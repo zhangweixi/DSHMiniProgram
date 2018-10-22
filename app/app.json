@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/home/index/index",
+    "pages/book/list/list",
+    "pages/book/detail/detail"
+    
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "教导读书会",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/home/index/index",
+      "text": "广场"
+    },{
+      "pagePath":"pages/book/list/list",
+      "text":"周课"
+    }]
+  }
+}
