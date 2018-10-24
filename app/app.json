@@ -2,24 +2,39 @@
   "pages": [
     "pages/home/index/index",
     "pages/book/list/list",
-    "pages/book/detail/detail"
+    "pages/book/detail/detail",
+    "pages/user/center/center"
     
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "教导读书会",
-    "backgroundColor": "#eeeeee",
+    "backgroundColor": "#000",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": false
   },
   "tabBar": {
+    "color": "#8A8A8A",
+    "selectedColor":"#151515",
+    "backgroundColor":"#fff",
+    "borderStyle":"#fff",
     "list": [{
       "pagePath": "pages/home/index/index",
-      "text": "广场"
+      "text": "广场",
+      "iconPath": "/images/icon/gc-off.png",
+      "selectedIconPath": "/images/icon/gc-on.png"
     },{
       "pagePath":"pages/book/list/list",
-      "text":"周课"
+      "text":"周课",
+      "iconPath":"/images/icon/zk-off.png",
+      "selectedIconPath":"/images/icon/zk-on.png"
+    },{
+      "pagePath":"pages/user/center/center",
+      "text":"我的",
+      "iconPath":"images/icon/my-off.png",
+      "selectedIconPath":"images/icon/my-on.png"
     }]
-  }
+  },
+  "debug":true
 }
