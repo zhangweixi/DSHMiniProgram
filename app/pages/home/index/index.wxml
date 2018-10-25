@@ -1,11 +1,112 @@
 <!--pages/home/index/index.wxml-->
 <view class='swiper'>
-    <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" duration="{{duration}}" interval='{{interval}}' bindchange="bindchange"  circular="{{circular}}" style="height:{{imgheights[current]}}rpx;">
-    <block wx:for='{{imgUrls}}' wx:key="{{index}}">
-      <swiper-item>
-        <image src="{{item}}" data-id='{{index}}' class="slide-image" mode="widthFix" bindload="imageLoad"/>
-      </swiper-item>
-      </block>
+    <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" duration="{{duration}}" interval='{{interval}}' bindchange="bindchange" circular="{{circular}}" style="height:{{imgheights[current]}}rpx;">
+        <block wx:for='{{imgUrls}}' wx:key="{{index}}">
+            <swiper-item>
+                <image src="{{item}}" data-id='{{index}}' class="slide-image" mode="widthFix" bindload="imageLoad" /></swiper-item>
+        </block>
     </swiper>
-  </view>
+</view>
 
+
+<view class='container'>
+
+
+    <view class='lhhd'>
+        <view class='page-title'>
+            <text class='title'>老侯论道</text>
+            <text class='empty'></text>
+            <text class='detail'>查看全部</text></view>
+        <view class='content'>
+            <image src='/images/icon/video-pause.png'></image>
+            <text>一个小店如何做成千亿级产值的公司？</text></view>
+    </view>
+
+
+    <view class='yantu'>
+        <view class='page-title'>
+            <text class='title'>一言一图</text>
+            <text class='empty'></text>
+            <text class='detail'>查看全部</text></view>
+        <view class='content'>
+            <view class='text-content'>
+                <view class='text'>所谓计划就是要随着实际情况、竞争对手的情况变化而不断修正的。</view>
+                <view class='time'>2018.10.16</view></view>
+            <view class='img-content'>
+                <image src='/images/temp/book.jpg' mode="widthFix"></image>
+            </view>
+        </view>
+    </view>
+
+
+    <view class='free'>
+        <view class='page-title'>
+            <text class='title'>免费专区</text>
+            <text class='empty'></text>
+        </view>
+
+        <view class='content'>
+            
+
+            <view class="book-list">
+                
+                <image class="bg-img" mode="widthFix" src="/images/temp/c1.png"></image>
+
+                <view class="book-info">
+                    
+                    <view class="book-text">
+
+                        
+                        <view class="tag"><text class="tag-name">管理</text></view>
+
+                        <view class="sub-book-info">
+                            <text class="main-title">极致产品</text>    
+                            <text class="main-sub">国民简明爆品实战指南</text>
+                            <text class="read-time">1.84万次播放</text>
+                        </view>
+                    </view>
+
+                    <!-- 学校 -->
+                    <view class="book-img">
+                        <image src="/images/temp/book1.png" mode="widthFix"></image>
+                    </view>
+
+                </view>
+
+            </view>
+
+
+
+
+            <view class="book-list">
+                
+                <image class="bg-img" mode="widthFix" src="/images/temp/c1.png"></image>
+
+                <view class="book-info">
+                    
+                    <view class="book-text">
+
+                        
+                        <view class="tag"><text class="tag-name">管理</text></view>
+
+                        <view class="sub-book-info">
+                            <text class="main-title">极致产品</text>    
+                            <text class="main-sub">国民简明爆品实战指南</text>
+                            <text class="read-time">1.84万次播放</text>
+                        </view>
+                    </view>
+
+                    <!-- 学校 -->
+                    <view class="book-img">
+                        <image src="/images/temp/book1.png" mode="widthFix"></image>
+                    </view>
+
+                </view>
+
+            </view>
+
+
+        </view>
+    </view>
+
+</view>
