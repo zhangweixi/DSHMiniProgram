@@ -76,7 +76,7 @@
 
 .yantu .content .text-content{
   
-  width:75%;
+  width:80%;
   float: left;
   color:#505050;
   font-size:0.9rem;
@@ -84,6 +84,7 @@
 }
 .yantu .text-content .text{
   padding-right:35rpx;
+  font-size:1rem;
 }
 
 .yantu .text-content .time{
@@ -95,7 +96,7 @@
 
 .yantu .content .img-content{
 
-  width:25%;
+  width:20%;
   float: left;
 
 }
@@ -135,6 +136,10 @@
 }
 
 
+.free .bg-img{
+  display: block;
+}
+
 .free .book-info{
 
   position: absolute;
@@ -145,27 +150,38 @@
   
 }
 
-
+/*文字信息*/
 .free .book-text{
 
   width:75%;
+  height:100%;
   float:left;
   color:#fff;
 
 }
 
-
-.free .tag .tag-name{
-  font-size:.7rem;
-  padding-left:10rpx;
-  line-height:1.8rem;
-
+/*分类标签*/
+.free .tag{
+  height:30%;
 }
 
+
+.free .tag .tag-name{
+
+  font-size:.7rem;
+  padding-left:10rpx;
+  line-height:2.5rem;
+
+  
+}
+
+
+/*标题信息*/
 .free .book-text .sub-book-info{
 
-    padding-left:30rpx;
-
+    padding-left:50rpx;
+    height:70%;
+    position: relative;
 }
 
 
@@ -176,7 +192,7 @@
 }
 
 
-
+/*图片信息*/
 .free .book-img{
 
   float:left;
@@ -188,5 +204,37 @@
 .free .book-img image{
 
   width:75%;
-  margin-top:20%;
+  margin-top:28%;
+}
+
+
+.free .sub-book-info .main-title{
+
+  font-size:1.3rem;
+  margin-top:10rpx;
+
+}
+
+
+.free .sub-book-info .sub-title{
+
+  font-size:1rem;
+  margin-top:5rpx;
+}
+
+.free .sub-book-info .read-time{
+  
+    font-size:0.7rem;
+    position: absolute;
+    bottom:35rpx;
+    width:50%;
+    line-height:40rpx;
+}
+
+
+.free .sub-book-info .read-time image{
+
+    width:25rpx;
+    float:left;
+    margin-right:10rpx;
 }

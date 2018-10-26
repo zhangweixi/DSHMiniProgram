@@ -1,1 +1,5 @@
-var name = "zhangweixi";
+App({
+    data:{
+        "host":"https://wx.laohoulundao.com/miniprogram/"
+    }
+})

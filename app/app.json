@@ -3,14 +3,15 @@
     "pages/home/index/index",
     "pages/book/list/list",
     "pages/book/detail/detail",
-    "pages/user/center/center"
-    
+    "pages/user/center/center",
+    "pages/video/list/list",
+    "pages/video/detail/detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "教导读书会",
-    "backgroundColor": "#000",
+    "backgroundColor": "#999",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": false
   },

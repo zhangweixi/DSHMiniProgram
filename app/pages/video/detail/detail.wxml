@@ -1,0 +1,44 @@
+<!--pages/video/detail/detail.wxml-->
+
+<view class="page-container">
+
+	<view class="video-bg">
+		<image  src="/images/temp/video-bg.png" mode="widthFix"></image>
+	</view>
+
+	<view class="num">4/100</view>
+
+	<view class="video-title">一个小店如何做成千亿级产值的公司？</view>
+
+
+	<view class="share">
+		<image class="" src="/images/icon/share.png" mode="widthFix"></image>
+		<text>分享</text>
+	</view>
+
+<!-- <live-player src="http://media.jdclo.com/lundao/20181025.mp3" mode="RTC" autoplay bindstatechange="statechange" binderror="error" style="width: 300px; height: 225px;" /> -->
+
+
+	<view class="video-process">
+        <view class='process-bg'></view>
+		<view class="cycle left"></view>
+		<view class="cycle right"></view>
+		<progress class='process loaded' percent='50' stroke-width="2" color='#B1B1B1' backgroundColor="rgba(0,0,0,0)" />
+		<progress class='process played' percent='20' stroke-width='2' color='#FF9C00' backgroundColor="rgba(0,0,0,0)"/>
+		<view class="btn"></view>
+	</view>
+
+
+
+
+    <view class='play-box'>
+
+            <image class="prev change" src='/images/icon/detail-prev.png' mode='widthFix'></image>    
+            <view></view>
+            <image class="play" src='/images/icon/detail-off.png' mode='widthFix'></image>
+            <view></view>
+            <image class="next change" src='/images/icon/detail-next.png' mode='widthFix'></image>    
+
+    </view>
+
+</view>

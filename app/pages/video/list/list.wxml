@@ -1,0 +1,29 @@
+<!--pages/video/list/list.wxml-->
+
+<view class="page-container">
+	
+    <view class='all-play'>
+        <image class="video-img" src='/images/icon/video-off.png'></image>
+        <text class='title'>播放全部</text>
+        <text class='num'>已经更新900条</text>
+    </view>
+
+    <view class="video-list" wx:for='{{[1,2,3,4,5,6,7,8]}}'>
+        <view class='video-btn'>
+            <view style="background-image:url('{{host}}/images/icon/video-off.png')"></view>
+        </view>
+
+        <navigator  class='text-content' url="/pages/video/detail/detail?videoId=1" open-type="navigate" >
+            <view class='title'>最该深谋远虑还是该活在当下？</view>
+            <view class='time'>
+                <text class='length'>时长90秒</text>
+                <text class='date'>2018-02-25</text>
+            </view>
+        </navigator>
+    </view>
+
+</view>
+
+
+
+
