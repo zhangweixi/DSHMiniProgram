@@ -1,2 +1,48 @@
 <!--pages/book/list/list.wxml-->
-<text>pages/book/list/list.wxml</text>
+<import src="/template/bookinfo/bookinfo.wxml"/>
+
+<view class="page-container">
+	
+	<view class='page-title'>
+        <text class='title'>本周周课</text>
+        <text class='empty'></text>
+	</view>	
+
+	<view class="week-book">
+		
+		<image class="bg-img" src="/images/temp/c0.png" mode="widthFix"></image>
+
+		<view class="book-box">
+			<view class="book-content">
+				<view class="book-img">
+					<image  src="/images/temp/book1.png" mode="widthFix"></image>
+				</view>
+				<view class="book-text-info">
+					<view class="category"><text>效率提升</text></view>
+					<view class="title">释放</view>
+					<view class="sub-title">过上无压力生活的7个原则</view>
+					<view class="read-num">
+						<image class="" src="/images/icon/read-num.png" mode="widthFix"></image>
+						<text>333次播放</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	
+
+
+	<view class="books">
+
+		<view class='page-title'>
+	        <text class='title'>全部周课</text>
+	        <text class='empty'></text>
+	        <navigator url='/pages/book/category/search'><image class="title-icon search" 	src="/images/icon/search.png" mode="widthFix"></image></navigator>
+          <navigator url='/pages/book/category/category'><image class="title-icon category" 	src="/images/icon/category.png" mode="widthFix"></image></navigator>
+	        
+		</view>
+		
+		<template is="bookinfo" wx:for="{{[1,2,3,4,5,6,7]}}"></template>
+
+	</view>
+</view>

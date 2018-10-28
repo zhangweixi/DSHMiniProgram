@@ -1,1 +1,274 @@
 /* pages/book/detail/detail.wxss */
+page{
+    background:#f8f8f8;
+}
+.video-type{
+    width:100%;
+    padding:20rpx 0;
+}
+
+/* 音视频切换 */
+.video-type > view{
+    
+    width:50%;
+    display: inline-block;
+    text-align: center;
+}
+
+.video-type text{
+    text-align: center;
+    border-bottom:2px solid rgba(0,0,0,0);
+    display: inline-block;
+    padding-bottom:10rpx;
+}
+
+.video-type .selected{
+
+    border-bottom:2px solid #FFB800;
+}
+
+
+
+/* 音频样式 */
+.audio-box{
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.audio-box .handle-btn{
+    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width:75%;
+    max-width:350px;
+    margin:auto;
+    justify-content: space-between;
+}
+
+.audio-box .play-btn{
+    width:200rpx;
+    height:200rpx;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    margin:0 20px;
+    border:4px solid #fff;
+}
+
+.audio-box .timebtn{
+    width:10vw;
+}
+
+.audio-box .process{
+    margin-top:30rpx;
+}
+
+.audio-box .process slider{
+    margin:0;
+}
+
+.audio-time text{
+    color:#8A8A8A;
+    width:50%;
+    display: inline-block;
+    margin-top:10rpx;
+}
+
+.audio-time .end-time{
+    text-align: right;
+}
+
+
+
+/* 视频样式 */
+video{
+    width:100%;
+    padding:0;
+    margin:0;
+    height:56.12vw;
+}
+
+.sub-nav{
+    display: flex;
+    padding:40rpx 0;
+}
+
+.sub-nav > view {
+
+    width:50%;
+    text-align: center;
+
+}
+
+.sub-nav text{
+    display: inline-block;
+    text-align: center;
+    padding:0 50rpx;
+    line-height:80rpx;
+    color:#8A8A8A;
+    border-radius: 30rpx;
+}
+
+.sub-nav text.selected{
+
+    background:#FFF5E5;
+    color:#FF9C00;
+}
+
+
+/* 读书笔记 */
+.book-note{
+    
+    overflow: hidden;
+}
+
+.single-note{
+    border:1px solid #E3E3E3;
+    display: flex;
+    color:#8A8A8A;
+    margin-bottom:10px;
+    border-radius: 5px;
+    line-height:40rpx;
+}
+
+.single-note .title{
+
+    padding:20rpx;
+    padding-right:0;
+
+}
+
+.single-note textarea{
+    flex: 1;
+    height:80px;
+    color:#505050;
+}
+
+.note-btn{
+    overflow: hidden;
+}
+
+.note-btn button{
+    width:50%;
+    background:#FF9C00;
+    color:#fff;
+    max-width: 150px;
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+
+/*精选内容*/
+.ppt-content{
+
+
+
+}
+
+.ppt-content .ppts image{
+    width:100%;
+    display: block;
+}
+
+.ppt-content .comment-input{
+
+
+    display: flex;
+    align-items: center;
+    padding-top:20rpx;
+    padding-bottom:20rpx;
+}
+
+.ppt-content .comment-input .input{
+    flex:1;
+    background: #F0F0F0;
+    display: flex;
+    align-items: center;
+    padding:20rpx;
+    border-radius: 10rpx;
+}
+
+.ppt-content .input input{
+    font-size:1rem;
+    text-indent: 10rpx;
+}
+
+.ppt-content .comment-input .input image{
+    width:50rpx;
+}
+
+.ppt-content .comment-input .icon{
+    width:50rpx;
+    margin-left:30rpx;
+}
+
+
+
+/* 弹窗 */
+
+.model-box .title{
+    color:#151515;
+    font-size:1.2rem;
+    text-align: center;
+    line-height:2;
+    margin-top:30rpx;
+}
+
+.model-box .sub-title{
+    text-align: center;
+    color:#505050;
+    margin-top:15px;
+    margin-bottom:40rpx;
+}
+
+.model-box .input{
+    width:80%;
+    margin:auto;
+    margin-top:20rpx;
+    margin-bottom:40rpx;
+    padding:20rpx;
+    border:1px solid RGBA(0, 0, 0, 0.05);
+}
+
+.model-box .input button{
+    display: block;
+    width:100%;
+    color:#151515;
+}
+
+.btns{
+    display: flex;
+    position: absolute;
+    bottom:0;
+    width:100%;
+    border-top:1px solid rgba(0,0,0,0.05);
+}
+
+.btns .btn{
+    flex: 1;
+    text-align: center;
+    line-height:80rpx;
+}
+
+.btns .empty{
+    width:1px;
+    background: rgba(0,0,0,0.05);
+}
+
+.btns .sure{
+    color:#FF9C00;
+}
+.btns .cancel{
+    color:#8A8A8A;
+}
+
+
+
+
+
+
+
+
+

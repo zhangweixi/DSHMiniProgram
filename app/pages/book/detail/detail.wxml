@@ -1,2 +1,96 @@
 <!--pages/book/detail/detail.wxml-->
-<text>pages/book/detail/detail.wxml</text>
+<view class='video-type'>
+    <view><text class="{{mediaType == 'mp4' ? 'selected' : ''}}" bindtap="triggleMedia" data-media="mp4">视频</text></view>
+    <view><text class="{{mediaType == 'mp3' ? 'selected' : ''}}" bindtap="triggleMedia" data-media="mp3">音频</text></view>
+</view>
+
+<!-- 视频 -->
+<video hidden="{{mediaType=='mp3'}}" src='http://media.jdclo.com/video/20181024zhongshenxuexi.mp4' poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" ></video>
+
+
+<!-- 音频 -->
+<view hidden="{{mediaType == 'mp4'}}" class='audio-box'>
+
+    <view class='handle-btn'>
+        <image class="back timebtn" src='/images/icon/15back.png' mode="widthFix"></image>
+        <view class="play-btn" style='background-image:url("https://wx.laohoulundao.com/images/book.jpg");'></view>
+        <image class="font timebtn" src='/images/icon/15font.png' mode="widthFix"></image>
+    </view>
+
+    <view class='process page-container'>
+        <slider max="100" selected-color="#FF9C00" color='#E3E3E3' value='20' block-color="#FF9C00" block-size="15"></slider>
+        <view class="audio-time">
+            <text class="begin-time">12:56</text>
+            <text class="end-time">23:23</text>
+        </view>
+    </view>
+
+</view>
+
+
+<view class=''>
+
+    <view class='sub-nav'>
+        <view><text bindtap='triggleContent' class="{{contentType == 'ppt'  ? 'selected' : ''}}" data-content="ppt">精选内容</text></view>
+        <view><text bindtap="triggleContent" class="{{contentType == 'note' ? 'selected' : ''}}" data-content="note">读书笔记</text></view>
+    </view>
+
+    <!-- 读书笔记 -->
+    <view class='page-container book-note' hidden="{{contentType == 'ppt'}}">
+        <view wx:for="{{bookNotes}}" class='single-note'>
+            <view class='title'>{{item.title}}：</view>
+            <textarea placeholder="{{item.placeholder}}" ></textarea>
+        </view>
+
+        <view class='note-btn'><button>确认提交</button></view>
+        
+    </view>
+
+    
+
+
+    <!-- 书籍PPT -->
+    <view class="ppt-content" hidden="{{contentType == 'note' }}">
+        
+        <view class="ppts">
+            <image class="" wx:for="{{[1,2]}}" src="https://wx.laohoulundao.com/images/ppt/{{item}}.jpg" mode="widthFix"></image>
+        </view>
+
+        <view class="page-container comment-input">
+            
+            <view class="input">
+                <image class="" src="/images/icon/edit.png" mode="widthFix"></image>
+                <input placeholder="期待你的神评论"></input>
+            </view>
+
+            <image class="icon" src="/images/icon/comment.png" mode="widthFix"></image>
+            <image class="icon" src="/images/icon/download.png" mode="widthFix"></image>
+            <image class="icon" src="/images/icon/share1.png" mode="widthFix"></image>
+
+        </view>
+
+    </view>
+
+
+    
+
+    <!-- 下载PPT弹窗 -->
+    <cover-view class="download-model model-bg" wx:if="{{false}}">
+        <cover-view class="model-box">
+            <cover-view class="title">发送PPT</cover-view>
+            <cover-view class="sub-title">我们会将PPT直接发送到您邮箱</cover-view>
+            <cover-view class="input">
+                <input placeholder="请输入邮箱"></input>
+            </cover-view>
+            <cover-view style="height:50px;"></cover-view>
+            <cover-view class="btns">
+                <cover-view class="btn cancel">取消</cover-view>
+                <cover-view class="empty"></cover-view>
+                <cover-view class="btn sure">确定</cover-view>
+            </cover-view>
+        </cover-view>
+
+    </cover-view>
+  
+</view>
+

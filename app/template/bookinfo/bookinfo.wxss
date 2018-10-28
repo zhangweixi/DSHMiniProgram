@@ -1,0 +1,84 @@
+.book-list{
+
+  position: relative;
+  border-radius: 5rpx;
+  margin-bottom:20rpx;
+
+}
+
+.book-list image.bg-img {
+  width: 100%;
+}
+.book-list .content {
+  margin-top: 40rpx;
+}
+.book-list .book-list {
+  position: relative;
+  border-radius: 5rpx;
+  margin-bottom: 20rpx;
+}
+.book-list .bg-img {
+  display: block;
+}
+.book-list .book-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/*文字信息*/
+.book-list .book-text {
+  width: 75%;
+  height: 100%;
+  float: left;
+  color: #fff;
+}
+/*分类标签*/
+.book-list .tag {
+  height: 30%;
+}
+.book-list .tag .tag-name {
+  font-size: .7rem;
+  padding-left: 10rpx;
+  line-height: 2.5rem;
+}
+/*标题信息*/
+.book-list .book-text .sub-book-info {
+  padding-left: 50rpx;
+  height: 70%;
+  position: relative;
+}
+.book-list .book-text .sub-book-info text {
+  display: block;
+}
+/*图片信息*/
+.book-list .book-img {
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+.book-list .book-img image {
+  width: 75%;
+  margin-top: 28%;
+}
+.book-list .sub-book-info .main-title {
+  font-size: 1.3rem;
+  margin-top: 10rpx;
+}
+.book-list .sub-book-info .sub-title {
+  font-size: 1rem;
+  margin-top: 5rpx;
+}
+.book-list .sub-book-info .read-time {
+  font-size: 0.7rem;
+  position: absolute;
+  bottom: 35rpx;
+  width: 50%;
+  line-height: 40rpx;
+}
+.book-list .sub-book-info .read-time image {
+  width: 25rpx;
+  float: left;
+  margin-right: 10rpx;
+}

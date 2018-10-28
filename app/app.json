@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/index/index",
     "pages/book/list/list",
+    "pages/book/category/category",
     "pages/book/detail/detail",
     "pages/user/center/center",
     "pages/video/list/list",

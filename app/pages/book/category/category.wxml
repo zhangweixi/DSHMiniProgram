@@ -1,0 +1,18 @@
+<!--pages/book/category/category.wxml-->
+
+
+<scroll-view class='categorys' scroll-x>
+    <text class='selected'>全部</text>
+    <text wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}}">精品</text>
+</scroll-view>
+
+<view class='books'>
+    
+    <view class='bookinfo' wx:for="{{[1,2,3,4,5,6,7,8,9,10]}}" >
+        <navigator url='/pages/book/detail/detail?bookId=12'>
+            <image src='/images/temp/book1.png' mode='widthFix'></image>
+            <text class='title'>释放</text>
+        </navigator>
+    </view>
+
+</view>
