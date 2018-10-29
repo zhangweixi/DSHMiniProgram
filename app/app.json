@@ -5,6 +5,7 @@
     "pages/book/category/category",
     "pages/book/detail/detail",
     "pages/user/center/center",
+    "pages/user/login/login",
     "pages/video/list/list",
     "pages/video/detail/detail"
   ],

@@ -43,7 +43,7 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/home/index/index",
+					"pathName": "pages/user/login/login",
 					"query": "videoId=1"
 				}
 			]
