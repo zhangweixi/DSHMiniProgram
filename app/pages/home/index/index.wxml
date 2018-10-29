@@ -1,4 +1,14 @@
 <!--pages/home/index/index.wxml-->
+
+<!-- 微信授权 -->
+
+<!-- <cover-view class='login-bg' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:100;background:#999;'>
+
+    <cover-view bindgetuserinfo="getUserInfo" style='width:80vw;margin:auto;margin-top:20vh;text-align:center;background:green;line-height:3;' open-type="getUserInfo">允许授权</cover-view>
+    <button class='info' open-type="getUserInfo" bindgetuserinfo="getUserInfo">允许授权</button>
+</cover-view> -->
+
+
 <import src="/template/bookinfo/bookinfo.wxml"/>
 <view class='swiper'>
     <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" duration="{{duration}}" interval='{{interval}}' bindchange="bindchange" circular="{{circular}}" style="height:{{imgheights[current]}}rpx;">
