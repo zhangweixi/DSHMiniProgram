@@ -3,6 +3,7 @@
     color:#333333;
     line-height:140rpx;
     font-size:40rpx;
+    font-weight: 600;
 }
 
 form .mobile-box{

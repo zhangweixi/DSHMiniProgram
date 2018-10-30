@@ -1,6 +1,8 @@
 App({
     data:{
-        "host":"https://wx.laohoulundao.com/miniprogram/"
+        "host":"http://test.wx.laohoulundao.com/miniprogram/",
+        "apiHost":""
+
     },
     onLaunch:function(){
 

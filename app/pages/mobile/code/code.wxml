@@ -1,0 +1,17 @@
+<!--pages/mobile/code/code.wxml-->
+<view class='page-container container'>
+    <view class='title'>输入验证码</view>
+
+    <form>
+        <view class='mobile-box'>
+            
+            <input class='input' type='number' placeholder='请输入验证码'></input>
+            <view class='border'></view>
+            <view class='regetbtn tapno'>重新获取（60）</view>
+           
+        </view>
+    
+        <button class='getcodebtn' bindtap=''>确定绑定</button>
+    </form> 
+</view>
+

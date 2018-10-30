@@ -24,9 +24,9 @@ Page({
      * 页面的初始数据
      */
     data: {
-        host:getApp().data.host,
-        countrys: {"name":['美国', '中国', '巴西', '日本'],"code":["01","086","023","041"]},
-        index:1,
+        host: getApp().data.host,
+        countrys: { "name": ['美国', '中国', '巴西', '日本'], "code": ["01", "086", "023", "041"] },
+        index: 1,
         years: years,
         year: date.getFullYear(),
         months: months,
@@ -51,7 +51,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
+
     },
 
     /**
@@ -101,5 +101,13 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    getMobileCode:function(){
+        wx.navigateTo({
+            url: '/pages/mobile/code/code',
+            success: function(res) {},
+            fail: function(res) {},
+            complete: function(res) {},
+        })
     }
 })

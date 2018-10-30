@@ -1,8 +1,9 @@
-/* pages/user/login/login.wxss */
+/* pages/mobile/code/code.wxss */
 .title{
     color:#333333;
     line-height:140rpx;
     font-size:40rpx;
+    font-weight: 600;
 }
 
 form .mobile-box{
@@ -19,35 +20,26 @@ form .mobile-box{
     width:80%;
     margin:auto;
 }
-.mobile-box .country-code{
-    min-width:100rpx;
-    text-align: center;
-  
+
+.mobile-box .regetbtn{
+    color:#FF9C00;
 }
 
-.mobile-box .country-code .picker{
-    background-size: 30rpx auto;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right:50rpx;
+.mobile-box .regetbtn.tapno{
+    color:#C4C4C4;
 }
 
-.mobile-box .icon{
-    width:30rpx;
-    height:100%;
-    margin-left:30rpx;
-    
-}
+
 
 .mobile-box .border{
     width:1px;
     height:50rpx;
     background:RGBA(0, 0, 0, 0.05);
     margin-left:20rpx;
+    margin-right:20rpx;
 }
 
 .mobile-box .input{
-    margin-left:30rpx;
     flex: 1;
 }
 
