@@ -7,7 +7,7 @@ App({
     onLaunch:function(){
 
         //1.检查本地是否有用户登录的信息
-        //app启动的时候检查用户是否登录
+        
 
 
         wx.login({
