@@ -7,13 +7,6 @@
 }
 
 
-.container{
-  padding:25rpx;
-}
-
-
-
-
 .lhhd{
   margin-top:20rpx;
 }
@@ -92,4 +85,65 @@
 .free{
 
     margin-top:40rpx;
+}
+
+
+.another-book{
+
+    display: flex;
+    line-height:60rpx;
+    text-align: center;
+    align-items: center;
+    color:#8A8A8A;
+}
+
+.another-book image{
+    width:40rpx;
+    margin-right:30rpx;
+}
+.another-book text{
+    font-size:1.1rem;
+}
+
+.another-book .empty{
+    flex:1;
+}
+
+
+.video-player{
+    position: fixed;
+    display: flex;
+    width:90%;
+    left:5%;
+    bottom:40rpx;
+    background:rgba(0,0,0,.75);
+    z-index: 100;
+    color:#fff;
+    line-height:60rpx;
+    padding:15rpx 0;
+    border-radius: 50rpx;
+    align-items: center;
+}
+
+
+.video-player .close-btn{
+    width:40rpx;
+    margin:0 20rpx;
+    
+
+}
+
+.video-player .video-btn{
+    width:60rpx;
+    margin:0 30rpx;
+    
+}
+
+.video-player .video-title{
+    flex: 1;
+    white-space:nowrap;
+}
+
+.video-player .video-time{
+    
 }

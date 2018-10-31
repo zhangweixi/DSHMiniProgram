@@ -11,7 +11,10 @@
            
         </view>
     
-        <button class='getcodebtn' bindtap=''>确定绑定</button>
+        <button class='getcodebtn' bindtap='checkMobileCode'>确定绑定</button>
     </form> 
+
+    <!-- <cover-view><toast></toast></cover-view> -->
+    <include  src="../../../components/dialog/dialog" />
 </view>
 

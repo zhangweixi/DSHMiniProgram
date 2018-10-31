@@ -58,3 +58,48 @@ page{
   border-radius: 10rpx;
   z-index: 10001;
 }
+
+toast{
+
+    z-index:1000;
+}
+
+/* 提示对话框 */
+.dialog{
+    width:100vw;
+    height:100vh;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.dialog .dialog-box{
+    width:260rpx;
+    height:260rpx;
+    background:RGBA(60, 60, 60, 0.9);
+    border-radius: 20rpx;
+    margin:auto;
+}
+
+.dialog .dialog-blank{
+    flex:1;
+
+}
+
+.dialog .dialog-img{
+    display: block;
+    width:90rpx;
+    margin:auto;
+    margin-top:40rpx;
+}
+
+.dialog .dialog-msg{
+    color:#fff;
+    text-align: center;
+    margin-top:40rpx;
+    font-size:1rem;
+}

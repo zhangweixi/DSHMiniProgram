@@ -41,5 +41,8 @@
       "selectedIconPath":"images/icon/my-on.png"
     }]
   },
-  "debug":true
+    "debug":true,
+    "usingComponents": {
+        "toast": "./components/toast/toast"
+    }
 }

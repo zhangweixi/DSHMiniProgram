@@ -1,0 +1,17 @@
+<cover-view class='dialog' hidden="{{!dialogStatus}}">
+    <cover-view class='dialog-blank'></cover-view>
+    <cover-view>
+        <cover-view class='dialog-box'>
+            <cover-view>
+                
+                <cover-image wx:if="{{dialogType == 'success'}}" class='dialog-img' src='/images/icon/toast-success.png' mode='widthFix'></cover-image>
+                <cover-image wx:if="{{dialogType == 'warning'}}" class='dialog-img' src='/images/icon/toast-warning.png' mode='widthFix'></cover-image>
+                <cover-image wx:if="{{dialogType == 'error'  }}" class='dialog-img' src='/images/icon/toast-error.png' mode='widthFix'></cover-image>
+
+            </cover-view>
+            <cover-view class='dialog-msg'>{{dialogMsg}}</cover-view>
+            <cover-view></cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view class='dialog-blank'></cover-view>
+</cover-view>

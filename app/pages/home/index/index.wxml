@@ -11,8 +11,8 @@
 
 <import src="/template/bookinfo/bookinfo.wxml"/>
 <view class='swiper'>
-    <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" duration="{{duration}}" interval='{{interval}}' bindchange="bindchange" circular="{{circular}}" style="height:{{imgheights[current]}}rpx;">
-        <block wx:for='{{imgUrls}}' wx:key="{{index}}">
+    <swiper indicator-dots="{{swiper.indicatorDots}}" vertical="{{swiper.vertical}}" autoplay="{{swiper.autoplay}}" duration="{{swiper.duration}}" interval='{{swiper.interval}}' bindchange="bindchange" circular="{{swiper.circular}}" style="height:{{swiper.imgheights[current]}}rpx;">
+        <block wx:for='{{swiper.imgUrls}}' wx:key="{{index}}">
             <swiper-item>
                 <image src="{{item}}" data-id='{{index}}' class="slide-image" mode="widthFix" bindload="imageLoad" /></swiper-item>
         </block>
@@ -20,7 +20,7 @@
 </view>
 
 
-<view class='container'>
+<view class='page-container'>
 
 
     <view class='lhhd'>
@@ -30,7 +30,7 @@
             <navigator class='detail' url="/pages/video/list/list">查看全部</navigator>
         </view>
 
-        <view class='content'>
+        <view class='content' data-src="http://media.jdclo.com/music/20181031shuohuadeliliang.mp3" data-title="一个小店如何做成千亿级产值的公司？" bindtap='playAudio'>
             <image src='/images/icon/video-pause.png'></image>
             <text>一个小店如何做成千亿级产值的公司？</text>
         </view>
@@ -64,8 +64,26 @@
         <view class='content'>
 
             <template is="bookinfo" wx:for="{{[1,2,3]}}"></template>
-
+            <view class='another-book'>
+                <view class='empty'></view>
+                <image src='/images/icon/fresh.png' mode='widthFix'></image>
+                <text>换一换</text>
+                <view class='empty'></view>
+            </view> 
         </view>
     </view>
 
+    <!-- 音频播放器 -->
+    <view class='video-player' hidden="{{bgMusic.show == false }}">
+    
+        <image class='close-btn' src='/images/icon/close-video.png' mode="widthFix"></image>
+        <text class='video-title'>{{bgMusic.title}}</text>
+        <text class='video-time'>{{textTimeCurrent}}/{{textTimeLength}}</text>
+        <image class='video-btn video-play-btn' src='/images/icon/video-play.png' mode="widthFix"></image>
+        <!-- <image class='video-btn video-stop-btn' src='/images/icon/video-stop.png' mode="widthFix"></image> -->
+
+    </view>
+
 </view>
+
+
