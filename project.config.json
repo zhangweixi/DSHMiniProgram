@@ -43,7 +43,7 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/book/search/search",
+					"pathName": "pages/home/index/index",
 					"query": "videoId=1"
 				}
 			]
