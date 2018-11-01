@@ -1,0 +1,60 @@
+/* pages/book/search/search.wxss */
+
+/*搜索输入框*/
+.search-input{
+	display: flex;
+	align-items: center;
+	padding:20rpx;
+	border-bottom:1px solid RGBA(12, 0, 51, 0.1);
+}
+
+.search-input image{
+	width:40rpx;
+	margin:0 25rpx;
+    margin-left:0;
+
+}
+
+.search-input input{
+	flex: 1;
+}
+
+
+
+/*标题*/
+.search-title{
+	color:#151515;
+	display: flex;
+	align-items: center;
+	margin-top:60rpx;
+	margin-bottom: 30rpx;
+	font-weight: 550;
+}
+
+.search-title text{
+	flex: 1;
+}
+
+.search-title image{
+	width:40rpx;
+
+}
+
+
+/*历史搜索*/
+.search-keywords{
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.search-keywords view{
+	padding:10rpx 30rpx;
+	margin:10rpx 20rpx;
+	margin-left:0;
+	border:1px solid RGBA(12, 0, 51, 0.1);
+	color:#505050;
+	border-radius: 8rpx;
+	font-size:1rem;
+
+}

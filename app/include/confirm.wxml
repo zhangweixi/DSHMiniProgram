@@ -1,0 +1,17 @@
+ <!-- 下载PPT弹窗 -->
+    <cover-view class="model-bg confirm" hidden="{{!confirmShow}}">
+        <cover-view class="model-box">
+            <cover-view class="title">{{confirmTitle}}</cover-view>
+            <cover-view class="sub-title">{{confirmMsg}}</cover-view>
+            <!-- <cover-view class="input">
+                <input placeholder="请输入邮箱"></input>
+            </cover-view> -->
+            <!-- <cover-view style="height:50px;"></cover-view> -->
+            <cover-view class="btns" bind:tap="confirmClose">
+                <cover-view class="btn cancel">{{confirmCancelText}}</cover-view>
+                <cover-view class="empty"></cover-view>
+                <cover-view class="btn sure" bind:tap="confirmCallback">{{confirmSureText}}</cover-view>
+            </cover-view>
+        </cover-view>
+
+    </cover-view>

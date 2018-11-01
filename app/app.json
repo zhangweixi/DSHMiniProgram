@@ -4,6 +4,7 @@
     "pages/book/list/list",
     "pages/book/category/category",
     "pages/book/detail/detail",
+    "pages/book/search/search",
     "pages/user/center/center",
     "pages/user/login/login",
     "pages/mobile/mobile/mobile",
@@ -42,7 +43,9 @@
     }]
   },
     "debug":true,
+    "requiredBackgroundModes":["audio"],
     "usingComponents": {
-        "toast": "./components/toast/toast"
+       
     }
 }
+

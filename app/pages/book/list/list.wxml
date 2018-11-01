@@ -37,7 +37,7 @@
 		<view class='page-title'>
 	        <text class='title'>全部周课</text>
 	        <text class='empty'></text>
-	        <navigator url='/pages/book/category/search'><image class="title-icon search" 	src="/images/icon/search.png" mode="widthFix"></image></navigator>
+	        <navigator url='/pages/book/search/search'><image class="title-icon search" 	src="/images/icon/search.png" mode="widthFix"></image></navigator>
           <navigator url='/pages/book/category/category'><image class="title-icon category" 	src="/images/icon/category.png" mode="widthFix"></image></navigator>
 	        
 		</view>

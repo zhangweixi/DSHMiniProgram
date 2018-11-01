@@ -206,65 +206,6 @@ video{
 
 
 
-/* 弹窗 */
-
-.model-box .title{
-    color:#151515;
-    font-size:1.2rem;
-    text-align: center;
-    line-height:2;
-    margin-top:30rpx;
-}
-
-.model-box .sub-title{
-    text-align: center;
-    color:#505050;
-    margin-top:15px;
-    margin-bottom:40rpx;
-}
-
-.model-box .input{
-    width:80%;
-    margin:auto;
-    margin-top:20rpx;
-    margin-bottom:40rpx;
-    padding:20rpx;
-    border:1px solid RGBA(0, 0, 0, 0.05);
-}
-
-.model-box .input button{
-    display: block;
-    width:100%;
-    color:#151515;
-}
-
-.btns{
-    display: flex;
-    position: absolute;
-    bottom:0;
-    width:100%;
-    border-top:1px solid rgba(0,0,0,0.05);
-}
-
-.btns .btn{
-    flex: 1;
-    text-align: center;
-    line-height:80rpx;
-}
-
-.btns .empty{
-    width:1px;
-    background: rgba(0,0,0,0.05);
-}
-
-.btns .sure{
-    color:#FF9C00;
-}
-.btns .cancel{
-    color:#8A8A8A;
-}
-
-
 
 
 

@@ -75,22 +75,7 @@
     
 
     <!-- 下载PPT弹窗 -->
-    <cover-view class="download-model model-bg" wx:if="{{false}}">
-        <cover-view class="model-box">
-            <cover-view class="title">发送PPT</cover-view>
-            <cover-view class="sub-title">我们会将PPT直接发送到您邮箱</cover-view>
-            <cover-view class="input">
-                <input placeholder="请输入邮箱"></input>
-            </cover-view>
-            <cover-view style="height:50px;"></cover-view>
-            <cover-view class="btns">
-                <cover-view class="btn cancel">取消</cover-view>
-                <cover-view class="empty"></cover-view>
-                <cover-view class="btn sure">确定</cover-view>
-            </cover-view>
-        </cover-view>
-
-    </cover-view>
+    <include src="../../../include/confirm.wxml"> </include>
   
 </view>
 

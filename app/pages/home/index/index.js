@@ -1,4 +1,7 @@
 // pages/home/index/index.js
+var common = require("../../../common.js");
+
+
 Page({
 
     /**
@@ -31,14 +34,17 @@ Page({
             //默认  
             current: 0
         },
+        //音频列表
+        videos:[],
         bgMusic:{
-            show:show,
+            show:false,
             playing:false,
             title:"",
             timeLength:0,
             timeCurrent:0,
             textTimeLength:"00:00",
-            textTimeCurrent:"00:00"
+            textTimeCurrent:"00:00",
+            src:'',
         }
     },
 
@@ -150,44 +156,100 @@ Page({
      */
 
     playAudio:function(e){
-        var data = e.currentTarget.dataset;
-        var videoSrc = data.src;
-        var title   = data.title;
-        var bgMusic = this.data.bgMusic;
-            bgMusic.playing = true;
-            bgMusic.show = true;
-            bgMusic.title = title;
 
-            
-        const innerAudioContext = wx.createInnerAudioContext()
-        innerAudioContext.src = videoSrc;
+        var data        = e.currentTarget.dataset;
+        var videoSrc    = data.src;
+        var title       = data.title;
+
+        var bgMusic         = this.data.bgMusic;
+            bgMusic.playing = true;
+            bgMusic.show    = true;
+            bgMusic.src     = videoSrc;
+            bgMusic.title   = title.substring(0,5)+"...";
+
+        
+        const innerAudioContext     = wx.createInnerAudioContext()
+        innerAudioContext.src       = videoSrc;
+
         innerAudioContext.onCanplay(() => {
 
             innerAudioContext.duration //类似初始化-必须触发-不触发此函数延时也获取不到
-            console.log(innerAudioContext);
+            
 
             setTimeout(() => {
+
                 //在这里就可以获取到大家梦寐以求的时长了
                 console.log(innerAudioContext.duration);//延时获取长度 单位：秒
-
-                this.playBgMusic(videoSrc,title);
-
-                bgMusic.show = true;
                 
+                //设置总的时间
 
-                this.setData('bgMusic',bgMusic);
+                bgMusic.timeLength = innerAudioContext.duration;
+                bgMusic.textTimeLength = common.numberToTime(bgMusic.timeLength);
+                
+                //播放音乐
+                this.playBgMusic();
 
-                console.log(this.data.bgMusic);
+                //监听播放进度
+                var bgVideo = wx.getBackgroundAudioManager();
+                bgVideo.onTimeUpdate(()=>{
 
+                    var currentTime = bgVideo.currentTime;
+
+                    var textTime = common.numberToTime(currentTime);
+
+                        this.setData({ ["bgMusic.textTimeCurrent"]: textTime,["bgMusic.timeCurrent"]:currentTime });                        
+                })
+
+                this.setData({ ["bgMusic"]: bgMusic });
+                
             }, 1000)  //这里设置延时1秒获取
         })
     },
-    playBgMusic:function(videoSrc,title){
+    /**
+     * 播放背景音乐
+     */
+    playBgMusic:function(){
+
         //总的时间根据
-        var bgVideo = wx.getBackgroundAudioManager();
-        bgVideo.src = videoSrc;
-        bgVideo.title = title;
+        var bgMusic     = this.data.bgMusic;
+        var bgVideo     = wx.getBackgroundAudioManager();
+        bgVideo.src     = bgMusic.src;
+        bgVideo.title   = bgMusic.title;
         bgVideo.play();
+    },
+    //继续播放
+    continueMusic:function(){
+
+        (wx.getBackgroundAudioManager()).play();
+
+        this.setData({['bgMusic.playing']:true});
+    },
+    //暂停音频
+    pauseMusic:function(){
+
+        wx.getBackgroundAudioManager().pause();
+    
+        this.setData({['bgMusic.playing']:false});
+    },
+
+    closeMusic:function(){
+
+        wx.getBackgroundAudioManager().stop();
+        
+        this.setData({["bgMusic.show"]:false});
+
+
+    },
+    /**
+     * 改变文字颜色
+     */
+    changeVideoColor:function(action){
+
+        for(var music of this.data.videos)
+        {
+            
+        }
+       
     }
 
 })

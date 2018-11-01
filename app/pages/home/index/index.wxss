@@ -16,6 +16,8 @@
   
   margin:25rpx 0;
   line-height:50rpx;
+  color:#151515;
+  font-size:.9rem;
 
 }
 
@@ -27,9 +29,18 @@
   vertical-align: middle
 }
 
-.lhhd .content text{
-  color:#151515;
-  font-size:.9rem;
+
+.lhhd .playing image.off{
+  display: none;
+}
+
+.lhhd .unplay image.on{
+  display: none;
+}
+
+.lhhd .playing text{
+  
+    color:#FF9C00;
 }
 
 .yantu{

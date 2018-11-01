@@ -30,8 +30,10 @@
             <navigator class='detail' url="/pages/video/list/list">查看全部</navigator>
         </view>
 
-        <view class='content' data-src="http://media.jdclo.com/music/20181031shuohuadeliliang.mp3" data-title="一个小店如何做成千亿级产值的公司？" bindtap='playAudio'>
-            <image src='/images/icon/video-pause.png'></image>
+        <view class='content playing unplay1 ' data-src="http://media.jdclo.com/music/20181031shuohuadeliliang.mp3" data-title="一个小店如何做成千亿级产值的公司？" bindtap='playAudio'>
+            <image class="on" src='/images/icon/gc-video-on.png'></image>
+            <image class="off" src='/images/icon/gc-video-off.png'></image>
+
             <text>一个小店如何做成千亿级产值的公司？</text>
         </view>
 
@@ -76,11 +78,11 @@
     <!-- 音频播放器 -->
     <view class='video-player' hidden="{{bgMusic.show == false }}">
     
-        <image class='close-btn' src='/images/icon/close-video.png' mode="widthFix"></image>
+        <image  bindtap="closeMusic" class='close-btn' src='/images/icon/close-video.png' mode="widthFix"></image>
         <text class='video-title'>{{bgMusic.title}}</text>
-        <text class='video-time'>{{textTimeCurrent}}/{{textTimeLength}}</text>
-        <image class='video-btn video-play-btn' src='/images/icon/video-play.png' mode="widthFix"></image>
-        <!-- <image class='video-btn video-stop-btn' src='/images/icon/video-stop.png' mode="widthFix"></image> -->
+        <text class='video-time'>{{bgMusic.textTimeCurrent}}/{{bgMusic.textTimeLength}}</text>
+        <image hidden="{{bgMusic.playing}}" bindtap="continueMusic" class='video-btn video-play-btn' src='/images/icon/video-play.png' mode="widthFix"></image>
+        <image hidden="{{!bgMusic.playing}}" bindtap="pauseMusic" class='video-btn video-stop-btn' src='/images/icon/video-stop.png' mode="widthFix"></image>
 
     </view>
 

@@ -1,0 +1,32 @@
+<!--pages/book/search/search.wxml-->
+
+<view class="search-input">
+	<image  src="/images/icon/search1.png" mode="widthFix"></image>
+	<input placeholder="他人的力量"></input>
+</view>
+
+
+
+
+
+<view class="page-container" style='margin-right:0;'>
+	<view class=" search-title page-container" style='margin-left:0;'>
+		<text>搜索历史</text>
+		<image bind:tap="deleteHistorySearchKey" src="/images/icon/delete.png" mode="widthFix"></image>
+    </view>
+
+	<view class="search-keywords">
+			<view wx:for="{{searchKeys}}">{{item}}</view>
+	</view>
+
+
+	<view class="search-title">
+		<text>热门搜索</text>
+	</view>
+    <view class="search-keywords">
+		<view wx:for="{{hotKeys}}">{{item}}</view>
+	</view>
+    
+</view>
+
+<include src="../../../include/confirm.wxml"> </include>

@@ -1,4 +1,6 @@
 // pages/book/detail/detail.js
+var common = require('../../../common.js');
+
 Page({
       /**
        * 页面的初始数据
@@ -92,6 +94,8 @@ Page({
         */
        triggleContent:function(e)
        {
+            
+            
             var contentType = e.target.dataset.content;
 
             if(contentType == this.data.contentType)
@@ -102,15 +106,8 @@ Page({
             this.setData({"contentType":contentType});
        },
 
-       showview: function() { 
-          this.setData({
-            display: "block"
-          })
-        },
-        hideview: function() {
-          this.setData({
-            display: "none"
-          })
+        callback:function(){
+          console.log('xx');
         }
 
 
