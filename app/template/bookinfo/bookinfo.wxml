@@ -9,21 +9,21 @@
             <view class="book-text">
 
                 
-                <view class="tag"><text class="tag-name">管理</text></view>
+                <view class="tag"><text class="tag-name">{{book.tags}}</text></view>
 
                 <view class="sub-book-info">
-                    <text class="main-title">极致产品</text>    
-                    <text class="sub-title">国民简明爆品实战指南</text>
+                    <text class="main-title">{{book.BookTitle}}</text>    
+                    <text class="sub-title">{{book.BookDesc}}</text>
                     <view class="read-time">
                         <image src="/images/icon/read-num.png" mode="widthFix"></image>
-                        <text >1.84万次播放</text>
+                        <text >{{book.ReadNumber}}</text>
                     </view>
                 </view>
             </view>
 
             <!-- 学校 -->
             <view class="book-img">
-                <image src="/images/temp/book1.png" mode="widthFix"></image>
+                <image src="{{book.book_img}}" mode="widthFix"></image>
             </view>
 
         </view>

@@ -12,9 +12,9 @@
 <import src="/template/bookinfo/bookinfo.wxml"/>
 <view class='swiper'>
     <swiper indicator-dots="{{swiper.indicatorDots}}" vertical="{{swiper.vertical}}" autoplay="{{swiper.autoplay}}" duration="{{swiper.duration}}" interval='{{swiper.interval}}' bindchange="bindchange" circular="{{swiper.circular}}" style="height:{{swiper.imgheights[current]}}rpx;">
-        <block wx:for='{{swiper.imgUrls}}' wx:key="{{index}}">
+        <block wx:for='{{swiper.imgs}}' wx:key="{{index}}">
             <swiper-item>
-                <image src="{{item}}" data-id='{{index}}' class="slide-image" mode="widthFix" bindload="imageLoad" /></swiper-item>
+                <image src="{{item.img}}" data-id='{{index}}' class="slide-image" mode="widthFix" bindload="imageLoad" /></swiper-item>
         </block>
     </swiper>
 </view>
@@ -65,7 +65,10 @@
 
         <view class='content'>
 
-            <template is="bookinfo" wx:for="{{[1,2,3]}}"></template>
+            
+            <template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}"></template>
+
+
             <view class='another-book'>
                 <view class='empty'></view>
                 <image src='/images/icon/fresh.png' mode='widthFix'></image>

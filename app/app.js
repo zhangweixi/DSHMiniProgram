@@ -1,11 +1,12 @@
 var common = require('common.js');
+var host = "http://test.wx.laohoulundao.com/";
 
 App({
     common:common,
     data:{
-        "host":"http://test.wx.laohoulundao.com/miniprogram/",
-        "apiHost":""
-
+        'host':host,
+        "miniroot":host+"miniprogram/",
+        "api":host+"api/v6/",
     },
     onLaunch:function(){
 

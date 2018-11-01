@@ -1,6 +1,6 @@
 // pages/home/index/index.js
 var common = require("../../../common.js");
-
+var app  = getApp();
 
 Page({
 
@@ -9,10 +9,7 @@ Page({
      */
     data: {
         swiper:{
-            imgUrls: [
-                '/images/banner/banner1.png',
-                '/images/temp/exchange.jpg',
-            ],
+            imgs: [],
             //是否采用衔接滑动  
             circular: true,
             //是否显示画板指示点  
@@ -36,6 +33,7 @@ Page({
         },
         //音频列表
         videos:[],
+        books:[],
         bgMusic:{
             show:false,
             playing:false,
@@ -52,6 +50,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        
+        this.getIndexData();
 
 
     },
@@ -149,6 +149,37 @@ Page({
     getUserInfo:function(e)
     {
         console.log(e.detail)
+    },
+
+    /**
+     * 获得首页数据
+     * */
+    getIndexData:function(){
+
+        var url     = app.data.api + "home/home";
+        var data    = {userId:0};
+        var _this   = this;
+
+        wx.request({
+            url: url,
+            method:'POST',
+            data:data,
+            success:function(res)
+            {
+                var data    = res.data.data;
+
+                var bannerData    = {['swiper.imgs']: data.banners };
+                _this.setData(bannerData); 
+
+                console.log(bannerData);
+                //书籍
+                _this.setData({ "books": data.freeBooks})
+                
+
+
+            }
+        })
+
     },
 
     /**
