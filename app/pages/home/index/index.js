@@ -8,6 +8,10 @@ Page({
      * 页面的初始数据
      */
     data: {
+        //音频列表
+        videos: [],
+        books: [],
+        bookSentence:{},
         swiper:{
             imgs: [],
             //是否采用衔接滑动  
@@ -31,9 +35,6 @@ Page({
             //默认  
             current: 0
         },
-        //音频列表
-        videos:[],
-        books:[],
         bgMusic:{
             show:false,
             playing:false,
@@ -171,12 +172,16 @@ Page({
                 var bannerData    = {['swiper.imgs']: data.banners };
                 _this.setData(bannerData); 
 
-                console.log(bannerData);
-                //书籍
-                _this.setData({ "books": data.freeBooks})
                 
+                //书籍
+                _this.setData({ "books": data.freeBooks});
 
-
+                //言图
+                _this.setData({"bookSentence":data.bookSentence});
+                
+            },
+            complete:function(res){
+                
             }
         })
 

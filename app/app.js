@@ -1,5 +1,7 @@
 var common = require('common.js');
-var host = "http://test.wx.laohoulundao.com/";
+//var host = "https://wx.laohoulundao.com/";
+var host = "http://test1.wx.laohoulundao.com/";
+
 
 App({
     common:common,

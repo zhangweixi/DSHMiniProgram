@@ -48,10 +48,10 @@
         </view>
         <view class='content'>
             <view class='text-content'>
-                <view class='text'>所谓计划就是要随着实际情况、竞争对手的情况以及公司情况的变化而不断修正的。</view>
-                <view class='time'>2018.10.16</view></view>
+                <view class='text'>{{bookSentence.content}}</view>
+                <view class='time'>{{bookSentence.publish_date}}</view></view>
             <view class='img-content'>
-                <image src='/images/temp/book.jpg' mode="widthFix" ></image>
+                <image src='{{bookSentence.bg_img}}' mode="widthFix" ></image>
             </view>
         </view>
     </view>

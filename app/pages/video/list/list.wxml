@@ -10,7 +10,7 @@
 
     <view class="video-list" wx:for='{{[1,2,3,4,5,6,7,8]}}'>
         <view class='video-btn'>
-            <view style="background-image:url('{{host}}/images/icon/video-off.png')"></view>
+            <view style="background-image:url('{{appdata.miniroot}}images/icon/video-off.png')"></view>
         </view>
 
         <navigator  class='text-content' url="/pages/video/detail/detail?videoId=1" open-type="navigate" >

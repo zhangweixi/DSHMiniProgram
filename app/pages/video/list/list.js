@@ -1,11 +1,12 @@
 // pages/video/list/list.js
+var appdata =  getApp().data;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      host:getApp().data.host
+     appdata:appdata,
   },
 
   /**
