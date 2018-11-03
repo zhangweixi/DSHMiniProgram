@@ -6,7 +6,6 @@
     "pages/book/detail/detail",
     "pages/book/search/search",
     "pages/user/center/center",
-    "pages/user/login/login",
     "pages/mobile/mobile/mobile",
     "pages/mobile/code/code",
     "pages/video/list/list",

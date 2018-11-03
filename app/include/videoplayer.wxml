@@ -1,0 +1,12 @@
+
+    <!-- 音频播放器 -->
+    <view class='video-player' hidden="{{bgMusic.show == false }}">
+    
+        <image  bindtap="closeMusic" class='close-btn' src='/images/icon/close-video.png' mode="widthFix"></image>
+        <!-- <text class='video-title'>{{bgMusic.title}}</text> -->
+        <navigator class='video-title' url="/pages/video/detail/detail">{{bgMusic.title}}</navigator>
+        <text class='video-time'>{{bgMusic.textTimeCurrent}}/{{bgMusic.textTimeLength}}</text>
+        <image hidden="{{bgMusic.playing}}" bindtap="continueMusic" class='video-btn video-play-btn' src='/images/icon/video-play.png' mode="widthFix"></image>
+        <image hidden="{{!bgMusic.playing}}" bindtap="pauseMusic" class='video-btn video-stop-btn' src='/images/icon/video-stop.png' mode="widthFix"></image>
+
+    </view>

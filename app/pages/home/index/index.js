@@ -12,6 +12,7 @@ Page({
         videos: [],
         books: [],
         bookSentence:{},
+        videos:[],
         swiper:{
             imgs: [],
             //是否采用衔接滑动  
@@ -43,7 +44,7 @@ Page({
             timeCurrent:0,
             textTimeLength:"00:00",
             textTimeCurrent:"00:00",
-            src:'',
+            src:''
         }
     },
 
@@ -68,7 +69,40 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        //从缓存提取背景音乐
+        var bgMusicData = common.bgMusic.getData();
+        if (bgMusicData)
+        {
+            this.setData({ ["bgMusic"]: bgMusicData});
 
+            //改变监听事件
+            var bgVideo = wx.getBackgroundAudioManager();
+            bgVideo.onTimeUpdate(()=>{
+
+                this.monitorBgmusic();
+
+            });
+            var bgMusicSrc = bgMusicData.src;
+
+        }else{
+
+            var bgMusicSrc = "";
+            
+        }
+
+        for (var video of this.data.videos) {
+
+            if (video.FilePath1 == bgMusicSrc) {
+
+                video.playing = true;
+
+            } else {
+
+                video.playing = false;
+
+            }
+        }
+        this.setData({ "videos": this.data.videos });
     },
 
     /**
@@ -141,8 +175,7 @@ Page({
     
     setSwiperData:function(key,value){
         var swiper = this.data.swiper;
-        //console.log(swiper);
-        //console.log(key);
+        
         swiper[key] = value;
         this.setData({ swiper: swiper });
     },
@@ -178,6 +211,15 @@ Page({
 
                 //言图
                 _this.setData({"bookSentence":data.bookSentence});
+
+                //音频
+                for(var video of data.lundaoList)
+                {
+                    video.playing = false;
+                }
+
+                _this.setData({"videos":data.lundaoList});
+
                 
             },
             complete:function(res){
@@ -194,8 +236,31 @@ Page({
     playAudio:function(e){
 
         var data        = e.currentTarget.dataset;
-        var videoSrc    = data.src;
-        var title       = data.title;
+        var audioId     = data.audioid;
+        
+        //判断当前音频是否在播放状态中
+        if (this.data.bgMusic.src == videoSrc) {
+
+            return false;
+        }
+
+        //将播放的音频设置于播放状态
+        for (var video of this.data.videos) {
+
+            if (video.AudioID == audioId){
+
+                video.playing   = true;
+                var videoSrc = video.FilePath1;
+                var title = video.AudioTitle;
+
+            }else{
+
+                video.playing = false;
+
+            }
+        }
+        this.setData({ "videos": this.data.videos });
+
 
         var bgMusic         = this.data.bgMusic;
             bgMusic.playing = true;
@@ -223,35 +288,29 @@ Page({
                 bgMusic.textTimeLength = common.numberToTime(bgMusic.timeLength);
                 
                 //播放音乐
-                this.playBgMusic();
+                common.bgMusic.play(bgMusic.src,bgMusic.title);
+                
+                this.setData({ ["bgMusic"]: bgMusic });
+                
+                common.bgMusic.setData(bgMusic);
 
                 //监听播放进度
                 var bgVideo = wx.getBackgroundAudioManager();
                 bgVideo.onTimeUpdate(()=>{
 
-                    var currentTime = bgVideo.currentTime;
-
-                    var textTime = common.numberToTime(currentTime);
-
-                        this.setData({ ["bgMusic.textTimeCurrent"]: textTime,["bgMusic.timeCurrent"]:currentTime });                        
+                   this.monitorBgmusic();
                 })
 
-                this.setData({ ["bgMusic"]: bgMusic });
-                
-            }, 1000)  //这里设置延时1秒获取
+            }, 500)  //这里设置延时1秒获取
         })
     },
-    /**
-     * 播放背景音乐
-     */
-    playBgMusic:function(){
+    monitorBgmusic:function(){
 
-        //总的时间根据
-        var bgMusic     = this.data.bgMusic;
         var bgVideo     = wx.getBackgroundAudioManager();
-        bgVideo.src     = bgMusic.src;
-        bgVideo.title   = bgMusic.title;
-        bgVideo.play();
+        var currentTime = bgVideo.currentTime;
+        var textTime    = common.numberToTime(currentTime);
+
+        this.setData({ ["bgMusic.textTimeCurrent"]: textTime, ["bgMusic.timeCurrent"]: currentTime });
     },
     //继续播放
     continueMusic:function(){
@@ -259,6 +318,7 @@ Page({
         (wx.getBackgroundAudioManager()).play();
 
         this.setData({['bgMusic.playing']:true});
+        common.bgMusic.setData({"playing":true});
     },
     //暂停音频
     pauseMusic:function(){
@@ -266,26 +326,33 @@ Page({
         wx.getBackgroundAudioManager().pause();
     
         this.setData({['bgMusic.playing']:false});
+        common.bgMusic.setData({ "playing": false});
     },
 
     closeMusic:function(){
 
-        wx.getBackgroundAudioManager().stop();
         
         this.setData({["bgMusic.show"]:false});
+        
+        //将音频全部关闭
+        for (var video of this.data.videos){
 
-
-    },
-    /**
-     * 改变文字颜色
-     */
-    changeVideoColor:function(action){
-
-        for(var music of this.data.videos)
-        {
-            
+            video.playing = false;
         }
-       
-    }
 
+        common.bgMusic.stop();
+
+        this.setData({"videos":this.data.videos});
+        var bgMusic={
+            show:false,
+            playing:false,
+            title:"",
+            timeLength:0,
+            timeCurrent:0,
+            textTimeLength:"00:00",
+            textTimeCurrent:"00:00",
+            src:''
+        }
+        this.setData({'bgMusic':bgMusic});
+    }
 })

@@ -1,11 +1,13 @@
 // pages/book/detail/detail.js
-var common = require('../../../common.js');
+var common  = require('../../../common.js');
+var app     = getApp();
 
 Page({
       /**
        * 页面的初始数据
        */
       data: {
+          "bookInfo":{},
           "bookNotes":[
               { "type": "book", "placeholder":"通过此次代读，对我启发最大的一个知识点是？","title":"读 书"},
               { "type": "people", "placeholder": "通过这个知识点，在工作上改进的是？", "title":"读 人"},
@@ -22,12 +24,25 @@ Page({
        */
       onLoad: function (options) {
           
+            this.setData({"bookId":options.bookId})
+
+            this.getBookInfo();
+
+            setTimeout(()=>{ 
+
+              this.getUserReadPlan();
+              
+
+            },1000);
+          console.log('xxx');
       },
 
       /**
        * 生命周期函数--监听页面初次渲染完成
        */
       onReady: function () {
+
+         
 
       },
 
@@ -94,21 +109,90 @@ Page({
         */
        triggleContent:function(e)
        {
-            
-            
             var contentType = e.target.dataset.content;
 
             if(contentType == this.data.contentType)
             {
                 return false;
             }
-
             this.setData({"contentType":contentType});
        },
+       /**
+        * 获取书籍详情
+        */
+       getBookInfo:function(){
 
-        callback:function(){
-          console.log('xx');
-        }
+          var url = app.data.api + "book/book_detail";
+
+          wx.request({
+            // 必需
+            url: url,
+            method:"POST",
+            data: {
+              bookId:this.data.bookId
+            },
+            header: {
+              'Content-Type': 'application/json'
+            },
+            success: (res) => {
+                
+
+                var data = res.data;
+
+                this.setData({"bookInfo":data.data.bookInfo});
+
+            },
+            fail: (res) => {
+              
+            },
+            complete: (res) => {
+              
+            }
+          })
 
 
+       },
+       /**
+        * 获取用户的读书改进计划
+        */
+       getUserReadPlan:function(){
+
+          var url = app.data.api + "book/get_user_read_plan";
+
+          wx.request({
+            // 必需
+            url: url,
+            method:"post",
+            data: {
+              "bookId":this.data.bookId,
+              "memberNumber":"2017042701956667076"
+            },
+            header: {
+              'Content-Type': 'application/json'
+            },
+            success: (res) => {
+               
+                var readplanInfo= res.data.data.readplan;
+                var dushu       = readplanInfo.BookReview1;
+                var duren       = readplanInfo.BookReview2;
+                var dushi       = readplanInfo.BookReview3;
+                var gift        = readplanInfo.BookReview4;
+
+                var bookNotes   = this.data.bookNotes;
+                bookNotes[0]["content"] = dushu;
+                bookNotes[1]["content"] = duren;
+                bookNotes[2]["content"] = dushi;
+                bookNotes[3]["content"] = gift;
+
+                this.setData({"bookNotes":bookNotes});
+
+            },
+            fail: (res) => {
+              
+            },
+            complete: (res) => {
+              
+            }
+          })
+       }
 })

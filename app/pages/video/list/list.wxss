@@ -76,6 +76,10 @@
     font-size:1.1rem;
 }
 
+.text-content .playing{
+    
+    color:#FF9C00;
+}
 .text-content .date{
     margin-left:20rpx;
 }

@@ -2,16 +2,16 @@
 
 
 <scroll-view class='categorys' scroll-x>
-    <text class='selected'>全部</text>
-    <text wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12,13,14]}}">精品</text>
+    
+    <text wx:for="{{bookTypes}}" bind:tap="changeBookType" data-type-id="{{item.TypeID}}" class="{{item.TypeID == bookTypeId ? 'selected':''}}">{{item.TypeName}}</text>
 </scroll-view>
 
 <view class='books'>
     
-    <view class='bookinfo' wx:for="{{[1,2,3,4,5,6,7,8,9,10]}}" >
-        <navigator url='/pages/book/detail/detail?bookId=12'>
-            <image src='/images/temp/book1.png' mode='widthFix'></image>
-            <text class='title'>释放</text>
+    <view class='bookinfo' wx:for="{{books}}" wx:for-item="book">
+        <navigator url='/pages/book/detail/detail?bookId={{book.BookID}}'>
+            <image src='{{book.book_img}}' mode='widthFix'></image>
+            <text class='title'>{{book.BookTitle}}</text>
         </navigator>
     </view>
 

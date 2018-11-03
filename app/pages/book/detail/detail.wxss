@@ -174,13 +174,21 @@ video{
 
 .ppt-content .comment-input{
 
+    position: fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#fff;
+}
 
+.ppt-content .comment-input >view {
+    
     display: flex;
     align-items: center;
     padding-top:20rpx;
     padding-bottom:20rpx;
-}
 
+}
 .ppt-content .comment-input .input{
     flex:1;
     background: #F0F0F0;

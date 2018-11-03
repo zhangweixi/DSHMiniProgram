@@ -15,15 +15,15 @@
 		<view class="book-box">
 			<view class="book-content">
 				<view class="book-img">
-					<image  src="/images/temp/book1.png" mode="widthFix"></image>
+					<image  src="{{lastBook.book_img}}" mode="widthFix"></image>
 				</view>
 				<view class="book-text-info">
-					<view class="category"><text>效率提升</text></view>
-					<view class="title">释放</view>
-					<view class="sub-title">过上无压力生活的7个原则</view>
+					<view class="category"><text>{{lastBook.tags}}</text></view>
+					<view class="title">{{lastBook.BookTitle}}</view>
+					<view class="sub-title">{{lastBook.BookDesc}}</view>
 					<view class="read-num">
 						<image class="" src="/images/icon/read-num.png" mode="widthFix"></image>
-						<text>333次播放</text>
+						<text>{{lastBook.ReadNumber}}</text>
 					</view>
 				</view>
 			</view>
@@ -42,7 +42,7 @@
 	        
 		</view>
 		
-		<template is="bookinfo" wx:for="{{[1,2,3,4,5,6,7]}}"></template>
+		<template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}"></template>
 
 	</view>
 </view>

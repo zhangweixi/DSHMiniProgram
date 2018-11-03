@@ -1,3 +1,7 @@
+
+
+var app = getApp();
+
 function showDialog(obj,msg,msgType){
 
     obj.setData({
@@ -16,6 +20,10 @@ function showDialog(obj,msg,msgType){
 }
 
 
+/**
+ * 数字转换时间
+ * 
+ * */
 function numberToTime(num)
 {
     var minute = parseInt(num / 60);
@@ -55,8 +63,79 @@ function appConfirm(obj,title,msg,callback,sureText = '确定',cancelText = '取
     }
 }
 
+/**
+ * 播放背景音乐
+ */
+function playBgMusic(src, title) {
+    
+    var bgVideo = wx.getBackgroundAudioManager();
+    bgVideo.src = src;
+    bgVideo.title = title;
+    bgVideo.play();
+}
+
+var bgMusic = {
+
+    play: function(src, title) 
+    {
+        var bgVideo     = wx.getBackgroundAudioManager();
+        bgVideo.src     = src;
+        bgVideo.title   = title;
+        bgVideo.play();
+    },
+    parse:function(){
+
+        var bgVideo = wx.getBackgroundAudioManager();
+        bgVideo.pause();
+    },
+    stop:function(){
+        var bgVideo = wx.getBackgroundAudioManager();
+        bgVideo.stop();
+        wx.clearStorageSync("bgMusic");
+    },
+    setData:function(option){
+
+        var bgMusic = wx.getStorageSync("bgMusic");
+        
+        if (!bgMusic) {
+            bgMusic = {};
+        }
+
+        for(var key in option){
+
+            bgMusic[key] = option[key];
+        }
+        wx.setStorageSync("bgMusic", bgMusic);
+    },
+    getData:function(){
+        
+        return wx.getStorageSync("bgMusic");
+    }
+};
+
+
+var user = {
+
+    login:function(code){
+
+        var url = app.data.api + "user/login?code=" + code;
+
+        wx.request({
+            // 必需
+            url: url,
+            method:"POST",
+            success: (res) => {
+                   
+                console.log(res);
+            }
+        })
+    }
+};
+
 module.exports.showDialog   = showDialog;
 
 module.exports.numberToTime = numberToTime;
 
 module.exports.confirm      = appConfirm;
+
+module.exports.bgMusic      = bgMusic;

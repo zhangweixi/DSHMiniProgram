@@ -1,6 +1,19 @@
-var common = require('common.js');
-//var host = "https://wx.laohoulundao.com/";
-var host = "http://test1.wx.laohoulundao.com/";
+var systemInfo = wx.getSystemInfoSync();
+var platform = systemInfo.platform;
+
+var common  = require('common.js');
+//var host  = "https://wx.laohoulundao.com/";
+if (platform == 'devtools'){
+
+    var host = "http://test1.wx.laohoulundao.com/";
+
+}else{
+
+    var host  = "https://wx.laohoulundao.com/";
+}
+
+
+
 
 
 App({
@@ -9,36 +22,55 @@ App({
         'host':host,
         "miniroot":host+"miniprogram/",
         "api":host+"api/v6/",
+        "platform": platform
     },
     onLaunch:function(){
 
         //1.检查本地是否有用户登录的信息
-        
 
+        var userInfo    = wx.getStorageSync('userInfo');
 
-        wx.login({
-            success:function(res){
-                if(res.code){
-                    console.log(res.code);
-                }else{
-                    console.log("error");
+        if(userInfo){
+            
+            this.data.userInfo = userInfo;
+            
+
+        }else{
+
+            wx.login({
+                success:(res)=>{
+
+                    var code     = res.code;
+
+                    if(res.code){
+
+                        this.wxLogin(code);
+                    }
                 }
-            }
-        })
+            })
 
+        }
+    },
+    wxLogin:function(code){
 
-        wx.getUserInfo({
-            success: function (res) {
-                console.log(res);
-                var userInfo = res.userInfo
-                var nickName = userInfo.nickName
-                var avatarUrl = userInfo.avatarUrl
-                var gender = userInfo.gender //性别 0：未知、1：男、2：女
-                var province = userInfo.province
-                var city = userInfo.city
-                var country = userInfo.country
+        var url = this.data.api + "member/login?code="+code;
+
+        wx.request({
+            // 必需
+            url: url,
+            method:'POST',
+            success: (res) => {
+                
+                var userInfo = res.data.data.userInfo;
+                
+                this.data.userInfo = userInfo;
+                wx.setStorage({
+                    key: 'userInfo',
+                    data: userInfo
+                })
             }
         })
     }
+
 
 })

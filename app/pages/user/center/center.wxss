@@ -1,1 +1,90 @@
-/* pages/user/center/center.wxss */
+@import "/template/login/login.wxss"
+
+.head-container{
+
+	text-align: center;
+}
+
+.head-container .head-box{
+
+	width:180rpx;
+	margin: auto;
+	margin-top:25rpx;
+	padding-bottom:20rpx;
+	position: relative;
+}
+
+.head-container .head-box > view{
+	width:100%;
+	border-radius: 100%;
+	overflow: hidden;
+	border: 2px solid #FFB800;
+}
+
+
+.head-container .head-img{
+	width:100%;
+	display: block;
+}
+.head-container .head-hat{
+	width:70rpx;
+	position: absolute;
+	bottom:0;
+	right:0;
+}
+
+
+.user-name{
+	margin-top:15rpx;
+	color:#151515;
+}
+
+.upgrade-vip{
+	background: #FFB800;
+	color:#fff;
+	width:150rpx;
+	font-size:0.9rem;
+	border-radius: 60rpx;
+	padding:15rpx 80rpx;
+	margin:auto;
+	margin-top:10rpx;
+}
+.user-vip-time{
+	line-height:80rpx;
+	color:#505050;
+}
+
+
+.share-jd{
+	width:100%;
+	display: block;
+	margin-top:40rpx;
+}
+
+
+.menues{
+
+
+}
+
+.menu-list{
+	display: flex;
+	line-height:90rpx;
+	border-bottom: 1px solid #E3E3E3;
+	align-items: center;
+	padding:15rpx 0;
+}
+
+.menu-list .icon-img{
+	width:45rpx;
+	margin-right:30rpx;
+}
+
+.menu-list .next{
+	width:20rpx;
+}
+
+.menu-list text{
+	flex: 1;
+	color:#151515;
+}

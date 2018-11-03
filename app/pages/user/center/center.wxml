@@ -1,2 +1,76 @@
 <!--pages/user/center/center.wxml-->
-<text>pages/user/center/center.wxml</text>
+<template hidden="{{userInfo}}" is="login" data="{{app}}"></template>
+
+<view hidden="{{!userInfo}}" class="page-container">
+	
+	<view class="head-container">
+		<view class="head-box">
+			<view>
+				<image class="head-img" src="{{userInfo.head_img}}" mode="widthFix"></image>	
+			</view>
+			
+			<image wx:if="{{userInfo.isValid == true}}" class="head-hat" src="/images/icon/vip-yes.png" mode="widthFix"></image>
+
+
+			<image wx:if="{{userInfo.isValid == false}}" class="head-hat" src="/images/icon/vip-yes.png" mode="widthFix"></image>			
+
+		</view>	
+		<view class="user-name">{{userInfo.NickName}}</view>
+
+			<view wx:if="{{userInfo.isValid == false}}" class="upgrade-vip">升级会员</view>
+
+			<view wx:if="{{userInfo.isValid == true }}" class="user-vip-time">会员到期时间：{{userInfo.MemEndTime}}</view>
+
+		<view></view>
+
+	</view>
+
+
+	<image class="share-jd" src="/images/icon/share-jd.png" mode="widthFix"></image>
+
+	<view class="menues">
+		
+		<navigator class="menu-list" url="" open-type="navigate">
+			<image class="icon-img" src="/images/icon/menu-note.png" mode="widthFix"></image>
+			<text>周课笔记</text>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
+		</navigator>
+			
+		
+		<navigator class="menu-list" url="" open-type="navigate">
+			<image class="icon-img" src="/images/icon/menu-read.png" mode="widthFix"></image>
+			<text>读书记录</text>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
+		</navigator>
+
+		<navigator class="menu-list" url="" open-type="navigate">
+			<image class="icon-img" src="/images/icon/menu-message.png" mode="widthFix"></image>
+			<text>消息中心</text>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
+		</navigator>
+
+		<navigator class="menu-list" url="" open-type="navigate">
+			<image class="icon-img" src="/images/icon/menu-question.png" mode="widthFix"></image>
+			<text>常见问题</text>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
+		</navigator>
+
+		<navigator class="menu-list" url="" open-type="navigate" style="border:none;">
+			<image class="icon-img" src="/images/icon/menu-advise.png" mode="widthFix"></image>
+			<text>反馈建议</text>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
+		</navigator>
+
+	</view>
+
+	
+
+
+
+
+</view>
+
+
+
+
+

@@ -43,8 +43,14 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/video/list/list",
-					"query": "videoId=1"
+					"pathName": "pages/user/center/center",
+					"query": "bookId=106"
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/home/index/index",
+					"query": ""
 				}
 			]
 		}

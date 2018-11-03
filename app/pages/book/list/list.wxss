@@ -44,7 +44,7 @@
 
 .book-content .book-img image {
   display: block;
-  width:25vw;
+  width:20vw;
 }
 
 .book-content .book-text-info{
