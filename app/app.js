@@ -61,13 +61,18 @@ App({
             method:'POST',
             success: (res) => {
                 
-                var userInfo = res.data.data.userInfo;
+                res = res.data;
+                if(res.code == 200){
+
+                    var userInfo = res.data.userInfo;
+                    
+                    this.data.userInfo = userInfo;
+                    wx.setStorage({
+                        key: 'userInfo',
+                        data: userInfo
+                    })    
+                }
                 
-                this.data.userInfo = userInfo;
-                wx.setStorage({
-                    key: 'userInfo',
-                    data: userInfo
-                })
             }
         })
     }

@@ -8,14 +8,15 @@ Page({
    */
   data: {
      app:app,
-     userInfo:app.data.userInfo
+     userInfo:app.data.userInfo ? app.data.userInfo : false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log('xxxxxxxx');
+    console.log(this.data.userInfo);
 
   },
 
@@ -31,7 +32,14 @@ Page({
    */
   onShow: function () {
 
-      this.setData({"userInfo":app.data.userInfo});
+      var userInfo = app.data.userInfo;
+      if(!userInfo){
+
+        userInfo = false;
+      }
+
+      this.setData({"userInfo":userInfo});  
+      
   },
 
   /**
@@ -70,6 +78,20 @@ Page({
   },
   toLogin:function(e){
 
+    //获取用户微信信息
+    wx.getUserInfo({
+      success: (res) => {
+        
+          let userInfo = res.userInfo
+
+          wx.setStorageSync('wxinfo', userInfo);
+
+          //跳转到手机页面
+          wx.navigateTo({
+            url: '/pages/mobile/mobile/mobile'
+          })
+      }
+    })
 
 
   }

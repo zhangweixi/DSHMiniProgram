@@ -6,7 +6,7 @@
         <view class='mobile-box'>
             
              <picker class='country-code' range="{{countrys['name']}}" value="{{index}}" bindchange="bindPickerChange" >
-                <view class="picker" style='background-image:url({{host + "images/icon/select-icon.png"}})'>{{countrys.code[index]}}</view>
+                <view class="picker" style='background-image:url({{miniroot + "images/icon/select-icon.png"}})'>{{countrys.code[index]}}</view>
             </picker>
             <view class='border'></view>
             <input class='input' type='number'></input>
