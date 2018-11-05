@@ -1,4 +1,5 @@
 // pages/book/search/search.js
+var app = getApp();
 
 Page({
 
@@ -6,8 +7,11 @@ Page({
      * 页面的初始数据
      */
     data: {
-        searchKeys:["王阳明","好好说话","印象里","七个准者"],
-        hotKeys: ["王阳明", "人生", "印象里", "准者","销售"]
+        historyKeywords:[],
+        hotKeywords: [],
+        keywords:'',
+        page:1,
+        books:[]
     },
 
     /**
@@ -15,6 +19,7 @@ Page({
      */
     onLoad: function (options) {
         
+        this.getSearchKeywords();
     },
 
     /**
@@ -56,7 +61,11 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
+        
+        if(this.data.canFreshBook == true){
 
+            this.getBooks();
+        }
     },
 
     /**
@@ -76,8 +85,77 @@ Page({
     /**
      * 删除历史搜索
      */
-     deleteHistorySearchKeyAction:function(){
+    deleteHistorySearchKeyAction:function(){
 
-     }
-    
+    },
+
+    getSearchKeywords:function(){
+
+        wx.request({
+            url: app.data.api+"book/get_search_keywords",
+            data: {
+                userId:app.data.userId ? app.data.userId : 0
+            },
+            method:'POST',
+            header: {
+                'Content-Type': 'application/json'
+            },
+            success: (res) => {
+                res = res.data;
+
+                this.setData(res.data);
+            }
+        })
+    },
+
+    getSearchBook:function(e){
+
+        var keywords = e.detail.value;
+
+        if(keywords == this.data.keywords){
+
+            return;
+            
+        }
+        
+        this.setData({"keywords":keywords,"page":1,"canFreshBook":true});    
+
+        this.getBooks();
+    },
+    getBooks:function(){
+
+        var url   = app.data.api + "book/get_book_list";
+        var page  = this.data.page;
+        this.setData({"page":page+1});
+
+        wx.request({
+            url: url,
+            method:"POST",
+            data: {
+                page:page,
+                keywords:this.data.keywords,
+                userId:app.data.userId,
+            },
+            success: (res) => {
+                var data      = res.data.data;
+                var bookInfo  = data.books;
+                var books     = bookInfo.data;
+                var page      = bookInfo.current_page;
+
+                if(books.length == 0){
+
+                    this.setData({"canFreshBook":false})
+
+                    return;
+                }
+
+               
+                //将新的数据放到旧的后面
+                this.data.books   = this.data.books.concat(books);
+      
+                this.setData({"books":this.data.books});
+            }
+        })
+    }
+        
 })
