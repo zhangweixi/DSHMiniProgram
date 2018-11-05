@@ -28,12 +28,13 @@ App({
 
         //1.检查本地是否有用户登录的信息
 
-        var userInfo    = wx.getStorageSync('userInfo');
+        var userInfo        = wx.getStorageSync('userInfo');
+        this.data.userId    = 0;
 
         if(userInfo){
             
-            this.data.userInfo = userInfo;
-            
+            this.data.userInfo  = userInfo;
+            this.data.userId    = userInfo.UserID;
 
         }else{
 
@@ -61,9 +62,9 @@ App({
             method:'POST',
             success: (res) => {
                 
-                var userInfo = res.data.data.userInfo;
-                
-                this.data.userInfo = userInfo;
+                var userInfo        = res.data.data.userInfo;
+                this.data.userInfo  = userInfo;
+                this.data.userId    = userInfo.UserID;
                 wx.setStorage({
                     key: 'userInfo',
                     data: userInfo
