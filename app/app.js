@@ -5,12 +5,12 @@ var common  = require('common.js');
 //var host  = "https://wx.laohoulundao.com/";
 if (platform == 'devtools'){
 
-    var host = "http://test1.wx.laohoulundao.com/";
-    //var host  = "https://wx.laohoulundao.com/";
+    //var host = "http://test1.wx.laohoulundao.com/";
+    var host  = "https://test.jdclo.com/";
 
 }else{
 
-    var host  = "https://wx.laohoulundao.com/";
+    var host = "https://test.jdclo.com/";
 }
 
 
