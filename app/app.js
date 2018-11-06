@@ -6,13 +6,12 @@ var common  = require('common.js');
 if (platform == 'devtools'){
 
     var host = "http://test1.wx.laohoulundao.com/";
+    //var host  = "https://wx.laohoulundao.com/";
 
 }else{
 
     var host  = "https://wx.laohoulundao.com/";
 }
-
-
 
 
 
@@ -27,7 +26,7 @@ App({
     onLaunch:function(){
 
         //1.检查本地是否有用户登录的信息
-
+        wx.clearStorageSync('userInfo');
         var userInfo        = wx.getStorageSync('userInfo');
         this.data.userId    = 0;
 
@@ -61,11 +60,10 @@ App({
             url: url,
             method:'POST',
             success: (res) => {
-                
                 res = res.data;
                 if(res.code == 200){
 
-                    var userInfo        = res.data.data.userInfo;
+                    var userInfo        = res.data.userInfo;
                     this.data.userInfo  = userInfo;
                     this.data.userId    = userInfo.UserID;
                     

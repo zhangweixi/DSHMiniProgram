@@ -1,5 +1,7 @@
 /* pages/book/search/search.wxss */
 
+@import "/template/bookinfo/bookinfo.wxss"
+
 /*搜索输入框*/
 .search-input{
 	display: flex;
@@ -57,4 +59,14 @@
 	border-radius: 8rpx;
 	font-size:1rem;
 
+}
+
+.search-content{
+	padding-top:40rpx;
+}
+
+.empty-notice{
+	text-align: center;
+	color:#8A8A8A;
+	margin-top:20vh;
 }

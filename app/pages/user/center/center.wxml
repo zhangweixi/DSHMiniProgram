@@ -1,8 +1,10 @@
 <!--pages/user/center/center.wxml-->
-<import src="/template/login/login.wxml"/>
-<template hidden="{{userInfo}}" is="login" data="{{app}}"></template>
+<!-- <import src="/template/login/login.wxml"/> -->
+<!-- <template hidden="{{userInfo}}" is="login" data="{{app}}"></template> -->
 
-<view hidden="{{!userInfo}}" class="page-container">
+<login wx:if="{{!userInfo}}"> </login>
+
+<view wx:if="{{userInfo}}" class="page-container">
 	
 	<view class="head-container">
 		<view class="head-box">

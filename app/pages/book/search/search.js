@@ -11,7 +11,8 @@ Page({
         hotKeywords: [],
         keywords:'',
         page:1,
-        books:[]
+        books:[],
+        isSearching:true
     },
 
     /**
@@ -87,6 +88,14 @@ Page({
      */
     deleteHistorySearchKeyAction:function(){
 
+        wx.request({
+            url: app.data.api + "book/delete_search_keywords?userId="+app.data.userId,
+            method:"POST",
+            success: (res) => {
+
+                this.getSearchKeywords();   
+            }
+        })
     },
 
     getSearchKeywords:function(){
@@ -108,19 +117,34 @@ Page({
         })
     },
 
-    getSearchBook:function(e){
+    searchBook:function(e){
+        var elementData = e.currentTarget.dataset;
+        
+        if(elementData.type == "input"){
 
-        var keywords = e.detail.value;
+            var keywords = e.detail.value; 
+            if(keywords == this.data.keywords){
 
-        if(keywords == this.data.keywords){
+                return;
+            }   
 
-            return;
-            
+        }else{
+
+            var keywords = elementData.value;
+            this.setData({"keywords":keywords});
         }
         
+
         this.setData({"keywords":keywords,"page":1,"canFreshBook":true});    
+        
+        this.setData({"books":[]});
 
         this.getBooks();
+        
+        setTimeout(()=>{
+            this.getSearchKeywords();
+        },1000);
+        
     },
     getBooks:function(){
 
@@ -141,21 +165,27 @@ Page({
                 var bookInfo  = data.books;
                 var books     = bookInfo.data;
                 var page      = bookInfo.current_page;
+                
+                
 
                 if(books.length == 0){
 
                     this.setData({"canFreshBook":false})
 
-                    return;
+                }else{
+                
+                    //将新的数据放到旧的后面
+                    this.data.books   = this.data.books.concat(books);
+          
+                    this.setData({"books":this.data.books});
                 }
 
-               
-                //将新的数据放到旧的后面
-                this.data.books   = this.data.books.concat(books);
-      
-                this.setData({"books":this.data.books});
+                this.setData({"isSearching":false})
             }
         })
+    },
+    showSearchKeywords:function(){
+        this.setData({"isSearching":true});
     }
         
 })

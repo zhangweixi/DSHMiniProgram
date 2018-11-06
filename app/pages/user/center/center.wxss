@@ -1,4 +1,11 @@
-@import "/template/login/login.wxss"
+/* @import "/template/login/login.wxss" */
+
+login{
+    z-index:1000;
+    width:100vw;
+    height:100vh;
+    display:block;
+}
 
 .head-container{
 
@@ -88,3 +95,4 @@
 	flex: 1;
 	color:#151515;
 }
+

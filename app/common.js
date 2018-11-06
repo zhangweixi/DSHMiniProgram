@@ -1,7 +1,12 @@
 
 
 var app = getApp();
-
+/**
+ * msgType有三种类型
+ * success
+ * warning
+ * error
+ */
 function showDialog(obj,msg,msgType){
 
     obj.setData({

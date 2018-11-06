@@ -2,19 +2,20 @@
 <view class='page-container container'>
     <view class='title'>输入手机号</view>
 
-    <form>
+    <form bindsubmit="getMobileCode">
         <view class='mobile-box'>
             
-             <picker class='country-code' range="{{countrys['name']}}" value="{{index}}" bindchange="bindPickerChange" >
+             <picker class='country-code' range="{{countrys['name']}}" value="{{index}}" bindchange="bindPickerChange" name="countryCode">
                 <view class="picker" style='background-image:url({{miniroot + "images/icon/select-icon.png"}})'>{{countrys.code[index]}}</view>
             </picker>
             <view class='border'></view>
-            <input class='input' type='number'></input>
+            <input class='input' type='number' name="mobile"></input>
 
            
         </view>
         
-
-        <button class='getcodebtn' bindtap='getMobileCode'>获取验证码</button>
+        <button class='getcodebtn' formType="submit" >获取验证码</button>
     </form> 
 </view>
+
+<include src="../../../include/dialog.wxml"> </include>

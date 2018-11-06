@@ -1,34 +1,46 @@
 <!--pages/book/search/search.wxml-->
+<import src="/template/bookinfo/bookinfo.wxml"/>
 
 <view class="search-input">
 	<image  src="/images/icon/search1.png" mode="widthFix"></image>
-	<input placeholder="他人的力量" bindblur="getSearchBook"></input>
-	<image class="" src="/images/icon/search-close.png" mode="widthFix"></image>
+	<input placeholder="他人的力量" data-type="input" bindfocus="showSearchKeywords" bindblur="searchBook" value="{{keywords}}"></input>
+	<image hidden="{{!isSearching}}" class="" src="/images/icon/search-close.png" mode="widthFix"></image>
 </view>
-
 
 
 
 
 <view class="page-container" style='margin-right:0;'>
 
-	<view hidden="{{historyKeywords.length == 0}}">
-		<view class=" search-title page-container" style='margin-left:0;'>
-		<text>搜索历史</text>
-		<image bind:tap="deleteHistorySearchKey" src="/images/icon/delete.png" mode="widthFix"></image>
-	    </view>
+	<view class="search-container" hidden="{{!isSearching}}">
+		
+		<view hidden="{{historyKeywords.length == 0}}">
+			<view class=" search-title page-container" style='margin-left:0;'>
+			<text>搜索历史</text>
+			<image bind:tap="deleteHistorySearchKey" src="/images/icon/delete.png" mode="widthFix"></image>
+		    </view>
 
-		<view class="search-keywords">
-				<view wx:for="{{historyKeywords}}">{{item}}</view>
+			<view class="search-keywords">
+					<view bind:tap="searchBook" data-type="btn" data-value="{{item}}" wx:for="{{historyKeywords}}">{{item}}</view>
+			</view>
 		</view>
+		
+
+		<view class="search-title">
+			<text>热门搜索</text>
+		</view>
+	    <view class="search-keywords">
+			<view bind:tap="searchBook" wx:for="{{hotKeywords}}" data-type="btn" data-value="{{item}}">{{item}}</view>
+		</view>
+
 	</view>
 	
 
-	<view class="search-title">
-		<text>热门搜索</text>
-	</view>
-    <view class="search-keywords">
-		<view wx:for="{{hotKeywords}}">{{item}}</view>
+	<view class="search-content" hidden="{{isSearching}}">
+
+		<template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}"></template>
+		
+		<view class="empty-notice" hidden="{{books.length > 0}}">没有相应的内容，试试别的吧</view>
 	</view>
     
 </view>
