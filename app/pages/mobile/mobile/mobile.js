@@ -116,6 +116,12 @@ Page({
         
         var data = { mobile: fromData.mobile, countryCode: this.data.countrys.code[this.data.index]};
         
+        wx.setStorageSync("mobileCodeData", data);
+
+        wx.navigateTo({url: '/pages/mobile/code/code'});
+
+        return;
+
         if (checkMobile(data.mobile) == false){
 
             common.showDialog(this,"手机号格式错误","warning");
@@ -127,16 +133,10 @@ Page({
             data:data,
             method:"POST",
             success: (res) => {
-                
-                wx.navigateTo({
-                    url: '/pages/mobile/code/code',
-                    success: (res) => {
 
-                        wx.setStorageSync("mobileCodeData", data);
-                        
+                wx.setStorageSync("mobileCodeData", data);
 
-                    }
-                })
+                wx.navigateTo({url: '/pages/mobile/code/code'});
             }
         })
 

@@ -13,7 +13,6 @@
 
 
 .lhhd .content{
-  
   margin:25rpx 0;
   line-height:50rpx;
   color:#151515;

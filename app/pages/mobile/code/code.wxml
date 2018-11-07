@@ -2,19 +2,19 @@
 <view class='page-container container'>
     <view class='title'>输入验证码</view>
 
-    <form>
+    <form bindsubmit="register">
+
         <view class='mobile-box'>
-            
-            <input class='input' type='number' placeholder='请输入验证码'></input>
+
+            <input class='input' type='number' name="code" placeholder='请输入验证码'></input>
             <view class='border'></view>
             <view class='regetbtn {{surplusTime > 0 ? "tapno" : ""}}' bind:tap="getMobileCode">{{regetText}}</view>
            
         </view>
     
-        <button class='getcodebtn' bindtap='checkMobileCode'>确定绑定</button>
+        <button class='getcodebtn' form-type="submit">确定绑定</button>
     </form> 
 
-    <!-- <cover-view><toast></toast></cover-view> -->
     <include  src="../../../components/dialog/dialog" />
 </view>
 

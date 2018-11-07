@@ -13,18 +13,22 @@
 
     <view class='handle-btn'>
         <image class="back timebtn" src='/images/icon/15back.png' mode="widthFix"></image>
-        <view class="play-btn" style='background-image:url("{{bookInfo.book_img}}");'></view>
+        <view class="play-btn" style='background-image:url("{{bookInfo.book_img}}");'>
+            <view></view>
+            <image hidden="{{mp3Playing}}" class="btn" bind:tap="playAudio" src="/images/icon/sp-video-off.png" mode="widthFix"></image>
+            <image hidden="{{!mp3Playing}}" class="btn" bind:tap="pauseAudio" src="/images/icon/sp-video-on.png" mode="widthFix"></image>
+            <view></view>
+        </view>
         <image class="font timebtn" src='/images/icon/15font.png' mode="widthFix"></image>
     </view>
 
     <view class='process page-container'>
-        <slider max="100" selected-color="#FF9C00" color='#E3E3E3' value='20' block-color="#FF9C00" block-size="15"></slider>
+        <slider max="{{audioInfo.timeLength}}" selected-color="#FF9C00" color='#E3E3E3' value='{{audioInfo.timeCurrent}}' block-color="#FF9C00" block-size="15"></slider>
         <view class="audio-time">
-            <text class="begin-time">12:56</text>
-            <text class="end-time">23:23</text>
+            <text class="begin-time">{{audioInfo.textTimeCurrent}}</text>
+            <text class="end-time">{{audioInfo.textTimeLength}}</text>
         </view>
     </view>
-
 </view>
 
 

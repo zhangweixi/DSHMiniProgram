@@ -5,7 +5,7 @@ var common  = require('common.js');
 //var host  = "https://wx.laohoulundao.com/";
 if (platform == 'devtools'){
 
-    //var host = "http://test1.wx.laohoulundao.com/";
+    var host = "http://test1.wx.laohoulundao.com/";
     var host  = "https://test.jdclo.com/";
 
 }else{
@@ -53,7 +53,13 @@ App({
     },
     wxLogin:function(code){
 
-        var url = this.data.api + "member/login?code="+code;
+        var url     = this.data.api + "member/login?code="+code;
+        var unionid = wx.getStorageSync("unionid");
+        
+        if(unionid){
+
+            return false;
+        }
 
         wx.request({
             // 必需
@@ -67,14 +73,15 @@ App({
                     this.data.userInfo  = userInfo;
                     this.data.userId    = userInfo.UserID;
                     
-                    wx.setStorage({
-                        key: 'userInfo',
-                        data: userInfo
-                    })
-                }
-                
-                
+                    wx.setStorageSync("userInfo", userInfo);
+                    
+                }else if(res.code == 2003){
 
+                    this.data.unionid = res.data.unionid;
+
+                    wx.setStorageSync("unionid",this.data.unionid);
+
+                }
             }
         })
     }

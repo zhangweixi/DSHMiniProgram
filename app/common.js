@@ -134,8 +134,25 @@ var user = {
                 console.log(res);
             }
         })
+    },
+    //检查用户是否是有效的用户
+    checkIsLogin:function(pageScope){
+        
+        if(app.data.userId > 0){
+
+            return true;
+        }
+        var tologin=function(){
+
+            wx.switchBar({url:"/pages/user/center/center"});
+        };
+
+        common.appConfirm(pageScope,"请先登录","现在就去登录",tologin,"去登录","取消");
+
     }
 };
+
+
 
 module.exports.showDialog   = showDialog;
 

@@ -43,8 +43,8 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/mobile/code/code",
-					"query": "bookId=106"
+					"pathName": "pages/book/detail/detail",
+					"query": "bookId=149"
 				},
 				{
 					"id": -1,

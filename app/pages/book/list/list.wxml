@@ -13,7 +13,8 @@
 		<image class="bg-img" src="/images/temp/c0.png" mode="widthFix"></image>
 
 		<view class="book-box">
-			<view class="book-content">
+			<navigator class="book-content" url="/pages/book/detail/detail?bookId={{lastBook.BookID}}" open-type="navigate">
+				
 				<view class="book-img">
 					<image  src="{{lastBook.book_img}}" mode="widthFix"></image>
 				</view>
@@ -26,7 +27,7 @@
 						<text>{{lastBook.ReadNumber}}</text>
 					</view>
 				</view>
-			</view>
+			</navigator>
 		</view>
 	</view>
 	

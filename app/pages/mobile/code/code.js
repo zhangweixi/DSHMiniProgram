@@ -9,7 +9,8 @@ Page({
      */
     data: {
         surplusTime:10,
-        regetText:"重新获取"
+        regetText:"重新获取",
+        wxinfo:wx.getStorageSync('wxinfo')
     },
 
     /**
@@ -71,14 +72,9 @@ Page({
         },1000);
         console.log(this.data.surplusTime);
     },
-    checkMobileCode:function(){
 
-        console.log(this.data);
 
-        common.showDialog(this,"操作成功","warning");
-    },
     getMobileCode: function (e) {
-
 
         if(this.data.surplusTime > 0){
             
@@ -104,5 +100,49 @@ Page({
                 })
             }
         })
+    },
+
+
+    register:function(e){
+        
+            console.log(e.detail.value);
+        var code            = e.detail.value.code;
+        var wxinfo          = wx.getStorageSync('wxinfo');
+
+        var data = {
+                "mobileCode":code,
+                "unionid":wx.getStorageSync("unionid"),
+                "mobile":wx.getStorageSync('mobileCodeData').mobile,
+                "nickName":wxinfo.nickName,
+                "headImg":wxinfo.avatarUrl
+            };
+
+        var url = app.data.api + "member/register"
+            wx.request({
+                url: url,
+                data:data,
+                method:"POST",
+                success: (res) => {
+                    
+                    var res = res.data;
+
+                    if(res.code == 200){
+
+
+                        var userInfo = res.data.userInfo;
+
+                        app.data.userInfo   = userInfo;
+
+                        app.data.unionid    = userInfo.wx_unionid;
+
+                        wx.setStorageSync("userInfo",userInfo);
+
+
+                        wx.switchTab({url: '/pages/user/center/center'});
+                        
+
+                    }
+                }
+            })
     }
 })
