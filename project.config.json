@@ -44,7 +44,7 @@
 					"id": 0,
 					"name": "测试",
 					"pathName": "pages/book/detail/detail",
-					"query": "bookId=149"
+					"query": "bookId=148"
 				},
 				{
 					"id": -1,

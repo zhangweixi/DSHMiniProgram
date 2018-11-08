@@ -8,17 +8,19 @@ Page({
        */
       data: {
           "bookInfo":{},
+          "readPlanId":0,
           "bookNotes":[
               { "type": "book", "placeholder":"通过此次代读，对我启发最大的一个知识点是？","title":"读 书"},
               { "type": "people", "placeholder": "通过这个知识点，在工作上改进的是？", "title":"读 人"},
               { "type": "thing", "placeholder": "通过这个知识点，在工作上改进的是？", "title":"读 事" },      
               { "type": "gift", "placeholder":"通过这个知识点，在工作上改进的是？","title":"赠礼物"}
           ],
-          "mediaType":"mp3",
+          "mediaType":"mp4",
           "contentType":"note",
           "display":'',
           "audioInfo":{},
-          "mp3Playing":false
+          "mp3Playing":false,
+          "haveRight":false,
         },
 
         /**
@@ -37,6 +39,11 @@ Page({
                 //设置时间
                 this.initBookMp3();
 
+                if (app.data.userId > 0 && app.data.userInfo.vipTimeIsValid == 1){
+
+                    this.setData({ "haveRight": true });
+
+                }
             },1000);
         },
 
@@ -172,6 +179,7 @@ Page({
                     return;
 
                     }
+                    
                     var dushu       = readplanInfo.BookReview1;
                     var duren       = readplanInfo.BookReview2;
                     var dushi       = readplanInfo.BookReview3;
@@ -183,7 +191,7 @@ Page({
                     bookNotes[2]["content"] = dushi;
                     bookNotes[3]["content"] = gift;
 
-                    this.setData({"bookNotes":bookNotes});
+                    this.setData({ "bookNotes": bookNotes,"readPlanId":readplanInfo.SumUpID});
 
                 }
             })
@@ -225,8 +233,13 @@ Page({
                 }, 500)  //这里设置延时1秒获取
             })
         },
-
+        //开始播放音频
         playAudio:function(){
+
+            if(this.checkHaveRight() == false){
+                
+                return false;
+            }
 
             this.setData({"mp3Playing":true});
             var bgMusic          = wx.getBackgroundAudioManager();
@@ -247,9 +260,162 @@ Page({
 
             bgMusic.play();
         },
-
+        //暂停
         pauseAudio:function(){
             this.setData({ "mp3Playing": false });
             wx.getBackgroundAudioManager().pause();
+        },
+
+        //改变音频播放的时间
+        changeAudioTime:function(e){
+
+            if(this.checkHaveRight() == false){
+                return;
+            }
+
+            var timeType    = e.currentTarget.dataset.type;
+            var currentTime = this.data.audioInfo.timeCurrent;
+            var changeTime  = 15;
+
+            
+            if(timeType == 'add'){
+
+                currentTime = currentTime + changeTime;
+
+            }else{
+
+                currentTime = currentTime - changeTime;
+            }
+
+            if(currentTime < 0){
+                
+                currentTime = 0;
+
+            }else if(currentTime > this.data.audioInfo.timeLength){
+
+                currentTime = this.data.audioInfo.timeLength;
+            }
+
+            wx.seekBackgroundAudio({
+                position: currentTime
+            })
+        },
+        //设置音频播放的时间
+        setAudioTime:function(e){
+            
+            if (this.checkHaveRight() == false) {
+                return;
+            }
+
+            var time        = e.detail.value;
+            var timeText    = common.numberToTime(time);
+            this.setData({["audioInfo.timeCurrent"]:time,["audioInfo.textTimeCurrent"]:timeText});
+            
+            wx.seekBackgroundAudio({
+                position: time,
+            });
+            
+        },
+
+        playMp4:function(e){
+           
+            if(this.checkHaveRight() == false){
+            
+                setTimeout(($res)=>{
+                    wx.createVideoContext("mp4").pause();
+                },500);
+
+                return;
+            }
+
+
+            if (this.data.mp3Playing == true){
+
+                this.setData({"mp3Playing":false});
+                wx.getBackgroundAudioManager().pause();
+            }
+        },
+
+        /**
+         * 检查是否有权限
+         * 如果本书不是免费的书籍，则需要判断用户是否是登录
+         * 
+         * 
+         * */
+        checkHaveRight:function(){
+
+            
+            var isFree = this.data.bookInfo.IsGratis;
+            
+            if (isFree == 1){ //书籍免费
+
+                return true;
+            }
+            
+            //2.判断是否登录
+            console.log(app.data.userId);
+            if(app.data.userId == 0){
+              
+                common.confirm(this,"请先登录","需要前往登录吗？",function(){
+
+                    wx.switchTab({
+                        url: '/pages/user/center/center',
+                    });
+
+                },"去登录","取消");
+                
+                return false;
+
+            } else if (app.data.userInfo.vipTimeIsValid == 0){
+
+                common.confirm(this, "您的会员已到期", "继续续费？", function () {
+
+                    wx.switchTab({
+                        url: '/pages/user/center/center',
+                    });
+
+                }, "续费", "取消");
+
+                return false;
+            }
+
+            return true;
+        },
+
+
+        /**
+         * 填写/编辑读书改进计划
+         * 
+         * */
+        edit_read_plan:function(e){
+
+            if(this.checkHaveRight == false){
+                
+                return false;
+            }
+
+            var url = app.data.api + "book/edit_read_plan";
+
+            console.log(e.detail.value);
+            var data = e.detail.value;
+                data.userId = app.data.userId;
+                data.bookId = this.data.bookId;
+                data.readPlanId = this.data.readPlanId;
+
+            
+            wx.request({
+                url: url,
+                data:data,
+                method:"POST",
+                success:(res)=>{
+                    res = res.data;
+                    if(res.code == 200){
+                        this.setData({ readPlanId: res.data.sumupId});
+                        //common.showDialog("保存成功","success");
+                    }
+                }
+            })
+
         }
+        
 })

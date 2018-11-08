@@ -6,14 +6,14 @@ var common  = require('common.js');
 if (platform == 'devtools'){
 
     var host = "http://test1.wx.laohoulundao.com/";
-    var host  = "https://test.jdclo.com/";
+    //var host  = "https://test.jdclo.com/";
 
 }else{
 
     var host = "https://test.jdclo.com/";
 }
 
-
+//var host  = "https://wx.laohoulundao.com/";
 
 App({
     common:common,

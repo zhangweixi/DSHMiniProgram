@@ -132,6 +132,7 @@ Page({
                         var userInfo = res.data.userInfo;
 
                         app.data.userInfo   = userInfo;
+                        app.data.userId     = userInfo.UserID;
 
                         app.data.unionid    = userInfo.wx_unionid;
 

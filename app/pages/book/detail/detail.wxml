@@ -5,25 +5,30 @@
 </view>
 
 <!-- 视频 -->
-<video hidden="{{mediaType=='mp3'}}" src='{{bookInfo.mp4}}' poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" ></video>
+<view class='mp4box'>
+
+    <video id="mp4" hidden="{{mediaType=='mp3'}}" src='{{bookInfo.mp4}}' bindplay='playMp4' poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" ></video>
+    <cover-view wx:if="{{haveRight == false}}" class='mp4-model' bind:tap="checkHaveRight" ></cover-view>
+</view>
+
 
 
 <!-- 音频 -->
 <view hidden="{{mediaType == 'mp4'}}" class='audio-box'>
 
     <view class='handle-btn'>
-        <image class="back timebtn" src='/images/icon/15back.png' mode="widthFix"></image>
+        <image class="back timebtn" data-type="reduce" bind:tap="changeAudioTime" src='/images/icon/15back.png' mode="widthFix"></image>
         <view class="play-btn" style='background-image:url("{{bookInfo.book_img}}");'>
             <view></view>
             <image hidden="{{mp3Playing}}" class="btn" bind:tap="playAudio" src="/images/icon/sp-video-off.png" mode="widthFix"></image>
             <image hidden="{{!mp3Playing}}" class="btn" bind:tap="pauseAudio" src="/images/icon/sp-video-on.png" mode="widthFix"></image>
             <view></view>
         </view>
-        <image class="font timebtn" src='/images/icon/15font.png' mode="widthFix"></image>
+        <image class="font timebtn" data-type="add" bind:tap="changeAudioTime" src='/images/icon/15font.png' mode="widthFix"></image>
     </view>
 
     <view class='process page-container'>
-        <slider max="{{audioInfo.timeLength}}" selected-color="#FF9C00" color='#E3E3E3' value='{{audioInfo.timeCurrent}}' block-color="#FF9C00" block-size="15"></slider>
+        <slider max="{{audioInfo.timeLength}}" activeColor="#FF9C00" selected-color="#FF9C00" color='#E3E3E3' value='{{audioInfo.timeCurrent}}' block-color="#FF9C00" block-size="15" bindchanging="setAudioTime"></slider>
         <view class="audio-time">
             <text class="begin-time">{{audioInfo.textTimeCurrent}}</text>
             <text class="end-time">{{audioInfo.textTimeLength}}</text>
@@ -41,15 +46,19 @@
 
     <!-- 读书笔记 -->
     <view class='page-container book-note' hidden="{{contentType == 'ppt'}}">
-        <view wx:for="{{bookNotes}}" class='single-note'>
-            <view class='title'>{{item.title}}：</view>
-            <textarea placeholder="{{item.placeholder}}" value="{{item.content}}"></textarea>
-        </view>
+        <form bindsubmit='edit_read_plan' >
+            <view wx:for="{{bookNotes}}" class='single-note'>
+                <view class='title'>{{item.title}}：</view>
+                <textarea placeholder="{{item.placeholder}}" value="{{item.content}}" name="{{item.type}}"></textarea>
+            </view>
 
-        <view class='note-btn'><button>确认提交</button></view>
-        
+            <view class='note-btn'><button formType="submit">确认提交</button></view>
+    
+        </form>
     </view>
-
+    
+        
+        
     
 
 
