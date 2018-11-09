@@ -9,6 +9,8 @@ Page({
       data: {
           "bookInfo":{},
           "readPlanId":0,
+          "isEditing":false,
+          "pptDownloading":false,
           "bookNotes":[
               { "type": "book", "placeholder":"通过此次代读，对我启发最大的一个知识点是？","title":"读 书"},
               { "type": "people", "placeholder": "通过这个知识点，在工作上改进的是？", "title":"读 人"},
@@ -16,11 +18,16 @@ Page({
               { "type": "gift", "placeholder":"通过这个知识点，在工作上改进的是？","title":"赠礼物"}
           ],
           "mediaType":"mp4",
-          "contentType":"note",
+          "contentType":"ppt",
           "display":'',
           "audioInfo":{},
           "mp3Playing":false,
+          "mp4Playing":false,
+          "autoPlayMp4":false,
           "haveRight":false,
+          "app":app,
+          "email": "",
+
         },
 
         /**
@@ -39,12 +46,17 @@ Page({
                 //设置时间
                 this.initBookMp3();
 
+                
                 if (app.data.userId > 0 && app.data.userInfo.vipTimeIsValid == 1){
 
                     this.setData({ "haveRight": true });
 
+                }else{
+                    console.log("用户不存在");
                 }
-            },1000);
+
+                
+            },2000);
         },
 
         /**
@@ -334,6 +346,22 @@ Page({
                 this.setData({"mp3Playing":false});
                 wx.getBackgroundAudioManager().pause();
             }
+
+            this.setData({"mp4Playing":true});
+        },
+        /**
+         * 暂停MP4
+         * 
+         */
+        pauseMp4:function(){
+            
+            this.setData({ "mp4Playing": false });
+
+        },
+
+        finishMp4:function(){
+
+            this.setData({ "mp4Playing": false });
         },
 
         /**
@@ -382,7 +410,11 @@ Page({
             return true;
         },
 
+        openEdit: function(){
 
+            this.setData({ isEditing:true});
+
+        },
         /**
          * 填写/编辑读书改进计划
          * 
@@ -410,12 +442,100 @@ Page({
                 success:(res)=>{
                     res = res.data;
                     if(res.code == 200){
-                        this.setData({ readPlanId: res.data.sumupId});
-                        //common.showDialog("保存成功","success");
+
+                        this.setData({ readPlanId: res.data.sumupId, isEditing:false});
+
+                        common.showDialog(this,"保存成功","success");
                     }
                 }
             })
+        },
 
+        //显示下载输入框
+        showDownload:function(){
+
+            if(this.data.mp4Playing == true){
+
+                this.setData({ autoPlayMp4 : true });    
+            }
+            this.setData({ pptDownloading:true});
+
+            if(app.data.userId > 0){
+
+                var email = app.data.userInfo.email;
+
+            }else{
+                var email = "";
+            }
+            common.confirmInput(this,email,"发送PPT","我们会将PPT直接发送到您邮箱",this.downloadppt,this.cancelDownload,"确定","取消");
+        },
+
+        //下载PPT
+        downloadppt:function(e){
+
+            var url     = app.data.api + "book/send_book_ppt";
+            var email = e.detail.value.confirminput;
+            
+            var data = {
+
+                email:email,
+                userId:app.data.userId ? app.data.userId : 0,
+                bookId:this.data.bookInfo.BookID
+
+            };
+
+            console.log(data);
+           
+
+            wx.request({
+                url: url,
+                data:data,
+                method:'POST',
+                success:(res)=>{
+
+                    res = res.data;
+
+                    if(res.code == 200){
+
+                        this.setData({ pptDownloading: false });
+
+                        common.confirmInputClose(this);
+
+                        if (this.data.autoPlayMp4 == true) {
+                           wx.createVideoContext("mp4").play();
+                           this.setData({ autoPlayMp4: false });
+                        }
+                        app.data.userInfo.email = email;
+
+                        common.showDialog(this,"已发送", "success");
+
+                   }else{
+                        //common.confirmInputClose(this);
+                        common.showDialog(this, res.message,"warning");
+                   }
+                }
+            });
+
+           
+        },
+
+        //取消下载PPT
+        cancelDownload:function(){
+
+            this.setData({ pptDownloading: false });
+
+            if (this.data.autoPlayMp4 == true) {
+
+                wx.createVideoContext("mp4").play();
+
+                this.setData({ autoPlayMp4: false });
+            }
+
+        },
+        toCommentPage:function(){
+
+            wx.navigateTo({
+                url: '/pages/book/comments/comments?bookId='+this.data.bookInfo.BookID,
+            })
         }
-        
 })

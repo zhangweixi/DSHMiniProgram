@@ -5,6 +5,8 @@
     "pages/book/category/category",
     "pages/book/detail/detail",
     "pages/book/search/search",
+    "pages/book/download/download",
+    "pages/book/comments/comments",
     "pages/user/center/center",
     "pages/mobile/mobile/mobile",
     "pages/mobile/code/code",

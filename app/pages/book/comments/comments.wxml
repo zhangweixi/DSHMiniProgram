@@ -1,0 +1,43 @@
+<!--pages/book/comments/comments.wxml-->
+<view class="page-container">
+
+	<view class="comments-list" wx:for="{{[1,2,3]}}">
+		
+		<view class="head-img">
+			<image class="" src="https://wx.qlogo.cn/mmopen/vi_32/r2a4LHhXVGiaicfhZfjmIz0d4S88n9KICvBZxaKUx7zQIjUu27ib4abYkzXo1actqH87dZIPVbxRQvuSBKroP50EQ/132" mode="widthFix"></image>
+		</view>
+
+
+		<view class="comment-content">
+			<view class="name">张维喜</view>
+			<view class="content">如果你无法简洁的表达你的想法那只能说明你还不够了解它</view>
+			<view class="btns">
+				<text class="time">10月22日 21:58</text>
+				<image class="btn replay-btn" src="/images/icon/replay.png" mode="widthFix"></image>
+				
+				<image class="btn zan-btn" src="/images/icon/up-yes.png" mode="widthFix"></image>
+				<text class="zan-num">23</text>
+				
+			</view>
+			<view class="replays">
+				<view class="replay-list">
+					<view class="replay-name">张维喜:</view>
+					<view class="replay-content">如果你无法简洁的表达你的想法那只能说明你还不够了解它…</view>
+				</view>
+				<view>
+					<view class="replay-name">李四:</view>
+					<view class="replay-content">表达你的那只够了…</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view style="height:60px;"></view>
+</view>
+
+<view class="new-comment-btn">
+	<view class="box">
+		<image class="" src="/images/icon/edit.png" mode="widthFix"></image>
+		<text>期待你的神评论！</text>	
+	</view>
+</view>

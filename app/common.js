@@ -68,6 +68,34 @@ function appConfirm(obj,title,msg,callback,sureText = '确定',cancelText = '取
     }
 }
 
+
+function appConfirmInputShow(obj,defaultValue, title, msg, sureCallback, cancelCallback, sureText = '确定', cancelText = '取消') {
+    var data = {
+        "confirmInputShow": true,
+        "confirmTitle": title,
+        "confirmMsg": msg,
+        "confirmSureText": sureText,
+        "confirmCancelText": cancelText,
+        "confirmInputValue": defaultValue
+    };
+
+    obj.setData(data);
+    obj.confirmFromCallback = sureCallback;
+
+    obj.confirmInputClose = function () {
+        this.setData({ 'confirmInputShow': false });
+        cancelCallback();
+    }
+}
+
+
+function appConfirmInputClose(obj) {
+   
+    obj.setData({ 'confirmInputShow': false });
+}
+
+
+
 /**
  * 播放背景音乐
  */
@@ -159,5 +187,10 @@ module.exports.showDialog   = showDialog;
 module.exports.numberToTime = numberToTime;
 
 module.exports.confirm      = appConfirm;
+
+module.exports.confirmInput = appConfirmInputShow;
+
+module.exports.confirmInputClose = appConfirmInputClose;
+
 
 module.exports.bgMusic      = bgMusic;

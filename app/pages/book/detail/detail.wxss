@@ -118,6 +118,12 @@ video{
     height:56.12vw;
 }
 
+.mp4bg{
+    display: block;
+    width:100%;
+    margin:0;
+    padding:0;
+}
 .sub-nav{
     display: flex;
     padding:40rpx 0;
@@ -166,14 +172,26 @@ video{
     padding:20rpx;
     padding-right:0;
 
+
 }
 
 .single-note textarea{
     flex: 1;
-    height:80px;
+    height:auto;
+    min-height:50px;
     color:#505050;
+    display: block;
 }
 
+.single-note textarea.android{
+    padding-top:20rpx;
+}
+
+.single-note textarea.ios{
+    float:left;
+    padding-top:10rpx;
+
+}
 .note-btn{
     overflow: hidden;
 }
@@ -242,6 +260,25 @@ video{
 
 
 
+.download-box{
+    width:100%;
+    position: fixed;
+    background:rgba(0,0,0,.5);
+    z-index: 100000;
+    top:0;
+    left:0;
+    height:100%;
+}
+
+.download-box view{
+    width:80vw;
+    height:300px;
+    left:10vw;
+    top:20vh;
+    position: absolute;
+    
+    background: #fff;
+}
 
 
 

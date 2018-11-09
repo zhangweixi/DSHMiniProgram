@@ -1,0 +1,124 @@
+/* pages/book/comments/comments.wxss */
+
+.comments-list{
+
+	border-bottom:1px solid #E3E3E3;
+	display: flex;
+	padding-top:40rpx;
+	padding-bottom:40rpx;
+	
+}
+
+.comments-list .head-img{
+
+	width:100rpx;
+
+}
+
+.comments-list .head-img image{
+	width:100%;
+	display: block;
+	border-radius: 100%;
+}
+
+.comment-content{
+
+	flex: 1;
+	margin-left:20rpx;
+}
+
+.comment-content .name{
+	color:#8A8A8A;
+	font-size:1rem;
+}
+
+.comment-content .content{
+	color:#151515;
+	font-size:1rem;
+	margin-top:10rpx;
+}
+.comment-content .btns{
+	display: flex;
+	align-items: center;
+	margin:20rpx 0;
+	color:#C4C4C4;
+	font-size:0.85rem;
+}
+
+.comment-content .btns .btn{
+	width:40rpx;
+	display: inline-block;
+	line-height:40rpx;
+	margin-right:20rpx;
+}
+
+.comment-content .time{
+
+	flex: 1;
+	
+}
+
+.comment-content .zan-num{
+	margin-right:10rpx;
+}
+
+.replays{
+	background: #F3F3F3;
+	padding:20rpx;
+	border-radius: 6rpx;
+}
+
+
+.replays .replay-list{
+
+	display: flex;
+
+}
+
+.replays view{
+	display: inline-block;
+	color:#8A8A8A;
+	font-size:0.85rem;
+}
+
+.replays .replay-name{
+	margin-right:20rpx;
+	
+	white-space:nowrap;
+}
+
+
+.replays .replay-content{
+	flex: 1;
+}
+
+/*新回复按钮*/
+.new-comment-btn{
+	position: fixed;
+	bottom:0;
+	background:#fff;
+	width:100%;
+}
+
+.new-comment-btn .box{
+
+	background:RGBA(0, 0, 0, 0.1);
+	display: flex;
+	width:80;
+	margin:20rpx 25rpx;
+	padding:20rpx;
+	align-items: center;
+	border-radius: 6rpx;
+}
+
+.new-comment-btn image{
+	width:60rpx;
+	margin-right:20rpx;
+
+}
+
+.new-comment-btn text{
+	flex: 1;
+	color:#C4C4C4;
+
+}

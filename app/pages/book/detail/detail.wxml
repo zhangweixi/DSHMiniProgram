@@ -7,8 +7,10 @@
 <!-- 视频 -->
 <view class='mp4box'>
 
-    <video id="mp4" hidden="{{mediaType=='mp3'}}" src='{{bookInfo.mp4}}' bindplay='playMp4' poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" ></video>
-    <cover-view wx:if="{{haveRight == false}}" class='mp4-model' bind:tap="checkHaveRight" ></cover-view>
+    <video id="mp4" hidden="{{mediaType=='mp3' || pptDownloading == true}}" src='{{bookInfo.mp4}}' bindplay='playMp4'  bindpause="pauseMp4" bindended="finishMp4" poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" ></video>
+    <cover-view wx:if="{{haveRight == false && pptDownloading == false}}" class='mp4-model' bind:tap="checkHaveRight" ></cover-view>
+
+    <image wx:if="{{pptDownloading == true}}" src="https://wx.laohoulundao.com/images/default-images/video-bg.png"  mode='widthFix' class='mp4bg'></image>
 </view>
 
 
@@ -49,18 +51,22 @@
         <form bindsubmit='edit_read_plan' >
             <view wx:for="{{bookNotes}}" class='single-note'>
                 <view class='title'>{{item.title}}：</view>
-                <textarea placeholder="{{item.placeholder}}" value="{{item.content}}" name="{{item.type}}"></textarea>
+                <textarea placeholder="{{item.placeholder}}" class="{{app.data.platform == 'ios'?'ios':'android'}}" value="{{item.content}}" name="{{item.type}}" disabled="{{ isEditing == false && readPlanId > 0}}"></textarea>
             </view>
 
-            <view class='note-btn'><button formType="submit">确认提交</button></view>
+            <view class='note-btn'>
+            
+                <button wx:if="{{isEditing == false && readPlanId > 0}}" bind:tap="openEdit">修改</button>
+
+                <button wx:if="{{isEditing == true || readPlanId == 0}}" formType="submit">确认提交</button>
+
+            </view>
     
         </form>
     </view>
     
         
-        
     
-
 
     <!-- 书籍PPT -->
     <view class="ppt-content" hidden="{{contentType == 'note' }}">
@@ -71,13 +77,13 @@
 
         <view class="comment-input">
             <view class='page-container'>
-                <view class="input">
+                <view class="input" bindtap='toCommentPage'>
                     <image class="" src="/images/icon/edit.png" mode="widthFix"></image>
-                    <input placeholder="期待你的神评论"></input>
+                    <input placeholder="期待你的神评论" disabled='true'></input>
                 </view>
 
-                <image class="icon" src="/images/icon/comment.png" mode="widthFix"></image>
-                <image class="icon" src="/images/icon/download.png" mode="widthFix"></image>
+                <image class="icon" src="/images/icon/comment.png" mode="widthFix" bindtap='toCommentPage'></image>
+                <image class="icon" src="/images/icon/download.png" mode="widthFix" bindtap='showDownload'></image>
                 <image class="icon" src="/images/icon/share1.png" mode="widthFix"></image>
             </view>
         </view>
@@ -85,10 +91,19 @@
     </view>
 
 
-    
+    <!-- <view class='download-box'>
+        <view>
+            <input placeholder='kdkdkk'></input>
+        </view>
+    </view> -->
 
     <!-- 下载PPT弹窗 -->
+
+    <include src="../../../include/confirm-input.wxml"> </include>
+
     <include src="../../../include/confirm.wxml"> </include>
+
+    <include src="../../../include/dialog.wxml"></include>
   
 </view>
 

@@ -1,0 +1,18 @@
+ <!-- 下载PPT弹窗 -->
+    <view class="model-bg confirm" hidden="{{!confirmInputShow}}">
+        <form bindsubmit="confirmFromCallback">
+            <view class="model-box">
+                <view class="title">{{confirmTitle}}</view>
+                <view class="sub-title">{{confirmMsg}}</view>
+                <view class="input">
+                    <input placeholder="请输入" name="confirminput" value='{{confirmInputValue}}'></input>
+                </view>
+                <view style="height:50px;"></view>
+                <view class="btns">
+                    <view class="btn cancel" bind:tap="confirmInputClose">{{confirmCancelText}}</view>
+                    <view class="empty"></view>
+                    <button formType='submit' class="btn sure" style='background:#fff;'>{{confirmSureText}}</button>
+                </view>
+            </view>
+        </form>
+    </view>

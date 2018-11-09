@@ -6,7 +6,7 @@ var common  = require('common.js');
 if (platform == 'devtools'){
 
     var host = "http://test1.wx.laohoulundao.com/";
-    //var host  = "https://test.jdclo.com/";
+    var host  = "https://test.jdclo.com/";
 
 }else{
 
@@ -21,7 +21,7 @@ App({
         'host':host,
         "miniroot":host+"miniprogram/",
         "api":host+"api/v6/",
-        "platform": platform
+        "platform": platform,
     },
     onLaunch:function(){
 
@@ -29,7 +29,7 @@ App({
         wx.clearStorageSync('userInfo');
         var userInfo        = wx.getStorageSync('userInfo');
         this.data.userId    = 0;
-
+        
         if(userInfo){
             
             this.data.userInfo  = userInfo;
