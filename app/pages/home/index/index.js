@@ -52,7 +52,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
+
+        console.log(1);
         this.getIndexData();
 
 
@@ -157,10 +158,6 @@ Page({
         //把每一张图片的对应的高度记录到数组里  
         imgheights[e.target.dataset.id] = imgheight;
         this.setSwiperData('imgheights', imgheights);
-
-        // this.setData({
-        //     imgheights: imgheights
-        // })
     },
     /**
      * banner轮播改变事件
@@ -214,8 +211,8 @@ Page({
 
                 //音频
                 for(var video of data.lundaoList)
-                {
-                    video.playing = false;
+                { 
+                    video['playing'] = false;
                 }
 
                 _this.setData({"videos":data.lundaoList});

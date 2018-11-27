@@ -1,0 +1,35 @@
+<view class="gray-line"></view>
+
+<view class="page-container">
+	<form>
+
+		<view class="u-info">
+			<text>姓名</text>
+			<input value="18080591234"></input>
+		</view>
+
+		<view class="u-info">
+			<text>手机</text>
+			<input value="18080591234"></input>
+		</view>
+
+		<view class="u-info" bind:tap="showDepartment">
+			<text>所属部门</text>
+			<input value="{{selectedDepartment}}" disabled ></input>
+
+			<image src="/images/icon/select.png" mode="widthFix"></image>
+
+		</view>
+
+		<view class="u-info">
+			<text>部门职务</text>
+			<input value="大中华地区常务副总裁"></input>
+		</view>
+
+		<view class="btn">
+			<button class="has-content">确定修改</button>
+		</view>
+	</form>
+	
+</view>
+

@@ -1,32 +1,31 @@
 <!--pages/book/comments/comments.wxml-->
 <view class="page-container">
 
-	<view class="comments-list" wx:for="{{[1,2,3]}}">
+	<view class="comments-list" wx:for="{{comments}}" wx:for-item="comment">
 		
 		<view class="head-img">
-			<image class="" src="https://wx.qlogo.cn/mmopen/vi_32/r2a4LHhXVGiaicfhZfjmIz0d4S88n9KICvBZxaKUx7zQIjUu27ib4abYkzXo1actqH87dZIPVbxRQvuSBKroP50EQ/132" mode="widthFix"></image>
+			<image class="" src="{{comment.headImg}}" mode="widthFix"></image>
 		</view>
 
 
 		<view class="comment-content">
-			<view class="name">张维喜</view>
-			<view class="content">如果你无法简洁的表达你的想法那只能说明你还不够了解它</view>
+			<view class="name">{{comment.YourName}}</view>
+			<view class="content">{{comment.body}}</view>
 			<view class="btns">
-				<text class="time">10月22日 21:58</text>
-				<image class="btn replay-btn" src="/images/icon/replay.png" mode="widthFix"></image>
+				<text class="time">{{comment.created_at}}</text>
+				<image class="btn replay-btn" bind:tap="showCommentInput" src="/images/icon/replay.png" data-type="replay" data-topcommentid="{{comment.id}}" mode="widthFix"></image>
 				
-				<image class="btn zan-btn" src="/images/icon/up-yes.png" mode="widthFix"></image>
-				<text class="zan-num">23</text>
+				<image wx:if="{{comment.is_like == 1}}" class="btn zan-btn" src="/images/icon/up-yes.png" mode="widthFix" data-commentid="{{comment.id}}" bind:tap="zan"></image>
+
+				<image wx:if="{{comment.is_like == 0}}" class="btn zan-btn" src="/images/icon/up-no.png" mode="widthFix" data-commentid="{{comment.id}}" bind:tap="zan"></image>
+
+				<text class="zan-num">{{comment.up_times}}</text>
 				
 			</view>
-			<view class="replays">
-				<view class="replay-list">
-					<view class="replay-name">张维喜:</view>
-					<view class="replay-content">如果你无法简洁的表达你的想法那只能说明你还不够了解它…</view>
-				</view>
-				<view>
-					<view class="replay-name">李四:</view>
-					<view class="replay-content">表达你的那只够了…</view>
+			<view class="replays" wx:if="{{comment.subComments.length > 0}}">
+				<view class="replay-list" wx:for="{{comment.subComments}}" wx:for-item="subcom">
+					<view class="replay-name">{{subcom.replayYourName}}:</view>
+					<view class="replay-content">{{subcom.body}}</view>
 				</view>
 			</view>
 		</view>
@@ -36,8 +35,32 @@
 </view>
 
 <view class="new-comment-btn">
-	<view class="box">
+	<view class="box" bind:tap="showCommentInput" data-type="topcomment" data-topcommentid="0">
 		<image class="" src="/images/icon/edit.png" mode="widthFix"></image>
 		<text>期待你的神评论！</text>	
 	</view>
 </view>
+
+
+<view class="new-comment-input-bg" hidden="{{showComment == false}}">
+
+	<view class="empty" bind:tap="closeCommentInput"></view>
+	<form bindsubmit="addComment">
+		<view class="new-comment-input">
+			<view class="title">评论</view>
+			<view class="area"><textarea placeholder="点评此次老侯代读" placeholder-style="color:#C4C4C4;" fixed="true" show-confirm-bar="" cursor-spacing="150" name="comment"></textarea></view>
+			<view class="btn">
+				<button  formType="submit">发表评论</button>
+			</view>
+		</view>	
+
+	</form>
+	
+
+</view>
+
+
+<include src="../../../include/dialog.wxml"></include>
+
+
+

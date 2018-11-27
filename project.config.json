@@ -43,8 +43,8 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/book/detail/detail",
-					"query": "bookId=148"
+					"pathName": "pages/readparty/detail/detail",
+					"query": "readPartyId=209&companyId=1&readPartyName=小南瓜自学习社群"
 				},
 				{
 					"id": -1,

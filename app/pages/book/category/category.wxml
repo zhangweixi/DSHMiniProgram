@@ -8,11 +8,11 @@
 
 <view class='books'>
     
-    <view class='bookinfo' wx:for="{{books}}" wx:for-item="book">
-        <navigator url='/pages/book/detail/detail?bookId={{book.BookID}}'>
+    <view class='bookinfo' wx:for="{{books}}" wx:for-item="book" >
+        <view data-book-id="{{book.BookID}}" data-book-name="{{book.BookTitle}}" bind:tap="selectBook" >
             <image src='{{book.book_img}}' mode='widthFix'></image>
             <text class='title'>{{book.BookTitle}}</text>
-        </navigator>
+        </view>
     </view>
 
 </view>

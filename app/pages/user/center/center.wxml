@@ -29,49 +29,63 @@
 	</view>
 
 
-	<image class="share-jd" src="/images/icon/share-jd.png" mode="widthFix"></image>
 
-	<view class="menues">
-		
-		<navigator class="menu-list" url="" open-type="navigate">
+	<image class="share-jd" src="/images/icon/share-jd.png" mode="widthFix"></image>
+</view>
+
+
+<view class="menues">
+	
+	<navigator  url="/pages/user/books/books" open-type="navigate">
+		<view class="menu-list">
 			<image class="icon-img" src="/images/icon/menu-note.png" mode="widthFix"></image>
 			<text>周课笔记</text>
 			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
-		</navigator>
-			
+		</view>
+	</navigator>
 		
-		<navigator class="menu-list" url="" open-type="navigate">
+	
+	<navigator  url="/pages/user/notes/notes" open-type="navigate">
+		<view class="menu-list">
 			<image class="icon-img" src="/images/icon/menu-read.png" mode="widthFix"></image>
 			<text>读书记录</text>
-			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
-		</navigator>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>	
+		</view>
+	</navigator>
 
-		<navigator class="menu-list" url="" open-type="navigate">
+	<navigator  url="/pages/user/message/message" open-type="navigate">
+
+		<view class="menu-list">
 			<image class="icon-img" src="/images/icon/menu-message.png" mode="widthFix"></image>
 			<text>消息中心</text>
-			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
-		</navigator>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>	
+		</view>
+	</navigator>
 
-		<navigator class="menu-list" url="" open-type="navigate">
+	<navigator  url="/pages/user/question/question" open-type="navigate">
+		<view class="menu-list">
 			<image class="icon-img" src="/images/icon/menu-question.png" mode="widthFix"></image>
 			<text>常见问题</text>
-			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
-		</navigator>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>	
+		</view>
+		
+	</navigator>
 
-		<navigator class="menu-list" url="" open-type="navigate" style="border:none;">
+	<navigator  url="/pages/user/advice/advice" open-type="navigate" style="border:none;">
+		<view class="menu-list" style="border:none;">
 			<image class="icon-img" src="/images/icon/menu-advise.png" mode="widthFix"></image>
 			<text>反馈建议</text>
-			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
-		</navigator>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>	
+		</view>
+	</navigator>
 
-	</view>
+</view>
 
 	
 
 
 
 
-</view>
 
 
 

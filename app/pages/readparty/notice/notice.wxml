@@ -1,0 +1,21 @@
+<!--pages/readparty/notice/notice.wxml-->
+<view class="line"></view>
+<view class="page-container">
+	<view wx:for="{{notices}}" class="notice-list">
+		<view class="head">
+			<image class="" src="{{item.avg}}" mode="widthFix"></image>
+		</view>
+
+		<view class="content-box">
+			<view class="nametime">
+				<text class="name color-y">{{item.user_name}}</text>
+				<text class="time color-g">{{item.created_at}}</text>
+			</view>
+
+			<view class="content">
+				<text>{{item.content}}</text>
+				<!-- <image src="/images/icon/up-yes-1.png" mode="widthFix"></image> -->
+			</view>
+		</view>
+	</view>	
+</view>

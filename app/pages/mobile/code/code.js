@@ -133,7 +133,7 @@ Page({
 
                         app.data.userInfo   = userInfo;
                         app.data.userId     = userInfo.UserID;
-
+                        app.data.memNumber  = userInfo.MemNumber;
                         app.data.unionid    = userInfo.wx_unionid;
 
                         wx.setStorageSync("userInfo",userInfo);

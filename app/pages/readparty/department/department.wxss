@@ -1,0 +1,67 @@
+.big-title{
+	display: flex;
+	align-items: center;
+	padding:40rpx 0;
+}
+
+.big-title .t1{
+	flex:1;
+	font-weight: 600;
+	font-size:1.2rem;
+}
+
+.big-title image{
+	width:40rpx;
+	margin:0 20rpx;
+}
+
+
+
+/*列表*/
+.depart-list{
+	display: flex;
+	align-items: center;
+	padding:20rpx 0;
+	font-size:1.1rem;
+	color:#505050;
+}
+
+.depart-list .edit-img{
+	width:35rpx;
+	margin-right:20rpx;
+}
+
+.depart-list text{
+	flex:1;
+}
+
+.radio{
+	width:35rpx;
+}
+
+.edit-delete{
+	position: fixed;
+	display: flex;
+	bottom:0;
+	left:0;
+	width:100%;
+	border-top:1px solid rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	color:#C4C4C4;
+	background: #fff;
+}
+
+.edit-delete .flex{
+	flex:1;
+	text-align: center;
+	line-height: 80rpx;
+}
+
+.edit-delete .active{
+	color:#FF9C00;
+}
+
+.edit-delete .line{
+	width:1px;
+	background: rgba(0, 0, 0, 0.1);
+}

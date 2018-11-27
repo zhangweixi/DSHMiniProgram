@@ -258,8 +258,21 @@ video{
     margin-left:30rpx;
 }
 
-
-
+.ppt-content .comment-input .comment-num{
+    
+    position: relative;
+}
+.comment-num image{
+    width:100%;
+    display: block;
+}
+.comment-num text{
+    position: absolute;
+    top:-10rpx;
+    right:-10rpx;
+    color:#FF9C00;
+    font-size:.7rem;
+}
 .download-box{
     width:100%;
     position: fixed;

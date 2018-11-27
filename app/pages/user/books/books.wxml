@@ -1,0 +1,10 @@
+<view class='books'>
+    
+    <view class='bookinfo' wx:for="{{books}}" wx:for-item="book">
+        <navigator url='/pages/book/detail/detail?bookId={{book.BookID}}'>
+            <image src='{{book.book_img}}' mode='widthFix'></image>
+            <text class='title'>{{book.BookTitle}}</text>
+        </navigator>
+    </view>
+
+</view>

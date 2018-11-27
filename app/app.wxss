@@ -1,5 +1,29 @@
 page{
   /* font-size:12rpx; */
+  color:#151515;
+}
+
+button::after {
+  border: none
+}
+.center-bg{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.color-y{
+  color:#FF9C00 ! important;
+}
+.color-g{
+  color:#C4C4C4;
+}
+
+.color-b{
+  color:#151515;
+}
+.gray-line{
+  height:1px;
+  background: RGBA(12, 0, 51, 0.1);
 }
 
 /*页面容器*/
@@ -7,8 +31,6 @@ page{
 
   margin-right:25rpx;
   margin-left:25rpx;
-
-  
 }
 
 /*页面通用标题*/
@@ -17,6 +39,7 @@ page{
   line-height:1.5rem;
   margin-top:40rpx;
   margin-bottom:40rpx;
+  align-items: center;
 }
 
 .page-title .title{

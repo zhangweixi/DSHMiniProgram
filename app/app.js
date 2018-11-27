@@ -6,34 +6,39 @@ var common  = require('common.js');
 if (platform == 'devtools'){
 
     var host = "http://test1.wx.laohoulundao.com/";
-    var host  = "https://test.jdclo.com/";
+    //var host  = "https://test.jdclo.com/";
 
 }else{
 
     var host = "https://test.jdclo.com/";
 }
 
+
 //var host  = "https://wx.laohoulundao.com/";
 
 App({
     common:common,
     data:{
-        'host':host,
-        "miniroot":host+"miniprogram/",
-        "api":host+"api/v6/",
-        "platform": platform,
+        host:host,
+        userId:0,
+        memNumber:"",
+        miniroot:host+"miniprogram/",
+        api:host+"api/v6/",
+        platform: platform,
+        loginKey:'',
     },
     onLaunch:function(){
 
         //1.检查本地是否有用户登录的信息
         wx.clearStorageSync('userInfo');
         var userInfo        = wx.getStorageSync('userInfo');
-        this.data.userId    = 0;
+        
         
         if(userInfo){
             
             this.data.userInfo  = userInfo;
             this.data.userId    = userInfo.UserID;
+            this.data.memNumber = userInfo.MemNumber;
 
         }else{
 
@@ -53,6 +58,7 @@ App({
     },
     wxLogin:function(code){
 
+      
         var url     = this.data.api + "member/login?code="+code;
         var unionid = wx.getStorageSync("unionid");
         
@@ -72,6 +78,8 @@ App({
                     var userInfo        = res.data.userInfo;
                     this.data.userInfo  = userInfo;
                     this.data.userId    = userInfo.UserID;
+                    this.data.memNumber = userInfo.MemNumber;
+                    this.data.loginKey  = userInfo.loginKey;
                     
                     wx.setStorageSync("userInfo", userInfo);
                     
@@ -82,6 +90,32 @@ App({
                     wx.setStorageSync("unionid",this.data.unionid);
 
                 }
+            }
+        })
+    },
+    request:function(url,data,callback){
+        
+        data =  typeof data == "object" ? data : {};
+        if(this.data.userId > 0){
+
+            data.loginKey = this.data.userInfo.LoginKey;    
+
+        }else{
+
+            data.loginKey = "";
+
+        }
+        
+        
+        wx.request({
+            url: url,
+            data: data,
+            method: 'POST',
+            success: function (res) {
+                typeof callback == "function" && callback(res,null)
+            },
+            fail: function (res) {
+                typeof callback == "function" && callback(null,res)
             }
         })
     }

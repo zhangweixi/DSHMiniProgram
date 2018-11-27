@@ -80,6 +80,8 @@ login{
 	border-bottom: 1px solid #E3E3E3;
 	align-items: center;
 	padding:15rpx 0;
+	margin-left:25rpx;
+	margin-right:25rpx;
 }
 
 .menu-list .icon-img{

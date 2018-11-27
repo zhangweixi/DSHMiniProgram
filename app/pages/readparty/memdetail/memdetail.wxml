@@ -1,0 +1,67 @@
+<!--pages/readparty/memdetail/memdetail.wxml-->
+
+
+<view class="head-box">
+
+	<view class="bg-box">
+		<view class="bg center-bg"  style="background-image:url('https://wx.laohoulundao.com/uploads/memface/20180926/201804101033811160190749.jpg')">
+		</view>	
+	</view>
+
+	<view class="container">
+		<view class="head center-bg" style="background-image:url('http://wx.laohoulundao.com/uploads/memface/20180926/201804101033811160190749.jpg')">
+		</view>
+
+		<view class="name">张维喜</view>
+		<view class="join-time">2019-01-23加入</view>
+
+		<view class="data-detail">
+			<view class="flex1">
+				<view><text>112</text>本</view>
+				<view class="desc">阅读书籍</view>
+			</view>
+			<view class="flex1">
+				
+				<view><text>89</text>小时</view>
+				<view class="desc">学习时间</view>
+			</view>
+			<view class="flex1">
+				
+				<view><text>89</text>名</view>
+				<view class="desc">排行榜排名</view>
+			</view>
+		</view>
+	</view>
+	
+</view>
+
+
+<view class="page-container">
+	<form>
+		<view class="page-title">
+			<text class="title">基本信息</text>
+			<!-- <image class="" src="" mode="widthFix"></image> -->
+		</view>
+
+		<view class="u-info">
+			<text>手机</text>
+			<input value="18080591234"></input>
+		</view>
+
+		<view class="u-info">
+			<text>部门</text>
+			<input value="研发部"></input>
+		</view>
+
+		<view class="u-info">
+			<text>职务</text>
+			<input value="大中华地区常务副总裁"></input>
+		</view>
+
+		<view class="btn">
+			<button >确定修改</button>
+		</view>
+	</form>
+	
+</view>
+

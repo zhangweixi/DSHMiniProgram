@@ -1,0 +1,129 @@
+<!--pages/readparty/detail/detail.wxml-->
+
+<wxs module="nav">
+
+var navs = [
+	["read-zkt.png","自课堂",''],
+	["read-phb.png","周课",''],
+	["read-zk.png","往期周课","/pages/book/category/category"]
+];
+
+module.exports.navs = navs;
+</wxs>
+
+<view class="icon-member"><image  src="/images/icon/read-users.png" mode="widthFix" data-url="/pages/readparty/framework/framework?readPartyId={{readPartyId}}" bind:tap="nav"></image></view>
+
+<view class="navs">
+	<navigator wx:for="{{nav.navs}}" url="{{item[2]}}" open-type="navigate">
+		<image src="/images/icon/{{item[0]}}" mode="widthFix" ></image>
+		<text>{{item[1]}}</text>
+	</navigator>
+</view>
+
+
+<!-- 新消息提示 -->
+<view class="new-message" wx:if="{{notices.length > 0}}">
+	<navigator class="" url="/pages/readparty/notice/notice?readPartyId={{readPartyId}}" open-type="navigate">
+		<block wx:for="{{notices}}" wx:for-item="notice" wx:for-key="index">
+			<image wx:if="{{index < 3}}" class="" src="{{notice.avg}}" mode="widthFix"></image>	
+		</block>
+		<text>你收到了{{notices.length}}条消息</text>
+	</navigator>
+</view>
+
+<view class="book" hidden="{{!bookName}}">
+	<view>
+		<text>《{{bookName}}》</text>
+		<image class="close" src="/images/icon/close2.png" mode="widthFix" bind:tap="cleanBook"></image>
+	</view>
+</view>
+
+
+<scroll-view class="departs" scroll-x>
+	<view wx:for="{{departments}}" class="{{item.selected == 1 ?'selected':''}}" data-department-id="{{item.department_id}}" bind:tap="selectDepartment">{{item.department_name}}</view>
+</scroll-view>
+<view class="page-container" style="overflow:hidden;">
+	
+	<view class="plan-list" wx:for="{{readPlans}}">
+		<view class="img">
+			<image class="" src="{{item.FilePath1}}" mode="widthFix"></image>
+		</view>
+
+		<view class="content">
+			<view class="name">{{item.YourName}}</view>
+			<view class="main-plan" hidden="{{false}}">
+				<view>
+					<view class="title">读书：</view>
+					<view>{{item.BookReview1}}</view>
+				</view>
+				<view>
+					<view class="title">读人：</view>
+					<view>{{item.BookReview2}}</view>
+				</view>
+
+				<view>
+					<view class="title">读事：</view>
+					<view>{{item.BookReview3}}</view>
+				</view>
+
+				<view>
+					<view class="title">礼物：</view>
+					<view>{{item.BookReview4}}</view>
+				</view>
+			</view>
+			
+			<!-- 时间 -->
+			<view class="hand-btn">
+				<text class="time">{{item.AddDate}}</text>
+				<view style="flex:1;"></view>
+
+				
+
+				<image class="" src="/images/icon/replay.png" mode="widthFix" 
+				data-comment-type="comment" 
+				data-read-plan-id="{{item.SumUpID}}" 
+				data-replayed-id="0"  
+				bind:tap="showComment"></image>
+
+				<image class="" src="/images/icon/{{item.isLike==1?'up-yes.png':'up-no.png'}}" mode="widthFix" data-read-plan-id="{{item.SumUpID}}" bind:tap="addOrCancelZan"></image>
+			</view>
+
+			<!-- 回复及评论 -->
+			<view class="relay-content" wx:if="{{item.commentlist.length > 0 || item.zan.length > 0}}">
+				<view hidden="{{item.zan.length == 0}}" class="zan-list color-y {{item.commentlist.length > 0?'zan-border':''}}">
+					<image class="" src="/images/icon/up-yes-1.png" mode="widthFix"></image>	
+					<block wx:for="{{item.zan}}" wx:for-item="zan" wx:for-key="index">
+						<text wx:if="{{index  < item.zen.length - 1}}">{{zan.YourName}}、</text>
+						<text wx:else>{{zan.YourName}}</text>
+					</block>
+				</view>
+
+				<view>
+					<view  wx:for="{{item.commentlist}}" wx:for-item="comment" class="replay-list">
+						<text class="color-y">{{comment.userName}}</text>
+						<text class="gray" wx:if="{{comment.pid > 0}}">回复</text>
+						<text class="color-y" wx:if="{{comment.pid > 0}}">{{comment.replyName}}</text>
+						<text class="color-y">:</text>
+						<text class="gray" 
+						bind:tap="showComment"
+						data-comment-type="replay"
+						data-read-plan-id="{{item.SumUpID}}"
+						data-replayed-id="{{comment.RepID}}" 
+						data-replayed-user="{{comment.userName}}"
+						>{{comment.CommContents}}</text>
+					</view>
+				</view>
+
+			</view>
+		</view>
+	</view>
+
+</view>
+
+<form class="input"  style="display:{{showComment ? 'flex':'none'}};">
+	<input type="text" show-confirm-bar placeholder="{{commentPlaceHolder}}" focus="{{focus}}" confirm-type="send" bindconfirm="addComment"  name="content" bindblur="closeComment" value="{{commentContent}}"></input>	
+</form>
+
+
+
+

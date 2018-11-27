@@ -7,7 +7,7 @@
 <!-- 视频 -->
 <view class='mp4box'>
 
-    <video id="mp4" hidden="{{mediaType=='mp3' || pptDownloading == true}}" src='{{bookInfo.mp4}}' bindplay='playMp4'  bindpause="pauseMp4" bindended="finishMp4" poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" ></video>
+    <video id="mp4" hidden="{{mediaType=='mp3' || pptDownloading == true}}" src='{{bookInfo.mp4}}' bindplay='playMp4'  bindpause="pauseMp4" bindended="finishMp4" poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" bindtimeupdate="recordMp4PlayTime"></video>
     <cover-view wx:if="{{haveRight == false && pptDownloading == false}}" class='mp4-model' bind:tap="checkHaveRight" ></cover-view>
 
     <image wx:if="{{pptDownloading == true}}" src="https://wx.laohoulundao.com/images/default-images/video-bg.png"  mode='widthFix' class='mp4bg'></image>
@@ -81,8 +81,10 @@
                     <image class="" src="/images/icon/edit.png" mode="widthFix"></image>
                     <input placeholder="期待你的神评论" disabled='true'></input>
                 </view>
-
-                <image class="icon" src="/images/icon/comment.png" mode="widthFix" bindtap='toCommentPage'></image>
+                <view class="icon comment-num">
+                    <image  src="/images/icon/comment.png" mode="widthFix" bindtap='toCommentPage'></image>
+                    <text>{{bookInfo.commentNumber}}</text>
+                </view>
                 <image class="icon" src="/images/icon/download.png" mode="widthFix" bindtap='showDownload'></image>
                 <image class="icon" src="/images/icon/share1.png" mode="widthFix"></image>
             </view>

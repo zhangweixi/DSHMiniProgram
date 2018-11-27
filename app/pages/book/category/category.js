@@ -12,6 +12,7 @@ Page({
       bookTypeId:0,
       canFreshBook:true,
       page:0,
+      prevPage:null
   },
 
   /**
@@ -19,10 +20,16 @@ Page({
    */
   onLoad: function (options) {
 
+      let pages = getCurrentPages();
+      let prevpage = pages[pages.length - 2];
+
+      //pages/readparty/detail/detail
+
+      this.setData({prevPage:prevpage.route});
+      
       this.getBookTypes();
 
       this.getBooks();
-
   },
 
   /**
@@ -147,5 +154,35 @@ Page({
           this.setData({"books":this.data.books});
       }
     })
+  },
+  selectBook:function(e){ //选择书籍
+      var data    = e.currentTarget.dataset;
+      var bookId  = data.bookId;
+      var bookName= data.bookName;
+
+     
+
+      if(this.data.prevPage == 'pages/readparty/detail/detail'){
+
+          if(typeof(app.data.readparty) == 'undefined'){
+
+            app.data.readparty = {bookId:bookId,bookName:bookName};
+
+          }else{
+
+            app.data.readparty.bookId   = bookId;
+            app.data.readparty.bookName = bookName;
+
+          }
+
+          wx.navigateBack({delta: 1});
+
+      }else{
+
+        wx.navigateTo({
+            url: '/pages/book/detail/detail?bookId='+bookId
+        });
+      }
+
   }
 })

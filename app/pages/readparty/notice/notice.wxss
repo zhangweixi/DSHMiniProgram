@@ -1,0 +1,47 @@
+/* pages/readparty/notice/notice.wxss */
+.line{
+	border-bottom: 1px solid #E3E3E3;
+}
+.notice-list{
+	display: flex;
+	margin-top:40rpx;
+}
+
+.head{
+	width:100rpx;
+	height:100rpx;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-right:30rpx;
+}
+
+
+
+.head image{
+	width:100%;
+
+}
+
+.content-box{
+	flex:1;
+	border-bottom: 1px solid #E3E3E3;
+}
+
+.nametime{
+	display: flex;
+}
+
+.name{
+	flex: 1;
+}
+.time{
+	font-size:0.8rem;
+}
+
+.content{
+	margin:15rpx 0 20rpx;
+}
+
+.content image{
+	width:40rpx;
+}

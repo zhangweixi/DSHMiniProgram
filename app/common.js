@@ -83,8 +83,14 @@ function appConfirmInputShow(obj,defaultValue, title, msg, sureCallback, cancelC
     obj.confirmFromCallback = sureCallback;
 
     obj.confirmInputClose = function () {
+        
         this.setData({ 'confirmInputShow': false });
-        cancelCallback();
+
+        if(cancelCallback != null){
+
+            cancelCallback();
+        }
+        
     }
 }
 
@@ -180,7 +186,47 @@ var user = {
     }
 };
 
+function request(url,data,callback){
 
+    wx.request({
+        url: url,
+        data: data,
+        method: 'POST',
+        success: function (res) {
+            typeof callback == "function" && callback(null, res)
+        },
+        fail: function () {
+            typeof callback == "function" && callback(res)
+        }
+  })
+}
+
+var readparty= {
+    cache:function(readPartyId,callback){
+
+        var app = getApp();
+        var url = app.data.api + "readparty/get_read_party_detail";
+        var data = {
+            readPartyId:readPartyId
+        };
+
+        app.request(url,data,(res,error)=>{
+
+            res = res.data;
+            var readPartyInfo = res.data.readPartyInfo;
+            wx.setStorageSync('readpartyInfo',readPartyInfo);
+            //缓存
+            if(callback != null){
+
+                callback(res,error);    
+            }
+        });
+    },
+    get:function(){
+
+        return wx.getStorageSync('readpartyInfo');
+    }
+}
 
 module.exports.showDialog   = showDialog;
 
@@ -194,3 +240,7 @@ module.exports.confirmInputClose = appConfirmInputClose;
 
 
 module.exports.bgMusic      = bgMusic;
+
+module.exports.request      = request;
+
+module.exports.readparty    = readparty;

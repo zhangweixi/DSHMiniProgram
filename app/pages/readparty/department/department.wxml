@@ -1,0 +1,44 @@
+<view class="gray-line"></view>
+<view class="page-container">
+	
+	
+	<view class="big-title">
+		
+		<text class="t1 color-b">{{readPartyName}}</text>
+
+		<image hidden="{{isEdit || !isManager}}" bind:tap="showEditInput" data-type="add" src="/images/icon/addb.png" mode="widthFix"></image>
+		<image hidden="{{isEdit || !isManager}}" bind:tap="activeEdit" data-edit="1" src="/images/icon/setting.png" mode="widthFix"></image>
+
+		<text hidden="{{!isEdit}}" bind:tap="activeEdit" data-edit="0" class="t2 color-y">取消</text>
+	</view>
+		
+	<view class="gray-line"></view>
+
+	<view class="depart-list" wx:for="{{departments}}">
+			<!-- 未编辑状态 -->
+		<image hidden="{{isEdit}}" class="edit-img" src="/images/icon/edit-no.png" mode="widthFix"></image>
+
+		<!-- 编辑中 -->
+		<image hidden="{{!isEdit}}" class="edit-img" src="/images/icon/edit-yes.png" mode="widthFix"></image>
+
+
+
+		<text bind:tap="nav" data-department-id="{{item.department_id}}">{{item.department_name}}</text>
+
+		<!-- 选中状态 -->
+		<image hidden="{{!isEdit || item.select == 0}}" class="radio" src="/images/icon/radio-on.png" mode="widthFix" bind:tap="selectDepartment" data-department-id="{{item.department_id}}" data-select="0"></image>
+
+		<!-- 未选中状态 -->
+		<image hidden="{{!isEdit || item.select == 1}}" class="radio" src="/images/icon/radio-off.png" mode="widthFix" bind:tap="selectDepartment" data-department-id="{{item.department_id}}" data-select="1"></image>
+
+	</view>
+	<view style="height:80rpx;"></view>
+</view>
+
+<view class="edit-delete" hidden="{{!isEdit}}">
+		<text class="flex {{selectedNum == 1?'active' : ''}}" bind:tap="showEditInput" data-type="edit">修改</text>
+		<text class="line"></text>
+		<text class="flex {{selectedNum > 0? 'active':''}}" bind:tap="deleteDepartment">删除</text>
+</view>
+
+ <include src="../../../include/confirm-input.wxml"> </include>

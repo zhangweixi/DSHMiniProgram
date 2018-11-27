@@ -1,0 +1,33 @@
+<!--pages/readparty/member/member.wxml-->
+<view class="page-container">
+	<view class="hand-btn">
+		<!-- <image src="/images/icon/search.png" mode="widthFix"></image> -->
+		<image src="/images/icon/addb.png" mode="widthFix"></image>
+	</view>	
+
+
+	<block wx:for="{{members}}">
+		
+		
+		<view class="member">
+			
+			<view class="head">
+				<image class="" src="{{item.FilePath1}}" mode="widthFix"></image>
+			</view>
+
+			<view>
+				<view class="name-tag">
+					<text class="name">{{item.YourName}}</text>
+					<text class="tag" wx:if="{{item.isAdmin == 1}}">管理员</text>
+				</view>
+
+				<view class="depart">{{item.department_name}}</view>
+			</view>
+		</view>
+		<view class="gray-line"></view>
+	</block>
+
+</view>
+
+
+

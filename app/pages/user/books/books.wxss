@@ -1,0 +1,32 @@
+
+.books{
+    margin:5%;
+    margin-bottom:0;
+    display: flex;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.bookinfo{
+    width:30%;
+    margin-bottom:30rpx;
+}
+
+
+.bookinfo image{
+    width:100%;
+
+}
+
+.bookinfo .title{
+    margin-top:10rpx;
+    text-align: center;
+    font-size:1.1rem;
+    display: block;
+    line-height: 1.5;
+    color:#505050;
+}
+

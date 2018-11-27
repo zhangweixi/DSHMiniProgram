@@ -1,0 +1,44 @@
+<view class="page-container base">
+	<view id="img">
+		<image class="" src="{{readPartyInfo.FilePath1}}" mode="widthFix"></image>	
+	</view>
+	
+	<view class="other">
+		<view id="name">{{readPartyInfo.ReaParName}}</view>
+		<view id="sn">企业编号：{{readPartyInfo.company_sn}}</view>
+		<view id="time">创建时间：{{readPartyInfo.AddDate}}</view>
+	</view>
+</view>
+
+<view class="gray-line"></view>
+
+
+<wxs module="navs">
+var navs = [
+	["社群通讯录","read-tx.png","member/member"],
+	["社群架构","read-jg.png","department/department"],
+	["社群规则","read-gz.png","rule/rule"],
+];
+module.exports.navs = navs;
+</wxs>
+
+
+<view class="page-container">
+	<block wx:for="{{navs.navs}}">
+		<view class="nav" bind:tap="nav" data-url="{{item[2]}}">
+			<image class="type" src="/images/icon/{{item[1]}}" mode="widthFix"></image>
+			<text>{{item[0]}}</text>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
+		</view>	
+		<view class="gray-line" wx:if="{{index != (navs.navs.length-1)}}"></view>
+	</block>
+
+		<view class="nav gz">
+			<view class="type"></view>
+			<text >{{readPartyInfo.Regulation}}</text>
+			<view class="next"></view>
+		</view>
+</view>
+
+
+

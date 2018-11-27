@@ -1,0 +1,73 @@
+/* pages/readparty/framework/framework.wxss */
+.base{
+	display: flex;
+	margin-top:40rpx;
+	margin-bottom:40rpx;
+}
+
+#img{
+	width:180rpx;
+	height:180rpx;
+	border-radius: 8rpx;
+	overflow: hidden;
+}
+
+#img image{
+	display: block;
+	width:100%;
+
+}
+.other{
+	flex:1;
+	margin-left:18rpx;
+	display: flex;
+	flex-direction: column;
+	vertical-align: middle;
+}
+.other view{
+
+	display: flex;
+	align-items: center;
+}
+
+#name{
+	flex:3;
+	font-size:1.3rem;
+}
+
+#sn,#time{
+	font-size:.8rem;
+	color:#8A8A8A;
+	flex:1.5;
+}
+
+.nav{
+	display: flex;
+	padding:40rpx 0;
+	align-items: center;
+}
+
+
+.nav text{
+	flex:1;
+	margin-left:30rpx;
+	color:#151515;
+}
+.nav .type{
+
+	display: block;
+	width:50rpx;
+}
+
+.nav .next{
+	display: block;
+	width:20rpx;
+}
+
+.nav.gz{
+	padding:0;
+}
+.gz text{
+	color:#8A8A8A;
+	font-size:.9rem;
+}

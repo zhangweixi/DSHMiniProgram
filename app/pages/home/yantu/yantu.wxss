@@ -1,0 +1,40 @@
+swiper{
+    height:150vw;
+}
+
+
+swiper-item{
+    
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  
+}
+
+swiper-item image{
+    width:90%;
+    display: block;
+    margin:auto;
+    border:3px solid rgba(248, 210, 97, 0.979);
+    border-radius: 5px;
+}
+
+swiper-item.left{
+   
+}
+
+
+swiper-item.left{
+
+     
+}
+swiper-item.right image{
+
+    margin-left:0;
+}
+swiper-item.active{
+  
+  
+}
+

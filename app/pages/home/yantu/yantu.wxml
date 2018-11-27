@@ -1,0 +1,26 @@
+<swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" 
+  previous-margin="20"
+  next-margin="20"
+  bindchange="swiperChange"
+  >
+    <block wx:for="{{imgUrls}}" wx:for-index="imgIndex">
+
+        <swiper-item wx:if="{{index - 1 == imgIndex}}" id="item-{{imgIndex}}" class="left" bindtouchmove1='move' height="{{leftHeight}}vh" >
+            <image  src="{{item}}" class="slide-image" mode='widthFix'/>
+        </swiper-item>
+
+        <swiper-item wx:elif="{{index + 0 == imgIndex}}" id="item-{{imgIndex}}" class="active" bindtouchmove='move'>
+            <image  src="{{item}}" class="slide-image"  mode='widthFix' />            
+        </swiper-item>
+
+        <swiper-item wx:elif="{{index + 1 == imgIndex}}" id="item-{{imgIndex}}" class="right" height="{{rightHeight}}vh">    
+            <image  src="{{item}}" class="slide-image" mode='widthFix'/>
+        </swiper-item>
+
+        <swiper-item wx:else  height="95vh" id="item-{{imgIndex}}">    
+            <image  src="{{item}}" class="slide-image" mode='widthFix'/>
+        </swiper-item>
+
+    </block>
+</swiper>

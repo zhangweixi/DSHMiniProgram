@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/index/index",
+    "pages/home/yantu/yantu",
     "pages/book/list/list",
     "pages/book/category/category",
     "pages/book/detail/detail",
@@ -8,10 +9,25 @@
     "pages/book/download/download",
     "pages/book/comments/comments",
     "pages/user/center/center",
+    "pages/user/books/books",
+    "pages/user/notes/notes",
+    "pages/user/message/message",
+    "pages/user/advice/advice",
+    "pages/user/question/question",
     "pages/mobile/mobile/mobile",
     "pages/mobile/code/code",
     "pages/video/list/list",
-    "pages/video/detail/detail"
+    "pages/video/detail/detail",
+    "pages/readparty/index/index",
+    "pages/readparty/detail/detail",
+    "pages/readparty/notice/notice",
+    "pages/readparty/framework/framework",
+    "pages/readparty/department/department",
+    "pages/readparty/rule/rule",
+    "pages/readparty/member/member",
+    "pages/readparty/memdetail/memdetail",
+    "pages/readparty/memedit/memedit"
+
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -29,18 +45,23 @@
     "list": [{
       "pagePath": "pages/home/index/index",
       "text": "广场",
-      "iconPath": "/images/icon/gc-off.png",
-      "selectedIconPath": "/images/icon/gc-on.png"
+      "iconPath": "/images/icon/tab-gc-off.png",
+      "selectedIconPath": "/images/icon/tab-gc-on.png"
     },{
       "pagePath":"pages/book/list/list",
       "text":"周课",
-      "iconPath":"/images/icon/zk-off.png",
-      "selectedIconPath":"/images/icon/zk-on.png"
+      "iconPath":"/images/icon/tab-zk-off.png",
+      "selectedIconPath":"/images/icon/tab-zk-on.png"
+    },{
+        "pagePath": "pages/readparty/index/index",
+        "text": "读书会",
+        "iconPath": "images/icon/tab-read-off.png",
+        "selectedIconPath": "images/icon/tab-read-on.png"
     },{
       "pagePath":"pages/user/center/center",
       "text":"我的",
-      "iconPath":"images/icon/my-off.png",
-      "selectedIconPath":"images/icon/my-on.png"
+      "iconPath":"images/icon/tab-my-off.png",
+      "selectedIconPath":"images/icon/tab-my-on.png"
     }]
   },
     "debug":true,

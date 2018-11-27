@@ -1,0 +1,16 @@
+<!--pages/readparty/rule/rule.wxml-->
+
+<view class="page-container">
+
+	<form bindsubmit="updateReadParty">
+		<view class="input">
+			<textarea value="{{readPartyInfo.Regulation}}" disabled="{{!isAdmin}}">
+			
+			</textarea>		
+		</view>
+		
+		<view class="btn" wx:if="{{isAdmin}}">
+			<button>确认修改</button>
+		</view>
+	</form>
+</view>

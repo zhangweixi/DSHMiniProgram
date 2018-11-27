@@ -1,0 +1,61 @@
+
+.hand-btn{
+	text-align: right;
+	padding:20rpx 0;
+}
+
+.hand-btn image{
+	width:40rpx;
+	margin-left: 30rpx;
+}
+
+
+.member{
+	margin:30rpx 0;
+	display: flex;
+	align-items: center;
+}
+
+
+
+.head{
+	width:100rpx;
+	height:100rpx;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-right:40rpx;
+}
+
+.head image{
+	display: block;
+	width:100%;
+}
+
+.name,.tag{
+	display: inline-block;
+	margin-right:20rpx;
+	float: left;
+}
+.name{
+	line-height: 50rpx;
+	font-size: 1.1rem;
+}
+.tag{
+	color:#fff;
+	background: #69B414;
+	font-size:.7rem;
+	padding:2rpx 6rpx;
+	line-height: 36rpx;
+	margin-top:5rpx;
+}
+.depart{
+	clear: both;
+	line-height: 50rpx;
+	color:#8A8A8A;
+	font-size:0.8rem;
+
+}
+
+
+
+
