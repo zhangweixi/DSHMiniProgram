@@ -4,30 +4,30 @@
 <view class="head-box">
 
 	<view class="bg-box">
-		<view class="bg center-bg"  style="background-image:url('https://wx.laohoulundao.com/uploads/memface/20180926/201804101033811160190749.jpg')">
+		<view class="bg center-bg"  style="background-image:url('{{memberInfo.FilePath1}}')">
 		</view>	
 	</view>
 
 	<view class="container">
-		<view class="head center-bg" style="background-image:url('http://wx.laohoulundao.com/uploads/memface/20180926/201804101033811160190749.jpg')">
+		<view class="head center-bg" style="background-image:url('{{memberInfo.FilePath1}}')">
 		</view>
 
-		<view class="name">张维喜</view>
-		<view class="join-time">2019-01-23加入</view>
+		<view class="name">{{memberInfo.YourName}}</view>
+		<view class="join-time">{{memberInfo.AddDate}}加入</view>
 
 		<view class="data-detail">
 			<view class="flex1">
-				<view><text>112</text>本</view>
+				<view><text>{{memberInfo.readedBookNumber}}</text>本</view>
 				<view class="desc">阅读书籍</view>
 			</view>
 			<view class="flex1">
 				
-				<view><text>89</text>小时</view>
+				<view><text>{{memberInfo.leanTime}}</text>小时</view>
 				<view class="desc">学习时间</view>
 			</view>
 			<view class="flex1">
 				
-				<view><text>89</text>名</view>
+				<view><text>{{memberInfo.rank}}</text>名</view>
 				<view class="desc">排行榜排名</view>
 			</view>
 		</view>
@@ -37,29 +37,40 @@
 
 
 <view class="page-container">
-	<form>
+
+	<form bindsubmit="editMemberInfo">
 		<view class="page-title">
 			<text class="title">基本信息</text>
-			<!-- <image class="" src="" mode="widthFix"></image> -->
+			<text class="empty"></text>
+			<image class="right-img" bind:tap="activeEdit" hidden="{{ !isAdmin || isEdit}}" src="/images/icon/edit1.png" mode="widthFix"></image>
 		</view>
 
 		<view class="u-info">
 			<text>手机</text>
-			<input value="18080591234"></input>
+			<input value="{{memberInfo.UserName}}" disabled="{{!isEdit}}"></input>
 		</view>
 
 		<view class="u-info">
 			<text>部门</text>
-			<input value="研发部"></input>
+			<input value="{{memberInfo.department_name}}" bind:tap="showDepartments" disabled="{{!isEdit}}"></input>
+			<image hidden="{{!isEdit}}" src="/images/icon/select.png" mode="widthFix" bind:tap="showDepartments"></image>
 		</view>
 
 		<view class="u-info">
 			<text>职务</text>
-			<input value="大中华地区常务副总裁"></input>
+			<input value="{{memberInfo.job}}" disabled="{{!isEdit}}"></input>
 		</view>
 
 		<view class="btn">
-			<button >确定修改</button>
+
+			<!-- 管理员进入到自己的界面 -->
+			<button wx:if="{{isAdmin && isSelf && !isEdit}}">转让管理权限</button>
+
+			<!-- 管理员进入别人的界面 -->
+			<button wx:if="{{isAdmin && !isSelf && !isEdit}}">删除成员</button>
+
+			<button wx:if="{{isAdmin && isEdit}}" form-type="submit">确定修改</button>
+
 		</view>
 	</form>
 	

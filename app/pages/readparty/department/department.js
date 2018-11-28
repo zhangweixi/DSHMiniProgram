@@ -57,16 +57,9 @@ Page({
     },
     getDepartments:function(){
 
-        var url = app.data.api + "company/get_department";
-
-        var data = {
-            companyId:this.data.companyId,
-            readPartyId:this.data.readPartyId
-        };
-
-        app.request(url,data,(res,error)=>{
-
-            var departments =res.data.data.departments;
+        var companyId   = this.data.companyId;
+        var readPartyId = this.data.readPartyId;
+        var departments = common.readparty.cacheDepartments(readPartyId,companyId,(departments)=>{
 
             for(var depart of departments){
 
@@ -82,8 +75,8 @@ Page({
 
             this.setData({departments:departments});
             this.freshSelectedArr();
-        });
 
+        });
     },
     nav:function(e){
 

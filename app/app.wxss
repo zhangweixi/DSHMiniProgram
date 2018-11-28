@@ -57,6 +57,10 @@ button::after {
     font-size:.8rem;
 }
 
+.page-title .right-img{
+  width:50rpx;
+}
+
 /*弹窗*/
 .model-bg{
   background-color:rgba(0,0,0,.4);

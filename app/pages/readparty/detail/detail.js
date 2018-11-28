@@ -32,10 +32,8 @@ Page({
      */
     onLoad: function (options) {
 
-        var readpartyId = options.readPartyId;
+        this.setData(options);
 
-        this.setData({readPartyId:readpartyId});
-console.log(this.data);
         setTimeout(()=>{
 
 
@@ -296,29 +294,14 @@ console.log(this.data);
     //获得读书会部门
     getReadPartyDepartments:function(){
 
-        var url = app.data.api + "company/get_company_orgization";
 
-        var data = {
-            readPartyId:
-            this.data.readPartyId,
-            userId:app.data.userId,
-        };
-
-        app.request(url,data,(res,error)=>{
-
-            res = res.data;
-
-            if(res.code == 200){
-                res.data.departments.unshift({department_id:-1,department_name:"全部",selected:1})
-                this.setData({
-                    companyInfo:res.data.companyInfo,
-                    departments:res.data.departments
-                });
-            }
-
-
-        });
-
+        var readPartyId = this.data.readPartyId;
+      
+        common.readparty.cacheDepartments(readPartyId,(departments)=>
+        {
+            departments.unshift({department_id:-1,department_name:"全部",selected:1})
+            this.setData({departments:departments});
+        })
     },
     //获取读书改进计划
     getReadPartyPlans:function(clear=false){

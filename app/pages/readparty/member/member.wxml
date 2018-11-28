@@ -15,7 +15,7 @@
 				<image class="" src="{{item.FilePath1}}" mode="widthFix"></image>
 			</view>
 
-			<view>
+			<view class="namedepart" bind:tap="nav" data-user-id="{{item.UserID}}">
 				<view class="name-tag">
 					<text class="name">{{item.YourName}}</text>
 					<text class="tag" wx:if="{{item.isAdmin == 1}}">管理员</text>

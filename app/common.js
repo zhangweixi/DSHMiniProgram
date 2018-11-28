@@ -225,6 +225,33 @@ var readparty= {
     get:function(){
 
         return wx.getStorageSync('readpartyInfo');
+    },
+    getDepartments:function(){
+
+        return wx.getStorageSync('departments');
+
+    },
+    cacheDepartments:function(readPartyId,callback){
+        
+        var app = getApp();
+        var url = app.data.api + "company/get_department";
+
+        var data = {
+            readPartyId:readPartyId
+        };
+        
+        app.request(url,data,(res,error)=>{
+
+            var departments =res.data.data.departments;
+            
+            wx.setStorageSync('departments', departments);
+            
+            if(callback != null){
+
+                callback(departments);
+            }
+        });
+
     }
 }
 

@@ -2,15 +2,15 @@
 
 <view class="page-container">
 
-	<form bindsubmit="updateReadParty">
+	<form bindsubmit="updateReadParty" >
 		<view class="input">
-			<textarea value="{{readPartyInfo.Regulation}}" disabled="{{!isAdmin}}">
+			<textarea value="{{readPartyInfo.Regulation}}" disabled="{{!isAdmin}}" name="regulation" bindconfirm="contentChange" bindblur="contentChange" maxlength="1000">
 			
 			</textarea>		
 		</view>
 		
-		<view class="btn" wx:if="{{isAdmin}}">
-			<button>确认修改</button>
+		<view class="btn {{changed ?'active':''}}" wx:if="{{isAdmin}}">
+			<button form-type="submit" >确认修改</button>
 		</view>
 	</form>
 </view>

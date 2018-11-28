@@ -1,11 +1,18 @@
 // pages/readparty/memdetail/memdetail.js
+var app =getApp();
+var common = require('../../../common.js');
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        isEdit:false,
+        isAdmin:false,
+        memberInfo:null,
+        isSelf:false,
+        departments:['美国', '中国', '巴西', '日本']
     },
 
     /**
@@ -13,54 +20,70 @@ Page({
      */
     onLoad: function (options) {
 
+        this.setData(options);
+        this.getReadPartyMmeberInfo();
+
+        if(this.data.userId == app.data.userId){
+
+            this.setData({isSelf:true});
+        }
+
+        var readpartyInfo = common.readparty.get();
+
+        if(readpartyInfo.MemNumber == app.data.memNumber){
+
+            this.setData({isAdmin:true});
+        }
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
+    activeEdit:function(){
 
+        this.setData({isEdit:true});
     },
+    getReadPartyMmeberInfo:function(){
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
 
+        var url = app.data.api + "readparty/read_party_member_detail";
+
+        var data = {readPartyId:this.data.readPartyId,userId:this.data.userId};
+
+        app.request(url,data,(res,error)=>{
+
+            res = res.data;
+
+            if(res.code == 200){
+
+                var memberInfo = res.data.memberInfo;
+
+                memberInfo.leanTime = (memberInfo.leanTime / 3600).toFixed(2);
+                memberInfo.AddDate  = memberInfo.AddDate.substr(0,11);
+
+                this.setData({memberInfo:memberInfo});
+            }
+
+        })
     },
+    editMemberInfo:function(e){
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
+        this.setData({isEdit:false});
     },
+    //显示部门
+    showDepartments:function(){
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
+        if(this.data.isEdit == false){
 
-    },
+            return;
+        }
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+        wx.showActionSheet({
+            itemList:this.data.departments,
+            success (res) {
+                console.log(res.tapIndex)
+            },
+            fail (res) {
+                console.log(res.errMsg)
+            }
+        })
     }
+
 })

@@ -27,6 +27,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        
+        this.getReadPartyInfo();
+
 
     },
     nav:function(e){
@@ -40,7 +43,7 @@ Page({
     getReadPartyInfo:function()
     {
 
-        var readPartyInfo = common.readparty.get();
+        var readPartyInfo           = common.readparty.get();
             readPartyInfo.AddDate   = readPartyInfo.AddDate.substr(0,10);
             if(readPartyInfo.Regulation.length > 80)
             {

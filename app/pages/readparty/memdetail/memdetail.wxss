@@ -3,7 +3,7 @@
 	width:100%;
 	position: relative;	
 	overflow: hidden;
-	height:55vw;
+	height:60vw;
 }	
 
 
@@ -37,8 +37,8 @@
 
 
 .head{
-	width:100rpx;
-	height:100rpx;
+	width:120rpx;
+	height:120rpx;
 	border-radius: 50%;
 	margin:auto;
 	overflow: hidden;
@@ -90,12 +90,22 @@ form{
 .u-info{
 	display: flex;
 	border-bottom: 1px solid #E3E3E3;
-	padding:20rpx 0;
+	padding:30rpx 0;
+	align-items: center;
+	color:#8A8A8A;
 }
 
 .u-info input{
+	margin-left: 20rpx;
 	flex:1;
-	text-align: right;
+	text-align: left;
+	color:#151515;
+}
+
+.u-info image{
+	width:30rpx;
+	margin-left: 15rpx;
+	margin-right:10rpx;
 }
 
 .btn{
