@@ -11,14 +11,59 @@ var navs = [
 module.exports.navs = navs;
 </wxs>
 
-<view class="icon-member"><image  src="/images/icon/read-users.png" mode="widthFix" data-url="/pages/readparty/framework/framework?readPartyId={{readPartyId}}" bind:tap="nav"></image></view>
+<!-- 企业社群头部 -->
+<view wx:if="{{readPartyInfo.ReaParType == 1}}">
+	<view class="icon-member">
+		<image  src="/images/icon/read-users.png" mode="widthFix" data-url="/pages/readparty/framework/framework?readPartyId={{readPartyId}}" bind:tap="nav"></image>
+	</view>
 
-<view class="navs">
-	<navigator wx:for="{{nav.navs}}" url="{{item[2]}}" open-type="navigate">
-		<image src="/images/icon/{{item[0]}}" mode="widthFix" ></image>
-		<text>{{item[1]}}</text>
-	</navigator>
+	<view class="navs">
+		<navigator wx:for="{{nav.navs}}" url="{{item[2]}}" open-type="navigate">
+			<image src="/images/icon/{{item[0]}}" mode="widthFix" ></image>
+			<text>{{item[1]}}</text>
+		</navigator>
+	</view>	
 </view>
+
+<!-- 个人社群头部 -->
+<view class="readparty-person">
+
+	<!-- 高斯模糊背景 -->
+	<view class="bg-box">
+		<view class="gs-bg center-bg" style="background-image:url('https://wx.laohoulundao.com/images/vedio-play.jpg')"></view>	
+	</view>
+	
+
+	<view class="party-head">
+			
+		<view class="party-img center-bg" style="background-image:url('https://wx.laohoulundao.com/images/link.png')">
+		</view>
+
+		<view class="party-name">{{readPartyInfo.ReaParName}}</view>
+		
+
+		<view class="party-navs">
+			
+			<view class="nav" bind:tap="nav" data-url="/pages/readparty/framework/framework?readPartyId={{readPartyId}}" >
+				<text class="flex"></text>
+				<image src="/images/icon/read-users.png" mode="widthFix"></image>
+				<text>社群资料</text>
+				<text class="flex"></text>
+			</view>
+
+
+			<view class="nav nav2" bind:tap="nav" data-url="/pages/book/category/category">
+				<text class="flex"></text>
+				<image src="/images/icon/read-zk1.png" mode="widthFix"></image>
+				<text>往期周课</text>
+				<text class="flex"></text>
+			</view>
+		</view>
+	</view>
+
+
+</view>
+
 
 
 <!-- 新消息提示 -->
@@ -39,9 +84,11 @@ module.exports.navs = navs;
 </view>
 
 
-<scroll-view class="departs" scroll-x>
+<scroll-view wx:if="{{readPartyInfo.ReaParType == 1}}" class="departs" scroll-x>
 	<view wx:for="{{departments}}" class="{{item.selected == 1 ?'selected':''}}" data-department-id="{{item.department_id}}" bind:tap="selectDepartment">{{item.department_name}}</view>
 </scroll-view>
+
+
 <view class="page-container" style="overflow:hidden;">
 	
 	<view class="plan-list" wx:for="{{readPlans}}">

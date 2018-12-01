@@ -1,4 +1,6 @@
-// pages/readparty/memedit/memedit.js
+var app     = getApp();
+var common = require('../../../common.js');
+
 Page({
 
     /**
@@ -6,8 +8,9 @@ Page({
      */
     data: {
         index:0,
-        selectedDepartment:"请选择",
-        departments:['美国', '中国', '巴西', '日本']
+        selectedDepartment:null,
+        departments:[],
+
     },
 
     /**
@@ -15,7 +18,16 @@ Page({
      */
     onLoad: function (options) {
 
-       
+        this.setData(options);
+
+        setTimeout(()=>{
+
+            common.readparty.cacheDepartments(this.data.readPartyId,(departments)=>{
+
+                this.setData({departments:departments});
+            });
+
+        },2000);
 
     },
 
@@ -32,31 +44,52 @@ Page({
     onShow: function () {
 
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
     showDepartment:function(){
+        
+        var departmentNames = [];
+        for(var depart of this.data.departments){
 
-         wx.showActionSheet({
-          itemList:this.data.departments,
-          success (res) {
-            console.log(res.tapIndex)
-          },
-          fail (res) {
-            console.log(res.errMsg)
-          }
+            departmentNames.push(depart.department_name);
+        }
+        wx.showActionSheet({
+            itemList:departmentNames,
+            success: (res) => {
+
+                var d = this.data.departments[res.tapIndex];
+
+                this.setData({selectedDepartment:d});
+            }
         })
+    },
+
+    //添加会员
+    addMember:function(e){
+
+        var value = e.detail.value;
+
+        var url = app.data.api + "readparty/add_read_party_member";
+        var data = {
+
+            managerUserId:app.data.userId,
+            readPartyId:this.data.readPartyId,
+            userMobile:value.mobile,
+            userName:value.name,
+            job:value.job,
+            departmentId:this.data.selectedDepartment.department_id
+        };
+
+        app.request(url,data,(res,error)=>{
+
+            var res = res.data;
+
+            if(res.code == 200){
+
+                common.showToast("添加成功","success",()=>{
+                    wx.navigateBack({delta: 1});
+                });
+            }
+        })
+
     }
 
 })

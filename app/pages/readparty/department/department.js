@@ -59,10 +59,10 @@ Page({
 
         var companyId   = this.data.companyId;
         var readPartyId = this.data.readPartyId;
-        var departments = common.readparty.cacheDepartments(readPartyId,companyId,(departments)=>{
+        var departments = common.readparty.cacheDepartments(readPartyId,(departments)=>{
 
-            for(var depart of departments){
-
+            for(var depart of departments)
+            {
                 if(this.data.selectedArr.indexOf(depart.department_id) > -1){
                     
                     depart.select = true;    

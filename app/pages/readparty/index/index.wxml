@@ -1,56 +1,55 @@
-<!--pages/readparty/index/index.wxml-->
-
-<swiper previous-margin="20" current="3" next-margin="20">
-	<swiper-item wx:for="{{ads}}" wx:for-item="ad">
-		<image class="" src="{{ad.src}}" mode="widthFix"  bindload="imageLoad"></image>
-	</swiper-item>
-</swiper>
-
-
-<view class="navs">
-	<navigator class="" url="" open-type="navigate">
-		<image class="" src="/images/icon/read-share.png" mode="widthFix"></image>
-		<view>众智共享</view>
-	</navigator>	
-	<navigator class="" url="" open-type="navigate">
-		<image class="" src="/images/icon/read-sort.png" mode="widthFix"></image>
-		<view>明师榜</view>
-	</navigator>	
-
-</view>
-
-
 <view class="page-container">
+
+	<swiper  current="3">
+		<swiper-item wx:for="{{ads}}" wx:for-item="ad">
+			<image class="" src="{{ad.src}}" mode="widthFix"  bindload="imageLoad"></image>
+		</swiper-item>
+	</swiper>
+
+	<view class="navs">
+		<navigator class="" url="" open-type="navigate">
+			<image class="" src="/images/icon/read-share.png" mode="widthFix"></image>
+			<view>众智共享</view>
+		</navigator>
+		<view></view>	
+		<navigator class="" url="" open-type="navigate">
+			<image class="" src="/images/icon/read-sort.png" mode="widthFix"></image>
+			<view>明师榜</view>
+		</navigator>	
+
+	</view>
+
+
 	<view class="page-title">
 		<text class="title" style="font-weight:600;">我的读书会</text>
 		<text class="empty"></text>
 		<image  src="/images/icon/add.png" mode="widthFix"></image>
-		<text class="detail color-y">创建个人社群</text>
+		<text class="detail color-y" bind:tap="nav" data-url="/pages/readparty/partyadd/partyadd">创建个人社群</text>
 	</view>
 
+	<view class="readparty-box">
+		<navigator  
+			wx:for="{{readpartys}}" 
+			wx:for-item="readparty" 
+			class="readparty-list" 
+			url="/pages/readparty/detail/detail?readPartyId={{readparty.ReaParID}}" 
+			open-type="navigate">
+			
+			<view class="img center-bg" style="background-image:url('{{readparty.FilePath1}}')"></view>
 
-	<navigator  
-		wx:for="{{readpartys}}" 
-		wx:for-item="readparty" 
-		class="readparty-list" 
-		url="/pages/readparty/detail/detail?readPartyId={{readparty.ReaParID}}" 
-		open-type="navigate">
-		
-		<view class="base">
-			<view class="img" style="background-image:url('{{readparty.FilePath1}}')">
-			</view>
+			
 			<view class="nametype">
 				<view class="name">{{readparty.ReaParName}}</view>
+
 				<view class="type ">
 					<text wx:if="{{readparty.ReaParType == 1}}" class="company">企业社群</text>
 					<text wx:if="{{readparty.ReaParType == 2}}" class="person">个人社群</text>
-
+					<text class="num">{{readparty.msun}}名成员</text>
 				</view>
 			</view>
-		</view>
-
-		<view class="num">本期学习完成人数 3/50</view>
-	</navigator>
+		</navigator>
+	</view>
+	
 	<view style="height:10px;"></view>
 
 </view>

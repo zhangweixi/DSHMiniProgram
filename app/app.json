@@ -19,6 +19,7 @@
     "pages/video/list/list",
     "pages/video/detail/detail",
     "pages/readparty/index/index",
+    "pages/readparty/partyadd/partyadd",
     "pages/readparty/detail/detail",
     "pages/readparty/notice/notice",
     "pages/readparty/framework/framework",

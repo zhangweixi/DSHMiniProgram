@@ -1,6 +1,3 @@
-<!--pages/readparty/memdetail/memdetail.wxml-->
-
-
 <view class="head-box">
 
 	<view class="bg-box">
@@ -43,22 +40,24 @@
 			<text class="title">基本信息</text>
 			<text class="empty"></text>
 			<image class="right-img" bind:tap="activeEdit" hidden="{{ !isAdmin || isEdit}}" src="/images/icon/edit1.png" mode="widthFix"></image>
+
+			<text class="detail color-y" hidden="{{!isEdit}}" bind:tap="cancelEdit">取消</text>
 		</view>
 
 		<view class="u-info">
 			<text>手机</text>
-			<input value="{{memberInfo.UserName}}" disabled="{{!isEdit}}"></input>
+			<input value="{{memberInfo.UserName}}" disabled="{{!isEdit}}" name="mobile" maxlength="15"></input>
 		</view>
 
 		<view class="u-info">
 			<text>部门</text>
-			<input value="{{memberInfo.department_name}}" bind:tap="showDepartments" disabled="{{!isEdit}}"></input>
+			<input value="{{memberInfo.department_name}}" bind:tap="showDepartments" disabled="{{!isEdit}}" name="department"></input>
 			<image hidden="{{!isEdit}}" src="/images/icon/select.png" mode="widthFix" bind:tap="showDepartments"></image>
 		</view>
 
 		<view class="u-info">
 			<text>职务</text>
-			<input value="{{memberInfo.job}}" disabled="{{!isEdit}}"></input>
+			<input value="{{memberInfo.job}}" disabled="{{!isEdit}}" name="job" maxlength="10"></input>
 		</view>
 
 		<view class="btn">
@@ -67,7 +66,7 @@
 			<button wx:if="{{isAdmin && isSelf && !isEdit}}">转让管理权限</button>
 
 			<!-- 管理员进入别人的界面 -->
-			<button wx:if="{{isAdmin && !isSelf && !isEdit}}">删除成员</button>
+			<button wx:if="{{isAdmin && !isSelf && !isEdit}}" bind:tap="deleteMember">删除成员</button>
 
 			<button wx:if="{{isAdmin && isEdit}}" form-type="submit">确定修改</button>
 

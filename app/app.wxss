@@ -25,12 +25,14 @@ button::after {
   height:1px;
   background: RGBA(12, 0, 51, 0.1);
 }
-
+.noios-area{
+  padding:20rpx;
+}
 /*页面容器*/
 .page-container{
 
-  margin-right:25rpx;
-  margin-left:25rpx;
+  margin-right:4vw;
+  margin-left:4vw;
 }
 
 /*页面通用标题*/

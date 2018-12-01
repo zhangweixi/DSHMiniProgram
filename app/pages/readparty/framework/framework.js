@@ -30,7 +30,6 @@ Page({
         
         this.getReadPartyInfo();
 
-
     },
     nav:function(e){
         var url = "/pages/readparty/"+e.currentTarget.dataset.url + "?";
@@ -42,7 +41,6 @@ Page({
 
     getReadPartyInfo:function()
     {
-
         var readPartyInfo           = common.readparty.get();
             readPartyInfo.AddDate   = readPartyInfo.AddDate.substr(0,10);
             if(readPartyInfo.Regulation.length > 80)

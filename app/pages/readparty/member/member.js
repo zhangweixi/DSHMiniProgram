@@ -1,4 +1,5 @@
 var app = getApp();
+var common = require('../../../common.js');
 
 Page({
 
@@ -9,6 +10,7 @@ Page({
         readPartyId:0,
         departmentId:-1,
         members:[],
+        isAdmin:false
     },
 
     /**
@@ -18,6 +20,13 @@ Page({
 
         this.setData(options);
         this.getMembers();
+
+        var readpartyInfo = common.readparty.get();
+
+        if(readpartyInfo.MemNumber == app.data.memNumber){
+
+            this.setData({isAdmin:true});
+        }
     },
 
     /**
@@ -32,6 +41,10 @@ Page({
      */
     onShow: function () {
 
+        if(this.data.members.length > 0){
+
+            this.getMembers();
+        }
     },
 
 
@@ -62,6 +75,12 @@ Page({
         var userId = e.currentTarget.dataset.userId;
         wx.navigateTo({
             url: "/pages/readparty/memdetail/memdetail?readPartyId="+this.data.readPartyId + "&userId=" + userId
+        })
+    },
+    toAddPage:function(){
+
+        wx.navigateTo({
+            url:"/pages/readparty/memedit/memedit?readPartyId="+this.data.readPartyId
         })
     }
 })

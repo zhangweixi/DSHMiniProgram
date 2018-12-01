@@ -216,8 +216,9 @@ var readparty= {
             var readPartyInfo = res.data.readPartyInfo;
             wx.setStorageSync('readpartyInfo',readPartyInfo);
             //缓存
-            if(callback != null){
 
+            if(callback != null){
+                
                 callback(res,error);    
             }
         });
@@ -255,6 +256,20 @@ var readparty= {
     }
 }
 
+function showToast(title,type,callback){
+
+    wx.showToast({
+        title: title,
+        icon: type, // "success", "loading", "none"
+        duration: 1500,
+        mask: false,
+        success: (res) => {
+            if(callback != null){
+                callback();
+            }
+        }
+    })
+}
 module.exports.showDialog   = showDialog;
 
 module.exports.numberToTime = numberToTime;
@@ -271,3 +286,5 @@ module.exports.bgMusic      = bgMusic;
 module.exports.request      = request;
 
 module.exports.readparty    = readparty;
+
+module.exports.showToast    = showToast;

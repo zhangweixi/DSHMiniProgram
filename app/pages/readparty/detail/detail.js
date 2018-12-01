@@ -47,13 +47,19 @@ Page({
 
         setTimeout(()=>{
 
-            common.readparty.cache(this.data.readPartyId,null);
+            common.readparty.cache(this.data.readPartyId,(res,error)=>{
+
+                if(res.code == 200){
+                    
+                    this.setData({'readPartyInfo':res.data.readPartyInfo});
+                }
+            });
 
         },1000);
 
         this.noticeTimer = setInterval(()=>{
 
-            this.getNoticeMessage();
+           // this.getNoticeMessage();
 
         },10000); //10秒获取一次
        

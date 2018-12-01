@@ -1,8 +1,8 @@
 <!--pages/readparty/member/member.wxml-->
 <view class="page-container">
 	<view class="hand-btn">
-		<!-- <image src="/images/icon/search.png" mode="widthFix"></image> -->
-		<image src="/images/icon/addb.png" mode="widthFix"></image>
+		<image src="/images/icon/search.png" mode="widthFix"></image>
+		<image src="/images/icon/addb.png" bind:tap="toAddPage" mode="widthFix" wx:if="{{isAdmin}}"></image>
 	</view>	
 
 

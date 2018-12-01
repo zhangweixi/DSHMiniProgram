@@ -1,0 +1,33 @@
+<import src="../../../template/we-cropper/we-cropper.wxml"/>
+<view class="gray-line"></view>
+
+<form class="page-container">
+	<view class="list">
+		<text>社群名称</text>
+		<input class="flex" maxlength="18" placeholder="请输入"></input>
+	</view>
+
+	<view class="list">
+		<text>社群头像</text>
+		<view class="flex"></view>
+		<image wx:if="{{!headImg}}" class="icon-img" src="/images/icon/add.png" mode="widthFix" bind:tap="selectedImg"></image>
+
+		<image wx:if="{{headImg}}" class="head-img" src="{{headImg}}" mode="scaleToFill" bind:tap="selectedImg"></image>	
+	</view>
+	<view class="list rule">
+		<text>社群规则</text>
+		<view class="flex"></view>
+	</view>
+
+	<view class="area {{app.platform != 'ios'?'noios-area':''}}">
+		<textarea  placeholder="请输入社群规则">	</textarea>
+	</view>
+	
+			
+	
+
+	<button id="subbtn" class="{{cansubmit ? 'selected':''}}">确认创建</button>
+
+
+	<template is="we-cropper" id="cropper" data="{{cropperOpt}}"/>
+</form>
