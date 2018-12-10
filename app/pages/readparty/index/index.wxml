@@ -7,16 +7,15 @@
 	</swiper>
 
 	<view class="navs">
-		<navigator class="" url="" open-type="navigate">
-			<image class="" src="/images/icon/read-share.png" mode="widthFix"></image>
+		<navigator  url="/pages/wenda/index/index" open-type="navigate">
+			<image src="/images/icon/read-share.png" mode="widthFix"></image>
 			<view>众智共享</view>
 		</navigator>
 		<view></view>	
-		<navigator class="" url="" open-type="navigate">
+		<navigator class="" url="/pages/readparty/sort/sort" open-type="navigate">
 			<image class="" src="/images/icon/read-sort.png" mode="widthFix"></image>
 			<view>明师榜</view>
 		</navigator>	
-
 	</view>
 
 

@@ -43,8 +43,8 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/readparty/partyadd/partyadd",
-					"query": "readPartyId=210&userId=20571"
+					"pathName": "pages/readparty/index/index",
+					"query": "readPartyId=210&userId=20571&questionId=76&type=管理"
 				},
 				{
 					"id": 1,

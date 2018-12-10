@@ -1,0 +1,45 @@
+<template name="newcomment">
+
+	<view class="new-comment-input-bg" hidden="{{commentData.showComment == false}}">
+
+		<view class="empty" bind:tap="{{commentData.closeEvent}}"></view>
+		<form bindsubmit="{{commentData.submitEvent}}">
+			<view class="new-comment-input">
+				<view class="title">{{commentData.title}}</view>
+				<view class="area"><textarea placeholder="请输入" placeholder-style="color:#C4C4C4;" fixed="true" show-confirm-bar="{{true}}"  name="inputContent" focus="{{commentData.focus}}" confirm-type="send"></textarea></view>
+				<view class="btn">
+					<button  formType="submit">{{commentData.btnTitle}}</button>
+				</view>
+			</view>	
+		</form>
+	</view>
+	
+</template>
+
+
+
+<!-- 
+------使用例子--------
+page({
+	
+	data:{
+		commentData:{
+            showComment:false,
+            title:"您的回答",
+            btnTitle:"提交答案"
+        },
+	},
+	showComment:function(){
+        this.setData({['commentData.showComment']:true});
+    },
+    closeCommentInput:function(){
+        this.setData({['commentData.showComment']:false});
+    },
+    addComment:function(e){
+        console.log(e);
+    }
+})
+		
+
+
+-->

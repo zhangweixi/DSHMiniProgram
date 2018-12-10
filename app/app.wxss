@@ -28,6 +28,11 @@ button::after {
 .noios-area{
   padding:20rpx;
 }
+
+.flex1{
+  flex:1;
+}
+
 /*页面容器*/
 .page-container{
 

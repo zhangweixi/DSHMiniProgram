@@ -1,0 +1,68 @@
+<!--pages/readparty/sort/sort.wxml-->
+<view class="page-head" hidden="{{float}}">
+	<view class="upbg"></view>
+	<image class="question" src="/images/icon/question.png" mode="widthFix" bind:tap="triggleRule"></image>
+	<view class="mysort">
+		<view class="sort-box">
+			<view class="myimg">
+				<image src="{{selfData.FilePath1}}" mode="widthFix" ></image>
+			</view>
+			<view class="nameinfo">
+				<view class="name">{{selfData.YourName}}</view>
+				<view class="text">
+					<image src="/images/icon/sort.png" mode="widthFix"></image>
+					<text>排名:{{selfData.rank}}</text>
+					<image style="margin-left:40rpx;" src="/images/icon/integral.png" mode="widthFix"></image>
+					<text>积分：{{selfData.integral}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+<!-- 浮动的头像 -->
+<view class="head-float" hidden="{{!float}}">
+	<view class="box">
+		<image class="headimg" src="{{selfData.FilePath1}}" mode="widthFix"></image>
+		<text class="name">{{selfData.YourName}}</text>
+		<image class="icon" src="/images/icon/sort.png" mode="widthFix"></image>
+		<text class="num">排名:{{selfData.rank}}</text>
+		<image class="icon" src="/images/icon/integral.png" mode="widthFix"></image>
+		<text class="num">积分：{{selfData.integral}}</text>	
+	</view>
+</view>
+
+
+<view class="page-container">
+	
+	<view class="sort-list" wx:for="{{members}}">
+		<view class="sort-num">{{index+1}}</view>
+		<view class="head"><image  src="{{item.FilePath1}}" mode="widthFix" ></image></view>
+		<view class="name">{{item.YourName}}</view>
+		<view class="integral"><text>{{item.integral}}</text><text class="color-g">积分</text></view>
+		<view class="zan">
+			<image class="" src="/images/icon/up-no.png" mode="widthFix"></image>
+			<text class="color-g">320</text>
+		</view>
+	</view>
+
+</view>
+
+
+
+<view class="question-bg" hidden="{{!showRule}}" catch:touchstart="empty">
+
+	<view class="flex"></view>
+	<view class="quest-box">
+		<view class="close">
+			<image  src="/images/icon/addb.png" mode="widthFix" catch:touchstart="triggleRule"></image>	
+		</view>
+		<view class="title">社群积分规则</view>
+		<view class="content">
+		<text >一、积分统称为自学习力： \n1.明师榜是为了帮助社群用户在教导读书会APP上提升学习效果，做综合学习效果展示排名； 2.用户在使用教导读书会APP过程中，根据各种学习行为获得相应自学习力积分奖励来参加社群名师榜排名。\n\n 二、自学习力如何获得： \n用户在使用教导读书会APP过程中，通过【老侯论道打开签到】【代读】【自学习读书改进计划】【读书改进计划品论】来获取相应的自学习力。
+		</text></view>
+	</view>
+	<view class="flex"></view>
+	
+</view>

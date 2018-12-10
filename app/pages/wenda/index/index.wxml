@@ -1,0 +1,94 @@
+<wxs module="navs">
+	
+	var navs = [
+		{"bg":"#4EBBFF","img":"gz-gl.png","mainTitle":"管理","subTitle":"管理遇到问题？","type":"gl","id":4},
+		{"bg":"#FF886B","img":"gz-rs.png","mainTitle":"人事","subTitle":"人才培养问题？","type":"rs","id":5},
+		{"bg":"#12CA9D","img":"gz-yx.png","mainTitle":"营销","subTitle":"如何提高业绩？","type":"yx","id":6}
+	];
+
+	module.exports.navs = navs;
+</wxs>
+
+
+
+<view class="nav-box">
+	<view class="topnavs" wx:for="{{navs.navs}}">
+		
+		<view class="top {{item.type}}" style="background:{{item.bg}}" bind:tap="nav" data-url="/pages/wenda/category/category?type={{item.mainTitle}}">
+			<view class="cycle ">
+				<image class="midimg" src="/images/icon/{{item.img}}" mode="widthFix"></image>
+				<view>{{item.mainTitle}}</view>
+			</view>
+			<view class="subtitle">{{item.subTitle}}</view>
+		</view>
+
+		<view class="addbtn" bind:tap="nav" data-url="/pages/wenda/create/create?type={{item.id}}">
+			<text class="flex"></text>
+			<image class="addicon" src="/images/icon/add.png" mode="widthFix"></image>
+			<text class="color-y">提问</text>
+			<text class="flex"></text>
+		</view>
+	</view>
+</view>
+
+
+
+<view class="nav-types">
+	<view bind:tap="triggleType" data-type="0"><text class="{{showType == 0? 'selected':''}}">全部</text></view>
+	<view bind:tap="triggleType" data-type="1"><text class="{{showType == 1? 'selected':''}}">已解决</text></view>
+	<view bind:tap="triggleType" data-type="2"><text class="{{showType == 2? 'selected':''}}">我的</text></view>
+</view>
+<view class="gray-line"></view>
+
+<view class="page-container">
+	<block wx:for="{{questions}}"> 
+		
+		<view class="quest-list" >
+		
+			<view class="head">
+				<image class="" src="{{item.head_img}}" mode="widthFix"></image>
+			</view>
+
+			<view class="quest-content">
+				<view class="nametime">
+					<text class="flex">{{item.YourName}}</text>
+					<text class="time">{{item.created_at}}</text>
+				</view>
+
+				<view bind:tap="nav" data-url="/pages/wenda/detail/detail?questionId={{item.id}}">
+					<view class="content">{{item.question}}</view>
+					
+					<view wx:if="{{showType == 1}}" class="current-answer">采纳回答：{{item.answer}}</view>
+
+					<view class="answernum">
+						<text class="num flex">共{{item.answerNumber}}位伙伴参与回答</text>
+						<text hidden="{{item.user_id == userId || item.answer_id > 0}}" class="ansbtn color-y">我要回答</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="gray-line" wx:if="{{(index+1)  < questions.length }}"></view>
+	</block>
+	
+
+</view>
+
+
+
+
+
+<!-- 
+<view class="new-comment-input-bg" hidden="{{showComment == false}}">
+	<view class="empty" bind:tap="closeCommentInput"></view>
+	<form bindsubmit="addComment">
+		<view class="new-comment-input">
+			<view class="title">评论</view>
+			<view class="area"><textarea placeholder="点评此次老侯代读" placeholder-style="color:#C4C4C4;" fixed="true" show-confirm-bar="" cursor-spacing="150" name="comment"></textarea></view>
+			<view class="btn">
+				<button  formType="submit">发表评论</button>
+			</view>
+		</view>	
+
+	</form>
+</view>
+ -->

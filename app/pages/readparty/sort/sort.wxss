@@ -1,0 +1,235 @@
+/* pages/readparty/sort/sort.wxss */
+.page-head{
+	height:200rpx;
+	position: relative;
+	border-top: 15rpx solid #FFB800;
+}
+.page-head .upbg{
+	background: #FFB800;
+	height:50%;
+}
+
+.mysort{
+	border-radius: 10rpx;
+	position: absolute;
+	background: #fff;
+	height:100%;
+	width:90%;
+	left:5%;
+	top:0;
+	z-index: 100;
+	box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.07),-2px -2px 15px rgba(0, 0, 0, 0.07);
+	display: flex;
+}
+
+.question{
+	width:40rpx;
+	position: absolute;
+	top:30rpx;
+	right:70rpx;
+	z-index: 1000;
+}
+.sort-box{
+	margin:30rpx;
+	flex:1;
+	display: flex;
+}
+
+.mysort .myimg{
+
+	width:140rpx;
+	border-radius: 100%;
+	overflow: hidden;
+	margin-right:20rpx;
+}
+
+.mysort .myimg image{
+	display: block;
+	width:100%;
+}
+
+
+.mysort .nameinfo{
+	flex:1;
+	display: flex;
+	flex-direction: column;
+}
+
+.mysort .nameinfo .name{
+	flex:3;
+	margin-top:20rpx;
+	font-size: 1.1rem;
+}
+
+.mysort .nameinfo .text{
+	flex:2;
+	margin-bottom:20rpx;
+	font-size:.9rem;
+	align-items: center;
+	display: flex;
+	align-items: center;
+}
+.mysort .nameinfo image{
+	width:35rpx;
+	margin-right:10rpx;
+}
+
+/*浮动头像*/
+.head-float{
+	display: flex;
+	height:120rpx;
+	position: fixed;
+	width:100%;
+	background: #fff;
+	top:0;
+}
+
+.head-float .box{
+	flex: 1;
+	display: flex;
+	width:90%;
+	margin:auto;
+	padding:15rpx 20rpx;
+	align-items: center;
+}
+
+.head-float .headimg{
+
+	border-radius: 100%;
+	width:90rpx;
+	margin-right: 20rpx;
+}
+
+.head-float .name{
+	font-size: 1.2rem;
+	color:#151515;
+}
+
+.head-float .icon{
+	width:40rpx;
+	margin-left: 40rpx;
+	margin-right: 20rpx;
+}
+
+.head-float .num{
+	font-size: .9rem;
+}
+
+/*排名列表*/
+
+.page-container{
+	margin-top:20rpx;
+}
+
+
+.sort-list{
+
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #E3E3E3;
+	padding:20rpx 0;
+}
+
+/*头像*/
+.sort-list .head{
+	width:100rpx;
+	height:100rpx;
+	border-radius: 100%;
+	overflow: hidden;
+	background: green;
+	margin-right:30rpx;
+}
+
+
+.sort-list .head image{
+	width:100%;
+}
+
+.sort-num{
+	font-size: 1.2rem;
+	width:50rpx;
+	margin-right:20rpx;
+	text-align: center;
+}
+
+.sort-list .name{
+	flex:1;
+}
+
+.sort-list .integral{
+	margin-right:40rpx;
+}
+
+.sort-list .integral text{
+	display: block;
+	text-align: center;
+}
+
+.sort-list .zan{
+	text-align: center;
+}
+
+.sort-list .zan text{
+	display: block;
+
+}
+
+.sort-list .zan image{
+	width:30rpx;
+	margin:auto;
+}
+
+
+
+/*问题说明*/
+.question-bg{
+	background:  rgba(0,0,0,.4);
+	position: fixed;
+	z-index: 1000;
+	width:100vw;
+	height:100vh;
+	top:0;
+	left:0;
+	display: flex;
+	flex-direction: column;
+}
+
+.question-bg .flex{
+
+	flex:1;
+}
+
+.question-bg .quest-box{
+	background: #fff;
+	width:86%;
+	margin:auto;
+	border-radius: 15rpx;
+	padding-bottom: 10rpx;
+	padding-top: 10rpx;
+}
+.quest-box .close{
+
+	overflow: hidden;
+}
+.quest-box .close image{
+	transform: rotate(45deg);
+	width:30rpx;
+	float:right;
+	margin-right:30rpx;
+	margin-top:20rpx;
+	padding:10rpx;
+}
+
+.quest-box .title{
+
+	text-align: center;
+	line-height: 1.5;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.quest-box .content{
+	padding:30rpx;
+}
+
+

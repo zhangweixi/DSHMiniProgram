@@ -1,0 +1,87 @@
+<import  src="/template/new-comment/new-comment.wxml"/>
+
+<template is="newcomment" data="{{commentData}}"></template>
+
+<view class="page-container">
+	<view class="main-content">{{questionInfo.question}}</view>
+	<view class="main-time">{{questionInfo.created_at}}</view>
+</view>
+
+<!-- 已采纳的回答 -->
+<view class="page-container" wx:if="{{acceptAnswers.length > 0}}">
+	<view class="page-title">
+		<view class="title" style="color:#5BA6EB;">最佳回答</view>
+		<text></text>
+	</view>
+
+
+	<view class="answer-list" wx:for="{{acceptAnswers}}">
+		<view class="head">
+			<image class="" src="{{item.head_img}}" mode="widthFix"></image>
+		</view>
+
+		<view class="answer-content">
+			<view class="nametimezan">
+				<text class="name">{{item.YourName}}</text>
+				<text class="time">回答于{{item.created_at}}</text>
+				
+				<image  class="zanimg" src="/images/icon/{{item.is_like == 0 ? 'up-no.png':'up-yes.png'}}" mode="widthFix" bind:tap="addZan" data-answer-id="{{item.id}}" ></image>
+
+				<text class="zannum">{{item.likeNum}}</text>
+			</view>
+			<view class="answer-text">{{item.answer}}</view>
+		</view>
+	</view>
+	<view style="height:50rpx;"></view>
+</view>
+
+
+
+
+
+<!-- 回答列表 -->
+<view wx:if="{{answers.length > 0}}">
+	<view class="gray-line"></view>
+	<view class="page-container">
+
+		<view class="page-title" wx:if="{{acceptAnswers.length > 0}}">
+			<view class="title">其他回答</view>
+			<text></text>
+		</view>
+
+		<view class="answer-list" wx:for="{{answers}}">
+			<view class="head">
+				<image class="" src="{{item.head_img}}" mode="widthFix"></image>
+			</view>
+
+			<view class="answer-content">
+				<view class="nametimezan">
+					<text class="name">{{item.YourName}}</text>
+					<text class="time">回答于{{item.created_at}}</text>
+					
+					<image  class="zanimg" src="/images/icon/{{item.is_like == 0 ? 'up-no.png':'up-yes.png'}}" mode="widthFix" bind:tap="addZan" data-answer-id="{{item.id}}" ></image>
+
+					<text class="zannum">{{item.likeNum}}</text>
+				</view>
+
+				<view class="answer-text">{{item.answer}}</view>
+				<!-- 自己的问题&&他人的答案&&还没有采纳答案 -->
+				<view class="accept-btn" wx:if="{{selfQuestion && hasAnswer == false && app.data.userId != item.user_id}}"><text class="color-y" bind:tap="acceptAnswer" data-answer-id="{{item.id}}">采纳回答</text></view>
+				<view class="gray-line"></view>
+			</view>
+		</view>
+	</view>
+	<view style="height:130rpx;"></view>
+
+</view>
+
+
+
+
+<view class="comment-btn" hidden="{{commentData.showComment || hasAnswer }}">
+	<view class="answer-input-box" bind:tap="showComment">
+		<image class="" src="/images/icon/edit.png" mode="widthFix"></image>
+		<text>期待你的神回答</text>
+	</view>
+</view>
+

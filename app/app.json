@@ -27,8 +27,13 @@
     "pages/readparty/rule/rule",
     "pages/readparty/member/member",
     "pages/readparty/memdetail/memdetail",
-    "pages/readparty/memedit/memedit"
-
+    "pages/readparty/memedit/memedit",
+    "pages/readparty/cutimage/cutimage",
+    "pages/readparty/sort/sort",
+    "pages/wenda/index/index",
+    "pages/wenda/detail/detail",
+    "pages/wenda/create/create",
+    "pages/wenda/category/category"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

@@ -1,0 +1,23 @@
+/* pages/readparty/cutimage/cutimage.wxss */
+page{
+	background: rgba(0, 0, 0, 1);
+}
+.cropper-wrapper{
+	margin-top: 15vh;
+}
+.cropper-buttons{
+	margin-top:80rpx;
+	color:#fff;
+	text-align: center;
+}
+
+.cropper-buttons > view
+{
+	display: inline-block;
+	width:30%;
+	margin:0 10%;
+	background: #fff;
+	color:#444;
+	line-height: 60rpx;
+	border-radius: 5rpx;
+}

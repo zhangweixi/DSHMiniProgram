@@ -1,0 +1,18 @@
+<view class="gray-line"></view>
+<view class="page-container">
+	
+	<textarea placeholder="请详细描述你在工作当中所遇到的问题，这样伙伴可以更精确的帮助到你。" bindblur="freshContent"></textarea>
+
+	<view class="num-niming">
+		<text class="text-num">{{content.length}}/300</text>
+		
+	
+		<image class="niming" hidden="{{isAnonymous}}" bind:tap="triggleAnonymous" src="/images/icon/niming-no.png" mode="widthFix"></image>
+
+		<image class="niming" hidden="{{!isAnonymous}}" bind:tap="triggleAnonymous" src="/images/icon/niming-yes.png" mode="widthFix"></image>
+
+	</view>
+
+</view>
+
+<view class="create-btn {{content.length > 10 ?'active':''}}" bind:tap="addQuestion">确认发布</view>

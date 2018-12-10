@@ -1,0 +1,2 @@
+/* pages/wenda/category/category.wxss */
+@import "/style/company-question-list.wxss"

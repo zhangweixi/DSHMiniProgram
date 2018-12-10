@@ -1,0 +1,35 @@
+/* pages/wenda/create/create.wxss */
+textarea{
+	height:80vh;
+	width:100%;
+	display: block;
+	margin-top:40rpx;
+}
+
+.num-niming{
+	display: flex;
+	text-align: center;
+}
+.text-num{
+	flex: 1;
+	color:#C4C4C4;
+	text-align: left;
+}
+
+.niming{
+	width:150rpx;
+}
+
+.create-btn{
+	position: fixed;
+	bottom: 1px;
+	width:100%;
+	text-align: center;
+	line-height: 100rpx;
+	box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+	color:#C4C4C4;
+}
+
+.active{
+	color:#FF9C00;
+}

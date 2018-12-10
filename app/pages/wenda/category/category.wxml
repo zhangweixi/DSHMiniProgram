@@ -1,0 +1,33 @@
+<view class="gray-line"></view>
+<view class="page-container">
+	<block wx:for="{{questions}}"> 
+		
+		<view class="quest-list" >
+		
+			<view class="head">
+				<image class="" src="{{item.head_img}}" mode="widthFix"></image>
+			</view>
+
+			<view class="quest-content">
+				<view class="nametime">
+					<text class="flex1">{{item.YourName}}</text>
+					<text class="time">{{item.created_at}}</text>
+				</view>
+
+				<view bind:tap="nav" data-url="/pages/wenda/detail/detail?questionId={{item.id}}">
+					<view class="content">{{item.question}}</view>
+					<view wx:if="{{item.answer_id > 0}}" class="current-answer">采纳回答：{{item.answer}}</view>
+					<view class="answernum">
+						<text class="num flex1">共{{item.answerNumber}}位伙伴参与回答</text>
+						<text hidden="{{showType == 1 || item.user_id == app.data.userId || item.answer_id > 0}}" class="ansbtn color-y">我要回答</text>
+					</view>
+				</view>
+			
+
+			</view>
+		</view>
+		<view class="gray-line"></view>
+	</block>
+	
+
+</view>

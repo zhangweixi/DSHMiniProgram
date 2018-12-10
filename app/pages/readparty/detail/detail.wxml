@@ -26,7 +26,7 @@ module.exports.navs = navs;
 </view>
 
 <!-- 个人社群头部 -->
-<view class="readparty-person">
+<view class="readparty-person" wx:if="{{readPartyInfo.ReaParType == 0}}">
 
 	<!-- 高斯模糊背景 -->
 	<view class="bg-box">
@@ -121,7 +121,7 @@ module.exports.navs = navs;
 			
 			<!-- 时间 -->
 			<view class="hand-btn">
-				<text class="time">{{item.AddDate}}</text>
+				<text class="time">{{item.ReleaseDate}}</text>
 				<view style="flex:1;"></view>
 
 				
