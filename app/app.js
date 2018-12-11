@@ -10,11 +10,11 @@ if (platform == 'devtools'){
 
 }else{
 
-    var host = "https://test.jdclo.com/";
+    var host = "http://api.jdclo.com/";
 }
 
 
-//var host  = "https://wx.laohoulundao.com/";
+var host = "http://api.jdclo.com/";
 
 App({
     common:common,
@@ -90,6 +90,30 @@ App({
                     wx.setStorageSync("unionid",this.data.unionid);
 
                 }
+            },
+            fail:function(e){
+
+                wx.showModal({
+                    title: "xx",
+                    content: JSON.stringify(e),
+                    showCancel: true,
+                    cancelText: '取消',
+                    cancelColor: '#000000',
+                    confirmText: '确定',
+                    confirmColor: '#3CC51F',
+                    success: (res) => {
+                        // res.confirm 为 true 时，表示用户点击了确定按钮
+                        if(res.confirm) {
+                            
+                        }
+                    },
+                    fail: (res) => {
+                        
+                    },
+                    complete: (res) => {
+                        
+                    }
+                })
             }
         })
     },

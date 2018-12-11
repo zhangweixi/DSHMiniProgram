@@ -1,1 +1,34 @@
 /* pages/user/notes/notes.wxss */
+.notes{
+	display: flex;
+	padding:25rpx 0;
+}
+
+.bookimg{
+
+	margin-right:30rpx;
+
+}
+
+.bookimg .bookface{
+
+	width:100rpx;
+	height:100rpx;
+	display: block;
+	border-radius: 100%;
+	overflow: hidden;
+}
+
+.name{
+	color:#151515;
+	line-height: 40rpx;
+	font-size:1rem;
+	margin-top:10rpx;
+}
+
+.time{
+	margin-top:10rpx;
+	color:#8A8A8A;
+	font-size:.8rem;
+	line-height:30rpx;
+}

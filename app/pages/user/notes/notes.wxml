@@ -1,2 +1,18 @@
-<!--pages/user/notes/notes.wxml-->
-<text>pages/user/notes/notes.wxml</text>
+<view class="gray-line"></view>
+<view class="page-container">
+	
+	<block wx:for="{{notes}}">
+		<view class="notes" >
+			<view class="bookimg">
+				<view class="bookface center-bg" style="background-image:url('{{item.book_img}}');">
+				</view>
+			</view>
+
+			<view class="flex1">
+				<view class="name">{{item.BookTitle}}</view>
+				<view class="time">已学习{{item.learn_time}}</view>
+			</view>
+		</view>
+		<view class="gray-line"></view>
+	</block>
+</view>

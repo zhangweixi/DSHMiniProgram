@@ -43,7 +43,7 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/readparty/index/index",
+					"pathName": "pages/user/notes/notes",
 					"query": "readPartyId=210&userId=20571&questionId=76&type=管理"
 				},
 				{

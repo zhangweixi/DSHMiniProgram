@@ -1,11 +1,15 @@
 // pages/user/notes/notes.js
+var app = getApp();
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        page:0,
+        notes:[],
+        hasNextPage:true,
     },
 
     /**
@@ -13,34 +17,11 @@ Page({
      */
     onLoad: function (options) {
 
-    },
+        setTimeout(()=>{
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
+            this.getLearnTime();
 
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
+        },2000);
     },
 
     /**
@@ -55,6 +36,7 @@ Page({
      */
     onReachBottom: function () {
 
+        this.getLearnTime();
     },
 
     /**
@@ -62,5 +44,36 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    getLearnTime:function(){
+
+        if(this.data.hasNextPage == false){
+
+            return;
+        }
+
+        var url = app.data.api + "book/get_book_learn_time";
+
+        var data = {
+            userId:app.data.userId,
+            page:this.data.page + 1
+        };
+
+        app.request(url,data,(res,error)=>{
+
+            res = res.data;
+            var learnTimes = res.data.learnTimes;
+
+            this.setData({
+                notes:this.data.notes.concat(learnTimes.data),
+                page:learnTimes.current_page
+            });
+
+
+            if(learnTimes.data.length < learnTimes.per_page){
+
+                this.setData({hasNextPage:false});
+            }
+        });
     }
 })
