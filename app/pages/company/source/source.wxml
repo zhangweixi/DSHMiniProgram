@@ -1,0 +1,32 @@
+
+<view class="navs">
+	<view class="flex1"></view>
+
+	<block wx:for="{{types}}">
+		<view class="nav {{item.active==1?'active':''}}" data-type="{{item.type}}" bind:tap="changeType">{{item.title}}</view>
+		<view class="flex1"></view>			
+	</block>
+</view>
+<view class="gray-line"></view>
+
+<view class="page-container">
+	
+
+
+	<view class="list" wx:for="{{[1,2,3,4,5,6,7]}}">
+		
+
+		<view class="head" style="background-image:url('https://wx.laohoulundao.com/images/default-images/v-hexin.png')">
+			<view class="tag">视频</view>
+		</view>
+
+		<view class="content flex1">
+			<view class="title">企业自学习社群八大价值</view>
+			<view class="desc">通过代读的引员的自…</view>
+			<view class="time">2018-05-02</view>
+		</view>
+
+
+	</view>
+
+</view>

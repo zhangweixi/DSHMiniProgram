@@ -1,0 +1,71 @@
+/* pages/company/source/source.wxss */
+.navs{
+	display: flex;
+	padding:20rpx 0;
+}
+
+.nav{
+	text-align: center;
+	line-height:2;
+	color:#505050;
+	border-bottom: 2px solid rgba(0,0,0,0);
+}
+.nav.active{
+	color:#151515;
+	font-weight: bold;
+	border-bottom: 2px solid #FFB800;
+}
+
+
+.list{
+	display: flex;
+	padding:20rpx 0;
+}
+
+.head{
+	width:200rpx;
+	height:150rpx;
+	background-size: contain;
+	border-radius: 10rpx;
+	position: relative;
+	box-shadow: 2px 2px 10px #C4C4C4,-2px 0 10px #C4C4C4;
+}
+
+.head .tag{
+	position: absolute;
+	bottom:5rpx;
+	right:5rpx;
+	font-size:.8rem;
+	background:#0CA0DD;
+	color:#fff;
+	border-top-left-radius: 10rpx;
+	border-bottom-right-radius: 10rpx;
+	padding:3rpx 8rpx;
+
+}
+
+.content{
+
+	margin-left: 20rpx;
+	display: flex;
+	flex-direction: column;
+}
+
+.content .title{
+	color:#000;
+	font-size: 1.1rem;
+	line-height: 2;
+}
+
+.content .desc{
+	color:#505050;
+	overflow: hidden;
+	white-space:nowrap;
+	flex: 1
+}
+
+.content .time{
+	color:#C4C4C4;
+	font-size: .9rem;
+	line-height: 1.5;
+}

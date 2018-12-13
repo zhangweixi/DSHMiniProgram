@@ -3,8 +3,8 @@
 <wxs module="nav">
 
 var navs = [
-	["read-zkt.png","自课堂",''],
-	["read-phb.png","排行榜",''],
+	["read-zkt.png","自课堂",'/pages/company/source/source'],
+	["read-phb.png","排行榜",'/pages/company/sort/sort'],
 	["read-zk.png","往期周课","/pages/book/category/category"]
 ];
 
@@ -18,7 +18,7 @@ module.exports.navs = navs;
 	</view>
 
 	<view class="navs">
-		<navigator wx:for="{{nav.navs}}" url="{{item[2]}}" open-type="navigate">
+		<navigator wx:for="{{nav.navs}}" url="{{item[2]}}?readPartyId={{readPartyId}}" open-type="navigate">
 			<image src="/images/icon/{{item[0]}}" mode="widthFix" ></image>
 			<text>{{item[1]}}</text>
 		</navigator>

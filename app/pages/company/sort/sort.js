@@ -1,4 +1,4 @@
-// pages/readparty/companysort/companysort.js
+// pages/company/sort/sort.js
 Page({
 
     /**
