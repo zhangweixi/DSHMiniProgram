@@ -10,11 +10,11 @@ if (platform == 'devtools'){
 
 }else{
 
-    var host = "http://api.jdclo.com/";
+    var host = "https://test.jdclo.com/";
 }
 
 
-var host = "http://api.jdclo.com/";
+//var host = "https://test.jdclo.com/";
 
 App({
     common:common,
@@ -94,7 +94,7 @@ App({
             fail:function(e){
 
                 wx.showModal({
-                    title: "xx",
+                    title: host,
                     content: JSON.stringify(e),
                     showCancel: true,
                     cancelText: '取消',

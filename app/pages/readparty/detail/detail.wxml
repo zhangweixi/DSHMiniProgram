@@ -4,7 +4,7 @@
 
 var navs = [
 	["read-zkt.png","自课堂",''],
-	["read-phb.png","周课",''],
+	["read-phb.png","排行榜",''],
 	["read-zk.png","往期周课","/pages/book/category/category"]
 ];
 

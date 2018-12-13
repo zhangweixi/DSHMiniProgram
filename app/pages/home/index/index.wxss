@@ -105,6 +105,8 @@
     text-align: center;
     align-items: center;
     color:#8A8A8A;
+    padding-bottom: 20rpx;
+    overflow: hidden;
 }
 
 .another-book image{

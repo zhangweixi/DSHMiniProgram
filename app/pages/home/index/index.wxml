@@ -65,13 +65,13 @@
         <view class='content'>
 
             
-            <template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}"></template>
+            <template is="bookinfo" wx:for="{{books[bookPage]}}" wx:for-item="book" data="{{book}}"></template>
 
 
-            <view class='another-book'>
+            <view class='another-book' wx:if="{{books.length > 0}}">
                 <view class='empty'></view>
                 <image src='/images/icon/fresh.png' mode='widthFix'></image>
-                <text>换一换</text>
+                <text bind:tap="nextPageBook">换一换</text>
                 <view class='empty'></view>
             </view> 
         </view>

@@ -11,6 +11,7 @@ Page({
         //音频列表
         videos: [],
         books: [],
+        bookPage:0,
         bookSentence:{},
         videos:[],
         swiper:{
@@ -204,10 +205,10 @@ Page({
 
                 
                 //书籍
-                _this.setData({ "books": data.freeBooks});
-
-                //言图
-                _this.setData({"bookSentence":data.bookSentence});
+                _this.setData({ 
+                    books: data.freeBooks,
+                    bookSentence:data.bookSentence,
+                });
 
                 //音频
                 for(var video of data.lundaoList)
@@ -351,5 +352,12 @@ Page({
             src:''
         }
         this.setData({'bgMusic':bgMusic});
+    },
+    nextPageBook:function(){
+
+        var page = this.data.bookPage+1;
+
+        this.setData({bookPage:page%3})
+
     }
 })
