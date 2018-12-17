@@ -1,0 +1,12 @@
+var str = {
+	substr:function(s,num,join){
+
+		return s.substring(0,num) + join;
+	}
+}
+
+
+// 导出对外暴露的属性
+module.exports = {
+	substr:str.substr
+};

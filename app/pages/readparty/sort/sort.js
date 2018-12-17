@@ -66,10 +66,7 @@ Page({
 
         app.request(url,data,(res,error)=>{
 
-            res = res.data;
-            console.log("===================");
-            console.log(res);
-
+            res = res.data;        
             this.setData({members:res.data.members.data,selfData:res.data.selfData});
         })
     }

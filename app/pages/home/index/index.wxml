@@ -2,19 +2,21 @@
 
 <!-- 微信授权 -->
 
-<!-- <cover-view class='login-bg' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:100;background:#999;'>
-
-    <cover-view bindgetuserinfo="getUserInfo" style='width:80vw;margin:auto;margin-top:20vh;text-align:center;background:green;line-height:3;' open-type="getUserInfo">允许授权</cover-view>
-    <button class='info' open-type="getUserInfo" bindgetuserinfo="getUserInfo">允许授权</button>
-</cover-view> -->
-
-
 <import src="/template/bookinfo/bookinfo.wxml"/>
 <view class='swiper'>
-    <swiper indicator-dots="{{swiper.indicatorDots}}" vertical="{{swiper.vertical}}" autoplay="{{swiper.autoplay}}" duration="{{swiper.duration}}" interval='{{swiper.interval}}' bindchange="bindchange" circular="{{swiper.circular}}" style="height:{{swiper.imgheights[current]}}rpx;">
+    <swiper 
+    indicator-dots="{{swiper.indicatorDots}}" 
+    vertical="{{swiper.vertical}}" 
+    autoplay="{{swiper.autoplay}}" 
+    duration="{{swiper.duration}}" 
+    interval='{{swiper.interval}}' 
+    bindchange="bindchange" 
+    circular="{{swiper.circular}}" 
+    style="height:{{swiper.imgheights[current]}}rpx;">
         <block wx:for='{{swiper.imgs}}' wx:key="{{index}}">
-            <swiper-item>
-                <image src="{{item.img}}" data-id='{{index}}' class="slide-image" mode="widthFix" bindload="imageLoad" /></swiper-item>
+            <swiper-item bind:tap="swiperNav" data-id="{{index}}">
+                <image src="{{item.img}}" class="slide-image" mode="widthFix" bindload="imageLoad" />
+            </swiper-item>
         </block>
     </swiper>
 </view>
@@ -30,7 +32,12 @@
             <navigator class='detail' url="/pages/video/list/list">查看全部</navigator>
         </view>
 
-        <view wx:for="{{videos}}" wx:for-item="video" class='content {{video.playing?"playing":"unplay"}}'  data-audioid="{{video.AudioID}}" bindtap='playAudio'>
+        <view 
+            wx:for="{{videos}}" 
+            wx:for-item="video" 
+            class='content {{video.playing?"playing":"unplay"}}'  
+            data-audioid="{{video.AudioID}}" 
+            bindtap='playAudio'>
             <image class="on" src='/images/icon/gc-video-on.png'></image>
             <image class="off" src='/images/icon/gc-video-off.png'></image>
             <text>{{video.AudioTitle}}</text>

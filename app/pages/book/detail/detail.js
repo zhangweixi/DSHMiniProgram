@@ -17,7 +17,7 @@ Page({
                 { "type": "thing", "placeholder": "通过这个知识点，在工作上改进的是？", "title":"读 事" },      
                 { "type": "gift", "placeholder":"通过这个知识点，在工作上改进的是？","title":"赠礼物"}
             ],
-            "mediaType":"mp3",
+            "mediaType":"mp4",
             "contentType":"ppt",
             "display":'',
             "audioInfo":{},
@@ -161,7 +161,11 @@ Page({
             
                     res = res.data;
                     var bookInfo = res.data.bookInfo;
-                    var data = {"bookInfo":bookInfo,"mp4CurrentTime":bookInfo.mp4CurrentTime};
+                    var data = {
+                        "bookInfo":bookInfo,
+                        "mp4CurrentTime":bookInfo.mp4CurrentTime,
+                        "haveRight":bookInfo.IsGratis == 1 ? true : false
+                    };
                     this.setData(data);
             }
           })
@@ -405,7 +409,12 @@ Page({
         },
 
         playMp4:function(e){
-           
+            
+            if(this.data.mp4Playing == true){
+
+                return;
+            }
+
             if(this.checkHaveRight() == false){
             
                 setTimeout(($res)=>{
@@ -415,17 +424,20 @@ Page({
                 return;
             }
 
-
             if (this.data.mp3Playing == true){
 
                 this.setData({"mp3Playing":false});
                 wx.getBackgroundAudioManager().pause();
             }
             var time  = this.data.mp4CurrentTime;
+            
+            console.log(time);
+
             if( time > 1){
 
                 time = time -1;
             }
+
             (wx.createVideoContext("mp4")).seek(time);
             this.setData({"mp4Playing":true});
         },
@@ -446,6 +458,7 @@ Page({
         //记录MP4播放时间
         recordMp4PlayTime:function(e){
 
+        
             var currentTime = parseInt(e.detail.currentTime + 0.99);
 
             this.recordMediaTime(currentTime,"lhddmp4");
@@ -454,9 +467,6 @@ Page({
         //记录媒体播放时间
         recordMediaTime:function(currentTime,mediaType){
             
-            if(app.data.userId == 0){
-                return;
-            }
             var currentTime = parseInt(currentTime + 0.99);
 
             if(mediaType == 'lhddmp3'){
@@ -476,6 +486,7 @@ Page({
                     return;
                 }
                 this.setData({mp4CurrentTime:currentTime});
+
                 timeId  = this.mp4TimeId;
 
             }else{
@@ -483,6 +494,11 @@ Page({
                 return;
             }
 
+
+            if(app.data.userId == 0){
+
+                return;
+            }
             
             var url     = app.data.api + "book/record_media_time";
 
@@ -560,8 +576,14 @@ Page({
          * */
         edit_read_plan:function(e){
 
-            if(this.checkHaveRight == false){
+            if(this.checkHaveRight == false || app.data.userId == 0){
                 
+                wx.showToast({
+                    title: '请登录',
+                    icon: 'none', // "success", "loading", "none"
+                    duration: 1500,
+                    mask: false,
+                })
                 return false;
             }
 
@@ -592,6 +614,11 @@ Page({
 
         //显示下载输入框
         showDownload:function(){
+            
+            var mp4time = this.data.mp4CurrentTime;
+            setTimeout(()=>{
+                this.setData({mp4CurrentTime:mp4time});
+            },2000);
 
             if(this.data.mp4Playing == true){
 
@@ -644,6 +671,11 @@ Page({
 
                         if (this.data.autoPlayMp4 == true) {
                            wx.createVideoContext("mp4").play();
+                            
+                            var video =  wx.createVideoContext("mp4");
+                            video.seek(this.data.mp4CurrentTime);
+                            video.play();
+
                            this.setData({ autoPlayMp4: false });
                         }
                         app.data.userInfo.email = email;
@@ -669,7 +701,9 @@ Page({
 
             if (this.data.autoPlayMp4 == true) {
 
-                wx.createVideoContext("mp4").play();
+                var video =  wx.createVideoContext("mp4");
+                video.seek(this.data.mp4CurrentTime);
+                video.play();
 
                 this.setData({ autoPlayMp4: false });
             }

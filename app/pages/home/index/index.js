@@ -56,8 +56,6 @@ Page({
 
         console.log(1);
         this.getIndexData();
-
-
     },
 
     /**
@@ -178,6 +176,28 @@ Page({
         this.setData({ swiper: swiper });
     },
 
+    swiperNav:function(e){
+
+        var id = e.currentTarget.dataset.id;
+
+        var obj = this.data.swiper.imgs[id];
+
+        if(obj.content_type == 'article'){
+
+        
+            wx.setStorageSync('weburl', obj.link);
+            
+            wx.navigateTo({
+                url: '/pages/other/web/web'
+            })
+
+        }else{
+
+            wx.navigateTo({
+                url: "/pages/book/detail/detail?bookId="+obj.content_id
+            })
+        }
+    },
     getUserInfo:function(e)
     {
         console.log(e.detail)

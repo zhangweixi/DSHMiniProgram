@@ -4,10 +4,15 @@
     <view><text class="{{mediaType == 'mp3' ? 'selected' : ''}}" bindtap="triggleMedia" data-media="mp3">音频</text></view>
 </view>
 
+
 <!-- 视频 -->
 <view class='mp4box'>
 
-    <video id="mp4" hidden="{{mediaType=='mp3' || pptDownloading == true}}" src='{{bookInfo.mp4}}' bindplay='playMp4'  bindpause="pauseMp4" bindended="finishMp4" poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" bindtimeupdate="recordMp4PlayTime"></video>
+    
+    <video id="mp4" hidden="{{mediaType=='mp3' || pptDownloading == true}}" src='{{bookInfo.mp4}}'   bindpause="pauseMp4" bindended="finishMp4" bindtimeupdate="recordMp4PlayTime" poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" bindplay='playMp4' ></video>
+
+    
+
     <cover-view wx:if="{{haveRight == false && pptDownloading == false}}" class='mp4-model' bind:tap="checkHaveRight" ></cover-view>
 
     <image wx:if="{{pptDownloading == true}}" src="https://wx.laohoulundao.com/images/default-images/video-bg.png"  mode='widthFix' class='mp4bg'></image>

@@ -32,10 +32,12 @@
     "pages/readparty/sort/sort",
     "pages/company/source/source",
     "pages/company/sort/sort",
+    "pages/company/detail/detail",
     "pages/wenda/index/index",
     "pages/wenda/detail/detail",
     "pages/wenda/create/create",
-    "pages/wenda/category/category"
+    "pages/wenda/category/category",
+    "pages/other/web/web"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

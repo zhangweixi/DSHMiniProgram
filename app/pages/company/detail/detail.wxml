@@ -1,0 +1,63 @@
+<wxs src="../../../functions.wxs" module="functions"></wxs>
+<import  src="/template/new-comment/new-comment.wxml"/>
+
+
+
+<video src="{{sourceInfo.content}}" wx:if="{{sourceInfo.category == 'video'}}"></video>
+
+<view class="page-container maininfo">
+	<view class="title color-b">{{sourceInfo.title}}</view>
+	<view class="time">{{sourceInfo.created_at}}</view>
+	<view class="desc"><text wx:if="{{sourceInfo.category != 'article'}}">简介：</text>{{sourceInfo.description}}</view>
+</view>
+
+
+<view class="gray-line"></view>
+<view class="page-container">
+	
+	<view class="page-title">
+		<view class="title">学习收获</view>
+		<text class="detail"></text>
+	</view>
+
+	<view class="comment" wx:for="{{comments}}">
+			<view class="head">
+				<image  src="{{item.headImg}}" mode="widthFix"></image>
+			</view>
+
+			<view class="flex1 comment-box">
+				<view class="name color-y">{{item.YourName}}</view>
+				<view class="content">{{item.body}}</view>
+				<view class="time">
+					<text class="flex1">{{item.created_at}}</text>
+					<image src="/images/icon/replay.png" mode="widthFix" data-parent-comment-id="{{item.id}}" bind:tap="showComment"></image>
+					
+					<image src="/images/icon/{{item.is_like == 1 ?'up-yes':'up-no'}}.png" mode="widthFix" bind:tap="zan" data-comment-id="{{item.id}}"></image>
+
+					<text class="num">{{item.up_times}}</text>
+				</view>
+
+
+				<view class="replays" wx:if="{{item.subComments.length > 0}}">
+					<view class="replay" wx:for="{{item.subComments}}" wx:for-item="sub">{{sub.YourName}}：{{sub.body}}</view>
+				</view>
+			</view>
+	</view>
+
+
+	<view style="height:40px;"></view>
+
+</view>
+
+
+
+<template is="newcomment" data="{{commentData}}"></template>
+
+<view class="comment-btn" hidden="{{commentData.showComment || hasAnswer }}">
+	<view class="answer-input-box" bind:tap="showComment" data-parent-comment-id="0" >
+		<image class="" src="/images/icon/edit.png" mode="widthFix"></image>
+		<text>期待你的神回答</text>
+	</view>
+</view>
+
+

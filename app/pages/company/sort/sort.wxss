@@ -1,1 +1,224 @@
 /* pages/company/sort/sort.wxss */
+.navs{
+	display: flex;
+	padding:20rpx 0;
+	position: fixed;
+	top:0;
+	left:0;
+	width:100%;
+	background: #fff;
+	z-index: 1;
+}
+
+.nav{
+	text-align: center;
+	line-height:2;
+	color:#505050;
+	border-bottom: 2px solid rgba(0,0,0,0);
+}
+.nav.active{
+	color:#151515;
+	font-weight: bold;
+	border-bottom: 2px solid #FFB800;
+}
+.quest-img{
+
+	width:50rpx;
+	vertical-align: middle;
+	
+	float: right;
+	margin-right:40rpx;
+
+}
+
+.rankinfo{
+	position:absolute;
+	width:92vw;
+	display:flex;
+	top:38vw;
+	left:4vw;
+	text-align:center;
+}
+
+.rankinfo text{
+	display: block;
+}
+.rankinfo .num{
+	font-size:1.1rem;
+	font-weight: bold;
+}
+.rankinfo .text{
+	color:#C4C4C4;
+}
+
+.rankinfo .text-2{
+	color:#FC1C38;
+}
+
+.rankinfo .name{
+	color:#505050;
+}
+/*问题说明*/
+.question-bg{
+	background:  rgba(0,0,0,.4);
+	position: fixed;
+	z-index: 1000;
+	width:100vw;
+	height:100vh;
+	top:0;
+	left:0;
+	display: flex;
+	flex-direction: column;
+}
+
+.question-bg .flex{
+
+	flex:1;
+}
+
+.question-bg .quest-box{
+	background: #fff;
+	width:86%;
+	margin:auto;
+	border-radius: 15rpx;
+	padding-bottom: 10rpx;
+	padding-top: 10rpx;
+}
+.quest-box .close{
+
+	overflow: hidden;
+}
+.quest-box .close image{
+	transform: rotate(45deg);
+	width:30rpx;
+	float:right;
+	margin-right:30rpx;
+	margin-top:20rpx;
+	padding:10rpx;
+}
+
+.quest-box .title{
+
+	text-align: center;
+	line-height: 1.5;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.quest-box .content{
+	padding:30rpx;
+}
+
+
+
+/*头三名*/
+
+.first-three{
+
+	position: relative;
+}
+
+.first-three .bg{
+	width:100%;
+}
+
+.first-three .head{
+	position: absolute;
+	border-radius: 100%;
+}
+
+.first-three .nth-1{
+	width:13.5vw;
+	height:13.5vw;
+	top:20.2vw;
+	left:11.8vw;
+	background-color: #F5CFA7;
+	border:2px solid #F5CFA7;
+}
+
+.first-three .nth-2{
+	width:19.5vw;
+	height:19.5vw;
+	top:14vw;
+	left:40vw;
+	background-color:#FFD500;
+	border:2px solid #FFD500;
+}
+
+.first-three .nth-3{
+	width:13.5vw;
+	height:13.5vw;
+	top:20.2vw;
+	left:74.5vw;
+	background-color: #DBDBDB;
+	border:2px solid #DBDBDB;
+}
+
+
+
+
+
+/*排名列表*/
+
+.sort-list{
+
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #E3E3E3;
+	padding:20rpx 0;
+}
+
+/*头像*/
+.sort-list .head{
+	width:100rpx;
+	height:100rpx;
+	border-radius: 100%;
+	overflow: hidden;
+	background: green;
+	margin-right:30rpx;
+}
+
+
+.sort-list .head image{
+	width:100%;
+}
+
+.sort-num{
+	font-size: 1.2rem;
+	width:50rpx;
+	margin-right:20rpx;
+	text-align: center;
+}
+
+.sort-list .name{
+	flex:1;
+}
+
+.sort-list .integral{
+	margin-right:40rpx;
+}
+
+.sort-list .integral text{
+	display: block;
+	text-align: center;
+}
+
+.sort-list .zan{
+	text-align: center;
+}
+
+.sort-list .zan text{
+	display: block;
+
+}
+
+.sort-list .zan image{
+	width:30rpx;
+	margin:auto;
+}
+
+
+
+
+
+

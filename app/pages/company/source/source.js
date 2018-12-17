@@ -1,4 +1,7 @@
 // pages/company/source/source.js
+var app = getApp();
+
+
 Page({
 
     /**
@@ -6,6 +9,9 @@ Page({
      */
     data: {
         activeType:"all",
+        hasNextPage:true,
+        page:0,
+        sources:[],
         types:[
             {title:"全部",active:1,type:'all'},
             {title:"视频",active:0,type:'video'},
@@ -19,6 +25,8 @@ Page({
      */
     onLoad: function (options) {
 
+        this.setData(options);
+        this.getCompanySource();
     },
 
     /**
@@ -46,6 +54,7 @@ Page({
      */
     onReachBottom: function () {
 
+        this.getCompanySource();
     },
     changeType:function(e){
 
@@ -64,7 +73,56 @@ Page({
             t.active = t.type == type ? 1: 0;
         }
 
-        this.setData({activeType:type,types:types});
+        this.setData({
+            activeType:type,
+            types:types,
+            page:0,
+            hasNextPage:true
+        });
 
+        this.getCompanySource();
+    },
+
+    //获得企业资源
+    getCompanySource:function(){
+
+        if(this.data.hasNextPage == false){
+
+            return;
+        }
+
+
+        var url = app.data.api + "company/page_company_source";
+        var data = {
+            contentType:this.data.activeType,
+            page:this.data.page+1,
+            readPartyId:this.data.readPartyId
+        };
+
+        app.request(url,data,(res,error)=>{
+
+            res             = res.data;
+
+            var sources     = res.data.sources;
+
+            if(sources.current_page == 1) {
+
+                var newSources  = sources.data;
+
+            }else{
+
+                var newSources = this.data.sources.concat(sources.data);
+
+            }
+
+            var hasNextPage = sources.data.length < sources.per_page ? false : true;
+
+            this.setData({
+                hasNextPage:hasNextPage,
+                sources:newSources,
+                page:sources.current_page,
+
+            });
+        });
     }
 })

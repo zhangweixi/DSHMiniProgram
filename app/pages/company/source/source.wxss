@@ -35,7 +35,7 @@
 	position: absolute;
 	bottom:5rpx;
 	right:5rpx;
-	font-size:.8rem;
+	font-size:.7rem;
 	background:#0CA0DD;
 	color:#fff;
 	border-top-left-radius: 10rpx;
