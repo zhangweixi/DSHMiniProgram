@@ -15,30 +15,33 @@
 	color:#C4C4C4;
 	font-size:.8rem;
 	text-align: center;
-	margin-top:50rpx;
+	line-height: 2.5;
 }
 
 
 
 .video-title{
 
-	width:80vw;
+	width:60vw;
 	margin:auto;
-	margin-top:40rpx;
 	text-align: center;
 	color:#151515;
-	font-size:1.5rem;
+	font-size:1.3rem;
 }
 
 .share{
 	margin:auto;
 	margin-top:30px;
 	border-radius: 100rpx;
-	width:200rpx;
+	width:240rpx;
 	padding:20rpx 40rpx;
 	line-height: 50rpx;
 	text-align: center;
 	box-shadow: 1px 3px 5px #888888;
+	display: flex;
+	align-items: center;
+	line-height: 1.5;
+	background: rgba(0,0,0,0);
 }
 
 
@@ -51,6 +54,8 @@
 .share text{
 	color:#8A8A8A;
 	margin-left:30rpx;
+	border:none;
+	background: rgba(0,0,0,0);
 }
 
 /*音频播放进度*/
@@ -80,7 +85,7 @@
 
 .video-process .left{
 
-	left:0px;
+	left:3px;
     background:#FF9C00;
 }
 
@@ -91,27 +96,21 @@
 
 .video-process .process{
     height:2px;
-    width:100%;
+    width:97%;
     position: absolute;
-    left:0;
-    top:9px;
-    border-left:5px solid rgba(0,0,0,0);
-    border-right: 5px solid rgba(0,0,0,0);
+    left:-3%;
+    top:-9px;
+    /*border-left:5px solid rgba(0,0,0,0);
+    border-right: 5px solid rgba(0,0,0,0);*/
     box-sizing: border-box;
     background:rgba(0,0,0,0);
 }
 
 
-
-
-.video-process .btn{
-    border-radius: 5px;
-    height:20px;
-    width:10px;
-    position: absolute;
-    top:0;
-    left:65px;
-    background:#FF9C00;
+.timeinfo{
+	margin-top:20rpx;
+	display: flex;
+	color:#8A8A8A;
 }
 
 .play-box{
@@ -122,7 +121,6 @@
     margin:auto;
     margin-top:20px;
     text-align: center;
-    
 }
 
 .play-box .change{
@@ -131,12 +129,8 @@
 
 }
 
-.play-box .play,.play-box .stop{
+.play-box .middle{
 
     width:150rpx;
-
-}
-
-.play-box view{
-    flex:1;
+    margin:0 70rpx;
 }

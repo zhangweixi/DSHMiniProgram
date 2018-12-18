@@ -1,5 +1,5 @@
 <!--pages/video/detail/detail.wxml-->
-
+<view class="gray-line"></view>
 <view class="page-container">
 
 	<view class="video-bg">
@@ -8,37 +8,48 @@
 
 	<view class="num">4/100</view>
 
-	<view class="video-title">一个小店如何做成千亿级产值的公司？</view>
+	<view class="video-title">{{bgMusic.fullTitle}}</view>
 
 
-	<view class="share">
+	<button class="share" open-type="share">
+		<view class="flex1"></view>
 		<image class="" src="/images/icon/share.png" mode="widthFix"></image>
-		<text>分享</text>
-	</view>
+		<text >分享</text>
+		<view class="flex1"></view>
+	</button>
 
 <!-- <live-player src="http://media.jdclo.com/lundao/20181025.mp3" mode="RTC" autoplay bindstatechange="statechange" binderror="error" style="width: 300px; height: 225px;" /> -->
 
 
 	<view class="video-process">
-        <view class='process-bg'></view>
 		<view class="cycle left"></view>
 		<view class="cycle right"></view>
-		<progress class='process loaded' percent='50' stroke-width="2" color='#B1B1B1' backgroundColor="rgba(0,0,0,0)" />
-		<progress class='process played' percent='20' stroke-width='2' color='#FF9C00' backgroundColor="rgba(0,0,0,0)"/>
-		<view class="btn"></view>
+		<slider class='process played' percent='20' stroke-width='2' color='#FF9C00' backgroundColor="#E3E3E3" activeColor="#FF9C00"  block-color="#FF9C00"  block-size="18" min="0" max="{{bgMusic.timeLength}}" value="{{bgMusic.timeCurrent}}" bind:change="fastPlay"/>
+	</view>
+
+	<view class="timeinfo">
+		<view >{{bgMusic.textTimeCurrent}}</view>
+		<view class="flex1"></view>
+		<view >{{bgMusic.textTimeLength}}</view>
 	</view>
 
 
-
-
     <view class='play-box'>
+			
+			<view class="flex1"></view>
 
-            <image class="prev change" src='/images/icon/detail-prev.png' mode='widthFix'></image>    
-            <view></view>
-            <image class="play" src='/images/icon/detail-off.png' mode='widthFix'></image>
-            <view></view>
-            <image class="next change" src='/images/icon/detail-next.png' mode='widthFix'></image>    
+			<!-- 上一首 -->
+            <image class="change" src='/images/icon/detail-prev.png' mode='widthFix' bind:tap="changeMusic" data-type="prev"></image>  
 
+            
+            <image hidden="{{bgMusic.playing}}" class="middle" bind:tap="playMusic" src='/images/icon/detail-off.png' mode='widthFix'></image>
+            
+            <image hidden="{{!bgMusic.playing}}" bind:tap="pauseMusic" class="middle" src='/images/icon/detail-on.png' mode='widthFix'  ></image>
+
+            
+            <!-- 下一首 -->
+            <image class="change" src='/images/icon/detail-next.png' mode='widthFix' data-type="next" bind:tap="changeMusic"></image>    
+			<view class="flex1"></view>
     </view>
 
 </view>

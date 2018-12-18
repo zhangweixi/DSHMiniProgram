@@ -284,7 +284,9 @@ Page({
             bgMusic.playing = true;
             bgMusic.show    = true;
             bgMusic.src     = videoSrc;
+            bgMusic.fullTitle=title;
             bgMusic.title   = title.substring(0,5)+"...";
+            bgMusic.id      = audioId;
 
         
         const innerAudioContext     = wx.createInnerAudioContext()
