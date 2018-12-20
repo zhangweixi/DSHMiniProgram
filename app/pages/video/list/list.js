@@ -1,21 +1,20 @@
 // pages/video/list/list.js
-var appdata =  getApp().data;
+var appdata = getApp().data;
 
 // pages/home/index/index.js
 var common = require("../../../common.js");
-var app  = getApp();
-
+var app = getApp();
 
 Page({
 
-  /**
+    /**
    * 页面的初始数据
    */
-  data: {
-        appdata:appdata,
-        page:1,
-        videos:[],
-        total:0,
+    data: {
+        appdata: appdata,
+        page: 0,
+        videos: [],
+        total: 0,
         bgMusic: {
             show: false,
             playing: false,
@@ -25,146 +24,133 @@ Page({
             textTimeLength: "00:00",
             textTimeCurrent: "00:00",
             src: ''
-      }
-  },
+        }
+    },
 
-  /**
+    /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-      
-      this.getVideoList();
+    onLoad: function(options) {
 
-  },
+        this.getVideoList();
 
-  /**
+    },
+
+    /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+    onReady: function() {
 
-  },
+    },
 
-  /**
+    /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-      //从缓存提取背景音乐
-      var bgMusicData = common.bgMusic.getData();
-      if (bgMusicData) {
-          this.setData({ ["bgMusic"]: bgMusicData });
+    onShow: function() {
+        //从缓存提取背景音乐
+        var bgMusicData = common.bgMusic.getData();
+        if (bgMusicData) 
+        {
+            this.setData({ ["bgMusic"] : bgMusicData});
 
-          //改变监听事件
-          var bgVideo = wx.getBackgroundAudioManager();
-          bgVideo.onTimeUpdate(() => {
+            //改变监听事件
+            var bgVideo = wx.getBackgroundAudioManager();
+                bgVideo.onTimeUpdate(() =>{
 
-              this.monitorBgmusic();
+                    this.monitorBgmusic();
 
-          });
-      }
-  },
+                });
+        }
+    },
 
-  /**
+    /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+    onHide: function() {
 
-  },
+    },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
+    /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+    onReachBottom: function() {
 
-  },
+        this.getVideoList();
+    },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-
-
-  /**
+    /**
    * 获取音频列表
    */
-  getVideoList:function(){
+    getVideoList: function() {
 
-      var url = appdata.api + "audio/page_audio?page="+this.data.page;
-      var _this = this;
+        var page    = this.data.page + 1; 
 
-      wx.request({
-          url: url,
-          method:'POST',
-          success:function(res){
-            
-            var data    = res.data.data;
-            for(var video of data.data){
-                
-                video.playing = false;
+        var url     = appdata.api + "audio/page_audio?page=" + page;
+        var bgMusic = common.bgMusic.getData();
+
+        app.request(url,{},(res,error)=>{
+
+            var videoList = res.data.data;
+
+            for (var video of videoList.data) {
+
+                video.playing = bgMusic.id == video.AudioID ? true : false;
             }
-            var videos  = _this.data.videos.concat(data.data)
-              _this.setData({ "videos": videos,"total":data.total});
-              
-              
-          },
-          fail:function(res){
 
-              console.log(res);
-          }
-      })
-  },
+            var videos = this.data.videos.concat(videoList.data);
 
+            this.setData({
+                "videos": videos,
+                "total": videoList.total,
+                "page":videoList.current_page
+            });
+        })
+    },
 
     /**
      * 播放音频
      */
 
-    playAudio: function (e) {
+    playAudio: function(e) {
 
-        var data    = e.currentTarget.dataset;
-        var videoSrc= data.src;
-
-        this.initPlayAudio(videoSrc);
+        var audioId  = e.currentTarget.dataset.id;
+        
+        this.initPlayAudio(audioId);
     },
 
     /**
      * 初始化音频播放器
      *  
      */
-    initPlayAudio: function (videoSrc){
+    initPlayAudio: function(audioId) {
+
+        for(var audio of this.data.videos){
+
+            if(audio['AudioID'] == audioId){
+
+                var audioInfo   = audio;
+                break;
+            }
+        }
+        
 
         var bgMusic = this.data.bgMusic;
 
         //判断当前音频是否在播放状态中
-        if (bgMusic.src == videoSrc) {
+        if (audioId == bgMusic.id) {
 
             return false;
         }
 
+        console.log(audioInfo);
         //停止之前的声音
         wx.getBackgroundAudioManager().stop();
 
         //将播放的音频设置于播放状态
         for (var video of this.data.videos) {
 
-            if (video.FilePath1 == videoSrc) {
-
-                var title = video.AudioTitle;
+            if (video.FilePath1 == audioInfo.FilePath1) {
+       
                 video.playing = true;
 
             } else {
@@ -173,84 +159,90 @@ Page({
             }
         }
 
+
+        var title       = audioInfo.AudioTitle;
+        bgMusic.id      = audioId;
         bgMusic.playing = true;
-        bgMusic.show = true;
-        bgMusic.src = videoSrc;
-        bgMusic.title = title.substring(0, 5) + "...";
-
-        this.setData({ "videos": this.data.videos });
-
-
-        const innerAudioContext = wx.createInnerAudioContext()
-        innerAudioContext.src = videoSrc;
-
-        innerAudioContext.onCanplay(() => {
-
-            innerAudioContext.duration //类似初始化-必须触发-不触发此函数延时也获取不到
+        bgMusic.show    = true;
+        bgMusic.src     = audioInfo.FilePath1;
+        bgMusic.title   = title.substring(0, 5) + "...";
+        bgMusic.fullTitle=title;
+        bgMusic.timeCurrent     = 0;
+        bgMusic.textTimeCurrent = common.numberToTime(0);
 
 
-            setTimeout(() => {
+        this.setData({"videos": this.data.videos});
 
-                //在这里就可以获取到大家梦寐以求的时长了
-                console.log(innerAudioContext.duration);//延时获取长度 单位：秒
+        const   innerAudioContext       = wx.createInnerAudioContext();
+                innerAudioContext.src   = bgMusic.src;
 
-                //设置总的时间
+                innerAudioContext.onCanplay(() =>{
 
-                bgMusic.timeLength = innerAudioContext.duration;
-                bgMusic.textTimeLength = common.numberToTime(bgMusic.timeLength);
-                this.setData({ ["bgMusic"]: bgMusic });
+                    innerAudioContext.duration //类似初始化-必须触发-不触发此函数延时也获取不到
 
+                    setTimeout(() =>{
 
-                //播放音乐
-                common.bgMusic.play(bgMusic.src, bgMusic.title);
-                common.bgMusic.setData(bgMusic);
+                        //在这里就可以获取到大家梦寐以求的时长了
+                        console.log(innerAudioContext.duration); //延时获取长度 单位：秒
+                        //设置总的时间
+                        bgMusic.timeLength      = innerAudioContext.duration;
+                        bgMusic.textTimeLength  = common.numberToTime(bgMusic.timeLength);
+                        this.setData({bgMusic:bgMusic});
 
-                //监听播放进度
-                var bgVideo = wx.getBackgroundAudioManager();
-                bgVideo.onTimeUpdate(() => {
+                        //播放音乐
+                        common.bgMusic.play(bgMusic.src, bgMusic.title);
+                        common.bgMusic.setData(bgMusic);
 
-                    this.monitorBgmusic();
-                    
+                        //监听播放进度
+                        var bgVideo = wx.getBackgroundAudioManager();
+                            bgVideo.onTimeUpdate(() =>{
+
+                                this.monitorBgmusic();
+
+                            })
+
+                            //监控播放完成事件
+                            bgVideo.onEnded(() =>{
+
+                                this.playNextVideo();
+                            });
+                    },500)  //这里设置延时1秒获取
                 })
 
-                //监控播放完成事件
-                bgVideo.onEnded(()=>{
-
-                    this.playNextVideo();
-                });
-
-            }, 500)  //这里设置延时1秒获取
-        })
-
     },
-    monitorBgmusic: function () {
+    monitorBgmusic: function() {
 
         var bgVideo = wx.getBackgroundAudioManager();
         var currentTime = bgVideo.currentTime;
         var textTime = common.numberToTime(currentTime);
 
-        this.setData({ ["bgMusic.textTimeCurrent"]: textTime, ["bgMusic.timeCurrent"]: currentTime });
+        this.setData({ ["bgMusic.textTimeCurrent"] : textTime,
+            ["bgMusic.timeCurrent"] : currentTime
+        });
     },
     //继续播放
-    continueMusic: function () {
+    continueMusic: function() {
 
-        (wx.getBackgroundAudioManager()).play();
+        wx.getBackgroundAudioManager().play();
 
-        this.setData({ ['bgMusic.playing']: true });
+        this.setData({ ['bgMusic.playing'] : true
+        });
     },
     //暂停音频
-    pauseMusic: function () {
+    pauseMusic: function() {
 
         wx.getBackgroundAudioManager().pause();
 
-        this.setData({ ['bgMusic.playing']: false });
+        this.setData({ ['bgMusic.playing'] : false
+        });
     },
 
-    closeMusic: function () {
+    closeMusic: function() {
 
         wx.getBackgroundAudioManager().stop();
 
-        this.setData({ ["bgMusic.show"]: false });
+        this.setData({ ["bgMusic.show"] : false
+        });
 
         //将音频全部关闭
         for (var video of this.data.videos) {
@@ -258,7 +250,9 @@ Page({
             video.playing = false;
         }
 
-        this.setData({ "videos": this.data.videos });
+        this.setData({
+            "videos": this.data.videos
+        });
         var bgMusic = {
             show: false,
             playing: false,
@@ -269,45 +263,44 @@ Page({
             textTimeCurrent: "00:00",
             src: ''
         }
-        this.setData({ 'bgMusic': bgMusic });
+        this.setData({
+            'bgMusic': bgMusic
+        });
     },
 
     //开始播放
-    playFirstVideo:function(){
-
-        var musicSrc    = this.data.videos[0].FilePath1;
-        this.initPlayAudio(musicSrc);
-
+    playFirstVideo: function() {
+        var videos  = this.data.videos;
+        var video   = videos[0];
+        this.initPlayAudio(video['AudioID']);
     },
     // 播放下一段音频
-    playNextVideo:function(){
+    playNextVideo: function() {
 
         var oldMusicSrc = this.data.bgMusic.src;
         var newMusicSrc = "";
-        var findVideo   = false;
+        var findVideo = false;
 
-        for(var video of this.data.videos){
+        for (var video of this.data.videos) {
 
-            if(findVideo == true){
+            if (findVideo == true) {
 
                 newMusicSrc = video.FilePath1;
                 break;
             }
 
-            if(video.FilePath1 == oldMusicSrc){
-                
+            if (video.FilePath1 == oldMusicSrc) {
+
                 findVideo = true;
                 continue;
             }
         }
-        
-        if(newMusicSrc == '')
-        {
+
+        if (newMusicSrc == '') {
             newMusicSrc = this.data.videos[0].FilePath1;
         }
 
         this.initPlayAudio(newMusicSrc);
     }
-
 
 })

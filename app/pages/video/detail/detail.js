@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
     data: {
-        isMoving: false
+        isMoving: false,
+        audioNum:0
     },
 
     /**
@@ -20,7 +21,7 @@ Page({
 
         this.setData({bgMusic: bgMusic});
 
-        console.log(this.data.music);
+        this.getVideoNum();
     },
 
     /**
@@ -45,17 +46,16 @@ Page({
             bgMusic.timeCurrent = currentTime;
             bgMusic.textTimeCurrent = textTime;
 
-            this.setData({
-                bgMusic: bgMusic
-            });
+            this.setData({bgMusic: bgMusic});
 
             wx.setStorageSync('bgMusic', bgMusic)
         })
 
         //音乐结束事件
-        this.data.music.onEnded = function() {
-
-        }
+        this.data.music.onEnded((e)=> 
+        {
+            this.getOtherMusic('next');
+        }) 
     },
 
     /**
@@ -72,36 +72,50 @@ Page({
 
 
     },
+    //获得音频总数量
+    getVideoNum:function(){
+        var url = app.data.api + "audio/count_video";
+        app.request(url,{},(res)=>{
+
+            this.setData({audioNum:res.data.data.audioNum});
+        })
+    },
     //暂停音乐
     pauseMusic: function() {
 
         this.data.music.pause();
         this.setData({ ['bgMusic.playing'] : false});
+        common.bgMusic.setData({playing:false})
     },
     //播放音乐
     playMusic: function() {
 
         this.data.music.play();
         this.setData({ ['bgMusic.playing'] : true});
+        common.bgMusic.setData({playing:true});
     },
     //快进音乐
     fastPlay: function(e) {
-        this.setData({
-            isMoving: true
-        });
+        
+        this.setData({isMoving: true});
+
         var currentTime = e.detail.value;
         this.data.music.pause();
         this.data.music.seek(currentTime);
         setTimeout(() =>{
+            
             this.data.music.play();
-            this.setData({
-                isMoving: false
-            });
+            this.setData({isMoving: false});
+
         },1000);
     },
     changeMusic:function(e){
 
         var type    = e.currentTarget.dataset.type;
+
+        this.getOtherMusic(type);
+    },
+    getOtherMusic:function(type){
 
         var url     = app.data.api + "audio/prev_or_next_audio";
 

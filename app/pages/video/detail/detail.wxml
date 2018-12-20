@@ -6,7 +6,7 @@
 		<image  src="/images/temp/video-bg.png" mode="widthFix"></image>
 	</view>
 
-	<view class="num">4/100</view>
+	<view class="num">{{bgMusic.id}}/{{audioNum}}</view>
 
 	<view class="video-title">{{bgMusic.fullTitle}}</view>
 

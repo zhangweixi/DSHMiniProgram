@@ -8,7 +8,7 @@
         <text class='num'>已经更新{{total}}条</text>
     </view>
 
-    <view wx:for='{{videos}}' wx:for-item="video"  data-src="{{video.FilePath1}}" bind:tap="playAudio" class="video-list" >
+    <view wx:for='{{videos}}' wx:for-item="video"  data-id="{{video.AudioID}}" bind:tap="playAudio" class="video-list" >
         <view class='video-btn'>
             
             <view hidden="{{video.playing}}"     style="background-image:url('{{appdata.miniroot}}images/icon/video-off.png')"></view>

@@ -15,7 +15,7 @@ if (platform == 'devtools'){
 
 
 
-var host = "https://test.jdclo.com/";
+//var host = "https://test.jdclo.com/";
 
 App({
     common:common,
