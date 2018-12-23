@@ -3,16 +3,16 @@
 
 <view class="search-input">
 	<image  src="/images/icon/search1.png" mode="widthFix"></image>
-	<input placeholder="他人的力量" data-type="input" bindfocus="showSearchKeywords" bindblur="searchBook" value="{{keywords}}"></input>
-	<image hidden="{{!isSearching}}" class="" src="/images/icon/search-close.png" mode="widthFix"></image>
+	<input placeholder="他人的力量" data-type="input" bindfocus="showSearchKeywords" bindconfirm="searchBook" value="{{keywords}}"></input>
+	<image hidden="{{hiddenClear}}" bind:tap="clearKeywords" src="/images/icon/search-close.png" mode="widthFix"></image>
 </view>
 
 
 
 
-<view class="page-container" style='margin-right:0;'>
+<view class="page-container">
 
-	<view class="search-container" hidden="{{!isSearching}}">
+	<view class="search-container" hidden="{{hiddenClear}}">
 		
 		<view hidden="{{historyKeywords.length == 0}}">
 			<view class=" search-title page-container" style='margin-left:0;'>
@@ -36,7 +36,7 @@
 	</view>
 	
 
-	<view class="search-content" hidden="{{isSearching}}">
+	<view class="search-content" hidden="{{!hiddenClear}}">
 
 		<template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}"></template>
 		

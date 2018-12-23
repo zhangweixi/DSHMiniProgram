@@ -12,7 +12,7 @@ Page({
         keywords:'',
         page:1,
         books:[],
-        isSearching:true
+        hiddenClear:true
     },
 
     /**
@@ -37,45 +37,7 @@ Page({
 
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-        
-        if(this.data.canFreshBook == true){
-
-            this.getBooks();
-        }
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
-
+   
     /**
      * 提示删除历史搜索 
      */
@@ -99,21 +61,13 @@ Page({
     },
 
     getSearchKeywords:function(){
+        var url = app.data.api+"book/get_search_keywords";
+        var data= {userId:app.data.userId ? app.data.userId : 0}
+        app.request(url,data,(res,error)=>{
 
-        wx.request({
-            url: app.data.api+"book/get_search_keywords",
-            data: {
-                userId:app.data.userId ? app.data.userId : 0
-            },
-            method:'POST',
-            header: {
-                'Content-Type': 'application/json'
-            },
-            success: (res) => {
-                res = res.data;
+            res = res.data;
 
-                this.setData(res.data);
-            }
+            this.setData(res.data);
         })
     },
 
@@ -135,10 +89,14 @@ Page({
         }
         
 
-        this.setData({"keywords":keywords,"page":1,"canFreshBook":true});    
-        
-        this.setData({"books":[]});
-
+        this.setData({
+            "keywords":keywords,
+            "page":1,
+            "canFreshBook":true,
+            "books":[],
+            "hiddenClear":true
+        });    
+    
         this.getBooks();
         
         setTimeout(()=>{
@@ -185,7 +143,12 @@ Page({
         })
     },
     showSearchKeywords:function(){
-        this.setData({"isSearching":true});
+        this.setData({"hiddenClear":false});
+    },
+    clearKeywords:function(){
+        this.setData({
+            keywords:'',
+            hiddenClear:true
+        });
     }
-        
 })

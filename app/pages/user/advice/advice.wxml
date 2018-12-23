@@ -1,2 +1,11 @@
-<!--pages/user/advice/advice.wxml-->
-<text>pages/user/advice/advice.wxml</text>
+<view class="gray-line"></view>
+<form class="box" bindsubmit="addAdvice">
+	<textarea placeholder="请填写您的宝贵意见或建议" name="advice" bindblur="adviceChange" value="{{advice}}"></textarea>
+
+	<view class="mishu">
+		<text>或通过以下方式联系我们：</text>
+		<text>小秘书微信号：laohoulundao</text>
+	</view>
+
+	<button form-type="submit">确认提交</button>
+</form>

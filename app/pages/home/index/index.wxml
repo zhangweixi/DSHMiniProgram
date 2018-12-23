@@ -3,7 +3,7 @@
 <!-- 微信授权 -->
 
 <import src="/template/bookinfo/bookinfo.wxml"/>
-<view class='swiper'>
+<view class='swiper' hidden="{{false}}">
     <swiper 
     indicator-dots="{{swiper.indicatorDots}}" 
     vertical="{{swiper.vertical}}" 

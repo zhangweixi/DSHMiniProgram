@@ -270,6 +270,19 @@ function showToast(title,type,callback){
         }
     })
 }
+
+
+function toWeb(url,title){
+
+    wx.setStorageSync('weburl', url);
+    
+    wx.setStorageSync('webtitle', title)
+
+    wx.navigateTo({
+        url: '/pages/other/web/web'
+    })
+}
+
 module.exports.showDialog   = showDialog;
 
 module.exports.numberToTime = numberToTime;
@@ -288,3 +301,6 @@ module.exports.request      = request;
 module.exports.readparty    = readparty;
 
 module.exports.showToast    = showToast;
+
+module.exports.toWeb        = toWeb;
+

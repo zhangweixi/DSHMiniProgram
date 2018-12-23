@@ -2,6 +2,8 @@
 var common = require("../../../common.js");
 var app  = getApp();
 
+
+
 Page({
 
     /**
@@ -184,13 +186,8 @@ Page({
 
         if(obj.content_type == 'article'){
 
-        
-            wx.setStorageSync('weburl', obj.link);
+            common.toWeb(obj.link,obj.banner_title);
             
-            wx.navigateTo({
-                url: '/pages/other/web/web'
-            })
-
         }else{
 
             wx.navigateTo({
@@ -277,6 +274,7 @@ Page({
 
             }
         }
+
         this.setData({ "videos": this.data.videos });
 
 
@@ -287,6 +285,7 @@ Page({
             bgMusic.fullTitle=title;
             bgMusic.title   = title.substring(0,5)+"...";
             bgMusic.id      = audioId;
+            bgMusic.type    = 'lundao';
 
         
         const innerAudioContext     = wx.createInnerAudioContext()
@@ -299,9 +298,6 @@ Page({
 
             setTimeout(() => {
 
-                //在这里就可以获取到大家梦寐以求的时长了
-                console.log(innerAudioContext.duration);//延时获取长度 单位：秒
-                
                 //设置总的时间
 
                 bgMusic.timeLength = innerAudioContext.duration;
@@ -319,6 +315,10 @@ Page({
                 bgVideo.onTimeUpdate(()=>{
 
                    this.monitorBgmusic();
+                })
+
+                bgVideo.onEnded(()=>{
+                    this.closeMusic();
                 })
 
             }, 500)  //这里设置延时1秒获取
@@ -381,5 +381,18 @@ Page({
 
         this.setData({bookPage:page%3})
 
+    },
+    toVideoDetail:function(){
+
+        var bgMusic = common.bgMusic.getData();
+
+        if(bgMusic.type == 'lundao'){
+
+            wx.navigateTo({url: '/pages/video/detail/detail'});
+
+        }else{
+
+            wx.navigateTo({url: '/pages/book/detail/detail?bookId='+bgMusic.id});
+        }
     }
 })

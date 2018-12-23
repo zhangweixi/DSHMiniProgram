@@ -1,31 +1,28 @@
 <!--pages/user/center/center.wxml-->
 <!-- <import src="/template/login/login.wxml"/> -->
 <!-- <template hidden="{{userInfo}}" is="login" data="{{app}}"></template> -->
-
+<view class="gray-line"></view>
 <login wx:if="{{!userInfo}}"> </login>
 
 <view wx:if="{{userInfo}}" class="page-container">
 	
 	<view class="head-container">
 		<view class="head-box">
-			<view>
-				<image class="head-img" src="{{userInfo.head_img}}" mode="widthFix"></image>	
-			</view>
+
+			<view><image class="head-img" src="{{userInfo.head_img}}" mode="widthFix"></image>	</view>
 			
-			<image wx:if="{{userInfo.isValid == true}}" class="head-hat" src="/images/icon/vip-yes.png" mode="widthFix"></image>
+			<image wx:if="{{userInfo.isValid}}" class="head-hat" src="/images/icon/vip-yes.png" mode="widthFix"></image>
 
 
-			<image wx:if="{{userInfo.isValid == false}}" class="head-hat" src="/images/icon/vip-yes.png" mode="widthFix"></image>			
+			<image wx:if="{{!userInfo.isValid}}" class="head-hat" src="/images/icon/vip-no.png" mode="widthFix"></image>			
 
 		</view>	
+
 		<view class="user-name">{{userInfo.NickName}}</view>
 
-			<view wx:if="{{userInfo.isValid == false}}" class="upgrade-vip">升级会员</view>
+		<view wx:if="{{userInfo.isValid == false}}" class="upgrade-vip">升级会员</view>
 
-			<view wx:if="{{userInfo.isValid == true }}" class="user-vip-time">会员到期时间：{{userInfo.MemEndTime}}</view>
-
-		<view></view>
-
+		<view wx:if="{{userInfo.isValid == true }}" class="user-vip-time">会员到期时间：{{userInfo.MemEndTime}}</view>
 	</view>
 
 
@@ -62,7 +59,7 @@
 		</view>
 	</navigator>
 
-	<navigator  url="/pages/user/question/question" open-type="navigate">
+	<navigator  data-url="https://wx.laohoulundao.com/home/articleDetail?articleId=4" bind:tap="toWeb">
 		<view class="menu-list">
 			<image class="icon-img" src="/images/icon/menu-question.png" mode="widthFix"></image>
 			<text>常见问题</text>

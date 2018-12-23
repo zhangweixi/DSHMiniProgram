@@ -42,8 +42,10 @@ login{
 
 
 .user-name{
-	margin-top:15rpx;
+	margin-top:4vw;
 	color:#151515;
+	font-size: 50rpx;
+	line-height: 1;
 }
 
 .upgrade-vip{
@@ -54,10 +56,12 @@ login{
 	border-radius: 60rpx;
 	padding:15rpx 80rpx;
 	margin:auto;
-	margin-top:10rpx;
+	margin-top:4vw;
 }
+
 .user-vip-time{
-	line-height:80rpx;
+	line-height:1;
+	margin-top:4vw;
 	color:#505050;
 }
 
@@ -65,13 +69,13 @@ login{
 .share-jd{
 	width:100%;
 	display: block;
-	margin-top:40rpx;
+	margin-top:7vw;
 }
 
 
 .menues{
 
-
+	margin-top:16rpx;
 }
 
 .menu-list{
@@ -79,7 +83,7 @@ login{
 	line-height:90rpx;
 	border-bottom: 1px solid #E3E3E3;
 	align-items: center;
-	padding:15rpx 0;
+	padding:10rpx 0;
 	margin-left:25rpx;
 	margin-right:25rpx;
 }

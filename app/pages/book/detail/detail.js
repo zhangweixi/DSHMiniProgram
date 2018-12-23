@@ -42,70 +42,13 @@ Page({
 
             this.getBookInfo();
 
-            setTimeout(()=>{ 
+            this.getUserReadPlan();
 
-                this.getUserReadPlan();
+            if (app.data.userId > 0 && app.data.userInfo.vipTimeIsValid == 1){
 
-                //设置时间
-                this.initBookMp3();
-
-                
-                if (app.data.userId > 0 && app.data.userInfo.vipTimeIsValid == 1){
-
-                    this.setData({ "haveRight": true });
-
-                }else{
-                    console.log("用户不存在");
-                }
-
-                
-            },2000);
+                this.setData({ "haveRight": true });
+            }
         },
-
-        /**
-        * 生命周期函数--监听页面初次渲染完成
-        */
-        onReady: function () {
-
-         
-
-        },
-
-        /**
-        * 生命周期函数--监听页面显示
-        */
-        onShow: function () {
-
-        },
-
-        /**
-        * 生命周期函数--监听页面隐藏
-        */
-        onHide: function () {
-
-        },
-
-        /**
-        * 生命周期函数--监听页面卸载
-        */
-        onUnload: function () {
-
-        },
-
-        /**
-        * 页面相关事件处理函数--监听用户下拉动作
-        */
-        onPullDownRefresh: function () {
-
-        },
-
-        /**
-        * 页面上拉触底事件的处理函数
-        */
-        onReachBottom: function () {
-
-        },
-
         /**
         * 用户点击右上角分享
         */
@@ -164,11 +107,14 @@ Page({
                     var data = {
                         "bookInfo":bookInfo,
                         "mp4CurrentTime":bookInfo.mp4CurrentTime,
-                        "haveRight":bookInfo.IsGratis == 1 ? true : false
+                        "haveRight":bookInfo.IsGratis == 1 ? true : this.data.haveRight
                     };
                     this.setData(data);
-            }
-          })
+
+                    //设置时间
+                    this.initBookMp3();
+                }
+            })
         },
         /**
         * 获取用户的读书改进计划
@@ -227,134 +173,233 @@ Page({
                 
             wx.getBackgroundAudioPlayerState({
                 success:(res)=>{
-                   
-                   console.log(res);
-                    if(res.status == 1){
-
-                        this.setData({"mp3Playing":true});
-
-                        bgMusic.onTimeUpdate((res)=>{
-
-                            var currentTime = bgMusic.currentTime;
-                            if(currentTime == 0)
-                            {
-                                return;
-                            }
-                            var data = { 
-                                ["audioInfo.timeCurrent"]: currentTime, 
-                                ["audioInfo.textTimeCurrent"]:common.numberToTime(currentTime),
-                            };
-                            this.setData(data);
-
-                            //记录时间
-                            this.recordMediaTime(currentTime,"lhddmp3");
-                        });
-
-                    }
-                        
-                    this.initBookMp3Action();
                     
+                    //这里的播放有两种状态
+                    //1.其他音乐
+                    //2.本书籍的音乐
+
+                    if(res.status == 2){ //没有背景音乐
+
+                        this.initBookMp3Action();
+                        return;
+                    }
+
+                    //有背景音乐，但是不是本书
+                    var musicData   = common.bgMusic.getData();    
+                    if(musicData.src != this.data.bookInfo.mp3){
+
+                        this.initBookMp3Action();
+                        return;
+                    }
+
+                
+                    //有背景音乐，是本书，但是处于暂停
+                    //需要将时间设置为当前时间
+
+                    var currentTime = musicData.timeCurrent;
+                    var timeLength  = musicData.timeLength;
+
+
+                    if(res.status == 0){ //暂停状态中
+
+                        this.setData({mp3Playing:false});
+
+                    }else if(res.status == 1){//正在播放
+
+                        this.setData({"mp3Playing":true});    
+                    }
+
+                    var audioInfo               = this.data.audioInfo;
+                    audioInfo.timeCurrent       = currentTime;
+                    audioInfo.textTimeCurrent   = common.numberToTime(currentTime);
+                    audioInfo.timeLength        = timeLength;
+                    audioInfo.textTimeLength    = common.numberToTime(timeLength);
+                    this.setData({audioInfo:audioInfo});
+
+
+                    bgMusic.onTimeUpdate((res)=>{
+                        console.log('11');
+                        var currentTime     = bgMusic.currentTime;
+                        var textCurrentTime = common.numberToTime(currentTime);
+
+                        if(currentTime == 0)
+                        {
+                            return;
+                        }
+
+                        var audioInfo                   = this.data.audioInfo;
+                            audioInfo.timeCurrent       = currentTime;
+                            audioInfo.textTimeCurrent   = textTimeCurrent;
+
+                        this.setData({audioInfo:audioInfo});
+
+                        common.bgMusic.setData({
+                            timeCurrent:timeCurrent,
+                            textTimeCurrent:textTimeCurrent
+                        })
+
+                        //记录时间
+                        this.recordMediaTime(currentTime,"lhddmp3");
+                    });
                 },
                 fail:(res)=>{
+
+                    console.log('获取状态失败');
                     this.initBookMp3Action();
                 }
             });
         },
         initBookMp3Action:function(){
-            console.log("初始化MP3");
+            
+            console.log('初始化MP3');
+
+
             const bookInfo              = this.data.bookInfo;
             var innerAudioContext       = wx.createInnerAudioContext();
             innerAudioContext.src       = bookInfo.mp3;
+            var audioInfo = {
+                "title": bookInfo.BookTitle,
+                "author":"老侯",
+                "src": bookInfo.mp3,
+                "timeCurrent":bookInfo.mp3CurrentTime,
+                "textTimeCurrent":common.numberToTime(bookInfo.mp3CurrentTime)                        
+            };
+
+            this.setData({"audioInfo":audioInfo});
+
+
             innerAudioContext.onCanplay(() => 
             {
-                innerAudioContext.duration ;//类似初始化-必须触发-不触发此函数延时也获取不到
-                var audioInfo = {
+                innerAudioContext.duration
 
-                    "title": bookInfo.BookTitle,
-                    "author":"老侯",
-                    "src": bookInfo.mp3,
-                };
+                setTimeout(()=>{
 
-                setTimeout(() => {
+                    var timeLength  = innerAudioContext.duration;
+                    console.log('音频时长:');
+                    console.log(timeLength);
+                    var audioInfo               = this.data.audioInfo;
+                        audioInfo.timeLength    = timeLength;
+                        audioInfo.textTimeLength= common.numberToTime(timeLength);
+                    
+                        this.setData({"audioInfo":audioInfo});
 
-                    //设置总的时间
-
-                    audioInfo.timeLength    = innerAudioContext.duration;
-                    audioInfo.timeCurrent   = bookInfo.mp3CurrentTime; //这里要根据用户的历史记录来决定
-
-                    audioInfo.textTimeLength= common.numberToTime(audioInfo.timeLength);
-                    audioInfo.textTimeCurrent=common.numberToTime(0);
-
-                    this.setData({"audioInfo":audioInfo});
-
-                }, 500)  //这里设置延时1秒获取
+                },1000)
             })
         },
         //开始播放音频
         playAudio:function(){
 
-            //if(this.checkHaveRight() == false){
+            if(this.checkHaveRight() == false){
                 
-            //    return false;
-            //}
+               return false;
+            }
 
             this.setData({"mp3Playing":true});
-            var audioInfo        = this.data.audioInfo;
+            var audioInfo       = this.data.audioInfo;
 
-            var bgMusic          = wx.getBackgroundAudioManager();
-                bgMusic.title    = audioInfo.title;
-            
-        
-            bgMusic.onTimeUpdate((res)=>{
+            var bgMusic         = {
+                id:this.data.bookId,
+                fullTitle:audioInfo.title,
+                title:audioInfo.title,
+                type:'daidu',
+                show:true,
+                playing:false,
+                timeLength:audioInfo.timeLength,
+                timeCurrent:audioInfo.timeCurrent,
+                textTimeCurrent:audioInfo.textTimeCurrent,
+                textTimeLength:audioInfo.textTimeLength,
+                src:audioInfo.src
+            };
 
-                var currentTime = bgMusic.currentTime;
-                if(currentTime == 0)
+            common.bgMusic.setData(bgMusic);
+
+            //如果有了，就不要再设置了
+            var music = wx.getBackgroundAudioManager();
+            if(music.src == this.data.bookInfo.mp3){
+
+                music.play();
+                return;
+            }
+
+
+
+            music.title         = bgMusic.title;
+                
+            music.onTimeUpdate(()=>{
+                
+                console.log('音频更新');
+               
+
+                var timeCurrent = music.currentTime;
+                var textTime    = common.numberToTime(timeCurrent);
+
+                //console.log(music);
+
+                if(timeCurrent == 0)
                 {
                     return;
                 }
+ 
+                var audioInfo   = this.data.audioInfo;
+                audioInfo.timeCurrent       = timeCurrent;
+                audioInfo.textTimeCurrent   = textTime;
+                audioInfo.timeLength        = music.duration;
+                audioInfo.textTimeLength    = common.numberToTime(music.duration);
 
-                var data = { 
-                    ["audioInfo.timeCurrent"]: currentTime, 
-                    ["audioInfo.textTimeCurrent"]:common.numberToTime(currentTime),
-                };
-                this.setData(data);
+
+                this.setData({audioInfo:audioInfo});
+
+                common.bgMusic.setData({
+                    timeCurrent:timeCurrent,
+                    textTimeCurrent:textTime
+                });
 
                 //记录时间
-                this.recordMediaTime(currentTime,"lhddmp3");
+                this.recordMediaTime(timeCurrent,"lhddmp3");
             });
+            
+           
 
-            if(typeof(bgMusic.src) != 'undefined' && bgMusic.src == audioInfo.src){ //已经播放过，这里只是继续播放
 
-                bgMusic.play();
+            music.onEnded(()=>{
+
+                var audioInfo = this.data.audioInfo;
+
+                this.setData({
+
+                })
+
+            })
+
+
+            //已经播放过，这里只是继续播放
+            if(typeof(music.src) != 'undefined' && music.src == audioInfo.src){ 
+
+                music.play();
                 return;
 
             }else{
-                console.log('开始播放');
-                var currentTime     = audioInfo.timeCurrent;
-                bgMusic.src         = audioInfo.src;
+               
+                var currentTime   = audioInfo.timeCurrent;
+                music.src         = audioInfo.src;
 
-                bgMusic.onCanplay(()=>{
+                music.onCanplay(()=>{
 
-                    bgMusic.play();
+                    music.play();
                 })
                 
-                //wx.seekBackgroundAudio({
-                //    position: currentTime
-                //});
-
                 setTimeout(()=>{
                         
-                    bgMusic.seek(currentTime);
+                    music.seek(currentTime);
 
                 },500);
             }
-           
-        
         },
         //暂停
         pauseAudio:function(){
             this.setData({ "mp3Playing": false });
             wx.getBackgroundAudioManager().pause();
+            common.bgMusic.setData({playing:false,show:false});
         },
 
         //改变音频播放的时间
@@ -386,6 +431,8 @@ Page({
 
                 currentTime = this.data.audioInfo.timeLength;
             }
+            
+            console.log(currentTime);
 
             wx.seekBackgroundAudio({
                 position: currentTime
@@ -428,11 +475,11 @@ Page({
 
                 this.setData({"mp3Playing":false});
                 wx.getBackgroundAudioManager().pause();
+                common.bgMusic.setData({show:false,playing:false});
             }
+
             var time  = this.data.mp4CurrentTime;
             
-            console.log(time);
-
             if( time > 1){
 
                 time = time -1;

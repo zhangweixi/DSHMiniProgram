@@ -1,1 +1,31 @@
-/* pages/user/advice/advice.wxss */
+.box{
+	padding: 4vw;
+	display: block;
+}
+
+textarea{
+	background: #F3F3F3;
+	display: block;
+	width:100%;
+	border:20rpx solid #F3F3F3;
+	box-sizing: border-box;
+	font-size: 1rem;
+}
+
+.mishu{
+	margin-top:40rpx;
+}
+
+.mishu text{
+	display: block;
+	color:#505050;
+	font-size: .9rem;
+}
+
+button{
+	width:50vw;
+	background: #FFB800;
+	color:#fff;
+	margin-top:10vw;
+	border-radius: 50rpx;
+}

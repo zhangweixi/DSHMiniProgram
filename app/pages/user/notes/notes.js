@@ -17,11 +17,7 @@ Page({
      */
     onLoad: function (options) {
 
-        setTimeout(()=>{
-
-            this.getLearnTime();
-
-        },2000);
+        this.getLearnTime();
     },
 
     /**
@@ -39,12 +35,6 @@ Page({
         this.getLearnTime();
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    },
     getLearnTime:function(){
 
         if(this.data.hasNextPage == false){

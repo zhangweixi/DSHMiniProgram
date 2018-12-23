@@ -13,18 +13,19 @@
 
                 <view class="sub-book-info">
                     <text class="main-title">{{book.BookTitle}}</text>    
-                    <text class="sub-title">{{book.BookDesc}}</text>
+                    <text class="sub-title no-wrap">{{book.BookDesc}}</text>
                     <view class="read-time">
                         <image src="/images/icon/read-num.png" mode="widthFix"></image>
-                        <text >{{book.ReadNumber}}</text>
+                        <text class="flex1">{{book.ReadNumber}}</text>
                     </view>
                 </view>
             </view>
 
-            <!-- 学校 -->
+            <!-- 书籍图片 -->
             <view class="book-img">
-                <image src="{{book.book_img}}" mode="widthFix"></image>
+                <image src="{{book.book_img}}" mode="widthFix"></image>   
             </view>
+             
 
         </view>
 

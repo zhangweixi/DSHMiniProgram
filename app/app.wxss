@@ -1,8 +1,11 @@
 page{
-  /* font-size:12rpx; */
+  
   color:#151515;
 }
 
+.no-wrap{
+  white-space:nowrap;
+}
 button::after {
   border: none
 }
@@ -51,8 +54,9 @@ button::after {
 
 .page-title .title{
 
-  font-size:1.2rem;
+  font-size:1.3rem;
   color:#151515;
+  font-weight: bold;
 }
 
 .page-title .empty{

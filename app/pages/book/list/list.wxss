@@ -61,43 +61,42 @@
   border-right:5px solid rgba(181,161,113,.5);
   font-size:.8rem;
   margin-top:10rpx;
+  line-height: 6vw;
   box-sizing: content-box;
 }
 
 .book-text-info .category text{
   background: #B5A171;
   display: block;
-  padding:2px 3px;
+  padding:0rpx 6rpx;
 }
 
 
 .book-text-info .title{
-  line-height:1;
-  margin-top:20px;
-  margin-bottom:10px;
+  line-height: 13vw;
   font-size:1.3rem;
 
 }
 
 .book-text-info .sub-title{
   font-size:1rem;
-  line-height:1;
+  line-height:5vw;
 }
 
 .book-text-info .read-num{
   display: flex;
   align-items: center;
-  line-height:25px;
-  position: absolute;
-  bottom:0px;
+  line-height:5vw;
+  margin-top:10rpx;
 }
 
 .book-text-info .read-num image{
-  width:18px;
-  margin-right:10px;
+  width:30rpx;
+  margin-right:20rpx;
 }
 
 .book-text-info .read-num text{
   font-size:0.8rem;
+  border-top: 8rpx solid rgba(0,0,0,0);
 }
 
