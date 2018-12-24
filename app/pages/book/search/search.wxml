@@ -12,7 +12,7 @@
 
 <view class="page-container">
 
-	<view class="search-container" hidden="{{hiddenClear}}">
+	<view class="search-container" hidden="{{!showInput}}">
 		
 		<view hidden="{{historyKeywords.length == 0}}">
 			<view class=" search-title page-container" style='margin-left:0;'>
@@ -36,7 +36,7 @@
 	</view>
 	
 
-	<view class="search-content" hidden="{{!hiddenClear}}">
+	<view class="search-content" hidden="{{showInput}}">
 
 		<template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}"></template>
 		

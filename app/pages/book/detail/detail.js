@@ -28,9 +28,7 @@ Page({
             "app":app,
             "email": "",
             "mp4CurrentTime":0,
-            "mp3CurrentTime":0,
-            "mp4TimeId":0,
-            "mp3TimeId":0,
+            "mp3CurrentTime":0
         },
 
         /**
@@ -89,31 +87,27 @@ Page({
         * 获取书籍详情
         */
         getBookInfo:function(){
-
-            var url = app.data.api + "book/book_detail";
-
-            wx.request({
-                // 必需
-                url: url,
-                method:"POST",
-                data: {
+           
+            var url     = app.data.api + "book/book_detail";
+            var data    = {
                     bookId:this.data.bookId,
-                    userId:5164
-                },    
-                success: (res) => {
-            
-                    res = res.data;
-                    var bookInfo = res.data.bookInfo;
-                    var data = {
-                        "bookInfo":bookInfo,
-                        "mp4CurrentTime":bookInfo.mp4CurrentTime,
-                        "haveRight":bookInfo.IsGratis == 1 ? true : this.data.haveRight
-                    };
-                    this.setData(data);
+                    userId:app.data.userId
+                };
 
-                    //设置时间
-                    this.initBookMp3();
-                }
+            app.request(url,data,(res,error)=>{
+                console.log(res);
+                res = res.data;
+                var bookInfo = res.data.bookInfo;
+                var data = {
+                    "bookInfo":bookInfo,
+                    "mp4CurrentTime":bookInfo.mp4CurrentTime,
+                    "haveRight":bookInfo.IsGratis == 1 ? true : this.data.haveRight
+                };
+                this.setData(data);
+                wx.setNavigationBarTitle({title: bookInfo.BookTitle});
+                //设置时间
+                this.initBookMp3();
+
             })
         },
         /**
@@ -515,6 +509,11 @@ Page({
         recordMediaTime:function(currentTime,mediaType){
             
             var currentTime = parseInt(currentTime + 0.99);
+            
+            if(currentTime%5 != 0 || app.data.userId == 0){ //5秒记录一次
+            
+                return;
+            }
 
             if(mediaType == 'lhddmp3'){
 
@@ -524,7 +523,7 @@ Page({
                 }
                 this.setData({mp3CurrentTime:currentTime});
 
-                var timeId  = this.data.mp3TimeId;
+                var timeId  = this.data.bookInfo.mp3TimeId;
 
             }else if(mediaType == 'lhddmp4'){
 
@@ -534,18 +533,11 @@ Page({
                 }
                 this.setData({mp4CurrentTime:currentTime});
 
-                timeId  = this.mp4TimeId;
+                var timeId  = this.data.bookInfo.mp4TimeId;
 
-            }else{
-
-                return;
             }
 
-
-            if(app.data.userId == 0){
-
-                return;
-            }
+            
             
             var url     = app.data.api + "book/record_media_time";
 
@@ -559,11 +551,24 @@ Page({
 
             app.request(url,data,(res,error)=>{
 
-                res = res.data;
+                if(timeId > 0){
 
-                var timeId = res.data.timeId;
-                var data   = mediaType == "lhddmp4" ? {mp4TimeId:timeId}:{mp3TimeId:timeId};
-                this.setData(data)
+                    return;
+                }
+
+                var timeId      = res.data.data.timeId;
+                var bookInfo    = this.data.bookInfo;
+
+                if(mediaType == 'lhddmp4'){
+
+                    bookInfo.mp4TimeId  = timeId;
+
+                }else{
+
+                    bookInfo.mp3TimeId  = timeId;
+                }
+
+                this.setData({bookInfo:bookInfo});
             });
         },
         /**
@@ -583,7 +588,6 @@ Page({
             }
             
             //2.判断是否登录
-            console.log(app.data.userId);
             if(app.data.userId == 0){
               
                 common.confirm(this,"请先登录","需要前往登录吗？",function(){
@@ -598,18 +602,28 @@ Page({
 
             } else if (app.data.userInfo.vipTimeIsValid == 0){
 
-                common.confirm(this, "您的会员已到期", "继续续费？", function () {
+                if(app.data.userInfo.States == 1){
 
-                    wx.switchTab({
-                        url: '/pages/user/center/center',
-                    });
+                    var title   = "会员特权";
+                    var msg     = "会员已到期，需要续费吗";
+                   
+                }else if(app.data.userInfo.States == 0){
+                    
+                    var title   = "会员特权";
+                    var msg     = "需要升级成为VIP吗";
+                }
 
-                }, "续费", "取消");
+                common.showModel(title,msg,()=>
+                {
+                    wx.navigateTo({url: '/pages/user/upgrade/upgrade'});
+                })
 
                 return false;
-            }
 
-            return true;
+            }else{
+
+                return true;    
+            }
         },
 
         openEdit: function(){
@@ -623,14 +637,8 @@ Page({
          * */
         edit_read_plan:function(e){
 
-            if(this.checkHaveRight == false || app.data.userId == 0){
+            if(!this.checkHaveRight()){
                 
-                wx.showToast({
-                    title: '请登录',
-                    icon: 'none', // "success", "loading", "none"
-                    duration: 1500,
-                    mask: false,
-                })
                 return false;
             }
 
@@ -641,20 +649,15 @@ Page({
                 data.userId = app.data.userId;
                 data.bookId = this.data.bookId;
                 data.readPlanId = this.data.readPlanId;
+            return;
+            app.request(url,data,(res,error)=>{
+                
+                res = res.data;
+                if(res.code == 200){
 
-            
-            wx.request({
-                url: url,
-                data:data,
-                method:"POST",
-                success:(res)=>{
-                    res = res.data;
-                    if(res.code == 200){
+                    this.setData({ readPlanId: res.data.sumupId, isEditing:false});
 
-                        this.setData({ readPlanId: res.data.sumupId, isEditing:false});
-
-                        common.showDialog(this,"保存成功","success");
-                    }
+                    common.showDialog(this,"保存成功","success");
                 }
             })
         },
@@ -662,6 +665,9 @@ Page({
         //显示下载输入框
         showDownload:function(){
             
+            if(!this.checkHaveRight()){
+                return;
+            }
             var mp4time = this.data.mp4CurrentTime;
             setTimeout(()=>{
                 this.setData({mp4CurrentTime:mp4time});

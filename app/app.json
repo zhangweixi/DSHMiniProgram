@@ -14,6 +14,7 @@
     "pages/user/message/message",
     "pages/user/advice/advice",
     "pages/user/question/question",
+    "pages/user/upgrade/upgrade",
     "pages/mobile/mobile/mobile",
     "pages/mobile/code/code",
     "pages/video/list/list",

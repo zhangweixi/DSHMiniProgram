@@ -79,7 +79,10 @@
 .book-list .sub-book-info .sub-title {
   font-size: 1rem;
   padding:2vw 0;
-  line-height: 1.2;
+  line-height: 6vw;
+}
+.book-list .sub-book-info .sub-title.small{
+  font-size: 30rpx;
 }
 .book-list .sub-book-info .read-time {
   font-size: 0.7rem;

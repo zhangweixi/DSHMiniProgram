@@ -1,0 +1,2 @@
+<!--pages/user/upgrade/upgrade.wxml-->
+<button class="btn-info btn">升级</button>

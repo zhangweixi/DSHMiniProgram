@@ -13,7 +13,7 @@
 
                 <view class="sub-book-info">
                     <text class="main-title">{{book.BookTitle}}</text>    
-                    <text class="sub-title no-wrap">{{book.BookDesc}}</text>
+                    <text class="sub-title no-wrap {{book.BookDesc.length > 12 ?'small':''}}">{{book.BookDesc}}</text>
                     <view class="read-time">
                         <image src="/images/icon/read-num.png" mode="widthFix"></image>
                         <text class="flex1">{{book.ReadNumber}}</text>

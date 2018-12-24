@@ -12,7 +12,8 @@ Page({
         keywords:'',
         page:1,
         books:[],
-        hiddenClear:true
+        hiddenClear:true,//显示清楚关闭
+        showInput:true  //显示输入框
     },
 
     /**
@@ -94,7 +95,8 @@ Page({
             "page":1,
             "canFreshBook":true,
             "books":[],
-            "hiddenClear":true
+            "hiddenClear":true,
+            "showInput":false
         });    
     
         this.getBooks();
@@ -143,7 +145,10 @@ Page({
         })
     },
     showSearchKeywords:function(){
-        this.setData({"hiddenClear":false});
+        this.setData({
+            "hiddenClear":false,
+            "showInput":true
+        });
     },
     clearKeywords:function(){
         this.setData({

@@ -56,7 +56,7 @@
         <form bindsubmit='edit_read_plan' >
             <view wx:for="{{bookNotes}}" class='single-note'>
                 <view class='title'>{{item.title}}：</view>
-                <textarea placeholder="{{item.placeholder}}" class="{{app.data.platform == 'ios'?'ios':'android'}}" value="{{item.content}}" name="{{item.type}}" disabled="{{ isEditing == false && readPlanId > 0}}"></textarea>
+                <textarea placeholder="{{item.placeholder}}" class="{{app.data.platform == 'ios'?'ios':'android'}}" value="{{item.content}}" name="{{item.type}}" disabled="{{ isEditing == false && readPlanId > 0 || (!haveRight)}}"></textarea>
             </view>
 
             <view class='note-btn'>

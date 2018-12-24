@@ -24,6 +24,31 @@ function showDialog(obj,msg,msgType){
     },2000);
 }
 
+function showModel(title,msg,successCall,cancelCall=null){
+
+    wx.showModal({
+        title: title,
+        content: msg,
+        showCancel: true,
+        cancelText: '取消',
+        cancelColor: '#000000',
+        confirmText: '确定',
+        confirmColor: '#FF9C00',
+        success: (res) => {
+            // res.confirm 为 true 时，表示用户点击了确定按钮
+            if(res.confirm) {
+                
+                successCall();
+            }else{
+                if(cancelCall){
+
+                    cancelCall();
+                }
+            }
+        }
+    })
+}
+
 
 /**
  * 数字转换时间
@@ -301,6 +326,8 @@ module.exports.request      = request;
 module.exports.readparty    = readparty;
 
 module.exports.showToast    = showToast;
+
+module.exports.showModel    = showModel;
 
 module.exports.toWeb        = toWeb;
 
