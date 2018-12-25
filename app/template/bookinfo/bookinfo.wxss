@@ -73,16 +73,21 @@
 .book-list .sub-book-info .main-title {
   font-size: 1.3rem;
   margin-top: 5rpx;
-  line-height: 1;
-
+  line-height: 7vw;
 }
+
+.book-list .sub-book-info .main-title.small{
+
+  font-size:.9rem;
+}
+
 .book-list .sub-book-info .sub-title {
   font-size: 1rem;
   padding:2vw 0;
   line-height: 6vw;
 }
 .book-list .sub-book-info .sub-title.small{
-  font-size: 30rpx;
+  font-size: .85rem;
 }
 .book-list .sub-book-info .read-time {
   font-size: 0.7rem;

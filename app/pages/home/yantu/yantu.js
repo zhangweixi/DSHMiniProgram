@@ -1,19 +1,12 @@
 var system  = wx.getSystemInfoSync();
 var perVw   = system.windowWidth / 100;
+var app     = getApp();
 
 Page({
     data: {
-        imgUrls: [
-            "https://wx.laohoulundao.com/admin/speakImg/2017-09-30-speak-59cf45113b259.jpg",
-            "https://wx.laohoulundao.com/admin/speakImg/2017-09-30-speak-59cf45a539d3c.jpg",
-            "https://wx.laohoulundao.com/admin/speakImg/2017-09-30-speak-59cf45c98c0b7.jpg",
-            "https://wx.laohoulundao.com/admin/speakImg/2017-09-30-speak-59cf465ddda22.jpg",
-            "https://wx.laohoulundao.com/admin/speakImg/2017-09-30-speak-59cf468439b15.jpg",
-            "https://wx.laohoulundao.com/admin/speakImg/2017-09-30-speak-59cf4767c6ae1.jpg",
-            "https://wx.laohoulundao.com/admin/speakImg/2017-09-30-speak-59cf47a595b22.jpg",
-            "https://wx.laohoulundao.com/admin/speakImg/2017-10-09-speak-59db35aaba5b5.jpg",
-            "https://wx.laohoulundao.com/admin/speakImg/2017-10-09-speak-59db35c7038cd.jpg",
-        ],
+        sentences: [],
+        page:0,
+        showSwiper:false,
         indicatorDots: false,
         autoplay: false,
         interval: 5000,
@@ -24,6 +17,22 @@ Page({
         activeHeight:90,
         winHeight: system.windowHeight,
         winWidth: system.windowWidth
+    },
+    onLoad:function(options){
+        
+        if(options.showSwiper==1)
+        {
+            this.setData({showSwiper:true})
+        }
+
+        this.getSentences();
+    },
+     /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+        this.getSentences();
     },
     swiperChange:function(e){
         return;
@@ -57,5 +66,47 @@ Page({
             //console.log(this.data.activeHeight);
 
         })
-  }
+    },
+    stopMove:function(){
+
+    },
+    getSentences:function(){
+
+        var url = app.data.api + "bookSentence/getSentences";
+        var data = {page:this.data.page+1,userId:this.data.userId};
+        app.request(url,data,(res,error)=>{
+            res = res.data;
+            if(res.data.sentences.data.length > 0){
+                this.setData({
+                    sentences:this.data.sentences.concat(res.data.sentences.data),
+                    page:res.data.sentences.current_page
+                })    
+            }
+        })
+
+    },
+    showSwiper:function(e){
+
+        var current = e.currentTarget.dataset.url;
+        
+        var urls = [];
+        for(var img of this.data.sentences){
+
+            urls.push(img.bg_img);
+        }
+
+        wx.previewImage({
+            urls:urls,
+            current:current
+        })
+    },
+    closeSwiper:function(e){
+
+        this.setData({showSwiper:false});
+    },
+    download:function(){
+
+
+
+    }
 })

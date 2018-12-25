@@ -1,3 +1,15 @@
+page{
+    background: #000;
+}
+.swiper-container{
+    position: fixed;
+    height:100vh;
+    width:100vw;
+    top:0;
+    left:0;
+    background: #000;
+    z-index:100;
+}
 swiper{
     height:150vw;
 }
@@ -9,32 +21,80 @@ swiper-item{
     display: flex;
     align-items: center;
     text-align: center;
-  
 }
 
 swiper-item image{
-    width:90%;
+    width:80vw;
     display: block;
     margin:auto;
-    border:3px solid rgba(248, 210, 97, 0.979);
-    border-radius: 5px;
-}
-
-swiper-item.left{
-   
 }
 
 
-swiper-item.left{
+.handbtn{
+    display: flex;
+    padding: 10rpx 0;
+}
 
-     
+.handbtn image{
+    width:50rpx;
 }
-swiper-item.right image{
 
-    margin-left:0;
+.img-box{
+    margin:0 1vw;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
-swiper-item.active{
-  
-  
+
+.img-box .image-list{
+    float: left;
+    margin:1vw;
+    display: inline-block;
+    border-radius: 20rpx;
+    background:#fff;
 }
+
+.img-box image{
+    display: block;
+    width:100%;
+}
+
+
+
+.img-box .image-small{
+    width:30.6vw;
+}
+
+
+.img-box .image-middle{
+
+    width:47vw;
+    
+}
+
+.image-middle .img-container{
+
+    height:53.3vw;
+    overflow: hidden;
+    
+}
+
+.image-list .desc{
+    /*background: #FF9C00;*/
+    background: #fff;
+    color:#666;
+    font-size: .8rem;
+    padding:10rpx;
+    border:1.2vw solid #fff;
+}
+.image-list .desc .bookname{
+    margin-top:10rpx;
+    display: block;
+    text-align: right;
+    color:#000;
+    font-size: .7rem;
+}
+
+
+
 

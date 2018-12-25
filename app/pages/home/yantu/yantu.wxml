@@ -1,26 +1,46 @@
-<swiper indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" 
-  previous-margin="20"
-  next-margin="20"
+<view class="swiper-container" hidden="{{!showSwiper}}">
+  <swiper  
+  indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" 
+  interval="{{interval}}" 
+  duration="{{duration}}" 
+  previous-margin="0"
+  next-margin="0"
   bindchange="swiperChange"
+  current="{{index}}"
+  
   >
-    <block wx:for="{{imgUrls}}" wx:for-index="imgIndex">
-
-        <swiper-item wx:if="{{index - 1 == imgIndex}}" id="item-{{imgIndex}}" class="left" bindtouchmove1='move' height="{{leftHeight}}vh" >
-            <image  src="{{item}}" class="slide-image" mode='widthFix'/>
+    <block wx:for="{{sentences}}" wx:for-index="imgIndex">
+        <swiper-item  id="item-{{imgIndex}}" >
+            <image  src="{{item.bg_img}}" class="slide-image"  mode='widthFix' bindtap="closeSwiper"/>            
         </swiper-item>
-
-        <swiper-item wx:elif="{{index + 0 == imgIndex}}" id="item-{{imgIndex}}" class="active" bindtouchmove='move'>
-            <image  src="{{item}}" class="slide-image"  mode='widthFix' />            
-        </swiper-item>
-
-        <swiper-item wx:elif="{{index + 1 == imgIndex}}" id="item-{{imgIndex}}" class="right" height="{{rightHeight}}vh">    
-            <image  src="{{item}}" class="slide-image" mode='widthFix'/>
-        </swiper-item>
-
-        <swiper-item wx:else  height="95vh" id="item-{{imgIndex}}">    
-            <image  src="{{item}}" class="slide-image" mode='widthFix'/>
-        </swiper-item>
-
     </block>
-</swiper>
+  </swiper>
+
+  <view class="handbtn">
+    <view class="flex1"></view>
+    <image class="" src="/images/icon/download.png" mode="widthFix"></image>
+    <view class="flex1"></view>
+    <image class="" src="/images/icon/share1.png" mode="widthFix"></image>
+    <view class="flex1"></view>
+  </view>
+</view>
+
+<view class="img-box" >
+  <view wx:for="{{sentences}}" wx:for-index="imgIndex" class="image-list image-middle">
+
+    <view class="img-container">
+
+      <image    src="{{item.bg_img}}" mode="widthFix" data-url="{{item.bg_img}}" bind:tap="showSwiper"></image>
+
+    </view>
+
+    <view class="desc">
+      <text>{{item.content}}</text>
+      <text class="bookname">摘自《{{item.book_name}}》</text>
+    
+    </view>
+   
+  </view>
+    
+</view>
