@@ -31,7 +31,7 @@
 
     <view class="img-container">
 
-      <image    src="{{item.bg_img}}" mode="widthFix" data-url="{{item.bg_img}}" bind:tap="showSwiper"></image>
+      <image    src="{{item.bg_img}}" mode="widthFix" data-url="{{item.bg_img}}" bind:tap="previewImage"></image>
 
     </view>
 

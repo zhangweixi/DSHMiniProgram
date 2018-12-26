@@ -394,5 +394,15 @@ Page({
 
             wx.navigateTo({url: '/pages/book/detail/detail?bookId='+bgMusic.id});
         }
-    }
+    },
+    previewImage:function(e){
+
+        var current = 0
+        var host = "https://wx.laohoulundao.com/api/v6/bookSentence/sentence_img?";
+        var urls = [host + "sentenceId=" + this.data.bookSentence.id + "&userId="+app.data.userId];
+        wx.previewImage({
+            urls:urls,
+            current:current
+        })
+    },
 })

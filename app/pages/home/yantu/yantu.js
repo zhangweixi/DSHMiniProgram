@@ -20,11 +20,10 @@ Page({
     },
     onLoad:function(options){
         
-        if(options.showSwiper==1)
+        if(options.sentenceId > 0)
         {
-            this.setData({showSwiper:true})
+            this.prevImgs([options.sentenceId],0);
         }
-
         this.getSentences();
     },
      /**
@@ -85,16 +84,15 @@ Page({
         })
 
     },
-    showSwiper:function(e){
+    previewImage:function(e){
 
         var current = e.currentTarget.dataset.url;
-        
         var urls = [];
+        var host = "https://wx.laohoulundao.com/api/v6/bookSentence/sentence_img?";
         for(var img of this.data.sentences){
 
-            urls.push(img.bg_img);
+            urls.push(host + "sentenceId=" + img.id + "&userId="+app.data.userId);
         }
-
         wx.previewImage({
             urls:urls,
             current:current
