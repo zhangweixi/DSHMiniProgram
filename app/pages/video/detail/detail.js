@@ -9,7 +9,9 @@ Page({
    */
     data: {
         isMoving: false,
-        audioNum:0
+        audioNum:0,
+        bgMusic:{},
+        music:null
     },
 
     /**
@@ -17,11 +19,27 @@ Page({
    */
     onLoad: function(options) {
 
-        var bgMusic = wx.getStorageSync('bgMusic');
+        var videoId     = typeof options.videoId == "undefined" ? 0 : options.videoId+1;
+        
+
+        if(videoId > 0){
+
+            var bgMusic = {id:videoId};
+
+        }else{
+
+            var bgMusic     = common.bgMusic.getData();    
+        }
 
         this.setData({bgMusic: bgMusic});
+        
 
-        this.getVideoNum();
+        if(videoId > 0){
+
+            this.getOtherMusic("prev");
+        }
+
+        this.getVideoTotalNum();
     },
 
     /**
@@ -47,8 +65,7 @@ Page({
             bgMusic.textTimeCurrent = textTime;
 
             this.setData({bgMusic: bgMusic});
-
-            wx.setStorageSync('bgMusic', bgMusic)
+            common.bgMusic.setData(bgMusic);
         })
 
         //音乐结束事件
@@ -62,18 +79,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
     onShow: function() {
-
+        
     },
 
     /**
    * 用户点击右上角分享
    */
-    onShareAppMessage: function() {
-
+    onShareAppMessage: function(options) {
+        
+        var bgMusic = this.data.bgMusic;
+        return {
+            title:"老侯论道:"+bgMusic.fullTitle,
+            path:'pages/video/detail/detail?videoId='+bgMusic.id,
+            imageUrl:'http://wx.laohoulundao.com/images/uploads/2018/2/lundao3.jpg'
+        }
 
     },
     //获得音频总数量
-    getVideoNum:function(){
+    getVideoTotalNum:function(){
         var url = app.data.api + "audio/count_video";
         app.request(url,{},(res)=>{
 

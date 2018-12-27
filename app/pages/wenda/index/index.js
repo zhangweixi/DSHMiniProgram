@@ -1,6 +1,6 @@
 // pages/wenda/index/index.js
 var app = getApp();
-
+var common = require('../../../common.js')
 Page({
 
     /**
@@ -19,13 +19,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
-        setTimeout(()=>{
-            this.setData({userId:app.data.userId});    
-            this.getQuestion();
-        },1000);
-
-
+        this.setData({userId:app.data.userId});    
+        this.getQuestion();
     },
 
     /**
@@ -74,10 +69,15 @@ Page({
         this.getQuestion();
     },
     nav:function(e){
-        var url = e.currentTarget.dataset.url;
-        wx.navigateTo({
-            url: url
-        })
+        var obj         = e.currentTarget;
+        var needUser    = obj.dataset.user;
+        var url         = obj.dataset.url;
+        if(needUser == 1 && app.data.userId == 0){
+
+            common.showToast('请登录','none');
+            return ;
+        }
+        wx.navigateTo({url: url});
     },
     getQuestion:function(){
 

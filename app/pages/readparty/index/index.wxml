@@ -1,8 +1,8 @@
 <view class="page-container">
 
-	<swiper  current="3">
+	<swiper>
 		<swiper-item wx:for="{{ads}}" wx:for-item="ad">
-			<image class="" src="{{ad.src}}" mode="widthFix"  bindload="imageLoad"></image>
+			<image class="" src="{{ad.FilePath1}}" mode="widthFix"  bindload="imageLoad"></image>
 		</swiper-item>
 	</swiper>
 

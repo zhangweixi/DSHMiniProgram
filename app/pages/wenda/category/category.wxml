@@ -19,7 +19,7 @@
 					<view wx:if="{{item.answer_id > 0}}" class="current-answer">采纳回答：{{item.answer}}</view>
 					<view class="answernum">
 						<text class="num flex1">共{{item.answerNumber}}位伙伴参与回答</text>
-						<text hidden="{{showType == 1 || item.user_id == app.data.userId || item.answer_id > 0}}" class="ansbtn color-y">我要回答</text>
+						<text hidden="{{showType == 1 || item.user_id == app.data.userId || item.answer_id > 0 || app.data.userId ==0}}" class="ansbtn color-y">我要回答</text>
 					</view>
 				</view>
 			

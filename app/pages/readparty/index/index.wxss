@@ -2,7 +2,7 @@
 
 swiper{
 	
-	height:400rpx;
+	height:48vw;
 }
 
 swiper image{

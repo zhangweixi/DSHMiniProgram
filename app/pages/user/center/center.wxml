@@ -20,7 +20,7 @@
 
 		<view class="user-name">{{userInfo.NickName}}</view>
 
-		<view wx:if="{{userInfo.isValid == false}}" class="upgrade-vip" bind:tap="upgrade">升级会员</view>
+		<view wx:if="{{userInfo.isValid == false && false}}" class="upgrade-vip" bind:tap="upgrade">升级会员</view>
 
 		<view wx:if="{{userInfo.isValid == true }}" class="user-vip-time">会员到期时间：{{userInfo.MemEndTime}}</view>
 	</view>

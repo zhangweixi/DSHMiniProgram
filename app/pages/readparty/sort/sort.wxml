@@ -1,5 +1,5 @@
 <!--pages/readparty/sort/sort.wxml-->
-<view class="page-head" hidden="{{float}}">
+<view class="page-head" hidden="{{float}}" wx:if="{{app.data.userId > 0}}">
 	<view class="upbg"></view>
 	<image class="question" src="/images/icon/question.png" mode="widthFix" bind:tap="triggleRule"></image>
 	<view class="mysort">
@@ -22,7 +22,7 @@
 
 
 <!-- 浮动的头像 -->
-<view class="head-float" hidden="{{!float}}">
+<view class="head-float" hidden="{{!float}}" wx:if="{{app.data.userId > 0}}">
 	<view class="box">
 		<image class="headimg" src="{{selfData.FilePath1}}" mode="widthFix"></image>
 		<text class="name">{{selfData.YourName}}</text>
@@ -46,7 +46,6 @@
 			<text class="color-g">320</text>
 		</view>
 	</view>
-
 </view>
 
 

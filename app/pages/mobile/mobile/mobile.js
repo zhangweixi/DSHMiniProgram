@@ -118,10 +118,9 @@ Page({
         
         wx.setStorageSync("mobileCodeData", data);
 
-        wx.navigateTo({url: '/pages/mobile/code/code'});
+        //wx.navigateTo({url: '/pages/mobile/code/code'});
 
-        return;
-
+        
         if (checkMobile(data.mobile) == false){
 
             common.showDialog(this,"手机号格式错误","warning");

@@ -85,14 +85,18 @@ Page({
 
     },
     previewImage:function(e){
-
-        var current = e.currentTarget.dataset.url;
-        var urls = [];
+        
         var host = "https://wx.laohoulundao.com/api/v6/bookSentence/sentence_img?";
+        var id      = e.currentTarget.dataset.id;
+        var current = host + "sentenceId=" + id + "&userId="+app.data.userId;
+
+        var urls = [];
+        
         for(var img of this.data.sentences){
 
             urls.push(host + "sentenceId=" + img.id + "&userId="+app.data.userId);
         }
+        
         wx.previewImage({
             urls:urls,
             current:current

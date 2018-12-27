@@ -28,24 +28,11 @@ Page({
     onLoad: function (options) {
 
         var questionId = options.questionId;
-        this.setData({questionId:questionId,app:app})
-
-        setTimeout(()=>{
-
-            if(app.data.userId >0)
-            {
-                this.getQuestionDetail();        
-            }else{
-                setTimeout(()=>{
-                    if(app.data.userId >0)
-                    {
-                        this.getQuestionDetail();        
-                    }else{
-                        
-                    }
-                },1000);
-            }
-        },1000);
+        this.setData({
+            questionId:questionId,
+            app:app
+        });    
+        this.getQuestionDetail();        
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作
@@ -60,6 +47,11 @@ Page({
 
     },
     showComment:function(){
+
+        if(app.data.userId == 0){
+            common.showToast('请登录','none');
+            return;
+        }
         this.setData({['commentData.showComment']:true});
         this.setData({['commentData.focus']:true});
     },
@@ -70,6 +62,10 @@ Page({
     // 新增回复
     addAnswer:function(e){
         
+        if(app.data.userId == 0){
+            common.showToast('请登录','none');
+            return;
+        }
        
         var answer = e.detail.value.inputContent;
 
@@ -97,7 +93,11 @@ Page({
         })
     },
     addZan:function(e){
-
+        
+        if(app.data.userId == 0){
+            common.showToast('请登录','none');
+            return;
+        }
         var url = app.data.api + "companyQuestion/like_answer";
         var data = {
             userId:app.data.userId,
@@ -158,6 +158,10 @@ Page({
     },
     acceptAnswer:function(e){
 
+        if(app.data.userId == 0){
+            common.showToast('请登录','none');
+            return;
+        }
 
         var url = app.data.api + "companyQuestion/accept_answer";
 

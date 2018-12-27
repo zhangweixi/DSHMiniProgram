@@ -8,14 +8,7 @@ Page({
      */
     data: {
         readpartys:[],
-        ads:[
-            {src:"https://wx.laohoulundao.com/images/ppt/1.jpg"},
-            {src:"https://wx.laohoulundao.com/images/ppt/2.jpg"},
-            {src:"https://wx.laohoulundao.com/images/ppt/3.jpg"},
-            {src:"https://wx.laohoulundao.com/images/ppt/4.jpg"},
-            {src:"https://wx.laohoulundao.com/images/ppt/5.jpg"},
-            {src:"https://wx.laohoulundao.com/images/ppt/6.jpg"},
-        ]
+        ads:[]
     },
 
     /**
@@ -23,11 +16,7 @@ Page({
      */
     onLoad: function (options) {
 
-        setTimeout(()=>{
-            this.get_readpartys();    
-        },1000);
-        
-
+        this.get_readpartys();    
     },
 
     /**
@@ -63,15 +52,10 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
+
         this.get_readpartys();  
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
     imageLoad: function (e) {//获取图片真实宽度  
         return;
         var imgwidth = e.detail.width,
@@ -100,10 +84,14 @@ Page({
         });
 
         app.request(url,data,(res,error)=>{
+            
             wx.hideLoading();
-            res = res.data;
             wx.hideNavigationBarLoading();
             wx.stopPullDownRefresh();
+
+            res = res.data;
+
+            this.setData({ads:res.data.ads});
 
             if(res.code == 200){
                 var readpartys = res.data.readpartys;
@@ -131,6 +119,12 @@ Page({
     },
     nav:function(e){
 
+        if(app.data.userId == 0){
+
+            common.showToast("请登录","none");
+            return;
+        }
+        
         wx.navigateTo({
             url: e.currentTarget.dataset.url
         });

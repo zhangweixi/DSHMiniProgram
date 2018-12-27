@@ -22,7 +22,7 @@
 			<view class="subtitle">{{item.subTitle}}</view>
 		</view>
 
-		<view class="addbtn" bind:tap="nav" data-url="/pages/wenda/create/create?type={{item.id}}">
+		<view class="addbtn" bind:tap="nav" data-url="/pages/wenda/create/create?type={{item.id}}" data-user="1">
 			<text class="flex"></text>
 			<image class="addicon" src="/images/icon/add.png" mode="widthFix"></image>
 			<text class="color-y">提问</text>
@@ -36,7 +36,7 @@
 <view class="nav-types">
 	<view bind:tap="triggleType" data-type="0"><text class="{{showType == 0? 'selected':''}}">全部</text></view>
 	<view bind:tap="triggleType" data-type="1"><text class="{{showType == 1? 'selected':''}}">已解决</text></view>
-	<view bind:tap="triggleType" data-type="2"><text class="{{showType == 2? 'selected':''}}">我的</text></view>
+	<view wx:if="{{userId > 0}}" bind:tap="triggleType" data-type="2"><text class="{{showType == 2? 'selected':''}}">我的</text></view>
 </view>
 <view class="gray-line"></view>
 
@@ -46,7 +46,7 @@
 		<view class="quest-list" >
 		
 			<view class="head">
-				<image class="" src="{{item.head_img}}" mode="widthFix"></image>
+				<image  src="{{item.head_img}}" mode="widthFix"></image>
 			</view>
 
 			<view class="quest-content">
@@ -62,7 +62,7 @@
 
 					<view class="answernum">
 						<text class="num flex">共{{item.answerNumber}}位伙伴参与回答</text>
-						<text hidden="{{item.user_id == userId || item.answer_id > 0}}" class="ansbtn color-y">我要回答</text>
+						<text hidden="{{item.user_id == userId || item.answer_id > 0 || userId == 0}}" class="ansbtn color-y">我要回答</text>
 					</view>
 				</view>
 			</view>

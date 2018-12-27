@@ -20,12 +20,7 @@ Page({
      */
     onLoad: function (options) {
 
-        //this.setData({readPartyId:options.readPartyId});
-        setTimeout(()=>{
-
-            this.getIntegral();
-
-        },1000);
+        this.getIntegral();
     },
     onPageScroll:function(e){
 
