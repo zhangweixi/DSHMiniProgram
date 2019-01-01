@@ -1,66 +1,56 @@
 // pages/user/upgrade/upgrade.js
+var app = getApp();
+var common = require('../../../common.js');
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        error:""
     },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
+   
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
 
     },
+    upgrade:function(e){
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
 
+        var url     = app.data.api + "weixin/buy_vip";
+        var data    = {
+            userId:app.data.userId
+        };
+
+    
+
+        app.request(url,data,(res,error)=>{
+
+            var config = res.data.data.config;
+
+            wx.requestPayment({
+                timeStamp: config.timeStamp,
+                nonceStr: config.nonceStr,
+                package: config.package,
+                signType: config.signType,
+                paySign: config.paySign,
+                success:(res)=>{ 
+                    
+                    this.paySuccess(config);
+
+                },
+                fail:(res)=>{ 
+
+                    common.showToast('支付失败','none');
+                }
+            })
+        })
     },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    paySuccess:function(config){
+        
+        common.showToast('支付成功',"success");
     }
 })

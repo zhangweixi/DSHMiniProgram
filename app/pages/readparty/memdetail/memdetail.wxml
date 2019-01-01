@@ -63,7 +63,7 @@
 		<view class="btn">
 
 			<!-- 管理员进入到自己的界面 -->
-			<button wx:if="{{isAdmin && isSelf && !isEdit}}">转让管理权限</button>
+			<button wx:if="{{isAdmin && isSelf && !isEdit}}" bind:tap="replaceManager">转让管理权限</button>
 
 			<!-- 管理员进入别人的界面 -->
 			<button wx:if="{{isAdmin && !isSelf && !isEdit}}" bind:tap="deleteMember">删除成员</button>

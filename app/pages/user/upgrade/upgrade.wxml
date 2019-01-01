@@ -1,2 +1,7 @@
 <!--pages/user/upgrade/upgrade.wxml-->
-<button class="btn-info btn">升级</button>
+<form bindsubmit="upgrade"  report-submit="true">
+	<button class="btn-info btn" form-type="submit">升级</button>	
+</form>
+
+<view>{{error}}</view>
+

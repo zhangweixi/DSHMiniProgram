@@ -12,7 +12,8 @@ Page({
         isAdmin:false,
         memberInfo:null,
         isSelf:false,
-        departments:[]
+        departments:[],
+        waitingMember:false
     },
 
     /**
@@ -48,6 +49,13 @@ Page({
 
         },2000);
         
+    },
+    onShow:function(){
+
+        if(this.data.waitingMember){ //等待选择一个会员
+
+            this.confirmNewManager();
+        }
     },
     //触发编辑状态
     activeEdit:function(){
@@ -207,6 +215,53 @@ Page({
                 console.log(res.errMsg)
             }
         })
-    }
+    },
+    replaceManager:function(){
 
+        this.setData({waitingMember:true});    
+        wx.setStorageSync('waitingMember', true)
+    
+        //显示通讯录
+        wx.navigateTo({
+            url: '/pages/readparty/member/member?from=memberdetail&readPartyId='+this.data.readPartyId
+        })
+    },
+    //确定新的管理员
+    confirmNewManager:function(){ 
+
+        var newMember = wx.getStorageSync('selectedMember');
+        wx.removeStorageSync("waitingMember");
+        wx.removeStorageSync('selectedMember');
+
+        if(!newMember){
+
+            return;
+        }
+
+        common.showModel("权限转让","确定将管理员转给"+newMember.YourName+"吗",()=>{
+
+            this.replaceManagerAction(newMember);
+
+        },null);
+    },
+    replaceManagerAction:function(newMember){
+
+        var url = app.data.api+ "readparty/assignmentAdmin";
+        var data = {
+            userId:newMember.UserID,
+            memNumber:app.data.memNumber,
+            readPartId:this.data.readPartyId
+        };
+
+        app.request(url,data,(res,error)=>{
+            res = res.data;
+
+            if(res.code == 200){
+
+                //刷新前一页的数据
+                this.setData({isAdmin:false});
+            }
+            common.showToast(res.message);
+        });
+    }
 })

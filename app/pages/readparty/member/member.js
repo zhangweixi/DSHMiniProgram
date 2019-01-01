@@ -9,24 +9,30 @@ Page({
     data: {
         readPartyId:0,
         departmentId:-1,
+        allMembers:[],
         members:[],
-        isAdmin:false
+        isAdmin:false,
+        showSearchInput:false,
+        waitingMember:false //是否是选择会员
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        setTimeout(()=>{
 
-        this.setData(options);
-        this.getMembers();
+            this.setData(options);
+            this.getMembers();
 
-        var readpartyInfo = common.readparty.get();
+            var readpartyInfo = common.readparty.get();
 
-        if(readpartyInfo.MemNumber == app.data.memNumber){
+            if(readpartyInfo.MemNumber == app.data.memNumber){
 
-            this.setData({isAdmin:true});
-        }
+                this.setData({isAdmin:true});
+            }    
+        },2000);
+        
     },
 
     /**
@@ -41,9 +47,11 @@ Page({
      */
     onShow: function () {
 
-        if(this.data.members.length > 0){
+        //检查是否是选择会员的界面
+        var waitingMember  = wx.getStorageSync('waitingMember')
+        if(waitingMember){
 
-            this.getMembers();
+            this.setData({waitingMember:waitingMember});    
         }
     },
 
@@ -63,24 +71,61 @@ Page({
                 departmentId:this.data.departmentId
             };
 
-            app.request(url,data,(res,error)=>{
+        app.request(url,data,(res,error)=>{
 
-                res = res.data;
-
-                this.setData({members:res.data.members});
+            res         = res.data;
+            var members =  res.data.members;
+            this.setData({
+                members:members,
+                allMembers:members
             });
-
+        });
     },
     nav:function(e){
+        
         var userId = e.currentTarget.dataset.userId;
-        wx.navigateTo({
-            url: "/pages/readparty/memdetail/memdetail?readPartyId="+this.data.readPartyId + "&userId=" + userId
-        })
+
+        if(this.data.waitingMember){
+
+            for(var member of this.data.members){
+
+                if(userId == member.UserID){
+
+                    wx.setStorageSync('selectedMember', member);
+                }
+            }
+            wx.navigateBack({delta: 1});
+
+        }else{
+
+            wx.navigateTo({
+                url: "/pages/readparty/memdetail/memdetail?readPartyId="+this.data.readPartyId + "&userId=" + userId
+            })    
+        }
     },
     toAddPage:function(){
 
         wx.navigateTo({
             url:"/pages/readparty/memedit/memedit?readPartyId="+this.data.readPartyId
         })
+    },
+    triggleSearch:function(){
+        this.setData({showSearchInput:!this.data.showSearchInput});
+    },
+    search:function(e){
+
+        var searchKey   = e.detail.value;
+        var members     = [];
+        
+        for(var member of this.data.allMembers){
+            
+            if(member.YourName.indexOf(searchKey) > -1 || member.department_name.indexOf(searchKey) > -1){
+
+                members.push(member);
+            }
+        }
+
+        this.triggleSearch();
+        this.setData({members:members});
     }
 })

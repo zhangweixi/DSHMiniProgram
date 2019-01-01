@@ -61,9 +61,5 @@ Page({
 	toWeb:function(e){
 		var url = e.currentTarget.dataset.url;
 		common.toWeb(url,"常见问题");
-	},
-  upgrade:function(){
-    var url = "https://wx.laohoulundao.com/web/weblogin/buy_vip?vipType=1&userId="+app.data.userId;
-    common.toWeb(url);
-  }
+	}
 })

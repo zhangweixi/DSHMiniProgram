@@ -39,6 +39,7 @@ function showModel(title,msg,successCall,cancelCall=null){
             if(res.confirm) {
                 
                 successCall();
+                
             }else{
                 if(cancelCall){
 

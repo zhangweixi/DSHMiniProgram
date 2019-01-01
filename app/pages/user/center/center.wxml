@@ -20,11 +20,10 @@
 
 		<view class="user-name">{{userInfo.NickName}}</view>
 
-		<view wx:if="{{userInfo.isValid == false && false}}" class="upgrade-vip" bind:tap="upgrade">升级会员</view>
+		<navigator class="upgrade-vip" url="/pages/user/upgrade/upgrade" open-type="navigate" wx:if="{{userInfo.isValid == false || true}}" >升级会员</navigator>
 
 		<view wx:if="{{userInfo.isValid == true }}" class="user-vip-time">会员到期时间：{{userInfo.MemEndTime}}</view>
 	</view>
-
 
 
 	<image class="share-jd" src="/images/icon/share-jd.png" mode="widthFix"></image>

@@ -1,7 +1,15 @@
-
+/*头部按钮*/
 .hand-btn{
-	text-align: right;
-	padding:20rpx 0;
+	position: fixed;
+	top:0;
+	width:98%;
+}
+
+.hand-btn-inner{
+	display: flex;
+	background: #fff;
+	align-items: center;
+	padding:20rpx 2%;
 }
 
 .hand-btn image{
@@ -9,6 +17,53 @@
 	margin-left: 30rpx;
 }
 
+
+.search-box{
+	position: fixed;
+	top:0;
+	left:0;
+	width:100vw;
+	height:100vh;
+	background: rgba(0,0,0,.5);
+	z-index: 1000;
+}
+
+.search-input{
+	display: flex;
+	margin:auto;
+	padding:25rpx;
+	background: #fff;
+	align-items: center;
+}
+
+.search-input image{
+	width:35rpx;
+}
+
+.search-input input{
+	margin-left: 20rpx;
+}
+.search-input .cancel-btn{
+	color:#FF9C00;
+}
+/*字母导航*/
+.letter-navs{
+	position: fixed;
+	right:17rpx;
+	top:90rpx;
+	z-index: 100;
+	color:#888;
+}
+
+.letter-navs .active{
+	color:#108EE9;
+}
+
+
+/*列表*/
+.page-container{
+	margin-top:100rpx;
+}
 
 .member{
 	margin:30rpx 0;
@@ -60,7 +115,5 @@
 	font-size:0.8rem;
 
 }
-
-
 
 
