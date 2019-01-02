@@ -65,7 +65,7 @@
 /*图片信息*/
 
 .book-list .book-img image {
-  width:16vw;
+  width:20vw;
   margin-right: 20rpx;
 }
 

@@ -43,7 +43,7 @@ Page({
 
             this.getReadPartyPlans(true);
 
-        },500);
+        }, app.data.debugTime);
 
         setTimeout(()=>{
 
@@ -52,10 +52,13 @@ Page({
                 if(res.code == 200){
                     
                     this.setData({'readPartyInfo':res.data.readPartyInfo});
+                    wx.setNavigationBarTitle({
+                        title: res.data.readPartyInfo.ReaParName
+                    })
                 }
             });
 
-        },1000);
+        }, app.data.debugTime);
 
         this.noticeTimer = setInterval(()=>{
 

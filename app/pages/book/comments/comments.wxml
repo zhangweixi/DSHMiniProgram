@@ -24,7 +24,7 @@
 			</view>
 			<view class="replays" wx:if="{{comment.subComments.length > 0}}">
 				<view class="replay-list" wx:for="{{comment.subComments}}" wx:for-item="subcom">
-					<view class="replay-name">{{subcom.replayYourName}}:</view>
+					<view class="replay-name">{{subcom.YourName}}:</view>
 					<view class="replay-content">{{subcom.body}}</view>
 				</view>
 			</view>

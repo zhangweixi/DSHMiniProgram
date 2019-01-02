@@ -178,7 +178,7 @@ video{
 .single-note textarea{
     flex: 1;
     height:auto;
-    min-height:50px;
+    min-height:150rpx;
     color:#505050;
     display: block;
 }
@@ -209,7 +209,7 @@ video{
 /*精选内容*/
 .ppt-content{
 
-
+    padding-bottom: 120rpx;
 
 }
 

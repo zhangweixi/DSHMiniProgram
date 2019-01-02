@@ -35,7 +35,7 @@
 .comment-content .content{
 	color:#151515;
 	font-size:1rem;
-	margin-top:10rpx;
+	margin-top:20rpx;
 }
 .comment-content .btns{
 	display: flex;
@@ -106,13 +106,14 @@
 	display: flex;
 	width:80;
 	margin:20rpx 25rpx;
-	padding:20rpx;
+	padding:16rpx 20rpx;
 	align-items: center;
 	border-radius: 6rpx;
+    font-size:.9rem;
 }
 
 .new-comment-btn image{
-	width:60rpx;
+	width:45rpx;
 	margin-right:20rpx;
 
 }

@@ -58,14 +58,15 @@
 		</view>
 	</navigator>
 
+<!-- 
 	<navigator  data-url="https://wx.laohoulundao.com/home/articleDetail?articleId=4" bind:tap="toWeb">
 		<view class="menu-list">
 			<image class="icon-img" src="/images/icon/menu-question.png" mode="widthFix"></image>
 			<text>常见问题</text>
 			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>	
-		</view>
-		
+		</view>		
 	</navigator>
+     -->
 
 	<navigator  url="/pages/user/advice/advice" open-type="navigate" style="border:none;">
 		<view class="menu-list" style="border:none;">

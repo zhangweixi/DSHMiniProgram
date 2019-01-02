@@ -57,7 +57,9 @@
                 <view class='text'>{{bookSentence.content}}</view>
                 <view class='time'>{{bookSentence.publish_date}}</view></view>
             <view class='img-content'>
-                <image src='{{bookSentence.bg_img}}' mode="widthFix" ></image>
+                <view>
+                    <image src='{{bookSentence.bg_img}}' mode="widthFix" ></image>
+                </view>
             </view>
         </view>
     </view>
@@ -77,7 +79,7 @@
 
             <view class='another-book' wx:if="{{books.length > 0}}">
                 <view class='empty'></view>
-                <image src='/images/icon/fresh.png' mode='widthFix'></image>
+                <image bind:tap="nextPageBook" src='/images/icon/fresh.png' mode='widthFix'></image>
                 <text bind:tap="nextPageBook">换一换</text>
                 <view class='empty'></view>
             </view> 

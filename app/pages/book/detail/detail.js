@@ -12,10 +12,10 @@ Page({
             "isEditing":false,
             "pptDownloading":false,
             "bookNotes":[
-                { "type": "book", "placeholder":"通过此次代读，对我启发最大的一个知识点是？","title":"读 书"},
-                { "type": "people", "placeholder": "通过这个知识点，在工作上改进的是？", "title":"读 人"},
-                { "type": "thing", "placeholder": "通过这个知识点，在工作上改进的是？", "title":"读 事" },      
-                { "type": "gift", "placeholder":"通过这个知识点，在工作上改进的是？","title":"赠礼物"}
+                { "type": "book", "placeholder":"通过此次学习，对我启发最大的一个知识点是什么？","title":"周课"},
+                { "type": "people", "placeholder": "通过这个知识点，我反省到自己在工作上（事业）或家庭需要提高的是什么？", "title":"自省"},
+                { "type": "thing", "placeholder": "通过本次周课，我本周行动计划及成果是什么？", "title":"行动" },      
+                { "type": "gift", "placeholder":"通过此次学习我对团队创造性的建议是什么？","title":"贡献"}
             ],
             "mediaType":"mp4",
             "contentType":"ppt",

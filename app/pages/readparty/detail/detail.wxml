@@ -26,17 +26,17 @@ module.exports.navs = navs;
 </view>
 
 <!-- 个人社群头部 -->
-<view class="readparty-person" wx:if="{{readPartyInfo.ReaParType == 0}}">
+<view class="readparty-person" wx:if="{{readPartyInfo.ReaParType == 2}}">
 
 	<!-- 高斯模糊背景 -->
 	<view class="bg-box">
-		<view class="gs-bg center-bg" style="background-image:url('https://wx.laohoulundao.com/images/vedio-play.jpg')"></view>	
+		<view class="gs-bg center-bg" style="background-image:url('{{readPartyInfo.FilePath1}}')"></view>	
 	</view>
 	
 
 	<view class="party-head">
 			
-		<view class="party-img center-bg" style="background-image:url('https://wx.laohoulundao.com/images/link.png')">
+		<view class="party-img center-bg" style="background-image:url('{{readPartyInfo.FilePath1}}')">
 		</view>
 
 		<view class="party-name">{{readPartyInfo.ReaParName}}</view>

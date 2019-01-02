@@ -1,5 +1,5 @@
 /* pages/home/index/index.wxss */
-@import "/template/bookinfo/bookinfo.wxss"
+@import "/template/bookinfo/bookinfo.wxss";
 
 .swiper image {
   width: 100%;
@@ -72,7 +72,7 @@
 .yantu .text-content .time{
   color:#8A8A8A;
   margin-top:30rpx;
-  font-size:.8rem;
+  font-size:.9rem;
 
 }
 
@@ -83,7 +83,12 @@
 
 }
 
+.yantu .content .img-content view{
 
+    width:100%;
+    height:19vw;
+    overflow: hidden;
+}
 
 .yantu .img-content image{
   
