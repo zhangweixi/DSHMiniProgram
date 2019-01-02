@@ -19,19 +19,13 @@ Page({
         wx.setNavigationBarTitle({
             title: options.type
         })
+        this.setData({
+            app:app,
+            questionType:options.type,
+            page:0,
+        })
 
-        setTimeout(()=>{
-
-            this.setData({
-                app:app,
-                questionType:options.type,
-                page:0,
-            })
-
-            this.getQuestion();
-
-        },1000);
-        
+        this.getQuestion();
     },
 
     /**

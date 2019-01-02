@@ -37,6 +37,8 @@ Page({
 
                 this.setData({isAdmin:true});
             }
+            this.setData({readPartyInfo:readpartyInfo});
+
 
             setTimeout(()=>{
 
@@ -133,6 +135,7 @@ Page({
 
                 common.showToast("",'success');
                 this.setData({isEdit:false});
+                this.freshPrev();
             }
             
         })
@@ -178,8 +181,9 @@ Page({
             res = res.data;
 
             if(res.code == 200){
-                
+
                 common.showToast("已删除","success");
+                this.freshPrev();
                 setTimeout(()=>{
 
                     wx.navigateBack({delta: 1});    
@@ -244,6 +248,7 @@ Page({
 
         },null);
     },
+    //提交转让管理员
     replaceManagerAction:function(newMember){
 
         var url = app.data.api+ "readparty/assignmentAdmin";
@@ -262,6 +267,18 @@ Page({
                 this.setData({isAdmin:false});
             }
             common.showToast(res.message);
+            
+        
+            common.readparty.cache(this.data.readPartyInfo.ReaParID,null);
+            this.freshPrev();
         });
+    },
+    freshPrev:function(){
+
+        //通知前一个界面
+        var pages   = getCurrentPages();
+        var prevPage= pages[pages.length -2];
+        
+        prevPage.getMembers();
     }
 })

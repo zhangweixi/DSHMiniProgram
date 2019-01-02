@@ -13,7 +13,8 @@ Page({
         members:[],
         isAdmin:false,
         showSearchInput:false,
-        waitingMember:false //是否是选择会员
+        waitingMember:false, //是否是选择会员
+        searchWords:""
     },
 
     /**
@@ -64,7 +65,6 @@ Page({
     },
     getMembers:function(){
 
-
         var url = app.data.api + "readparty/get_read_party_member";
         var data = {
                 readPartyId:this.data.readPartyId,
@@ -73,12 +73,9 @@ Page({
 
         app.request(url,data,(res,error)=>{
 
-            res         = res.data;
-            var members =  res.data.members;
-            this.setData({
-                members:members,
-                allMembers:members
-            });
+            var members  = res.data.data.members;
+            this.setData({allMembers:members});
+            this.filterMembers(this.data.searchWords);
         });
     },
     nav:function(e){
@@ -112,20 +109,26 @@ Page({
     triggleSearch:function(){
         this.setData({showSearchInput:!this.data.showSearchInput});
     },
+    //搜索会员
     search:function(e){
 
         var searchKey   = e.detail.value;
+        this.setData({searchWords:searchKey});
+        this.filterMembers(searchKey);
+        this.triggleSearch();
+    },
+    //过滤会员
+    filterMembers:function(keyWords){
+
         var members     = [];
         
         for(var member of this.data.allMembers){
             
-            if(member.YourName.indexOf(searchKey) > -1 || member.department_name.indexOf(searchKey) > -1){
+            if(member.YourName.indexOf(keyWords) > -1 || member.department_name.indexOf(keyWords) > -1){
 
                 members.push(member);
             }
         }
-
-        this.triggleSearch();
         this.setData({members:members});
     }
 })
