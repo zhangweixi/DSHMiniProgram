@@ -167,7 +167,7 @@ module.exports.navs = navs;
 
 </view>
 
-<form class="input"  style="display:{{showComment ? 'flex':'none'}};">
+<form class="input"  style="display:{{showComment ? 'block':'none'}};">
 	<input type="text" show-confirm-bar placeholder="{{commentPlaceHolder}}" focus="{{focus}}" confirm-type="send" bindconfirm="addComment"  name="content" bindblur="closeComment" value="{{commentContent}}"></input>	
 </form>
 
