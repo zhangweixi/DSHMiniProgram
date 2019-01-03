@@ -233,14 +233,14 @@ Page({
             res = res.data;
             if(res.code != 200){
                 wx.showToast({
-                    title: '内容为空',
+                    title: res.message,
                     icon: 'none'
                 });
             }
 
             var commentList = res.data.comments;
             var readPlans   = this.data.readPlans;
-
+            this.setData({commentContent:""});
             for(var key in readPlans){
 
                 if(readPlans[key].SumUpID ==requestData.readPlanId ){
