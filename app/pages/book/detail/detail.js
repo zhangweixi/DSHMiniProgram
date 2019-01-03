@@ -11,14 +11,12 @@ Page({
             "readPlanId":0,
             "isEditing":false,
             "pptDownloading":false,
-            "bookNotes":[
-                { "type": "book", "placeholder":"通过此次学习，对我启发最大的一个知识点是什么？","title":"周课"},
-                { "type": "people", "placeholder": "通过这个知识点，我反省到自己在工作上（事业）或家庭需要提高的是什么？", "title":"自省"},
-                { "type": "thing", "placeholder": "通过本次周课，我本周行动计划及成果是什么？", "title":"行动" },      
-                { "type": "gift", "placeholder":"通过此次学习我对团队创造性的建议是什么？","title":"贡献"}
-            ],
+            "h_book":120,
+            "h_people":120,
+            "h_thing":120,
+            "h_gift":120,
             "mediaType":"mp4",
-            "contentType":"ppt",
+            "contentType":"note",//note|ppt
             "display":'',
             "audioInfo":{},
             "mp3Playing":false,
@@ -145,7 +143,7 @@ Page({
                     var readplanInfo= res.data.data.readplan;
                     if(readplanInfo == null){
 
-                    return;
+                        return;
 
                     }
                     
@@ -153,14 +151,15 @@ Page({
                     var duren       = readplanInfo.BookReview2;
                     var dushi       = readplanInfo.BookReview3;
                     var gift        = readplanInfo.BookReview4;
+                    
 
-                    var bookNotes   = this.data.bookNotes;
-                    bookNotes[0]["content"] = dushu;
-                    bookNotes[1]["content"] = duren;
-                    bookNotes[2]["content"] = dushi;
-                    bookNotes[3]["content"] = gift;
-
-                    this.setData({ "bookNotes": bookNotes,"readPlanId":readplanInfo.SumUpID});
+                    this.setData({ 
+                        "n_book":dushu,
+                        "n_people":duren,
+                        "n_thing":dushi,
+                        "n_gift":gift,
+                        "readPlanId":readplanInfo.SumUpID
+                    });
 
                 }
             })
@@ -639,10 +638,33 @@ Page({
             this.setData({ isEditing:true});
 
         },
-        changeLinie:function(e){
+        changeLine:function(e){
+            
+            
+            var id      = e.currentTarget.id;
+            var lines   = e.detail.lineCount;
+            var lineH   = 50;
 
-            console.log(e);
+            
+            if(lines == 0){
+                lines = 1;
+            }
+            var height  = lines * lineH;
 
+            if(height < 100){
+
+                height = 100;
+            }
+
+            height = height + 20;
+
+            switch(id){
+                case 'book':this.setData({h_book:height});break;
+                case 'people':this.setData({h_people:height});break;
+                case 'thing':this.setData({h_thing:height});break;
+                case 'gift':this.setData({h_gift:height});break;
+
+            }
         },
         /**
          * 填写/编辑读书改进计划
@@ -781,4 +803,5 @@ Page({
                 url: '/pages/book/comments/comments?bookId='+this.data.bookInfo.BookID,
             })
         }
+
 })

@@ -100,21 +100,21 @@ module.exports.navs = navs;
 			<view class="name">{{item.YourName}}</view>
 			<view class="main-plan" hidden="{{false}}">
 				<view>
-					<view class="title">读书：</view>
+					<view class="title">周课：</view>
 					<view>{{item.BookReview1}}</view>
 				</view>
 				<view>
-					<view class="title">读人：</view>
+					<view class="title">自省：</view>
 					<view>{{item.BookReview2}}</view>
 				</view>
 
 				<view>
-					<view class="title">读事：</view>
+					<view class="title">行动：</view>
 					<view>{{item.BookReview3}}</view>
 				</view>
 
 				<view>
-					<view class="title">礼物：</view>
+					<view class="title">贡献：</view>
 					<view>{{item.BookReview4}}</view>
 				</view>
 			</view>
