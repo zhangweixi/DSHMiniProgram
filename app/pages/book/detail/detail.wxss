@@ -171,27 +171,36 @@ video{
 
     padding:20rpx;
     padding-right:0;
-
-
 }
 
+.single-note .single-note-box{
+    flex:1;
+    position: relative;
+}
+
+.single-note .single-note-box .block{
+    color:rgba(0,0,0,0);
+}
 .single-note textarea{
-    flex: 1;
-    height:auto;
-    min-height:150rpx;
+    
+    position: absolute;
+    left:0;
+    top:0;
+    height:100%;
     color:#505050;
     display: block;
 }
 
 .single-note textarea.android{
-    padding-top:20rpx;
+    /*padding-top:20rpx;*/
 }
 
 .single-note textarea.ios{
-    float:left;
-    padding-top:10rpx;
+    
+    /*padding-top:10rpx;*/
 
 }
+
 .note-btn{
     overflow: hidden;
 }

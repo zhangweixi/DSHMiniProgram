@@ -56,14 +56,21 @@
         <form bindsubmit='edit_read_plan' >
             <view wx:for="{{bookNotes}}" class='single-note'>
                 <view class='title'>{{item.title}}：</view>
-                <textarea placeholder="{{item.placeholder}}" class="{{app.data.platform == 'ios'?'ios':'android'}}" value="{{item.content}}" name="{{item.type}}" disabled="{{ isEditing == false && readPlanId > 0 || (!haveRight)}}"></textarea>
+                <view class="single-note-box">
+                    
+                    <view class="block">{{item.content}}</view>
+
+                    <textarea placeholder="{{item.placeholder}}" class="{{app.data.platform == 'ios'?'ios':'android'}}" value="{{item.content}}" name="{{item.type}}" disabled="{{ isEditing == false && readPlanId > 0 || (!haveRight)}}" bindlinechange="changeLine"></textarea>
+
+                </view>
+                
             </view>
 
             <view class='note-btn'>
             
                 <button wx:if="{{isEditing == false && readPlanId > 0}}" bind:tap="openEdit">修改</button>
 
-                <button wx:if="{{isEditing == true || readPlanId == 0}}" formType="submit">确认提交</button>
+                <button wx:if="{{isEditing == true || readPlanId == 0}}" form-type="submit">确认提交</button>
 
             </view>
     

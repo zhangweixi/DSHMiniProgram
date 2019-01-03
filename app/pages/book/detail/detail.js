@@ -35,9 +35,17 @@ Page({
         * 生命周期函数--监听页面加载
         */
         onLoad: function (options) {
-          
+            
             this.setData({"bookId":options.bookId})
+            
+            setTimeout(()=>{
 
+                this.init(options);  
+
+            },app.data.debugTime);
+        },
+        init:function(){
+            
             this.getBookInfo();
 
             this.getUserReadPlan();
@@ -100,11 +108,11 @@ Page({
                 var bookInfo = res.data.bookInfo;
                 var data = {
                     "bookInfo":bookInfo,
-                    "mp4CurrentTime":bookInfo.mp4CurrentTime,
-                    "haveRight":bookInfo.IsGratis == 1 ? true : this.data.haveRight
+                    "mp4CurrentTime":bookInfo.mp4CurrentTime
                 };
                 this.setData(data);
                 wx.setNavigationBarTitle({title: bookInfo.BookTitle});
+                this.setData({haveRight:this.checkHaveRight()});
                 //设置时间
                 this.initBookMp3();
 
@@ -631,6 +639,11 @@ Page({
             this.setData({ isEditing:true});
 
         },
+        changeLinie:function(e){
+
+            console.log(e);
+
+        },
         /**
          * 填写/编辑读书改进计划
          * 
@@ -644,20 +657,21 @@ Page({
 
             var url = app.data.api + "book/edit_read_plan";
 
-            console.log(e.detail.value);
+            
             var data = e.detail.value;
                 data.userId = app.data.userId;
                 data.bookId = this.data.bookId;
                 data.readPlanId = this.data.readPlanId;
-            return;
+
+            
+            
             app.request(url,data,(res,error)=>{
                 
                 res = res.data;
                 if(res.code == 200){
 
                     this.setData({ readPlanId: res.data.sumupId, isEditing:false});
-
-                    common.showDialog(this,"保存成功","success");
+                    common.showToast('保存成功','success');
                 }
             })
         },
@@ -760,7 +774,6 @@ Page({
 
                 this.setData({ autoPlayMp4: false });
             }
-
         },
         toCommentPage:function(){
 

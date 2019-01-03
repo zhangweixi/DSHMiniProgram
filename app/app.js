@@ -28,7 +28,7 @@ App({
         api:host+"api/v6/",
         platform: platform,
         loginKey:'',
-        debugTime:0
+        debugTime:2000
     },
     onLaunch:function(){
 
