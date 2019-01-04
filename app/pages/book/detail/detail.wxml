@@ -124,9 +124,9 @@
                 </view>
                 <image class="icon" src="/images/icon/download.png" mode="widthFix" bindtap='showDownload'></image>
                 <image class="icon" src="/images/icon/share1.png" mode="widthFix"></image>
+                <button open-type="share" class="share-btn">分享</button>
             </view>
         </view>
-
     </view>
 
 

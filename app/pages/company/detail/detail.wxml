@@ -31,7 +31,7 @@
 				<view class="time">
 					<text class="flex1">{{item.created_at}}</text>
 					<image src="/images/icon/replay.png" mode="widthFix" data-parent-comment-id="{{item.id}}" bind:tap="showComment"></image>
-					
+					<text class="comment-num" wx:if="{{item.subComments.length > 0}}">{{item.subComments.length}}</text>
 					<image src="/images/icon/{{item.is_like == 1 ?'up-yes':'up-no'}}.png" mode="widthFix" bind:tap="zan" data-comment-id="{{item.id}}"></image>
 
 					<text class="num">{{item.up_times}}</text>

@@ -244,8 +244,14 @@
 .hand-btn image{
 	display: inline-block;
 	width:40rpx;
-	margin-right:30rpx;
 }
+
+.hand-btn .icon-zan{
+
+	margin:0 30rpx;
+}
+
+
 
 /*评论及回复*/
 

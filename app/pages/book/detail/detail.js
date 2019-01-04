@@ -57,7 +57,30 @@ Page({
         * 用户点击右上角分享
         */
         onShareAppMessage: function () {
+            //判断当前显示的是什么
+            //1.是读书计划
+            //2.书籍内容
+            var bookInfo = this.data.bookInfo;
 
+            var title   = "老侯代读：《"+bookInfo.BookTitle+"》\n"+ bookInfo.BookDesc;
+            var path    = "/pages/book/detail/detail?bookId="+bookInfo.BookID;
+            var img     = bookInfo.ppts[0];
+
+            if(this.data.contentType == 'note'){
+
+                //判断是否有读书改进计划
+                if(this.data.readPlanId > 0){
+
+                    path = "/pages/book/readplan/readplan?bookId="+bookInfo.BookID+"&userId="+app.data.userId;
+                    title= app.data.userInfo.NickName+"学习《"+bookInfo.BookTitle+"》的改进计划";
+                }
+            }
+
+            return {
+                title:title,
+                path:path,
+                imageUrl:img
+            };
         },
 
         /**

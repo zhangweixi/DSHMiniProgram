@@ -245,3 +245,19 @@ toast{
 }
 
 /* ======== 浮动音频播放器 end ==========*/
+
+
+/*评论按钮上的数字*/
+.comment-num{
+
+  line-height:30rpx;
+  color:#FF9C00;
+  margin-left:-10rpx;
+  margin-top:-10rpx;
+  background:#fff;
+  height:30rpx;
+  padding:0 5rpx;
+  font-size: .8rem;
+  text-align: center;
+  display: inline-block;
+}

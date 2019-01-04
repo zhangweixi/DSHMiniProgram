@@ -300,8 +300,16 @@ video{
     left:10vw;
     top:20vh;
     position: absolute;
-    
     background: #fff;
+}
+
+.share-btn{
+    border: none;
+    padding:0;
+    margin-left:-60rpx;
+    background:rgba(0,0,0,0);
+    color:rgba(0,0,0,0);
+    box-shadow: 0 0 0 0 rgba(0,0,0,0);
 }
 
 

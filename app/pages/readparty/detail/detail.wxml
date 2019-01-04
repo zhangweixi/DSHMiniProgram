@@ -93,7 +93,7 @@ module.exports.navs = navs;
 	
 	<view class="plan-list" wx:for="{{readPlans}}">
 		<view class="img">
-			<image class="" src="{{item.FilePath1}}" mode="widthFix"></image>
+			<image src="{{item.FilePath1}}" mode="widthFix" bind:tap="nav" data-url="/pages/readparty/memdetail/memdetail?readPartyId={{readPartyId}}&userId={{item.UserID}}"></image>
 		</view>
 
 		<view class="content">
@@ -131,8 +131,9 @@ module.exports.navs = navs;
 				data-read-plan-id="{{item.SumUpID}}" 
 				data-replayed-id="0"  
 				bind:tap="showComment"></image>
+				<text class="comment-num" wx:if="{{item.commentlist.length > 0}}">{{item.commentlist.length}}</text>
 
-				<image class="" src="/images/icon/{{item.isLike==1?'up-yes.png':'up-no.png'}}" mode="widthFix" data-read-plan-id="{{item.SumUpID}}" bind:tap="addOrCancelZan"></image>
+				<image class="icon-zan" src="/images/icon/{{item.isLike==1?'up-yes.png':'up-no.png'}}" mode="widthFix" data-read-plan-id="{{item.SumUpID}}" bind:tap="addOrCancelZan"></image>
 			</view>
 
 			<!-- 回复及评论 -->
