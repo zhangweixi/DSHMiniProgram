@@ -1,1 +1,91 @@
-/* pages/user/upgrade/upgrade.wxss */
+.head-name{
+	display: flex;
+	height:120rpx;
+	margin-top:20rpx;
+}
+
+.head-name .head{
+
+	width:120rpx;
+	border-radius: 100%;
+	overflow: hidden;
+
+}
+
+
+.head-name image{
+	display: block;
+	width:100%;
+}
+
+.head-name .nameinfo{
+	flex:1;
+	margin-left: 20rpx;
+
+}
+
+.nameinfo .valid-time{
+	color:#888;
+	font-size: .8rem;
+}
+.nameinfo text{
+	display: block;
+	line-height: 60rpx;
+}
+
+.info-other{
+	margin-top:20rpx;
+
+}
+
+.info-other view{
+
+	display: flex;
+	padding:20rpx;
+	border-bottom: 1px solid #E3E6E9;
+
+}
+
+.info-other text{
+	flex:1;
+}
+
+.info-other .right{
+	text-align: right;
+	color:#FFB629;
+}
+
+.pay-btn{
+	margin-top:100rpx;
+	line-height: 2.5;
+	background-color: #FF9200;
+	text-align: center;
+	border-radius: 10rpx;
+	color:#fff;
+	font-size: 1.2rem;
+}
+
+.vip-right{
+	margin-top:50rpx;
+	margin-bottom: 20rpx;
+	padding:20rpx;
+	box-shadow: 2px 2px 10px #ddd,-2px -2px 10px #ddd;
+	border-radius: 10rpx;
+}
+
+.vip-right .h2{
+	font-size: 1.4rem;
+	line-height: 2;
+	text-align: center;
+}
+.vip-right .title{
+	font-size: 1.1rem;
+	color:#333;
+	line-height: 1.5;
+}
+
+.vip-right .detail{
+	color: #666;
+	font-size: 1rem;
+	
+}

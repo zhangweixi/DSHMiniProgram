@@ -1,7 +1,46 @@
 <!--pages/user/upgrade/upgrade.wxml-->
-<form bindsubmit="upgrade"  report-submit="true">
-	<button class="btn-info btn" form-type="submit">升级</button>	
-</form>
+<view class="gray-line"></view>
+<view class="page-container">
+	
+	<view class="head-name">
+		<view class="head">
+			<image class="" src="https://wx.qlogo.cn/mmopen/vi_32/r2a4LHhXVGiaicfhZfjmIz0d4S88n9KICvBZxaKUx7zQIjUu27ib4abYkzXo1actqH87dZIPVbxRQvuSBKroP50EQ/132" mode="widthFix"></image>
+		</view>
 
-<view>{{error}}</view>
+		<view class="nameinfo">
+			<text>李四</text>
+			<text class="valid-time">有效期至2018年5月23日</text>
+		</view>
+	</view>
+
+	<view class="info-other">
+		<view>
+			<text>时长</text>
+			<text class="right">1年</text>
+		</view>
+
+		<view>
+			<text>合计</text>
+			<text class="right">￥690元</text>
+		</view>	
+	</view>
+	
+
+	<view class="pay-btn" bindsubmit="upgrade">支付</view>
+
+
+	<view class="vip-right">
+		<view class="h2">会员权益</view>
+		<view class="title">一、老侯代读</view>
+		<view class="detail">每年50本优质书籍代读，图文、音频、视频解读（非电子书原著）</view>
+		<view class="title">二、商业课题分享</view>
+		<view class="detail">每年100个商业课题视频分享</view>
+		<view class="title">三、学习365</view>
+		<view class="detail">每年365条经营智慧分享</view>
+		<view class="title">四、资源共享</view>
+		<view class="detail">会员期间平台现有及未来所有收费资源免费</view>
+	</view>
+</view>
+
+
 

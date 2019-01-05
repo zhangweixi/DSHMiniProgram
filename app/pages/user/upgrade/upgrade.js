@@ -25,8 +25,6 @@ Page({
             userId:app.data.userId
         };
 
-    
-
         app.request(url,data,(res,error)=>{
 
             var config = res.data.data.config;
@@ -52,5 +50,13 @@ Page({
     paySuccess:function(config){
         
         common.showToast('支付成功',"success");
+
+        //刷新用户信息
+        var data = {userId:app.data.userId};
+        var url = app.data.api + "member/";
+        var url = app.request(url,data,()=>{
+
+        })
+        
     }
 })

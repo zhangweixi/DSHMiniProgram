@@ -56,7 +56,6 @@ App({
                     }
                 }
             })
-
         }
     },
     wxLogin:function(code){
@@ -65,7 +64,7 @@ App({
         var url     = this.data.api + "member/login?code="+code;
         var unionid = wx.getStorageSync("unionid");
         
-        if(unionid){
+        if(unionid && fresh == false){
 
             return false;
         }
