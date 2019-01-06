@@ -312,7 +312,7 @@ function toWeb(url,title){
 
 var user = {
 
-    freshInfo:function(userId){
+    fresh:function(userId){
         var app = getApp();
         var url = app.data.api+"member/get_member_info";
         var data= {userId:app.data.userId};

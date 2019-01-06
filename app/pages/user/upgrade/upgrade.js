@@ -24,7 +24,7 @@ Page({
         var data    = {
             userId:app.data.userId
         };
-
+        
         app.request(url,data,(res,error)=>{
 
             var config = res.data.data.config;
@@ -37,8 +37,7 @@ Page({
                 paySign: config.paySign,
                 success:(res)=>{ 
                     
-                    this.paySuccess(config);
-
+                    this.paySuccess();
                 },
                 fail:(res)=>{ 
 
@@ -47,7 +46,7 @@ Page({
             })
         })
     },
-    paySuccess:function(config){
+    paySuccess:function(){
         
         common.showToast('支付成功',"success");
         var pages   = getCurrentPages();
@@ -62,5 +61,5 @@ Page({
             wx.navigateBack({delta: 1});
 
         },1500);
-    },fresh
+    }
 })

@@ -20,7 +20,7 @@
 
 		<view class="user-name">{{userInfo.NickName}}</view>
 
-		<navigator class="upgrade-vip" url="/pages/user/upgrade/upgrade" open-type="navigate" wx:if="{{userInfo.isValid == false || true}}" >升级会员</navigator>
+		<navigator class="upgrade-vip" url="/pages/user/upgrade/upgrade" open-type="navigate" wx:if="{{userInfo.isValid == false}}" >升级会员</navigator>
 
 		<view wx:if="{{userInfo.isValid == true }}" class="user-vip-time">会员到期时间：{{userInfo.MemEndTime}}</view>
 	</view>
