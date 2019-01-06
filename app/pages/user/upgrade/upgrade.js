@@ -50,13 +50,17 @@ Page({
     paySuccess:function(config){
         
         common.showToast('支付成功',"success");
-
+        var pages   = getCurrentPages();
+        var prevPage= pages[pages.length - 2];
+            prevPage.setData({payFinish:true});
+            common.user.fresh(app.data.userId);
+            
         //刷新用户信息
-        var data = {userId:app.data.userId};
-        var url = app.data.api + "member/";
-        var url = app.request(url,data,()=>{
+        setTimeout(()=>{
 
-        })
-        
-    }
+
+            wx.navigateBack({delta: 1});
+
+        },1500);
+    },fresh
 })

@@ -309,6 +309,30 @@ function toWeb(url,title){
     })
 }
 
+
+var user = {
+
+    freshInfo:function(userId){
+        var app = getApp();
+        var url = app.data.api+"member/get_member_info";
+        var data= {userId:app.data.userId};
+        app.request(url,data,(res,error)=>{
+
+            var userInfo    = res.data.data.userInfo;
+            this.cache(userInfo);
+        })
+    },
+    cache:function(userInfo){
+
+        var app = getApp();
+        app.data.userInfo  = userInfo;
+        app.data.userId    = userInfo.UserID;
+        app.data.memNumber = userInfo.MemNumber;
+        app.data.loginKey  = userInfo.LoginKey;
+        wx.setStorageSync("userInfo", userInfo);
+    }
+}
+
 module.exports.showDialog   = showDialog;
 
 module.exports.numberToTime = numberToTime;
@@ -332,3 +356,4 @@ module.exports.showModel    = showModel;
 
 module.exports.toWeb        = toWeb;
 
+module.exports.user         = user;

@@ -15,7 +15,7 @@ if (platform == 'devtools'){
 
 
 
-var host = "https://test.jdclo.com/";
+//var host = "https://test.jdclo.com/";
 //var host = "https://wx.laohoulundao.com/";
 
 App({
@@ -69,6 +69,7 @@ App({
             return false;
         }
 
+
         wx.request({
             // 必需
             url: url,
@@ -78,12 +79,7 @@ App({
                 if(res.code == 200){
 
                     var userInfo        = res.data.userInfo;
-                    this.data.userInfo  = userInfo;
-                    this.data.userId    = userInfo.UserID;
-                    this.data.memNumber = userInfo.MemNumber;
-                    this.data.loginKey  = userInfo.loginKey;
-                    
-                    wx.setStorageSync("userInfo", userInfo);
+                    common.user.cache(userInfo);
                     
                 }else if(res.code == 2003){
 
