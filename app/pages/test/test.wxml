@@ -1,0 +1,9 @@
+<scroll-view scroll-x bindscroll="move">
+
+	<view class="big-border">0</view>
+	
+
+	<view wx:for="{{imgs}}" class="box box1 {{item == 1 ? 'active':''}}" style="width:{{heights[item]}}vw;background:{{item%2==0?'#904802':'green'}};">{{item}}</view>
+	
+	<view class="big-border">0</view>	
+</scroll-view> 

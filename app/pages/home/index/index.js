@@ -55,8 +55,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
-        console.log(1);
         this.getIndexData();
     },
 
@@ -71,6 +69,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+
         //从缓存提取背景音乐
         var bgMusicData = common.bgMusic.getData();
         if (bgMusicData)
@@ -126,6 +125,7 @@ Page({
      */
     onPullDownRefresh: function () {
 
+        this.getIndexData();
     },
 
     /**
@@ -208,13 +208,15 @@ Page({
         var url     = app.data.api + "home/home";
         var data    = {userId:0};
         var _this   = this;
-
+        common.showLoading("加载中");
         wx.request({
             url: url,
             method:'POST',
             data:data,
             success:function(res)
-            {
+            {   
+                common.stopFresh();
+                
                 var data    = res.data.data;
 
                 var bannerData    = {['swiper.imgs']: data.banners };
@@ -234,14 +236,8 @@ Page({
                 }
 
                 _this.setData({"videos":data.lundaoList});
-
-                
-            },
-            complete:function(res){
-                
             }
         })
-
     },
 
     /**

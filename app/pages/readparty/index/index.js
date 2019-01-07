@@ -85,9 +85,7 @@ Page({
 
         app.request(url,data,(res,error)=>{
             
-            wx.hideLoading();
-            wx.hideNavigationBarLoading();
-            wx.stopPullDownRefresh();
+           common.stopFresh();
 
             res = res.data;
 

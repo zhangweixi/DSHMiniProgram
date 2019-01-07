@@ -2,7 +2,7 @@
     
     <navigator url="/pages/book/detail/detail?bookId={{book.BookID}}" open-type="navigate" class="book-list">
     
-        <image class="bg-img" mode="widthFix" src="/images/temp/c1.png"></image>
+        <image class="bg-img" mode="widthFix" src="{{book.bg_img_wx}}"></image>
 
         <view class="book-info">
             

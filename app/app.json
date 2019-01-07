@@ -1,84 +1,91 @@
 {
-  "pages": [
-    "pages/home/index/index",
-    "pages/home/yantu/yantu",
-    "pages/book/list/list",
-    "pages/book/category/category",
-    "pages/book/detail/detail",
-    "pages/book/search/search",
-    "pages/book/download/download",
-    "pages/book/comments/comments",
-    "pages/user/center/center",
-    "pages/user/books/books",
-    "pages/user/notes/notes",
-    "pages/user/message/message",
-    "pages/user/advice/advice",
-    "pages/user/question/question",
-    "pages/user/upgrade/upgrade",
-    "pages/mobile/mobile/mobile",
-    "pages/mobile/code/code",
-    "pages/video/list/list",
-    "pages/video/detail/detail",
-    "pages/readparty/index/index",
-    "pages/readparty/partyadd/partyadd",
-    "pages/readparty/detail/detail",
-    "pages/readparty/notice/notice",
-    "pages/readparty/framework/framework",
-    "pages/readparty/department/department",
-    "pages/readparty/rule/rule",
-    "pages/readparty/member/member",
-    "pages/readparty/memdetail/memdetail",
-    "pages/readparty/memedit/memedit",
-    "pages/readparty/cutimage/cutimage",
-    "pages/readparty/sort/sort",
-    "pages/company/source/source",
-    "pages/company/sort/sort",
-    "pages/company/detail/detail",
-    "pages/wenda/index/index",
-    "pages/wenda/detail/detail",
-    "pages/wenda/create/create",
-    "pages/wenda/category/category",
-    "pages/other/web/web"
-  ],
-  "window": {
-    "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "教导读书会",
-    "backgroundColor": "#999",
-    "backgroundTextStyle": "light",
-    "enablePullDownRefresh": false
-  },
-  "tabBar": {
-    "color": "#8A8A8A",
-    "selectedColor":"#151515",
-    "backgroundColor":"#fff",
-    "borderStyle":"#fff",
-    "list": [{
-      "pagePath": "pages/home/index/index",
-      "text": "广场",
-      "iconPath": "/images/icon/tab-gc-off.png",
-      "selectedIconPath": "/images/icon/tab-gc-on.png"
-    },{
-      "pagePath":"pages/book/list/list",
-      "text":"周课",
-      "iconPath":"/images/icon/tab-zk-off.png",
-      "selectedIconPath":"/images/icon/tab-zk-on.png"
-    },{
-        "pagePath": "pages/readparty/index/index",
-        "text": "读书会",
-        "iconPath": "images/icon/tab-read-off.png",
-        "selectedIconPath": "images/icon/tab-read-on.png"
-    },{
-      "pagePath":"pages/user/center/center",
-      "text":"我的",
-      "iconPath":"images/icon/tab-my-off.png",
-      "selectedIconPath":"images/icon/tab-my-on.png"
-    }]
-  },
-    "debug":true,
-    "requiredBackgroundModes":["audio"],
-    "usingComponents": {
-       
-    }
+    "pages": [
+        "pages/home/index/index", 
+        "pages/home/yantu/yantu", 
+        "pages/book/list/list", 
+        "pages/book/category/category", 
+        "pages/book/detail/detail", 
+        "pages/book/search/search", 
+        "pages/book/download/download", 
+        "pages/book/comments/comments", 
+        "pages/book/readplan/readplan", 
+        "pages/user/center/center", 
+        "pages/user/books/books", 
+        "pages/user/notes/notes", 
+        "pages/user/message/message", 
+        "pages/user/advice/advice", 
+        "pages/user/question/question", 
+        "pages/user/upgrade/upgrade", 
+        "pages/mobile/mobile/mobile", 
+        "pages/mobile/code/code", 
+        "pages/video/list/list", 
+        "pages/video/detail/detail", 
+        "pages/readparty/index/index", 
+        "pages/readparty/partyadd/partyadd", 
+        "pages/readparty/detail/detail", 
+        "pages/readparty/notice/notice", 
+        "pages/readparty/framework/framework", 
+        "pages/readparty/department/department", 
+        "pages/readparty/rule/rule", 
+        "pages/readparty/member/member", 
+        "pages/readparty/memdetail/memdetail", 
+        "pages/readparty/memedit/memedit", 
+        "pages/readparty/cutimage/cutimage", 
+        "pages/readparty/sort/sort", 
+        "pages/company/source/source", 
+        "pages/company/sort/sort", 
+        "pages/company/detail/detail", 
+        "pages/wenda/index/index", 
+        "pages/wenda/detail/detail", 
+        "pages/wenda/create/create", 
+        "pages/wenda/category/category", 
+        "pages/other/web/web", 
+        "pages/test/test"
+    ], 
+    "window": {
+        "navigationBarBackgroundColor": "#ffffff", 
+        "navigationBarTextStyle": "black", 
+        "navigationBarTitleText": "教导读书会", 
+        "backgroundColor": "#999", 
+        "backgroundTextStyle": "light", 
+        "enablePullDownRefresh": false
+    }, 
+    "tabBar": {
+        "color": "#8A8A8A", 
+        "selectedColor": "#151515", 
+        "backgroundColor": "#fff", 
+        "borderStyle": "#fff", 
+        "list": [
+            {
+                "pagePath": "pages/home/index/index", 
+                "text": "广场", 
+                "iconPath": "/images/icon/tab-gc-off.png", 
+                "selectedIconPath": "/images/icon/tab-gc-on.png"
+            }, 
+            {
+                "pagePath": "pages/book/list/list", 
+                "text": "周课", 
+                "iconPath": "/images/icon/tab-zk-off.png", 
+                "selectedIconPath": "/images/icon/tab-zk-on.png"
+            }, 
+            {
+                "pagePath": "pages/readparty/index/index", 
+                "text": "读书会", 
+                "iconPath": "images/icon/tab-read-off.png", 
+                "selectedIconPath": "images/icon/tab-read-on.png"
+            }, 
+            {
+                "pagePath": "pages/user/center/center", 
+                "text": "我的", 
+                "iconPath": "images/icon/tab-my-off.png", 
+                "selectedIconPath": "images/icon/tab-my-on.png"
+            }
+        ]
+    }, 
+    "debug": true, 
+    "requiredBackgroundModes": [
+        "audio"
+    ], 
+    "usingComponents": { }, 
+    "enablePullDownRefresh": true
 }
-

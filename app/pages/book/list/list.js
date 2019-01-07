@@ -56,7 +56,8 @@ Page({
    */
   onPullDownRefresh: function () {
 
-     
+     this.setData({page:0});
+     this.getBooks();
   },
 
   /**
@@ -81,14 +82,14 @@ Page({
     var url   = app.data.api + "book/get_book_list";
     var page  = this.data.page;
     this.setData({"page":page+1});
-
+    common.showLoading('加载中');
     wx.request({
       url: url,
       method:"POST",
-      data: {
-        page:page,
-      },
+      data: {page:page},
       success: (res) => {
+
+          common.stopFresh();
           var data      = res.data.data;
           var bookInfo  = data.books;
           var books     = bookInfo.data;

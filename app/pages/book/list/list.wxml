@@ -10,7 +10,7 @@
 
 	<view class="week-book">
 		
-		<image class="bg-img" src="/images/temp/c0.png" mode="widthFix"></image>
+		<image class="bg-img" src="https://wx.laohoulundao.com/image/book-bg/c0.png" mode="widthFix"></image>
 
 		<view class="book-box">
 			<navigator class="book-content" url="/pages/book/detail/detail?bookId={{lastBook.BookID}}" open-type="navigate">

@@ -1,0 +1,38 @@
+scroll-view{
+	height:100vw;
+	white-space: nowrap;
+	background:#ccc;
+}
+
+
+scroll-view view{
+
+	height:100vw;
+	display: inline-block;
+	color:#fff;
+	font-size:4rem;
+	text-align: center;
+}
+
+
+.box{
+	width:50vw;
+	
+}
+
+.big-border{
+	width:15vw;
+}
+
+.box1{
+	background: green;
+}
+
+.box2{
+	background: #783029;
+}
+
+
+.active{
+	width:70vw;
+}
