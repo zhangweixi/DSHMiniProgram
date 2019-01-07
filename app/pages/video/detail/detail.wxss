@@ -114,7 +114,7 @@
 }
 
 .play-box{
-    width:70vw;
+    width:50vw;
     height:200rpx;
     display: flex;
     align-items: center;
@@ -131,6 +131,6 @@
 
 .play-box .middle{
 
-    width:150rpx;
+    width:120rpx;
     margin:0 70rpx;
 }

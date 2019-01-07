@@ -91,7 +91,7 @@ Page({
         return {
             title:"老侯论道:"+bgMusic.fullTitle,
             path:'pages/video/detail/detail?videoId='+bgMusic.id,
-            imageUrl:'http://wx.laohoulundao.com/images/uploads/2018/2/lundao3.jpg'
+            imageUrl:'https://wx.laohoulundao.com/images/uploads/2018/2/lundao3.jpg'
         }
 
     },
@@ -151,15 +151,17 @@ Page({
     },
     playNewMusic:function(audioInfo){
 
-        var bgMusic = this.data.bgMusic;
-            bgMusic.title   = audioInfo.AudioTitle;
-            bgMusic.fullTitle= audioInfo.AudioTitle;
-            bgMusic.id      = audioInfo.AudioID;
-            bgMusic.src     = audioInfo.FilePath1;
+        var bgMusic             = this.data.bgMusic;
+            bgMusic.type        = "lundao";
+            bgMusic.title       = audioInfo.AudioTitle.substr(0,5)+"...";
+            bgMusic.fullTitle   = audioInfo.AudioTitle;
+            bgMusic.id          = audioInfo.AudioID;
+            bgMusic.src         = audioInfo.FilePath1;
             bgMusic.timeCurrent = 0;
             bgMusic.textTimeCurrent = common.numberToTime(0);
-            bgMusic.playing = true;
-            
+            bgMusic.playing     = true;
+            bgMusic.show        = true;
+
             //获取时长
             bgMusic.timeLength =0;
 
@@ -182,6 +184,7 @@ Page({
                 //播放音乐
                 common.bgMusic.play(bgMusic.src,bgMusic.title);
                 
+
                 this.setData({ bgMusic: bgMusic });
                 
                 common.bgMusic.setData(bgMusic);

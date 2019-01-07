@@ -59,37 +59,43 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
 
         //从缓存提取背景音乐
         var bgMusicData = common.bgMusic.getData();
-        if (bgMusicData)
+        if (!bgMusicData)
         {
-            this.setData({ ["bgMusic"]: bgMusicData});
-
-            //改变监听事件
-            var bgVideo = wx.getBackgroundAudioManager();
-            bgVideo.onTimeUpdate(()=>{
-
-                this.monitorBgmusic();
-
-            });
-            var bgMusicSrc = bgMusicData.src;
-
-        }else{
-
-            var bgMusicSrc = "";
-            
+            return;
         }
+
+
+        this.setData({ ["bgMusic"]: bgMusicData});
+
+        //改变监听事件
+        var bgVideo = wx.getBackgroundAudioManager();
+        bgVideo.onTimeUpdate(()=>
+        {
+            this.monitorBgmusic();
+        });
+
+        //绑定结束事件
+        bgVideo.onEnded(()=>{
+            
+            var bgMusic     = this.data.bgMusic;
+            bgMusic.show    = false;
+            bgMusic.playing = false;    //关闭音乐
+
+            this.setData({bgMusic:bgMusic});
+        });
+
+        if(bgMusicData.type != 'lundao'){
+
+            return;
+        }
+
+        var bgMusicSrc = bgMusicData.src;
 
         for (var video of this.data.videos) {
 
@@ -100,24 +106,9 @@ Page({
             } else {
 
                 video.playing = false;
-
             }
         }
         this.setData({ "videos": this.data.videos });
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
     },
 
     /**
@@ -128,13 +119,7 @@ Page({
         this.getIndexData();
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
+  
     /**
      * 用户点击右上角分享
      */
@@ -195,36 +180,32 @@ Page({
             })
         }
     },
-    getUserInfo:function(e)
-    {
-        console.log(e.detail)
-    },
-
     /**
      * 获得首页数据
      * */
     getIndexData:function(){
+        
+        common.showLoading("加载中");
 
         var url     = app.data.api + "home/home";
         var data    = {userId:0};
-        var _this   = this;
-        common.showLoading("加载中");
+
         wx.request({
             url: url,
             method:'POST',
             data:data,
-            success:function(res)
-            {   
+            success:(res)=>{   
+
                 common.stopFresh();
                 
                 var data    = res.data.data;
 
                 var bannerData    = {['swiper.imgs']: data.banners };
-                _this.setData(bannerData); 
+                this.setData(bannerData); 
 
                 
                 //书籍
-                _this.setData({ 
+                this.setData({ 
                     books: data.freeBooks,
                     bookSentence:data.bookSentence,
                 });
@@ -235,11 +216,24 @@ Page({
                     video['playing'] = false;
                 }
 
-                _this.setData({"videos":data.lundaoList});
+                this.setData({"videos":data.lundaoList});
+
+                this.checkHasPlayVideo();
             }
         })
     },
 
+    /**
+    * 检查是否有正在播放的音频
+    */
+    checkHasPlayVideo:function(){
+
+        var bgMusicData = common.bgMusic.getData();
+
+        console.log(bgMusicData);
+
+
+    },
     /**
      * 播放音频
      */

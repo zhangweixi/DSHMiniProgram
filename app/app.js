@@ -14,7 +14,7 @@ if (platform == 'devtools'){
 }
 
 
-//var host = "https://test.jdclo.com/";
+var host = "https://test.jdclo.com/";
 //var host = "https://wx.laohoulundao.com/";
 
 App({

@@ -230,7 +230,7 @@ Page({
 
                     }else if(res.status == 1){//正在播放
 
-                        this.setData({"mp3Playing":true});    
+                        this.setData({mp3Playing:true});    
                     }
 
                     var audioInfo               = this.data.audioInfo;
@@ -242,7 +242,7 @@ Page({
 
 
                     bgMusic.onTimeUpdate((res)=>{
-                        console.log('11');
+                        
                         var currentTime     = bgMusic.currentTime;
                         var textCurrentTime = common.numberToTime(currentTime);
 
@@ -275,9 +275,6 @@ Page({
         },
         initBookMp3Action:function(){
             
-            console.log('初始化MP3');
-
-
             const bookInfo              = this.data.bookInfo;
             var innerAudioContext       = wx.createInnerAudioContext();
             innerAudioContext.src       = bookInfo.mp3;
@@ -294,13 +291,11 @@ Page({
 
             innerAudioContext.onCanplay(() => 
             {
-                innerAudioContext.duration
+                innerAudioContext.duration //触发一次
 
                 setTimeout(()=>{
 
                     var timeLength  = innerAudioContext.duration;
-                    console.log('音频时长:');
-                    console.log(timeLength);
                     var audioInfo               = this.data.audioInfo;
                         audioInfo.timeLength    = timeLength;
                         audioInfo.textTimeLength= common.numberToTime(timeLength);
@@ -310,7 +305,7 @@ Page({
                 },1000)
             })
         },
-        //开始播放音频
+        //开始播放音频，这里触发的音频，肯定是书籍音频
         playAudio:function(){
 
             if(this.checkHaveRight() == false){
@@ -345,15 +340,11 @@ Page({
                 return;
             }
 
-
-
             music.title         = bgMusic.title;
                 
             music.onTimeUpdate(()=>{
                 
-                console.log('音频更新');
-               
-
+            
                 var timeCurrent = music.currentTime;
                 var textTime    = common.numberToTime(timeCurrent);
 
@@ -364,7 +355,7 @@ Page({
                     return;
                 }
  
-                var audioInfo   = this.data.audioInfo;
+                var audioInfo               = this.data.audioInfo;
                 audioInfo.timeCurrent       = timeCurrent;
                 audioInfo.textTimeCurrent   = textTime;
                 audioInfo.timeLength        = music.duration;
@@ -384,14 +375,24 @@ Page({
             
            
 
-
+            //音频播放结束
             music.onEnded(()=>{
 
-                var audioInfo = this.data.audioInfo;
+                var audioInfo               = this.data.audioInfo;
+                audioInfo.timeCurrent       = 0;
+                audioInfo.textTimeCurrent   = common.numberToTime(0);
 
+                //关闭当前音频
                 this.setData({
+                    audioInfo:audioInfo,
+                    mp3Playing:false,
+                });
 
-                })
+                //关闭背景音频
+                common.bgMusic.setData({
+                    show:false,
+                    playing:false
+                });
 
             })
 
