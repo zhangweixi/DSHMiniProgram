@@ -14,7 +14,7 @@ if (platform == 'devtools'){
 }
 
 
-var host = "https://test.jdclo.com/";
+//var host = "https://test.jdclo.com/";
 //var host = "https://wx.laohoulundao.com/";
 
 App({
@@ -27,7 +27,7 @@ App({
         api:host+"api/v6/",
         platform: platform,
         loginKey:'',
-        debugTime:2000
+        debugTime:0
     },
     onLaunch:function(){
 

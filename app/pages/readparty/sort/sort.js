@@ -7,7 +7,6 @@ Page({
      * 页面的初始数据
      */
     data: {
-        app:app,
         showRule:false,
         float:false,
         members:[],
@@ -20,6 +19,7 @@ Page({
      */
     onLoad: function (options) {
 
+        this.setData({app:getApp()});
         this.getIntegral();
     },
     onPageScroll:function(e){
@@ -64,6 +64,39 @@ Page({
             res = res.data;        
             this.setData({members:res.data.members.data,selfData:res.data.selfData});
         })
-    }
+    },
+    sendGift:function(e){
 
+        if(this.data.sendingGift){
+            return;
+        }
+        this.setData({sendingGift:true});
+        var gainner = e.currentTarget.dataset.userId;
+        var data = {
+            sender:app.data.userId,
+            gainner:gainner,
+            giftType:"all",
+            readPartyId:0
+        };
+
+        var url = app.data.api + "readparty/send_gift";
+        app.request(url,data,()=>{
+
+            var members = this.data.members;
+
+            for(var member of members){
+
+                if(member.UserID == gainner){
+                    member.giftNum += 1;
+                    member.hasGift  = 1;
+                    break;
+                }
+            }
+
+            this.setData({
+                members:members,
+                sendingGift:false
+            });
+        })
+    }
 })

@@ -42,14 +42,15 @@
 		<view class="name">{{item.YourName}}</view>
 		<view class="integral"><text>{{item.integral}}</text><text class="color-g">积分</text></view>
 		<view class="zan">
-			<image class="" src="/images/icon/up-no.png" mode="widthFix"></image>
-			<text class="color-g">320</text>
+			<image wx:if="{{item.hasGift == 0}}" src="/images/icon/up-no.png" mode="widthFix" bind:tap="sendGift" data-user-id="{{item.UserID}}"></image>
+			<image wx:if="{{item.hasGift == 1}}" src="/images/icon/up-yes.png" mode="widthFix"></image>
+			<text class="color-g">{{item.giftNum}}</text>
 		</view>
 	</view>
 </view>
 
 
-
+<!-- 积分提示 -->
 <view class="question-bg" hidden="{{!showRule}}" catch:touchstart="empty">
 
 	<view class="flex"></view>

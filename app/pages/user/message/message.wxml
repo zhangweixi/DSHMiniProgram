@@ -1,1 +1,20 @@
 
+<!-- 外层包裹视图 -->
+<view class="cont">
+  <!-- 列表 -->
+  <view wx:for="{{list}}" wx:key="index" class="list">
+    <!-- 滑动删除 -->
+    <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.shows}}" class="list_del txt">
+      <!-- 列表图片 -->
+      <image class="list_img" mode="widthFix" src="{{item.image}}"></image>
+      <!-- 列表名称 -->
+      <text class='list_name'>{{item.name}}</text>
+      <!-- 列表标题 -->
+      <label class='list_title'>{{item.title}}</label>
+      <!-- 活动时间 -->
+      <text class='list_datas'>活动时间:{{item.datas}}</text>
+    </view>
+    <!-- 删除 -->
+    <view data-index="{{index}}" bindtap="delItem" class="list_del del">删除</view>
+  </view>
+</view>

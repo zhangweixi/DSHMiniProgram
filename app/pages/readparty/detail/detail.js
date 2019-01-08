@@ -59,6 +59,8 @@ Page({
             });
 
         }, app.data.debugTime);
+        
+        this.getNoticeMessage();
 
         this.noticeTimer = setInterval(()=>{
 
