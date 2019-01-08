@@ -11,71 +11,120 @@ page{
  
 .list{ 
   position: relative; 
-  height: 170rpx; 
-margin: 20rpx; 
-border-radius: 10rpx;
+  /*height: 170rpx; */
+  margin: 20rpx; 
+  border-radius: 10rpx;
   line-height: 170rpx; 
   overflow: hidden; 
+
 } 
+
 /* 删除外层包裹视图 */
 .list_del{ 
-  position: absolute; 
   top:0; 
+  display: flex;
 } 
+
+
+
 .list_del.txt{ 
   position: relative;
   background-color: #fff; 
   width: 100%; 
   z-index: 5; 
-  padding:0 10rpx; 
+  padding:10rpx 0;
   transition: left 0.2s ease-in-out; 
-  white-space:nowrap; 
+  /*white-space:nowrap; */
   overflow:hidden; 
   text-overflow:ellipsis; 
 } 
+
 /* 删除 */
 .list_del.del{ 
-  background-color: #e64340; 
-  width: 180rpx;text-align: center; 
-  z-index: 4; 
+  position: absolute;
   right: 0; 
-  color: #fff 
+  z-index: 0; 
+  width: 180rpx;
+  height:100%;
+  
+  display: block;
+  /*background-color: #e64340; */
+  color: #fff;
+  display: flex;
+  align-items: center;
 } 
+
+.list_del.del text{
+  flex: 1;
+}
+
+.list_del.del image{
+  
+  width:50rpx;
+}
+
 /* 列表图片 */
 .list_img{ 
- 
-   width: 105rpx;
-  height: 105rpx;
-   border-radius: 10rpx;
-  vertical-align: middle; 
-  margin-left: 15rpx;
- margin-top: -8rpx;
+    
+    width: 90rpx;
+    /*height:170rpx;*/
+    border-radius: 10rpx;
+    margin-left: 20rpx;
+    margin-right:20rpx;
 } 
- 
- 
- 
- /* 列表名称 */
-.list_name{
-  position: absolute;
-  left:168rpx;
-  bottom:18rpx;
+
+.list_img image{
+  width:100%;
 }
+ 
+ 
+.list-info{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10rpx;
+}
+
+.list-info text{
+
+  display: block;
+}
+
 /* 列表标题 */
 .list_title{
-  position: absolute;
-  right:155rpx;
-  bottom:18rpx; 
-  font-size: 13px;
-  color: #818181;
+  font-size: 0.9rem;
+  line-height: 2;
+  color: #505050;
+  
 }
+
+.gray{
+
+  background:#F3F3F3;
+  margin-right:20rpx;
+  padding:10rpx 20rpx;
+}
+ 
+ /* 列表内容 */
+.list_content{
+  line-height: 1.5;
+  font-size: .8rem;
+  flex: 1;
+  color:#8A8A8A;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+
 /* 活动时间 */
 .list_datas{
-   position: absolute;
-  left:168rpx;
-  top:35rpx; 
-  font-size: 13px;
+  font-size: .7rem;
+  line-height: 1.5;
   color: #818181;
+  text-align: right;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
 }
+
  
  
  

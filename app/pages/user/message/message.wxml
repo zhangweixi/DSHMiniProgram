@@ -2,19 +2,37 @@
 <!-- 外层包裹视图 -->
 <view class="cont">
   <!-- 列表 -->
-  <view wx:for="{{list}}" wx:key="index" class="list">
+  <view wx:for="{{messages}}" wx:key="index" class="list">
     <!-- 滑动删除 -->
-    <view bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.shows}}" class="list_del txt">
-      <!-- 列表图片 -->
-      <image class="list_img" mode="widthFix" src="{{item.image}}"></image>
-      <!-- 列表名称 -->
-      <text class='list_name'>{{item.name}}</text>
-      <!-- 列表标题 -->
-      <label class='list_title'>{{item.title}}</label>
-      <!-- 活动时间 -->
-      <text class='list_datas'>活动时间:{{item.datas}}</text>
+    <view 
+    bindtouchstart="touchS" 
+    bindtouchmove="touchM" 
+    bindtouchend="touchE" 
+    data-index="{{index}}" 
+    style="{{item.shows?item.shows:''}}" 
+    class="list_del txt">
+        <!-- 列表图片 -->
+        <view class="list_img">
+
+          <image wx:if="{{item.msg_type == 'system'}}"  mode="widthFix" src="/images/icon/msg-system.png"></image>  
+
+        </view>
+
+        <view class="list-info">
+            <!-- 列表名称 -->
+            <text class='list_title'>{{item.msg_title}}</text>
+            <!-- 列表标题 -->
+            <text class='list_content gray'>{{item.msg_content}}</text>
+            <!-- 活动时间 -->
+            <text class='list_datas gray'>{{item.add_time}}</text>
+        </view>
     </view>
+
     <!-- 删除 -->
-    <view data-index="{{index}}" bindtap="delItem" class="list_del del">删除</view>
+    <view data-index="{{index}}" data-id="{{item.userMsgId}}" bindtap="delItem" class="list_del del">
+      <text></text>
+      <image  src="/images/icon/msg-del.png" mode="widthFix"></image>
+      <text></text>
+    </view>
   </view>
 </view>

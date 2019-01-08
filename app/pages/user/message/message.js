@@ -4,64 +4,80 @@ var common = require('../../../common.js');
 
 Page({
     data: {
-        delBtnWidth: 185,
-        //删除按钮宽度单位（rpx） 
-        // 列表数据
-        list: [{
-            // 删除状态
-            shows: "",
-            // 列表中图片
-            image: "/images/icon/video-off.png",
-            // 昵称
-            name: "菜鸟老五",
-            // 简介title
-            title: "主办方：小米科技",
-            // 日期
-            datas: "2017.02.21"
-        },
-        {
-            shows: "",
-            image: "/images/icon/video-off.png",
-            name: "菜鸟老五",
-            title: "主办方：小米科技",
-            datas: "2017.02.21"
-        },
-        {
-            shows: "",
-            image: "/images/icon/video-off.png",
-            name: "菜鸟老五",
-            title: "主办方：小科技",
-            datas: "2017.02.21"
-        },
-        {
-            shows: "",
-            image: "/images/icon/video-off.png",
-            name: "菜鸟老五",
-            title: "主办方：小米科技",
-            datas: "2017.02.21"
-        },
-        {
-            shows: "",
-            image: "/images/icon/video-off.png",
-            name: "菜鸟老五",
-            title: "主办方：小米科技",
-            datas: "2017.02.21"
-        },
-
-        ],
-
+        delBtnWidth: 185, //删除按钮宽度单位（rpx） 
+        hasNextPage:true,
+        page:0,
+        messages:[]
     },
 
     onLoad: function(options) {
         
         this.initEleWidth();
+
+        //获取事件
+        setTimeout(()=>{
+
+            this.getMessages();
+
+        },app.data.debugTime);
     },
 
+    /**
+    * 页面相关事件处理函数--监听用户下拉动作
+    */
+    onPullDownRefresh: function () {
+
+        this.setData({page:0,hasNextPage:true});
+        this.getMessages();
+    },
+
+    /**
+    * 页面上拉触底事件的处理函数
+    */
+    onReachBottom: function () {
+          
+        if(this.data.hasNextPage == true){
+
+            this.getMessages();
+        }
+    },
+
+    getMessages:function(){
+
+        var url = app.data.api + "message/get_user_message";
+        var data = {
+            userId:app.data.userId,
+            page:this.data.page+1
+        };
+
+        common.showLoading('加载中');
+        app.request(url,{userId:app.data.userId},(res,error)=>{
+
+            common.stopFresh();
+            
+
+            var messages    = res.data.data.data;
+                
+
+
+            if(messages.length == 0){
+
+                this.setData({hasNextPage:false});
+
+                return;
+            }
+            messages      = this.data.messages.concat(messages);
+            this.setData({
+                messages:messages,
+                page:res.data.data.current_page
+            });
+        })
+    },
     initEleWidth: function() {
+
         var delBtnWidth = this.getEleWidth(this.data.delBtnWidth);
-        this.setData({
-            delBtnWidth: delBtnWidth
-        });
+
+        this.setData({delBtnWidth: delBtnWidth});
     },
 
      //获取元素自适应后的实际宽度 
@@ -83,31 +99,36 @@ Page({
     delItem:function(e) {
 
         var that = this;
+        var dataset = e.currentTarget.dataset;
         // 打印出当前选中的index
-        console.log(e.currentTarget.dataset.index);
-        // 获取到列表数据
-        var list = that.data.list;
-        // 删除
-        list.splice(e.currentTarget.dataset.index, 1);
-        // 重新渲染
-        that.setData({
-            list: list
-        });
+        
+        var url = app.data.api + "message/del_message";
+        var data = {msgId:dataset.id};
+        app.request(url,data,()=>{
 
-        initdata(that)
+            // 获取到列表数据
+            var list = that.data.messages;
+            // 删除
+            list.splice(dataset.index, 1);
+            // 重新渲染
+            that.setData({messages: list});
+
+        });
     },
       // 开始滑动事件
     touchS: function(e) {
         if (e.touches.length == 1) {
+             //设置触摸起始点水平方向位置 
+
             this.setData({
-                //设置触摸起始点水平方向位置 
-                startX: e.touches[0].clientX
+                startX: e.touches[0].clientX,
+                startY: e.touches[0].clientY
             });
         }
     },
     touchM: function(e) {
         var that = this;
-        initdata(that) 
+        //initdata(that) 
         if (e.touches.length == 1) {
             //手指移动时水平方向位置 
             var moveX = e.touches[0].clientX;
@@ -141,14 +162,13 @@ Page({
             txtStyle = disX > delBtnWidth / 2 ? "left:-" + delBtnWidth + "px": "left:0px";
 
             //获取手指触摸的是哪一项 
-            var index   = e.currentTarget.dataset.index;
-            var list    = this.data.list;
-            list[index].shows = txtStyle;
-            console.log("1", list[index].shows);
+            var index       = e.currentTarget.dataset.index;
+            var messages    = this.data.messages;
+                messages[index].shows = txtStyle;
+            
+            console.log("1", messages[index].shows);
             //更新列表的状态 
-            this.setData({
-                list: list
-            });
+            this.setData({messages: messages});
 
         } else {
             console.log("2");
