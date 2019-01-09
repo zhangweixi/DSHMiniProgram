@@ -709,7 +709,11 @@ Page({
                 data.bookId = this.data.bookId;
                 data.readPlanId = this.data.readPlanId;
 
-            
+            if(data.book == '' && data.people == "" && data.thing == "" && data.gift == ""){
+
+                common.showToast("内容全为空","none");
+                return;
+            }
             
             app.request(url,data,(res,error)=>{
                 

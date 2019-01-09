@@ -30,6 +30,7 @@
         "pages/readparty/member/member", 
         "pages/readparty/memdetail/memdetail", 
         "pages/readparty/memedit/memedit", 
+        "pages/readparty/joinparty/joinparty",
         "pages/readparty/cutimage/cutimage", 
         "pages/readparty/sort/sort", 
         "pages/company/source/source", 

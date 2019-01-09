@@ -39,7 +39,7 @@
 		<view class="page-title">
 			<text class="title">基本信息</text>
 			<text class="empty"></text>
-			<image class="right-img" bind:tap="activeEdit" hidden="{{ !isAdmin || isEdit}}" src="/images/icon/edit1.png" mode="widthFix"></image>
+			<image class="right-img" bind:tap="activeEdit" hidden="{{ !isAdmin || isEdit || readPartyInfo.company_id == 0}}" src="/images/icon/edit1.png" mode="widthFix"></image>
 
 			<text class="detail color-y" hidden="{{!isEdit}}" bind:tap="cancelEdit">取消</text>
 		</view>
@@ -49,13 +49,13 @@
 			<input value="{{memberInfo.UserName}}" disabled="{{!isEdit}}" name="mobile" maxlength="15"></input>
 		</view>
 
-		<view class="u-info">
+		<view class="u-info" wx:if="{{readPartyInfo.company_id > 0}}">
 			<text>部门</text>
 			<input value="{{memberInfo.department_name}}" bind:tap="showDepartments" disabled="{{!isEdit}}" name="department"></input>
 			<image hidden="{{!isEdit}}" src="/images/icon/select.png" mode="widthFix" bind:tap="showDepartments"></image>
 		</view>
 
-		<view class="u-info">
+		<view class="u-info" wx:if="{{readPartyInfo.company_id > 0}}">
 			<text>职务</text>
 			<input value="{{memberInfo.job}}" disabled="{{!isEdit}}" name="job" maxlength="10"></input>
 		</view>
@@ -68,7 +68,7 @@
 			<!-- 管理员进入别人的界面 -->
 			<button wx:if="{{isAdmin && !isSelf && !isEdit}}" bind:tap="deleteMember">删除成员</button>
 
-			<button wx:if="{{isAdmin && isEdit}}" form-type="submit">确定修改</button>
+			<button wx:if="{{isAdmin && isEdit}}" form-type="submit" wx:if="{{readPartyInfo.company_id > 0}}">确定修改</button>
 
 		</view>
 	</form>

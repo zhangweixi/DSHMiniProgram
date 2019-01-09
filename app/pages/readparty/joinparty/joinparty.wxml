@@ -1,0 +1,13 @@
+<view class="page-container">
+	
+
+	<view class="readparty-info">
+		<image class="headimg" src="{{readPartyInfo.FilePath1}}" mode="widthFix"></image>
+
+		<view class="name">{{readPartyInfo.ReaParName}}</view>
+
+	</view>
+
+	<view class="join-btn">立即加入</view>
+
+</view>

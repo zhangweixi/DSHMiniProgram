@@ -10,11 +10,21 @@
 	background: #fff;
 	align-items: center;
 	padding:20rpx 2%;
+	position: relative;
 }
 
 .hand-btn image{
 	width:40rpx;
 	margin-left: 30rpx;
+}
+
+.hand-btn button{
+	width:40rpx;
+	height:40rpx;
+	background-color:rgba(0,0,0,0);
+	box-shadow: none;
+	position: absolute;
+	right:0;
 }
 
 

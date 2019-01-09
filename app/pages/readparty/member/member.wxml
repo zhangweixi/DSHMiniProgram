@@ -9,8 +9,10 @@
 <view class="hand-btn">
 	<view class="hand-btn-inner">
 		<view class="flex1"></view>
-		<image src="/images/icon/search.png" mode="widthFix" bind:tap="triggleSearch" ></image>
-		<image src="/images/icon/addb.png" bind:tap="toAddPage" mode="widthFix" wx:if="{{isAdmin && !waitingMember }}"></image>	
+		<image  src="/images/icon/search.png" mode="widthFix" bind:tap="triggleSearch" ></image>
+		<image  src="/images/icon/addb.png" bind:tap="toAddPage" mode="widthFix" wx:if="{{isAdmin && !waitingMember}}"></image>	
+
+		<button  open-type="share" wx:if="{{isAdmin && !waitingMember && companyId == 0 }}"> </button>
 	</view>
 </view>	
 
@@ -42,7 +44,7 @@
 					<text class="tag" wx:if="{{item.isAdmin == 1}}">管理员</text>
 				</view>
 
-				<view class="depart">{{item.department_name}}</view>
+				<view class="depart" wx:if="{{companyId > 0}}">{{item.department_name}}</view>
 			</view>
 		</view>
 		<view class="gray-line"></view>

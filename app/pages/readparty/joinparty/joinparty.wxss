@@ -1,0 +1,26 @@
+.readparty-info{
+	text-align: center;
+}
+
+.headimg{
+	width:50vw;
+	margin:auto;
+	margin-top:15vw;
+	border-radius: 20rpx;
+}
+
+.name{
+	line-height: 3rem;
+}
+
+.join-btn{
+
+	width:100%;
+	text-align: center;
+	color:#fff;
+	background: #FFB800;
+	line-height: 2.5;
+	font-size: 1.1rem;
+	border-radius: 50rpx;
+	margin-top:5vw;
+}

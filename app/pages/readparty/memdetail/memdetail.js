@@ -265,10 +265,14 @@ Page({
 
                 //刷新前一页的数据
                 this.setData({isAdmin:false});
+                common.showToast(res.message);    
+
+            }else{
+
+                common.showToast(res.message,"none");
             }
-            common.showToast(res.message);
             
-        
+            
             common.readparty.cache(this.data.readPartyInfo.ReaParID,null);
             this.freshPrev();
         });
@@ -278,7 +282,6 @@ Page({
         //通知前一个界面
         var pages   = getCurrentPages();
         var prevPage= pages[pages.length -2];
-        
         prevPage.getMembers();
     }
 })
