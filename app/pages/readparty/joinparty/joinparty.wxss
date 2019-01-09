@@ -1,4 +1,4 @@
-.readparty-info{
+.page-container{
 	text-align: center;
 }
 
@@ -15,7 +15,7 @@
 
 .join-btn{
 
-	width:100%;
+	width:60%;
 	text-align: center;
 	color:#fff;
 	background: #FFB800;

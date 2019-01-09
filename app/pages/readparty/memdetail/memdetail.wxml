@@ -68,7 +68,7 @@
 			<!-- 管理员进入别人的界面 -->
 			<button wx:if="{{isAdmin && !isSelf && !isEdit}}" bind:tap="deleteMember">删除成员</button>
 
-			<button wx:if="{{isAdmin && isEdit}}" form-type="submit" wx:if="{{readPartyInfo.company_id > 0}}">确定修改</button>
+			<button wx:if="{{isAdmin && isEdit && readPartyInfo.company_id > 0}}" form-type="submit">确定修改</button>
 
 		</view>
 	</form>

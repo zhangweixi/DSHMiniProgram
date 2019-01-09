@@ -29,7 +29,7 @@ Page({
             var readPartyInfo = common.readparty.get();
             var isAdmin =  readPartyInfo.MemNumber == app.data.memNumber ? true : false;
             
-            this.setData({isAdmin:true,readPartyInfo:readPartyInfo});
+            this.setData({isAdmin:isAdmin,readPartyInfo:readPartyInfo});
 
         },app.data.debugTime);
         
@@ -57,11 +57,13 @@ Page({
 
     onShareAppMessage:function(e){
         var readPartyInfo = this.data.readPartyInfo;
-        return {
-            title:app.data.userInfo.NickName+"邀请您加入"+ readPartyInfo.ReaParName,
+        var config =  {
+            title:app.data.userInfo.NickName+"邀请您加入\""+ readPartyInfo.ReaParName+"\"",
             path:'pages/readparty/joinparty/joinparty?readPartyId='+readPartyInfo.ReaParID,
-            imageUrl:readPartyInfo.filePath1
-        }
+            imageUrl:readPartyInfo.FilePath1
+        };
+        console.log(config);
+        return config;
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作
