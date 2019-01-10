@@ -150,42 +150,35 @@ var bgMusic = {
     getData:function(){
         
         return wx.getStorageSync("bgMusic");
-    }
-};
-
-
-var user = {
-
-    login:function(code){
-
-        var url = app.data.api + "user/login?code=" + code;
-
-        wx.request({
-            // 必需
-            url: url,
-            method:"POST",
-            success: (res) => {
-                   
-                console.log(res);
-            }
-        })
     },
-    //检查用户是否是有效的用户
-    checkIsLogin:function(pageScope){
+    //全局保持一个背景音频时间ID
+    recordMediaTime:function(mediaId,mediaType,currentTime,finish=false){
         
-        if(app.data.userId > 0){
+        var currentTime = parseInt(currentTime + 0.99);
+        
+        if(currentTime%5 != 0 && finish == false){
 
-            return true;
+            return;
         }
-        var tologin=function(){
 
-            wx.switchBar({url:"/pages/user/center/center"});
+        var app     = getApp();
+        var url     = app.data.api + "book/record_media_time";
+        var data    = {
+            mediaId:mediaId,
+            mediaType:mediaType,
+            timeId:timeId,
+            currentTime:currentTime,
+            userId:app.data.userId
         };
 
-        common.appConfirm(pageScope,"请先登录","现在就去登录",tologin,"去登录","取消");
-
+        app.request(url,data,(res,error)=>
+        {
+            app.data.timeId = res.data.data.timeId;
+        });
     }
 };
+
+
 
 function request(url,data,callback){
 
@@ -327,8 +320,8 @@ function toWeb(url,title){
 }
 
 
-var user = {
-
+var user = 
+{
     fresh:function(userId){
         var app = getApp();
 
@@ -348,8 +341,55 @@ var user = {
         app.data.memNumber = userInfo.MemNumber;
         app.data.loginKey  = userInfo.LoginKey;
         wx.setStorageSync("userInfo", userInfo);
+    },
+    login:function(code){
+
+        var url = app.data.api + "user/login?code=" + code;
+
+        wx.request({
+            // 必需
+            url: url,
+            method:"POST",
+            success: (res) => {
+                   
+                console.log(res);
+            }
+        })
+    },
+    //检查用户是否是有效的用户
+    checkIsLogin:function(pageScope){
+        
+        if(app.data.userId > 0){
+
+            return true;
+        }
+        var tologin=function(){
+
+            wx.switchBar({url:"/pages/user/center/center"});
+        };
+
+        common.appConfirm(pageScope,"请先登录","现在就去登录",tologin,"去登录","取消");
+
+    },
+    //同步学习时间
+    syncLeanTime:function(){
+
+        console.log('同步时间');
+        var app     = getApp();
+        var url     = app.data.api + "book/sync_lean_time";
+        var data    = {userId:app.data.userId};
+
+        if(data.userId == 0){
+
+            return;
+        }
+
+        app.request(url,data,()=>{
+            //do something
+        });
     }
-}
+
+};
 
 module.exports.showDialog   = showDialog;
 

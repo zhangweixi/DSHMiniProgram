@@ -95,7 +95,8 @@ Page({
 
         var data = {
                 "mobileCode":code,
-                "unionid":wx.getStorageSync("unionid"),
+                "unionId":wx.getStorageSync("unionId"),
+                "openId":wx.getStorageSync("openId"),
                 "mobile":wx.getStorageSync('mobileCodeData').mobile,
                 "nickName":wxinfo.nickName,
                 "headImg":wxinfo.avatarUrl

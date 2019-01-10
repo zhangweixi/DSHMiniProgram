@@ -1,3 +1,4 @@
+
 Component({
 
     properties:{
@@ -8,9 +9,8 @@ Component({
     },
     methods:{
 
-        toLogin: function (e) {
+        toLogin:function(){
 
-            //获取用户微信信息
             wx.getUserInfo({
                 success: (res) => {
 
@@ -24,8 +24,6 @@ Component({
                     })
                 }
             })
-
-
         }
 
     }

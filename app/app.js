@@ -15,7 +15,7 @@ if (platform == 'devtools'){
 
 
 //var host = "https://test.jdclo.com/";
-var host = "https://wx.laohoulundao.com/";
+//var host = "https://wx.laohoulundao.com/";
 
 App({
     common:common,
@@ -27,7 +27,9 @@ App({
         api:host+"api/v6/",
         platform: platform,
         loginKey:'',
-        debugTime:0
+        debugTime:0,
+        unionId:"",
+        openId:""
     },
     onLaunch:function(){
 
@@ -42,78 +44,46 @@ App({
             this.data.userId    = userInfo.UserID;
             this.data.memNumber = userInfo.MemNumber;
 
-        }else{
-
-            wx.login({
-                success:(res)=>{
-
-                    var code     = res.code;
-
-                    if(res.code){
-
-                        this.wxLogin(code);
-                    }
-                }
-            })
+            return;
         }
+
+        wx.login({success:(res)=>
+        {
+            var code     = res.code;
+            if(code){
+                this.wxLogin(code);
+            }
+        }})
     },
     wxLogin:function(code){
 
-      
-        var url     = this.data.api + "member/login?code="+code;
-        var unionid = wx.getStorageSync("unionid");
-        
-        if(unionid && fresh == false){
+        var url     = this.data.api + "member/login";
+        var openId  = wx.getStorageSync('openId');
+        if(openId){
 
-            return false;
+            return;
         }
+        
+        this.request(url,{code:code},(res,error)=>
+        {
+            res = res.data;
+        
+            if(res.code == 200){
 
+                common.user.cache(res.data.userInfo);
+                
+            }else if(res.code == 2003){
 
-        wx.request({
-            // 必需
-            url: url,
-            method:'POST',
-            success: (res) => {
-                res = res.data;
-                if(res.code == 200){
+                this.data.unionId   = res.data.unionId;
+                this.data.openId    = res.data.openId;
 
-                    var userInfo        = res.data.userInfo;
-                    common.user.cache(userInfo);
-                    
-                }else if(res.code == 2003){
-
-                    this.data.unionid = res.data.unionid;
-
-                    wx.setStorageSync("unionid",this.data.unionid);
-
-                }
-            },
-            fail:function(e){
-
-                wx.showModal({
-                    title: host,
-                    content: JSON.stringify(e),
-                    showCancel: true,
-                    cancelText: '取消',
-                    cancelColor: '#000000',
-                    confirmText: '确定',
-                    confirmColor: '#3CC51F',
-                    success: (res) => {
-                        // res.confirm 为 true 时，表示用户点击了确定按钮
-                        if(res.confirm) {
-                            
-                        }
-                    },
-                    fail: (res) => {
-                        
-                    },
-                    complete: (res) => {
-                        
-                    }
-                })
+                wx.setStorageSync("openId",this.data.openId);
             }
+
+            this.appInit();
         })
     },
+    //封装的APP请求包
     request:function(url,data,callback){
         
         data =  typeof data == "object" ? data : {};
@@ -139,7 +109,16 @@ App({
                 typeof callback == "function" && callback(null,res)
             }
         })
+    },
+    //app准备工作
+    appInit:function(){
+        
+        common.user.syncLeanTime();
+        
+        setInterval(()=>{
+            
+            common.user.syncLeanTime();
+
+        },1000*60*5);
     }
-
-
 })

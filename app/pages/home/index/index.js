@@ -81,16 +81,18 @@ Page({
         });
 
         //绑定结束事件
-        bgVideo.onEnded(()=>{
+        bgVideo.onEnded((e)=>{
             
             var bgMusic     = this.data.bgMusic;
             bgMusic.show    = false;
             bgMusic.playing = false;    //关闭音乐
 
             this.setData({bgMusic:bgMusic});
+
+
         });
 
-        if(bgMusicData.type != 'lundao'){
+        if(bgMusicData.type != 'lhldmp3'){
 
             return;
         }
@@ -242,6 +244,7 @@ Page({
 
         var data        = e.currentTarget.dataset;
         var audioId     = data.audioid;
+        app.data.timeId = 0;
         
         //判断当前音频是否在播放状态中
         if (this.data.bgMusic.src == videoSrc) {
@@ -275,7 +278,7 @@ Page({
             bgMusic.fullTitle=title;
             bgMusic.title   = title.substring(0,5)+"...";
             bgMusic.id      = audioId;
-            bgMusic.type    = 'lundao';
+            bgMusic.type    = 'lhldmp3';
 
         
         const innerAudioContext     = wx.createInnerAudioContext()
@@ -319,8 +322,12 @@ Page({
         var bgVideo     = wx.getBackgroundAudioManager();
         var currentTime = bgVideo.currentTime;
         var textTime    = common.numberToTime(currentTime);
-
-        this.setData({ ["bgMusic.textTimeCurrent"]: textTime, ["bgMusic.timeCurrent"]: currentTime });
+        var bgMusic     = this.data.bgMusic;
+            bgMusic.textTimeCurrent = textTime;
+            bgMusic.timeCurrent     = currentTime;
+        
+            this.setData({bgMusic:bgMusic});
+            common.bgMusic.recordMediaTime(bgMusic.id,bgMusic.type,currentTime,false);
     },
     //继续播放
     continueMusic:function(){
@@ -341,7 +348,7 @@ Page({
 
     closeMusic:function(){
 
-        
+        app.data.timeId = 0;
         this.setData({["bgMusic.show"]:false});
         
         //将音频全部关闭
@@ -376,7 +383,7 @@ Page({
 
         var bgMusic = common.bgMusic.getData();
 
-        if(bgMusic.type == 'lundao'){
+        if(bgMusic.type == 'lhldmp3'){
 
             wx.navigateTo({url: '/pages/video/detail/detail'});
 

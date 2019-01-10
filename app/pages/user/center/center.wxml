@@ -1,6 +1,3 @@
-<!--pages/user/center/center.wxml-->
-<!-- <import src="/template/login/login.wxml"/> -->
-<!-- <template hidden="{{userInfo}}" is="login" data="{{app}}"></template> -->
 <view class="gray-line"></view>
 <login wx:if="{{!userInfo}}"> </login>
 

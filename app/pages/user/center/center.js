@@ -72,4 +72,5 @@ Page({
         var url = e.currentTarget.dataset.url;
         common.toWeb(url, "常见问题");
     }
+
 })

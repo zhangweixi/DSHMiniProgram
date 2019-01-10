@@ -152,7 +152,7 @@ Page({
     playNewMusic:function(audioInfo){
 
         var bgMusic             = this.data.bgMusic;
-            bgMusic.type        = "lundao";
+            bgMusic.type        = "lhldmp3";
             bgMusic.title       = audioInfo.AudioTitle.substr(0,5)+"...";
             bgMusic.fullTitle   = audioInfo.AudioTitle;
             bgMusic.id          = audioInfo.AudioID;

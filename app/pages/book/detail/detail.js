@@ -209,10 +209,14 @@ Page({
                     }
 
                     //有背景音乐，但是不是本书
-                    var musicData   = common.bgMusic.getData();    
+                    var musicData   = common.bgMusic.getData(); 
+
                     if(musicData.src != this.data.bookInfo.mp3){
 
-                        this.initBookMp3Action();
+                        common.bgMusic.parse();     //暂停其他音频
+
+                        this.initBookMp3Action();   //初始化音频
+
                         return;
                     }
 
@@ -263,7 +267,7 @@ Page({
                         })
 
                         //记录时间
-                        this.recordMediaTime(currentTime,"lhddmp3");
+                        common.bgMusic.recordMediaTime(this.data.bookId,"lhddmp3",currentTime,false);
                     });
                 },
                 fail:(res)=>{
@@ -312,7 +316,7 @@ Page({
                 
                return false;
             }
-
+            app.data.timeId = 0;
             this.setData({"mp3Playing":true});
             var audioInfo       = this.data.audioInfo;
 
@@ -370,7 +374,7 @@ Page({
                 });
 
                 //记录时间
-                this.recordMediaTime(timeCurrent,"lhddmp3");
+                common.bgMusic.recordMediaTime(this.data.bookId,'lhddmp3',timeCurrent,false);
             });
             
            
@@ -394,6 +398,7 @@ Page({
                     playing:false
                 });
 
+                common.bgMusic.recordMediaTime(this.data.bookId,'lhddmp3',0,true);
             })
 
 
@@ -510,6 +515,8 @@ Page({
                 time = time -1;
             }
 
+            app.data.timeId = 0;
+            
             (wx.createVideoContext("mp4")).seek(time);
             this.setData({"mp4Playing":true});
         },
@@ -530,78 +537,12 @@ Page({
         //记录MP4播放时间
         recordMp4PlayTime:function(e){
 
-        
-            var currentTime = parseInt(e.detail.currentTime + 0.99);
+            var currentTime = e.detail.currentTime;
 
-            this.recordMediaTime(currentTime,"lhddmp4");
+            common.bgMusic.recordMediaTime(this.data.bookId,"lhddmp4",currentTime,false);
         },
 
-        //记录媒体播放时间
-        recordMediaTime:function(currentTime,mediaType){
-            
-            var currentTime = parseInt(currentTime + 0.99);
-            
-            if(currentTime%5 != 0 || app.data.userId == 0){ //5秒记录一次
-            
-                return;
-            }
-
-            if(mediaType == 'lhddmp3'){
-
-                if(this.data.mp3CurrentTime == currentTime){
-
-                    return;
-                }
-                this.setData({mp3CurrentTime:currentTime});
-
-                var timeId  = this.data.bookInfo.mp3TimeId;
-
-            }else if(mediaType == 'lhddmp4'){
-
-                if(this.data.mp4CurrentTime == currentTime){
-
-                    return;
-                }
-                this.setData({mp4CurrentTime:currentTime});
-
-                var timeId  = this.data.bookInfo.mp4TimeId;
-
-            }
-
-            
-            
-            var url     = app.data.api + "book/record_media_time";
-
-            var data    = {
-                mediaId:this.data.bookId,
-                mediaType:mediaType,
-                timeId:timeId,
-                currentTime:currentTime,
-                userId:app.data.userId
-            };
-
-            app.request(url,data,(res,error)=>{
-
-                if(timeId > 0){
-
-                    return;
-                }
-
-                var timeId      = res.data.data.timeId;
-                var bookInfo    = this.data.bookInfo;
-
-                if(mediaType == 'lhddmp4'){
-
-                    bookInfo.mp4TimeId  = timeId;
-
-                }else{
-
-                    bookInfo.mp3TimeId  = timeId;
-                }
-
-                this.setData({bookInfo:bookInfo});
-            });
-        },
+       
         /**
          * 检查是否有权限
          * 如果本书不是免费的书籍，则需要判断用户是否是登录
