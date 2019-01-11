@@ -113,9 +113,8 @@ Page({
 
     playAudio: function(e) {
 
-        var audioId  = e.currentTarget.dataset.id;
         
-        this.initPlayAudio(audioId);
+        this.initPlayAudio(e.currentTarget.dataset.id);
     },
 
     /**
@@ -123,7 +122,7 @@ Page({
      *  
      */
     initPlayAudio: function(audioId) {
-
+        app.data.timeId = 0;
         for(var audio of this.data.videos){
 
             if(audio['AudioID'] == audioId){
@@ -212,13 +211,16 @@ Page({
     },
     monitorBgmusic: function() {
 
-        var bgVideo = wx.getBackgroundAudioManager();
+        var bgVideo     = wx.getBackgroundAudioManager();
         var currentTime = bgVideo.currentTime;
-        var textTime = common.numberToTime(currentTime);
+        var textTime    = common.numberToTime(currentTime);
+        var bgMusic     = this.data.bgMusic;
+            bgMusic.timeCurrent     = currentTime;
+            bgMusic.textTimeCurrent = textTime;
 
-        this.setData({ ["bgMusic.textTimeCurrent"] : textTime,
-            ["bgMusic.timeCurrent"] : currentTime
-        });
+            this.setData({"bgMusic":bgMusic});
+
+            common.bgMusic.recordMediaTime(bgMusic.id,bgMusic.type,currentTime,false);
     },
     //继续播放
     continueMusic: function() {

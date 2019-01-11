@@ -59,13 +59,15 @@ Page({
             }
 
             var currentTime = this.data.music.currentTime;
-            var textTime = common.numberToTime(currentTime);
-            var bgMusic = this.data.bgMusic;
-            bgMusic.timeCurrent = currentTime;
+            var textTime    = common.numberToTime(currentTime);
+            var bgMusic     = this.data.bgMusic;
+            bgMusic.timeCurrent     = currentTime;
             bgMusic.textTimeCurrent = textTime;
 
             this.setData({bgMusic: bgMusic});
             common.bgMusic.setData(bgMusic);
+
+            common.bgMusic.recordMediaTime(bgMusic.id,bgMusic.type,currentTime,false);
         })
 
         //音乐结束事件
@@ -150,7 +152,7 @@ Page({
         })
     },
     playNewMusic:function(audioInfo){
-
+        app.data.timeId         = 0;
         var bgMusic             = this.data.bgMusic;
             bgMusic.type        = "lhldmp3";
             bgMusic.title       = audioInfo.AudioTitle.substr(0,5)+"...";

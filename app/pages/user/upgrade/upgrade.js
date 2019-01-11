@@ -8,9 +8,25 @@ Page({
      * 页面的初始数据
      */
     data: {
-        error:""
+        error:"",
+        userInfo:{},
+        deadLine:""
     },
-   
+    onLoad:function(){
+
+        
+
+        var pre = new Date();
+        pre.setFullYear(pre.getFullYear()+1);
+        var y = pre.getFullYear();
+        var m = pre.getMonth() + 1;
+        var d = pre.getDate();
+        var deadLine = y+"年"+m+"月"+d+"日";
+        this.setData({
+            userInfo:app.data.userInfo,
+            deadLine:deadLine
+        });
+    },
     /**
      * 生命周期函数--监听页面卸载
      */

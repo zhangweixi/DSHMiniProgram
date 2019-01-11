@@ -40,10 +40,9 @@ Page({
         var time = this.data.surplusTime;
         this.setData({"regetText":"重新获取("+ time +")"});
 
-        setTimeout(()=>{
-
+        var timer = setTimeout(()=>
+        {
             var time = this.data.surplusTime;
-
             if(time <= 1){
 
                 this.setData({"regetText":"重新获取","surplusTime":0});
@@ -52,11 +51,11 @@ Page({
             }
             
             this.setData({ "surplusTime": time-1});
-
             this.beginTimer()
 
         },1000);
-        console.log(this.data.surplusTime);
+
+        this.setData({timer:timer});
     },
 
 
@@ -95,7 +94,7 @@ Page({
 
         var data = {
                 "mobileCode":code,
-                "unionId":wx.getStorageSync("unionId"),
+                "unionId":app.data.unionId,
                 "openId":wx.getStorageSync("openId"),
                 "mobile":wx.getStorageSync('mobileCodeData').mobile,
                 "nickName":wxinfo.nickName,
@@ -104,20 +103,19 @@ Page({
 
         var url = app.data.api + "member/register"
            
-        wx.request({
-            url: url,
-            data:data,
-            method:"POST",
-            success: (res) => {
-                
-                var res = res.data;
+        app.request(url,data,(res,error)=>{
+            
+            var res = res.data;
+            if(res.code == 200){
 
-                if(res.code == 200){
-
-                    var userInfo = res.data.userInfo;
-                    common.user.cache(userInfo);
+                clearTimeout(this.data.timer);
+                common.user.cache(res.data.userInfo);
+                common.showToast('登录成功','success');
+                setTimeout(()=>{
+                    
                     wx.switchTab({url: '/pages/user/center/center'});
-                }
+
+                },2000);
             }
         })
     }

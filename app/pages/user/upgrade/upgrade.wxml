@@ -4,12 +4,12 @@
 	
 	<view class="head-name">
 		<view class="head">
-			<image class="" src="https://wx.qlogo.cn/mmopen/vi_32/r2a4LHhXVGiaicfhZfjmIz0d4S88n9KICvBZxaKUx7zQIjUu27ib4abYkzXo1actqH87dZIPVbxRQvuSBKroP50EQ/132" mode="widthFix"></image>
+			<image class="" src="{{userInfo.FilePath1}}" mode="widthFix"></image>
 		</view>
 
 		<view class="nameinfo">
-			<text>李四</text>
-			<text class="valid-time">有效期至2018年5月23日</text>
+			<text>{{userInfo.NickName}}</text>
+			<text class="valid-time">有效期至{{deadLine}}</text>
 		</view>
 	</view>
 

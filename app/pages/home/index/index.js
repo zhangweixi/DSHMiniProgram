@@ -311,6 +311,7 @@ Page({
                 })
 
                 bgVideo.onEnded(()=>{
+                    
                     this.closeMusic();
                 })
 

@@ -151,22 +151,25 @@ var bgMusic = {
         
         return wx.getStorageSync("bgMusic");
     },
+    times:{lhldmp3:1,lhddmp3:1,lhddmp4:1},
     //全局保持一个背景音频时间ID
     recordMediaTime:function(mediaId,mediaType,currentTime,finish=false){
-        
+
+        var app         = getApp();
         var currentTime = parseInt(currentTime + 0.99);
-        
-        if(currentTime%5 != 0 && finish == false){
+
+        if(app.data.userId == 0 || currentTime < 5 ||currentTime == this.times[mediaType] || (currentTime%5 != 0 && finish == false) ){
 
             return;
         }
 
-        var app     = getApp();
+        this.times[mediaType] = currentTime;
+
         var url     = app.data.api + "book/record_media_time";
         var data    = {
             mediaId:mediaId,
             mediaType:mediaType,
-            timeId:timeId,
+            timeId:app.data.timeId,
             currentTime:currentTime,
             userId:app.data.userId
         };
