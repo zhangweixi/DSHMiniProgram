@@ -29,7 +29,8 @@ App({
         loginKey:'',
         debugTime:0,
         unionId:"",
-        openId:""
+        openId:"",
+        version:1
     },
     onLaunch:function(){
 

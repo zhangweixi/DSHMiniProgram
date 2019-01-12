@@ -7,7 +7,6 @@ Page({
     /**
      * 页面的初始数据
      */
-    //countrys: { "name": ['美国', '中国', '巴西', '日本'], "code": ["01", "086", "023", "041"] },
     data: {
         miniroot: app.data.miniroot,
         countrys: { "name": [], "code": [] },
@@ -24,8 +23,6 @@ Page({
 
     },
     bindPickerChange: function (e) {
-
-        console.log('picker发送选择改变，携带值为', e.detail.value);
 
         this.setData({
             index: e.detail.value
@@ -127,20 +124,8 @@ Page({
             return;
         }
         
-        wx.request({
-            url: app.data.api + "member/add_mobile_code",
-            data:data,
-            method:"POST",
-            success: (res) => {
-
-                wx.setStorageSync("mobileCodeData", data);
-
-                wx.navigateTo({url: '/pages/mobile/code/code'});
-            }
-        })
-
-
-       
+        wx.setStorageSync("mobileCodeData", data);
+        wx.navigateTo({url: '/pages/mobile/code/code'});
     }
 })
 

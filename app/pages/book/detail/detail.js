@@ -576,13 +576,13 @@ Page({
 
                 if(app.data.userInfo.States == 1){
 
-                    var title   = "会员特权";
-                    var msg     = "会员已到期，需要续费吗";
+                    var title   = "权限到期";
+                    var msg     = "需要延长权限吗";
                    
                 }else if(app.data.userInfo.States == 0){
                     
-                    var title   = "会员特权";
-                    var msg     = "需要升级成为VIP吗";
+                    var title   = "暂无学习权限";
+                    var msg     = "需要获得学习权限吗";
                 }
 
                 common.showModel(title,msg,()=>

@@ -26,7 +26,7 @@
 	</view>
 	
 
-	<view class="pay-btn" bind:tap="upgrade">支付</view>
+	<view class="pay-btn" bind:tap="upgrade">立即获取</view>
 
 
 	<view class="vip-right">

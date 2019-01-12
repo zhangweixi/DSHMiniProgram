@@ -1,0 +1,58 @@
+{
+	"description": "项目配置文件",
+	"miniprogramRoot": "app/",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.0.9",
+	"appid": "wxb8842464f6dac6b2",
+	"projectname": "%E6%95%99%E5%AF%BC%E8%AF%BB%E4%B9%A6%E4%BC%9A",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "测试",
+					"pathName": "pages/test/test",
+					"query": "bookId=148&videoId=683&readPartyId=209"
+				},
+				{
+					"id": 1,
+					"name": "首页",
+					"pathName": "pages/home/index/index",
+					"query": ""
+				}
+			]
+		}
+	}
+}

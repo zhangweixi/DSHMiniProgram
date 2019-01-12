@@ -8,7 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        surplusTime:60,
+        surplusTime:0,
         regetText:"重新获取",
         wxinfo:wx.getStorageSync('wxinfo')
     },
@@ -18,7 +18,7 @@ Page({
      */
     onLoad: function (options) {
         
-        this.beginTimer();
+        this.getMobileCode();
     },
 
     /**
@@ -59,7 +59,7 @@ Page({
     },
 
 
-    getMobileCode: function (e) {
+    getMobileCode: function () {
 
         if(this.data.surplusTime > 0){
             
@@ -67,21 +67,19 @@ Page({
         }
 
         var data = wx.getStorageSync("mobileCodeData");
+        var url  = app.data.api + "member/add_mobile_code";
 
-        wx.request({
-            url: app.data.api + "member/add_mobile_code",
-            data: data,
-            method: "POST",
-            success: (res) => {
+        app.request(url,data,(res,error)=>{
+            
+            res     = res.data;
+            if(res.code == 200){
+                
+                this.setData({"surplusTime":60});
+                this.beginTimer();    
 
-                wx.navigateTo({
-                    url: '/pages/mobile/code/code',
-                    success: (res) => {
+            }else{
 
-                        this.setData({"surplusTime":60});
-                        this.beginTimer();
-                    }
-                })
+                common.showToast(res.message,'none');
             }
         })
     },
@@ -98,7 +96,8 @@ Page({
                 "openId":wx.getStorageSync("openId"),
                 "mobile":wx.getStorageSync('mobileCodeData').mobile,
                 "nickName":wxinfo.nickName,
-                "headImg":wxinfo.avatarUrl
+                "headImg":wxinfo.avatarUrl,
+                "version":app.data.version
             };
 
         var url = app.data.api + "member/register"
@@ -106,6 +105,7 @@ Page({
         app.request(url,data,(res,error)=>{
             
             var res = res.data;
+
             if(res.code == 200){
 
                 clearTimeout(this.data.timer);
@@ -116,6 +116,10 @@ Page({
                     wx.switchTab({url: '/pages/user/center/center'});
 
                 },2000);
+
+            }else{
+
+                common.showToast(res.message,"none");
             }
         })
     }
