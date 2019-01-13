@@ -1,4 +1,4 @@
-// pages/user/login/login.js
+
 let app = getApp();
 var common = require("../../../common.js");
 
@@ -10,7 +10,7 @@ Page({
     data: {
         miniroot: app.data.miniroot,
         countrys: { "name": [], "code": [] },
-        index: 0,
+        index: 0
     },
     
     bindChange: function (e) {

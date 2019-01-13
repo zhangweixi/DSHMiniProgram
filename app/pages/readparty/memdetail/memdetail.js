@@ -13,13 +13,17 @@ Page({
         memberInfo:null,
         isSelf:false,
         departments:[],
-        waitingMember:false
+        departNames:[],
+        waitingMember:false,
+        departIndex:0
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        
+        //common.readparty.cache(options.readPartyId);
 
         setTimeout(()=>{
 
@@ -40,17 +44,41 @@ Page({
             this.setData({readPartyInfo:readpartyInfo});
 
 
+            
+
+
             setTimeout(()=>{
 
-                common.readparty.cacheDepartments(this.data.readPartyId,(departments)=>{
-
-                    this.setData({departments:departments});
-                })
+                this.getDepartments();
 
             },1000);
 
-        },2000);
+        },app.data.debugTime);
         
+    },
+    getDepartments:function(){
+
+        common.readparty.cacheDepartments(this.data.readPartyId,(departments)=>
+        {
+
+            this.setData({departments:departments});
+            var departs = [];
+            var i       = 0;
+            var departIndex = 0;
+
+            for(var depart of departments){
+
+                //查找当前的index
+                if(depart.department_id == this.data.memberInfo.department_id){
+
+                    departIndex = i;
+                }
+                departs.push(depart.department_name);
+                i++;
+            }
+            
+            this.setData({departNames:departs,departIndex:departIndex});
+        })
     },
     onShow:function(){
 
@@ -99,9 +127,12 @@ Page({
         var memberInfo  = this.data.memberInfo;
         var values      = e.detail.value;
 
+        var department  = this.data.departments[values.department]; 
+
+
         var data = {
             readPartyId:this.data.readPartyId,
-            departmentId:memberInfo.department_id,
+            departmentId:department.department_id,
             memberUserId:memberInfo.UserID,
             userMobile:values.mobile,
             job:values.job,
@@ -121,10 +152,12 @@ Page({
             return;
         }
 
+
         wx.showLoading({
             title: '请稍等',
             mask: false,
         })
+        
         
         var url = app.data.api+ "readparty/update_read_party_member";
         app.request(url,data,(res,error)=>{
@@ -188,37 +221,14 @@ Page({
 
                     wx.navigateBack({delta: 1});    
 
-                },100000);
+                },1000);
             }
         });
     },
-    //显示部门
-    showDepartments:function(){
+    //改变部门
+    changeDepartment:function(e){
 
-        if(this.data.isEdit == false){
-
-            return;
-        }
-
-        var departmentNames = [];
-        for(var depart of this.data.departments){
-
-            departmentNames.push(depart.department_name);
-        }
-
-        wx.showActionSheet({
-            itemList:departmentNames,
-            success: (res) => {
-
-                var d = this.data.departments[res.tapIndex];
-
-                this.setData({["memberInfo.department_name"]:d.department_name,["memberInfo.department_id"]:d.department_id});
-            },
-            fail : (res) => {
-
-                console.log(res.errMsg)
-            }
-        })
+       this.setData({departIndex:parseInt(e.detail.value)});
     },
     replaceManager:function(){
 

@@ -43,8 +43,8 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/test/test",
-					"query": "bookId=148&videoId=683&readPartyId=209"
+					"pathName": "pages/readparty/detail/detail",
+					"query": "readPartyId=209&userId=418"
 				},
 				{
 					"id": 1,

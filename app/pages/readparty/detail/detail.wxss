@@ -218,7 +218,11 @@
 	color:#FF9C00;
 	line-height: 60rpx;
 }
-
+.plan-list .content .read-book{
+	font-size:.7rem;
+	color:#999;
+	margin-left: 10rpx;
+}
 .main-plan > view{
 	display: flex;
 	margin:10rpx 0;

@@ -14,11 +14,14 @@
 			<input placeholder="请输入" name="mobile" type="number" maxlength="15"></input>
 		</view>
 
-		<view class="u-info" bind:tap="showDepartment">
+		<view class="u-info">
 			<text>部门</text>
-			<input value="{{selectedDepartment.department_name}}" placeholder="请选择" disabled ></input>
 
-			<image src="/images/icon/select.png" mode="widthFix"></image>
+			<picker bindchange="changeDepartment" value="{{departIndex}}" range="{{departNames}}"  name="department">
+    			<view class="picker">{{departNames[departIndex]}}</view>
+  			</picker>
+
+			<image src="/images/icon/select.png" class="picker-icon" mode="widthFix"></image>
 
 		</view>
 

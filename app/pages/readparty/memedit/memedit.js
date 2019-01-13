@@ -10,7 +10,8 @@ Page({
         index:0,
         selectedDepartment:null,
         departments:[],
-
+        departIndex:0,
+        departNames:[]
     },
 
     /**
@@ -20,15 +21,18 @@ Page({
 
         this.setData(options);
 
-        setTimeout(()=>{
+        common.readparty.cacheDepartments(this.data.readPartyId,(departments)=>
+        {
+            this.setData({departments:departments});
+            var departs = [];
+            
+            for(var depart of departments){
 
-            common.readparty.cacheDepartments(this.data.readPartyId,(departments)=>{
-
-                this.setData({departments:departments});
-            });
-
-        },2000);
-
+                departs.push(depart.department_name);                    
+            }
+            
+            this.setData({departNames:departs});
+        })        
     },
 
     /**
@@ -44,38 +48,27 @@ Page({
     onShow: function () {
 
     },
-    showDepartment:function(){
+    changeDepartment:function(e){
         
-        var departmentNames = [];
-        for(var depart of this.data.departments){
-
-            departmentNames.push(depart.department_name);
-        }
-        wx.showActionSheet({
-            itemList:departmentNames,
-            success: (res) => {
-
-                var d = this.data.departments[res.tapIndex];
-
-                this.setData({selectedDepartment:d});
-            }
-        })
+         this.setData({departIndex:parseInt(e.detail.value)});
     },
 
     //添加会员
     addMember:function(e){
 
-        var value = e.detail.value;
+        var values = e.detail.value;
 
         var url = app.data.api + "readparty/add_read_party_member";
+        var department  = this.data.departments[values.department]; 
+
         var data = {
 
             managerUserId:app.data.userId,
             readPartyId:this.data.readPartyId,
-            userMobile:value.mobile,
-            userName:value.name,
-            job:value.job,
-            departmentId:this.data.selectedDepartment.department_id
+            userMobile:values.mobile,
+            userName:values.name,
+            job:values.job,
+            departmentId:department.department_id
         };
 
         app.request(url,data,(res,error)=>{
@@ -84,9 +77,15 @@ Page({
 
             if(res.code == 200){
 
-                common.showToast("添加成功","success",()=>{
+                var pages = getCurrentPages();
+                var prev  = pages[pages.length - 2];
+                prev.getMembers();
+
+                common.showToast("添加成功","success");
+
+                setTimeout(()=>{
                     wx.navigateBack({delta: 1});
-                });
+                },2000);
             }
         })
 

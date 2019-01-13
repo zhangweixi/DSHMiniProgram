@@ -97,12 +97,13 @@ module.exports.navs = navs;
 		</view>
 
 		<view class="content">
-			<view class="name">{{item.YourName}}</view>
+			<view class="name">{{item.YourName}}<text class="read-book">学《{{item.BookTitle}}》</text></view>
 			<view class="main-plan" hidden="{{false}}">
 				<view>
 					<view class="title">周课：</view>
 					<view>{{item.BookReview1}}</view>
 				</view>
+
 				<view>
 					<view class="title">自省：</view>
 					<view>{{item.BookReview2}}</view>

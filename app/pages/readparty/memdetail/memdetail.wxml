@@ -49,11 +49,18 @@
 			<input value="{{memberInfo.UserName}}" disabled="{{!isEdit}}" name="mobile" maxlength="15"></input>
 		</view>
 
+
 		<view class="u-info" wx:if="{{readPartyInfo.company_id > 0}}">
 			<text>部门</text>
-			<input value="{{memberInfo.department_name}}" bind:tap="showDepartments" disabled="{{!isEdit}}" name="department"></input>
-			<image hidden="{{!isEdit}}" src="/images/icon/select.png" mode="widthFix" bind:tap="showDepartments"></image>
+			<picker bindchange="changeDepartment" value="{{departIndex}}" range="{{departNames}}" disabled="{{!isEdit}}" name="department">
+    			<view class="picker">{{departNames[departIndex]}}</view>
+  			</picker>
+
+			<image class="picker-icon" hidden="{{!isEdit}}"  src="/images/icon/select.png" mode="widthFix"></image>
 		</view>
+
+
+
 
 		<view class="u-info" wx:if="{{readPartyInfo.company_id > 0}}">
 			<text>职务</text>
@@ -74,4 +81,6 @@
 	</form>
 	
 </view>
+
+
 

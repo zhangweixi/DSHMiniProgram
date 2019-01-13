@@ -15,27 +15,34 @@
       padding:0;
     }
 
+    .container{
+      position: relative;
+      width:100vw;
+      height:120vw;
+    }
+
     .box{ 
       padding:0 10vw;
-      height:90vh;
-      /* background:#333;  */
+      height:143vw;
+      background:#333; 
       white-space:nowrap; 
       margin-top:5vh;
-      overflow:auto;
-      overflow-y:hidden;
-      -webkit-overflow-scrolling : touch;
+      position: absolute;
+      left:0;
+      /* overflow:auto;
+      overflow-y:hidden; */
+      overflow: hidden;
+      /* -webkit-overflow-scrolling : touch; */
       font-size:0;
       position: relative;
       align-items: center;
-
     } 
 
     .box div{ 
-      
         top:0;
         width:40vw;;
         height:100%;
-        background:#fff; 
+        
         display: inline-block;
         font-size:50px;
         color:green;
@@ -46,12 +53,13 @@
       }
 
       p{
-        width:100%;
+        width:98%;
         height:100%;
         display: flex;
         align-items: center;
         margin:0;
-        padding:0;
+        padding:0 1%;
+        
       }
 
       img{
@@ -60,24 +68,29 @@
       }
   </style></head>
 <body>
-    <div class="box" id="imgs">
-        <div id="img1"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-10-speak-5c36a66985a60.jpg" alt=""></p></div>
-        <div id="img2"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-10-speak-5c36a5e9c980e.jpg" alt=""></p></div>
-        <div id="img3"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-10-speak-5c36a5886b013.jpg" alt=""></p></div>
-        <div id="img4"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-09-speak-5c35ac943e5f3.jpg" alt=""></p></div>
-        <div id="img5"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-08-speak-5c340b3025a9d.jpg" alt=""></p></div>
-        <div id="img6"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c526c68197.jpg" alt=""></p></div>
-        <div id="img7"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c51a7a0c7d.jpg" alt=""></p></div>
-        <div id="img8"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c513043785.jpg" alt=""></p></div>
-        <div id="img9"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c50c6186dd.jpg" alt=""></p></div>
-        <div id="img10"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c505d626f0.jpg" alt=""></p></div>
-    </div>
-</body>
 
+  <div class="container">
+      <div class="box" id="imgs">
+          <div id="img1"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-10-speak-5c36a66985a60.jpg" alt=""></p></div>
+          <div id="img2"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-10-speak-5c36a5e9c980e.jpg" alt=""></p></div>
+          <div id="img3"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-10-speak-5c36a5886b013.jpg" alt=""></p></div>
+          <div id="img4"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-09-speak-5c35ac943e5f3.jpg" alt=""></p></div>
+          <div id="img5"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-08-speak-5c340b3025a9d.jpg" alt=""></p></div>
+          <div id="img6"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c526c68197.jpg" alt=""></p></div>
+          <div id="img7"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c51a7a0c7d.jpg" alt=""></p></div>
+          <div id="img8"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c513043785.jpg" alt=""></p></div>
+          <div id="img9"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c50c6186dd.jpg" alt=""></p></div>
+          <div id="img10"><p><img src="https:\/\/wx.laohoulundao.com\/admin\/speakImg\/2019-01-02-speak-5c2c505d626f0.jpg" alt=""></p></div>
+      </div>
+  </div>
+</body>
 </html>
 
+<script src="https://cdn.bootcss.com/hammer.js/2.0.8/hammer.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery/2.0.2/jquery.min.js"></script>
+
 <script>
+  
   window.onload = function(){
       var box = $('#imgs');
       //计算每个元素的其实变动和截止变动
@@ -123,29 +136,88 @@
           i++;
       });
 
-      console.log(imgs);
       
-      
+      var boxWidth  = ((imgs.length-1)*40+80+20)*perVw;
+
+      $('#imgs').css("width",boxWidth+"px");
       $('#img1').css("width","80vw");
 
-     
+      var hammerTest = new Hammer(document.getElementById('imgs'));
 
+      hammerTest.on('panright panleft', function(ev) {
+
+        var direction = ev.additionalEvent;
+        var distance  = ev.distance/20;
+        
+        var left      = parseInt(box.css('left'));
+
+        
+        
+        if(left > 0){
+
+            left = 0;
+
+        }
+
+        if(left < 90*perVw-boxWidth){
+
+          left = 90*perVw-boxWidth;
+        }
+
+        if(direction == "panright"){
+
+          left += distance;          
+
+        }else{
+
+          left -= distance;
+        }
+
+
+
+
+        if(left > 0){
+
+            left = 0;
+        }
+
+        box.css('left',left+"px");
+
+        left = Math.abs(left);
+
+        if(left >= boxWidth){
+          
+          return;
+        }
+        move(left);
+        
+      });
+
+      hammerTest.on('panend',function(ev){
+        auto_move();
+      })
+      
       box.scroll(function(e){
 
-          var left = box.scrollLeft()/perVw;
-          //console.log(left);
 
+
+      });
+
+      function move(left){
+
+        var left = left/perVw;
+          
           //获得在当前区域的图
           
           if(left > box.width()-20){
             return;
           }
-         
+          
           
 
           var first = Math.ceil(left/80);
           var last  = parseInt(Math.ceil((left+100)/40));
-              first   = first == 0 ? 1 : first;
+              first = first == 0 ? 1 : first;
 
           console.log(first+"---"+last);
 
@@ -153,15 +225,37 @@
           for(var k=first;k<=last;k++){
               
             console.log('k='+k);
+
+
+            if(k > imgs.length){
+              continue;
+            }
+            
             
             var info = document.getElementById("img"+k).getBoundingClientRect();
             var left = info.left;
+
+            var obj = imgs[i-1].ele;
+
             console.log(k+"----"+left);
+
+            if(left < 0 && Math.abs(left) >= 30*perVw){
+
+              continue;
+            }
+
+            if(left > 0 && left > 90*perVw){
+
+              continue;
+            }
+
+
 
             if(left < -40*perVw){
 
               continue;
             }
+
 
             if(left < 10*perVw){
 
@@ -169,8 +263,6 @@
                 $('#img'+k).css({'width':width+"vw"});
 
                 
-
-
             }else{
 
                 var width = 85-(left/perVw*0.5);
@@ -179,14 +271,65 @@
                 $('#img'+k).css({'width':width+"vw"});
                 
             }
-
-    
           }
+        }
+      
+    //自动移动
+    function auto_move(){
 
-      });
+      return;
+      if(timer){
+        clearInterval(timer);
+      }
+      
+      var left = Math.abs(parseInt(box.css('left')));
+          //找到第几个最大
+      var n = Math.ceil(left / (40*perVw));
+
+      var newleft = (n-1)*40;
+
+        if(newleft > 0){
+
+            newleft = 0;
+
+        }
+
+        if(left < newleft){
 
 
+            var timer = setInterval(function(){
+
+                left = left++;
+                box.css('left',left*perVw+"px");
+                move(left);;
+
+                if(left >= newleft){
+                  clearInterval(timer);
+                }
+            },100);
+
+        }else if(left > newleft){
+
+            var timer = setInterval(function(){
+
+                left = left--;
+                box.css('left',left*perVw+"px");
+                move(left);;
+
+                if(left <= newleft){
+                  clearInterval(timer);
+                }
+              
+            },100);
+
+        }
+
+        
+        
+    }
   }
+
+  
 
   function getRandomColor(){
 
