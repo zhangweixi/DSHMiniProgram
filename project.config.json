@@ -43,7 +43,7 @@
 				{
 					"id": 0,
 					"name": "测试",
-					"pathName": "pages/readparty/detail/detail",
+					"pathName": "pages/user/center/center",
 					"query": "readPartyId=209&userId=418"
 				},
 				{

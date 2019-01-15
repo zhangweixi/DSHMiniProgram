@@ -18,7 +18,14 @@ Page({
     */
     onLoad: function(options) {
 
-        
+        setTimeout(()=>{
+
+            this.setData({
+                app:app,
+                userInfo:app.data.userInfo? app.data.userInfo : false
+            });
+
+        },app.data.debugTime);
     },
 
     /**
@@ -67,10 +74,27 @@ Page({
     */
     onShareAppMessage: function() {
 
+        return {
+            title: this.data.userInfo.NickName+'邀请您加入教导读书会',
+            imageUrl: "https://wx.laohoulundao.com/images/weixin/i-top.png",
+            path: '/pages/home/index/index?userId='+app.data.userId 
+        }
     },
     toWeb: function(e) {
         var url = e.currentTarget.dataset.url;
         common.toWeb(url, "常见问题");
+    },
+    toUpgrade:function(){
+
+        if(this.data.app.data.platform == 'ios'){
+
+            common.showModel("提示","受平台限制，IOS暂不可用");
+            return;
+        }
+        
+        wx.navigateTo({
+            url: '/pages/user/upgrade/upgrade'
+        })
     }
 
 })

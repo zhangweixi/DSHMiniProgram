@@ -56,6 +56,7 @@ Page({
      */
     onLoad: function (options) {
         this.getIndexData();
+
     },
 
     /**

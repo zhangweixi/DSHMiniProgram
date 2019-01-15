@@ -17,13 +17,16 @@
 
 		<view class="user-name">{{userInfo.NickName}}</view>
 
-		<navigator class="upgrade-vip" url="/pages/user/upgrade/upgrade" open-type="navigate" wx:if="{{userInfo.isValid == false}}" >获得权限</navigator>
+		<view class="upgrade-vip" bind:tap="toUpgrade" wx:if="{{userInfo.isValid == false}}" >获得权限</view>
 
 		<view wx:if="{{userInfo.isValid == true }}" class="user-vip-time">会员到期时间：{{userInfo.MemEndTime}}</view>
 	</view>
 
-
-	<image class="share-jd" src="/images/icon/share-jd.png" mode="widthFix"></image>
+	<view class="share-jd">
+		<image  src="/images/icon/share-jd.png" mode="widthFix"></image>
+		<button open-type="share"></button>
+	</view>
+	
 </view>
 
 

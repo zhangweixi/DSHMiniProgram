@@ -8,6 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        app:app,
         error:"",
         userInfo:{},
         deadLine:""
@@ -34,7 +35,11 @@ Page({
 
     },
     upgrade:function(e){
+        if(this.data.app.data.platform == 'ios'){
 
+            common.showModel("提示","受平台限制，IOS暂不可用");
+            return;
+        }
 
         var url     = app.data.api + "weixin/buy_vip";
         var data    = {

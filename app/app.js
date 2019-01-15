@@ -27,10 +27,10 @@ App({
         api:host+"api/v6/",
         platform: platform,
         loginKey:'',
-        debugTime:0,
+        debugTime:2000,
         unionId:"",
         openId:"",
-        version:1
+        version:0
     },
     onLaunch:function(){
 
