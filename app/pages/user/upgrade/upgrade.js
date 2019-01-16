@@ -35,20 +35,26 @@ Page({
 
     },
     upgrade:function(e){
-        if(this.data.app.data.platform == 'ios'){
-
-            common.showModel("提示","受平台限制，IOS暂不可用");
-            return;
-        }
-
+        
         var url     = app.data.api + "weixin/buy_vip";
         var data    = {
-            userId:app.data.userId
+            userId:app.data.userId,
+            platform:this.data.app.data.platform,
+            version:this.data.app.data.version
         };
         
+
         app.request(url,data,(res,error)=>{
 
-            var config = res.data.data.config;
+            res = res.data;
+
+            if(res.code != 200){
+
+                common.showModel("提示", res.message);
+                return;
+            }
+
+            var config = res.data.config;
 
             wx.requestPayment({
                 timeStamp: config.timeStamp,

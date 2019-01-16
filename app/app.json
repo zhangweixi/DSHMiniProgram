@@ -6,7 +6,6 @@
         "pages/book/category/category", 
         "pages/book/detail/detail", 
         "pages/book/search/search", 
-        "pages/book/download/download", 
         "pages/book/comments/comments", 
         "pages/book/readplan/readplan", 
         "pages/user/center/center", 

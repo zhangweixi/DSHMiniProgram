@@ -86,12 +86,6 @@ Page({
     },
     toUpgrade:function(){
 
-        if(this.data.app.data.platform == 'ios'){
-
-            common.showModel("提示","受平台限制，IOS暂不可用");
-            return;
-        }
-        
         wx.navigateTo({
             url: '/pages/user/upgrade/upgrade'
         })

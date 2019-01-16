@@ -30,7 +30,7 @@ App({
         debugTime:2000,
         unionId:"",
         openId:"",
-        version:0
+        version:2
     },
     onLaunch:function(){
 
