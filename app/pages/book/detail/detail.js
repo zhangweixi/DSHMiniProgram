@@ -538,7 +538,7 @@ Page({
         recordMp4PlayTime:function(e){
 
             var currentTime = e.detail.currentTime;
-
+            this.setData({mp4CurrentTime:currentTime});
             common.bgMusic.recordMediaTime(this.data.bookId,"lhddmp4",currentTime,false);
         },
 
@@ -771,6 +771,25 @@ Page({
             wx.navigateTo({
                 url: '/pages/book/comments/comments?bookId='+this.data.bookInfo.BookID,
             })
+        },
+        videoError:function(res){
+
+            setTimeout(()=>{
+                
+                wx.createVideoContext("mp4").play();
+
+            },1000);
+            
+            var url = app.data.api + "book/book_error";
+            var data = {
+                userId:app.data.userId,
+                phone: app.data.platform,
+                bookId:this.data.bookInfo.BookID,
+                currentTime: this.data.mp4CurrentTime
+            };
+
+            app.request(url,data,(res,error)=>{})
+
         }
 
 })

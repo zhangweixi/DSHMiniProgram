@@ -8,7 +8,7 @@
 <!-- 视频 -->
 <view class='mp4box'>
 
-    <video id="mp4" hidden="{{mediaType=='mp3' || pptDownloading == true}}" src='{{bookInfo.mp4}}'   bindpause="pauseMp4" bindended="finishMp4" bindtimeupdate="recordMp4PlayTime" poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" bindplay='playMp4' ></video>
+    <video id="mp4" hidden="{{mediaType=='mp3' || pptDownloading == true}}" data-src='{{bookInfo.mp4}}' src="http://media.jdclo.com/ceshi/jiaodaoshijian/20170830jiaodaoshijian.m3u8"   bindpause="pauseMp4" bindended="finishMp4" bindtimeupdate="recordMp4PlayTime" poster="https://wx.laohoulundao.com/images/default-images/video-bg.png" bindplay='playMp4' custom-cache="{{false}}" binderror="videoError"></video>
 
     
 
