@@ -19,8 +19,14 @@ Page({
    */
   onLoad: function (options) {
     
-    this.getBooks();
+    if(common.prevLoad.books != null){
 
+      this.handleBooks(common.prevLoad.books);
+      
+    }else{
+
+        this.getBooks();  
+    }
   },
 
   /**
@@ -90,7 +96,13 @@ Page({
       success: (res) => {
 
           common.stopFresh();
-          var data      = res.data.data;
+          this.handleBooks(res.data);
+      
+      }
+    })
+  },
+  handleBooks:function(data){
+          var data      = data.data;
           var bookInfo  = data.books;
           var books     = bookInfo.data;
           var page      = bookInfo.current_page;
@@ -110,9 +122,6 @@ Page({
 
           //将新的数据放到旧的后面
           this.data.books   = this.data.books.concat(books);
-  
-          this.setData({"books":this.data.books});
-      }
-    })
+          this.setData({"books":this.data.books,"page":page});
   }
 })

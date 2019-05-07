@@ -57,6 +57,9 @@ Page({
     onLoad: function (options) {
         this.getIndexData();
 
+        setTimeout(()=>{
+            common.prevLoad.cache();
+        },1000);
     },
 
     /**
@@ -89,8 +92,6 @@ Page({
             bgMusic.playing = false;    //关闭音乐
 
             this.setData({bgMusic:bgMusic});
-
-
         });
 
         if(bgMusicData.type != 'lhldmp3'){

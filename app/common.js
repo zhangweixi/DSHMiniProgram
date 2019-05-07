@@ -394,6 +394,37 @@ var user =
 
 };
 
+var prevLoad = {
+
+    cache:function(){
+        this.cachebook();
+        this.cacheparties();
+    },
+    cachebook:function(){
+
+        var app     = getApp();
+        var url     = app.data.api + "book/get_book_list";
+        wx.request({
+            url: url,
+            method:"POST",
+            data: {page:1},
+            success: (res) => {
+
+                this.books    = res.data;
+            }
+        })
+    },
+    cacheparties:function(){
+
+    },
+    get:function(){
+
+    },
+    books:null,
+    parts:null,
+    userInfo:null
+};
+
 module.exports.showDialog   = showDialog;
 
 module.exports.numberToTime = numberToTime;
@@ -422,3 +453,5 @@ module.exports.toWeb        = toWeb;
 module.exports.user         = user;
 
 module.exports.stopFresh    = stopFresh;
+
+module.exports.prevLoad     = prevLoad;

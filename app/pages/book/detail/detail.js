@@ -62,7 +62,7 @@ Page({
             //2.书籍内容
             var bookInfo = this.data.bookInfo;
 
-            var title   = "老侯代读：《"+bookInfo.BookTitle+"》\n"+ bookInfo.BookDesc;
+            var title   = "老侯周课：《"+bookInfo.BookTitle+"》\n"+ bookInfo.BookDesc;
             var path    = "/pages/book/detail/detail?bookId="+bookInfo.BookID;
             var img     = bookInfo.ppts[0];
 
@@ -257,13 +257,13 @@ Page({
 
                         var audioInfo                   = this.data.audioInfo;
                             audioInfo.timeCurrent       = currentTime;
-                            audioInfo.textTimeCurrent   = textTimeCurrent;
+                            audioInfo.textTimeCurrent   = textCurrentTime;
 
                         this.setData({audioInfo:audioInfo});
 
                         common.bgMusic.setData({
-                            timeCurrent:timeCurrent,
-                            textTimeCurrent:textTimeCurrent
+                            timeCurrent:currentTime,
+                            textTimeCurrent: textCurrentTime
                         })
 
                         //记录时间
@@ -326,7 +326,7 @@ Page({
                 title:audioInfo.title,
                 type:'daidu',
                 show:true,
-                playing:false,
+                playing:true,
                 timeLength:audioInfo.timeLength,
                 timeCurrent:audioInfo.timeCurrent,
                 textTimeCurrent:audioInfo.textTimeCurrent,

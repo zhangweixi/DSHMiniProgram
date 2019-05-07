@@ -12,8 +12,13 @@
                 <view class="tag"><text class="tag-name">{{book.tags}}</text></view>
 
                 <view class="sub-book-info">
-                    <text class="main-title {{book.BookTitle.length > 8 ?'small':''}}">{{book.BookTitle}}</text>    
+                    
+                    <!-- <text class="main-title {{book.BookTitle.length > 8 ?'small':''}}">{{book.BookTitle}}</text>    
+                    <text class="sub-title no-wrap {{book.BookDesc.length > 12 ?'small':''}}">{{book.BookDesc}}</text> -->
+                    
+                    <text class="main-title">{{book.BookTitle}}</text>    
                     <text class="sub-title no-wrap {{book.BookDesc.length > 12 ?'small':''}}">{{book.BookDesc}}</text>
+
                     <view class="read-time">
                         <image src="/images/icon/read-num.png" mode="widthFix"></image>
                         <text class="flex1">{{book.ReadNumber}}</text>

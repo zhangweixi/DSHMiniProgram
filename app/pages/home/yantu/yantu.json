@@ -1,7 +1,7 @@
 {
 	"navigationBarTitleText":"言图",
 	"navigationBarTextStyle": "white",
-	"backgroundTextStyle":"black",
+	"backgroundTextStyle":"dark",
 	"backgroundColor":"#000",
 	"navigationBarBackgroundColor": "#000",
     "enablePullDownRefresh": false
