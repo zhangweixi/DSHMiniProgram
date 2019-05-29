@@ -26,7 +26,8 @@ Page({
             "app":app,
             "email": "",
             "mp4CurrentTime":0,
-            "mp3CurrentTime":0
+            "mp3CurrentTime":0,
+            "prevTime":180
         },
 
         /**
@@ -268,6 +269,9 @@ Page({
 
                         //记录时间
                         common.bgMusic.recordMediaTime(this.data.bookId,"lhddmp3",currentTime,false);
+
+                        //检查试听是否结束
+                        this.checkPreView(currentTime, "mp3");
                     });
                 },
                 fail:(res)=>{
@@ -375,6 +379,10 @@ Page({
 
                 //记录时间
                 common.bgMusic.recordMediaTime(this.data.bookId,'lhddmp3',timeCurrent,false);
+
+                
+                //检查试听是否结束
+                this.checkPreView(timeCurrent, "mp3")
             });
             
            
@@ -540,6 +548,9 @@ Page({
             var currentTime = e.detail.currentTime;
             this.setData({mp4CurrentTime:currentTime});
             common.bgMusic.recordMediaTime(this.data.bookId,"lhddmp4",currentTime,false);
+
+            //检查预览时间是否已到
+            this.checkPreView(currentTime,"mp4");
         },
 
        
@@ -572,32 +583,51 @@ Page({
                 
                 return false;
 
-            } else if (app.data.userInfo.vipTimeIsValid == 0){
-
-                if(app.data.userInfo.States == 1){
-
-                    var title   = "权限到期";
-                    var msg     = "需要延长权限吗";
-                   
-                }else if(app.data.userInfo.States == 0){
-                    
-                    var title   = "暂无学习权限";
-                    var msg     = "需要获得学习权限吗";
-                }
-
-                common.showModel(title,msg,()=>
-                {
-                    wx.navigateTo({url: '/pages/user/upgrade/upgrade'});
-                })
-
-                return false;
-
-            }else{
+            } else {
 
                 return true;    
             }
         },
+        checkPreView: function (time,type) {
+            
+            if (app.data.userInfo.vipTimeIsValid == 0 && time > this.data.prevTime && (this.data.mp3Playing || this.data.mp4Playing )) {
 
+
+                if(type == "mp3"){
+
+                    this.pauseAudio();
+                    var tname = "听";
+
+                }else if(type == "mp4"){
+
+                    var tname = "看";
+                    wx.createVideoContext("mp4").pause();
+                }
+
+                if (app.data.userInfo.States == 1) {
+
+                    var title = "试" + tname +"已结束";
+                    var msg = "权限到期，继续开通权限？";
+
+                } else if (app.data.userInfo.States == 0) {
+
+                    var title = "试" + tname +"已结束";
+                    var msg = "前往获得学习权限";
+                }
+
+                
+
+                common.showModel(title, msg, () => {
+                    wx.navigateTo({ url: '/pages/user/upgrade/upgrade' });
+                },()=>{console.log('cancel')});
+
+                return false;
+
+            } else {
+
+                return true;
+            }
+        },
         openEdit: function(){
 
             this.setData({ isEditing:true});
@@ -790,6 +820,5 @@ Page({
 
             app.request(url,data,(res,error)=>{})
 
-        }
-
+        },
 })

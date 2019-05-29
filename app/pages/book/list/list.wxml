@@ -43,7 +43,7 @@
 	        
 		</view>
 		
-		<template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}"></template>
+		<template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}" wx:key="index"></template>
 
 	</view>
 </view>

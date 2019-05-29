@@ -21,7 +21,7 @@
 		    </view>
 
 			<view class="search-keywords">
-					<view bind:tap="searchBook" data-type="btn" data-value="{{item}}" wx:for="{{historyKeywords}}">{{item}}</view>
+					<view bind:tap="searchBook" data-type="btn" data-value="{{item}}" wx:for="{{historyKeywords}}" wx:key="index">{{item}}</view>
 			</view>
 		</view>
 		
@@ -38,7 +38,7 @@
 
 	<view class="search-content" hidden="{{showInput}}">
 
-		<template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}"></template>
+		<template is="bookinfo" wx:for="{{books}}" wx:for-item="book" data="{{book}}" wx:key="index"></template>
 		
 		<view class="empty-notice" hidden="{{books.length > 0}}">没有相应的内容，试试别的吧</view>
 	</view>

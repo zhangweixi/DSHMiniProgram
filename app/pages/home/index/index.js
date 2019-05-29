@@ -11,6 +11,7 @@ Page({
      */
     data: {
         //音频列表
+        prevTime:180,
         videos: [],
         books: [],
         bookPage:0,
@@ -331,6 +332,23 @@ Page({
         
             this.setData({bgMusic:bgMusic});
             common.bgMusic.recordMediaTime(bgMusic.id,bgMusic.type,currentTime,false);
+
+            this.checkPreView(currentTime);
+    },
+    checkPreView: function (time) {
+
+        if (app.data.userInfo.vipTimeIsValid == 0 && time > this.data.prevTime && this.data.bgMusic.playing) {
+
+            this.closeMusic();
+
+            var title = "试听已结束";
+            var msg = "前往获得学习权限";
+            
+            common.showModel(title, msg, () => 
+            {
+                wx.navigateTo({ url: '/pages/user/upgrade/upgrade' });
+            });
+        }
     },
     //继续播放
     continueMusic:function(){

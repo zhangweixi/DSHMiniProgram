@@ -36,7 +36,7 @@
 
 <view class="page-container">
 	
-	<view class="sort-list" wx:for="{{members}}">
+	<view class="sort-list" wx:for="{{members}}" wx:key="index" >
 		<view class="sort-num">{{index+1}}</view>
 		<view class="head"><image  src="{{item.FilePath1}}" mode="widthFix" ></image></view>
 		<view class="name">{{item.YourName}}</view>

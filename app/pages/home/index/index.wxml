@@ -35,6 +35,7 @@
         <view 
             wx:for="{{videos}}" 
             wx:for-item="video" 
+            wx:key="index"
             class='content {{video.playing?"playing":"unplay"}}'  
             data-audioid="{{video.AudioID}}" 
             bindtap='playAudio'>
@@ -74,7 +75,7 @@
         <view class='content'>
 
             
-            <template is="bookinfo" wx:for="{{books[bookPage]}}" wx:for-item="book" data="{{book}}"></template>
+            <template is="bookinfo" wx:for="{{books[bookPage]}}" wx:for-item="book" wx:key="index" data="{{book}}"></template>
 
 
             <view class='another-book' wx:if="{{books.length > 0}}">

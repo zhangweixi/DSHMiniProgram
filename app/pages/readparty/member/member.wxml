@@ -29,7 +29,7 @@
 
 <view class="page-container">
 	
-	<block wx:for="{{members}}">
+	<block wx:for="{{members}}" wx:key="index" >
 		
 		
 		<view class="member">

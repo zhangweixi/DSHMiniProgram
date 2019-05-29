@@ -25,7 +25,7 @@ module.exports.navs = navs;
 
 
 <view class="page-container">
-	<block wx:for="{{navs.navs}}" wx:if="{{index != 1 || (index == 1 && readPartyInfo.ReaParType == 1)}}">
+	<block wx:for="{{navs.navs}}" wx:if="{{index != 1 || (index == 1 && readPartyInfo.ReaParType == 1)}}" wx:key="index" >
 		<view class="nav" bind:tap="nav" data-url="{{item[2]}}">
 			<image class="type" src="/images/icon/{{item[1]}}" mode="widthFix"></image>
 			<text>{{item[0]}}</text>

@@ -41,7 +41,7 @@
 <view class="gray-line"></view>
 
 <view class="page-container">
-	<block wx:for="{{questions}}"> 
+	<block wx:for="{{questions}}" wx:key="index" > 
 		
 		<view class="quest-list" >
 		

@@ -1,7 +1,7 @@
 <!--pages/book/comments/comments.wxml-->
 <view class="page-container">
 
-	<view class="comments-list" wx:for="{{comments}}" wx:for-item="comment">
+	<view class="comments-list" wx:for="{{comments}}" wx:for-item="comment" wx:key="index">
 		
 		<view class="head-img">
 			<image class="" src="{{comment.headImg}}" mode="widthFix"></image>

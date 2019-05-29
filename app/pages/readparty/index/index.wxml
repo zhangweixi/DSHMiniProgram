@@ -29,7 +29,8 @@
 	<view class="readparty-box">
 		<navigator  
 			wx:for="{{readpartys}}" 
-			wx:for-item="readparty" 
+			wx:for-item="readparty"
+            wx:key="index" 
 			class="readparty-list" 
 			url="/pages/readparty/detail/detail?readPartyId={{readparty.ReaParID}}" 
 			open-type="navigate">

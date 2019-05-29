@@ -15,6 +15,6 @@
         <button class='getcodebtn' form-type="submit">确定绑定</button>
     </form> 
 
-    <include  src="../../../components/dialog/dialog" />
+    <include  src="../../../include/dialog" />
 </view>
 

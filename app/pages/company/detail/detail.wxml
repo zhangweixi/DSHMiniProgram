@@ -20,7 +20,7 @@
 		<text class="detail"></text>
 	</view>
 
-	<view class="comment" wx:for="{{comments}}">
+	<view class="comment" wx:for="{{comments}}" wx:key="index" >
 			<view class="head">
 				<image  src="{{item.headImg}}" mode="widthFix"></image>
 			</view>

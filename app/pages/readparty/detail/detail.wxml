@@ -91,7 +91,7 @@ module.exports.navs = navs;
 
 <view class="page-container" style="overflow:hidden;">
 	
-	<view class="plan-list" wx:for="{{readPlans}}">
+	<view class="plan-list" wx:for="{{readPlans}}" wx:key="index" >
 		<view class="img">
 			<image src="{{item.FilePath1}}" mode="widthFix" bind:tap="nav" data-url="/pages/readparty/memdetail/memdetail?readPartyId={{readPartyId}}&userId={{item.UserID}}"></image>
 		</view>
