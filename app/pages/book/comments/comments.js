@@ -138,14 +138,14 @@ Page({
            mask: false,
         })
 
-        app.request(url,data,(res,error)=>{
+        app.request(url, data, (res, error) => {
 
             res = res.data;
 
-            if(res.code == 200){
-                
+            if (res.code == 200) {
+
                 this.getBookComment();
-                this.setData({showComment:false});
+                this.setData({ showComment: false });
                 wx.showToast({
                     title: '',
                     icon: 'success', // "success", "loading", "none"
@@ -153,8 +153,8 @@ Page({
                     mask: false
                 })
 
-            }else{
-              
+            } else {
+
                 wx.showToast({
                     title: res.message,
                     icon: 'success',
@@ -162,8 +162,30 @@ Page({
                     mask: false,
                 });
             }
-            
+
         });
+
+        return;
+        //检查敏感词
+        wx.request({
+            url: `https://api.weixin.qq.com/wxa/msg_sec_check?access_token=` + wx.getStorageSync("accessToken"),
+            method: "POST",
+            data: {
+                content: comment
+            },
+            success:(res)=>{
+
+                if (res.data.errcode > 0) {
+                    common.showToast('您的内容包含敏感词', 'none');
+                    return;
+                }
+
+               
+
+            }
+        })  
+
+       
     },
     zan:function(e){
 

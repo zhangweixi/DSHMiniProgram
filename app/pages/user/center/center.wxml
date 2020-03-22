@@ -20,6 +20,7 @@
 		<view class="upgrade-vip" bind:tap="toUpgrade" wx:if="{{userInfo.isValid == false}}" >获得权限</view>
 
 		<view wx:if="{{userInfo.isValid == true }}" class="user-vip-time">会员到期时间：{{userInfo.MemEndTime}}</view>
+        
 	</view>
 
 	<view class="share-jd">
@@ -30,8 +31,15 @@
 </view>
 
 
-<view class="menues">
-	
+<view class="menues" >
+	<navigator  url="/pages/mobile/mobile/mobile" open-type="navigate" wx:if="{{!userInfo.UserName}}">
+		<view class="menu-list">
+			<image class="icon-img" src="/images/icon/menu-mobile.png" mode="widthFix"></image>
+			<text>绑定手机</text>
+			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>
+		</view>
+	</navigator>
+
 	<navigator  url="/pages/user/books/books" open-type="navigate">
 		<view class="menu-list">
 			<image class="icon-img" src="/images/icon/menu-note.png" mode="widthFix"></image>
@@ -58,6 +66,7 @@
 		</view>
 	</navigator>
 
+   
 <!-- 
 	<navigator  data-url="https://wx.laohoulundao.com/home/articleDetail?articleId=4" bind:tap="toWeb">
 		<view class="menu-list">
@@ -69,12 +78,20 @@
      -->
 
 	<navigator  url="/pages/user/advice/advice" open-type="navigate" style="border:none;">
-		<view class="menu-list" style="border:none;">
+		<view class="menu-list" >
 			<image class="icon-img" src="/images/icon/menu-advise.png" mode="widthFix"></image>
 			<text>反馈建议</text>
 			<image class="next" src="/images/icon/next.png" mode="widthFix"></image>	
 		</view>
 	</navigator>
+
+     
+		<view class="menu-list" style="border:none;">
+			<image class="icon-img" src="/images/icon/read-gz.png" mode="widthFix"></image>
+			<text>用户编号</text>	
+            <text style="text-align:right;color:#ddd;font-size:12px;" bindlongtap="copyMemNumber">{{userInfo.MemNumber}}</text>
+		</view>
+	
 
 </view>
 

@@ -17,6 +17,7 @@ Page({
         bookPage:0,
         bookSentence:{},
         videos:[],
+        miniVer:2,
         swiper:{
             imgs: [],
             //是否采用衔接滑动  
@@ -194,6 +195,7 @@ Page({
 
         var url     = app.data.api + "home/home";
         var data    = {userId:0};
+        
 
         wx.request({
             url: url,
@@ -205,6 +207,17 @@ Page({
                 
                 var data    = res.data.data;
 
+                if (data.miniVer >= this.data.miniVer){
+                    app.data.online = 1;
+                }else{
+                    app.data.online = 0;
+                }
+
+                wx.setStorage({
+                    key: 'accessToken',
+                    data: res.data.data.token,
+                })
+                
                 var bannerData    = {['swiper.imgs']: data.banners };
                 this.setData(bannerData); 
 

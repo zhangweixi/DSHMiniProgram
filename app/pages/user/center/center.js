@@ -89,6 +89,15 @@ Page({
         wx.navigateTo({
             url: '/pages/user/upgrade/upgrade'
         })
+    },
+    copyMemNumber:function()
+    {
+        wx.setClipboardData({
+            data: this.data.userInfo.MemNumber,
+            success(res) {
+               
+            }
+        })
     }
 
 })

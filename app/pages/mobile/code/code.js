@@ -10,14 +10,16 @@ Page({
     data: {
         surplusTime:0,
         regetText:"重新获取",
-        wxinfo:wx.getStorageSync('wxinfo')
+        wxinfo:wx.getStorageSync('wxinfo'),
+        userInfo: null,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        
+        var userInfo = app.data.userInfo ? app.data.userInfo : null;
+        this.setData({ userInfo: userInfo });
         this.getMobileCode();
     },
 
@@ -60,7 +62,7 @@ Page({
 
 
     getMobileCode: function () {
-
+        
         if(this.data.surplusTime > 0){
             
             return false;
@@ -89,14 +91,14 @@ Page({
         
         var code            = e.detail.value.code;
         var wxinfo          = wx.getStorageSync('wxinfo');
-
+        var uinfo           = this.data.userInfo;
         var data = {
                 "mobileCode":code,
-                "unionId":app.data.unionId,
-                "openId":wx.getStorageSync("openId"),
+                "unionId": uinfo ? uinfo.wx_unionid : app.data.unionId,
+                "openId": uinfo ? uinfo.mini_openid : wx.getStorageSync("openId"),
                 "mobile":wx.getStorageSync('mobileCodeData').mobile,
-                "nickName":wxinfo.nickName,
-                "headImg":wxinfo.avatarUrl,
+                "nickName":uinfo?uinfo.NickName : wxinfo.nickName,
+                "headImg": uinfo ? uinfo.head_img : wxinfo.avatarUrl,
                 "version":app.data.version
             };
 

@@ -1,6 +1,8 @@
 <!--pages/book/detail/detail.wxml-->
-<view class='video-type'>
+<view class='video-type' wx:if="{{online==1}}">
+    
     <view><text class="{{mediaType == 'mp4' ? 'selected' : ''}}" bindtap="triggleMedia" data-media="mp4">视频</text></view>
+
     <view><text class="{{mediaType == 'mp3' ? 'selected' : ''}}" bindtap="triggleMedia" data-media="mp3">音频</text></view>
 </view>
 

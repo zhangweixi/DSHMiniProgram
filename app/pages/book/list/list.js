@@ -122,6 +122,6 @@ Page({
 
           //将新的数据放到旧的后面
           this.data.books   = this.data.books.concat(books);
-          this.setData({"books":this.data.books,"page":page});
+          this.setData({"books":this.data.books,"page":page+1});
   }
 })

@@ -6,6 +6,7 @@
 		</swiper-item>
 	</swiper>
 
+<!-- 
 	<view class="navs">
 		<navigator  url="/pages/wenda/index/index" open-type="navigate">
 			<image src="/images/icon/read-share.png" mode="widthFix"></image>
@@ -16,7 +17,7 @@
 			<image class="" src="/images/icon/read-sort.png" mode="widthFix"></image>
 			<view>明师榜</view>
 		</navigator>	
-	</view>
+	</view> -->
 
 
 	<view class="page-title">

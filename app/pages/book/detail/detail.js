@@ -27,7 +27,8 @@ Page({
             "email": "",
             "mp4CurrentTime":0,
             "mp3CurrentTime":0,
-            "prevTime":180
+            "prevTime":180,
+            "online":1,
         },
 
         /**
@@ -36,7 +37,16 @@ Page({
         onLoad: function (options) {
             
             this.setData({"bookId":options.bookId})
-            
+            console.log(app.data.online);
+
+            if(app.data.online == 0)
+            {
+
+                this.setData({ "mediaType": "mp3",'online':0 });
+            }
+
+            this.init(options);
+            return;
             setTimeout(()=>{
 
                 this.init(options);  
@@ -128,6 +138,7 @@ Page({
                 console.log(res);
                 res = res.data;
                 var bookInfo = res.data.bookInfo;
+                bookInfo.online = 0;
                 var data = {
                     "bookInfo":bookInfo,
                     "mp4CurrentTime":bookInfo.mp4CurrentTime
@@ -137,7 +148,6 @@ Page({
                 this.setData({haveRight:this.checkHaveRight()});
                 //设置时间
                 this.initBookMp3();
-
             })
         },
         /**
@@ -590,7 +600,7 @@ Page({
         },
         checkPreView: function (time,type) {
             
-            if (app.data.userInfo.vipTimeIsValid == 0 && time > this.data.prevTime && (this.data.mp3Playing || this.data.mp4Playing )) {
+            if (this.data.bookInfo.IsGratis==0 && app.data.userInfo.vipTimeIsValid == 0 && time > this.data.prevTime && (this.data.mp3Playing || this.data.mp4Playing )) {
 
 
                 if(type == "mp3"){
@@ -685,16 +695,38 @@ Page({
                 common.showToast("内容全为空","none");
                 return;
             }
-            
-            app.request(url,data,(res,error)=>{
-                
-                res = res.data;
-                if(res.code == 200){
 
-                    this.setData({ readPlanId: res.data.sumupId, isEditing:false});
-                    common.showToast('保存成功','success');
+            app.request(url, data, (res, error) => {
+
+                res = res.data;
+                if (res.code == 200) {
+
+                    this.setData({ readPlanId: res.data.sumupId, isEditing: false });
+                    common.showToast('保存成功', 'success');
+                }else{
+                    common.showToast(res.message, 'none');
                 }
             })
+            
+            return;
+
+            //检查敏感词
+            wx.request({
+                url: `https://api.weixin.qq.com/wxa/msg_sec_check?access_token=`+wx.getStorageSync("accessToken"),
+                method:"POST",
+                data:{
+                    content:data.book+data.people+data.thing+data.gift
+                },
+                success:(res)=>{
+                    
+                    if(res.data.errcode > 0){
+                        common.showToast('您的内容包含敏感词', 'none');
+                        return ;
+                    }
+                }
+            })      
+
+           
         },
 
         //显示下载输入框
