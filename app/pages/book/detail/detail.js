@@ -46,12 +46,6 @@ Page({
             }
 
             this.init(options);
-            return;
-            setTimeout(()=>{
-
-                this.init(options);  
-
-            },app.data.debugTime);
         },
         init:function(){
             
